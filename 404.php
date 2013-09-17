@@ -10,7 +10,7 @@
  * @see http://codex.wordpress.org/Creating_an_Error_404_Page
  */
 
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 
 @header( "{$_SERVER[ 'SERVER_PROTOCOL' ]} 404 Not found", true, 404 ); // make sure proper 404 header sent
 
