@@ -10,7 +10,7 @@
  * @subpackage Template
  */
 
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 ?>
 
 		<?php
