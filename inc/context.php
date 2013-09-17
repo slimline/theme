@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
  * and "slimline_class-post-single-{ID}". Filters run from most generic to most specific to allow
  * developers to define broad filters that are later fine-tuned by more specific filters.
  *
- * @global obj $Slimline The Slimline theme object.
+ * @global obj $slimline The Slimline theme object.
  * @param string $tag The base name of the filter hook.
  * @param mixed $value The value which the filters hooked to $tag may modify.
  * @param mixed $args All additional arguments for the filter.
@@ -30,7 +30,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
  * @since 0.0.0
  */
 function slimline_apply_filters( $tag, $value, $args = '' ) {
-	global $Slimline;
+	global $slimline;
 
 	// retrieve the action arguments, minus the $tag
 	$args = func_get_args();
@@ -39,7 +39,7 @@ function slimline_apply_filters( $tag, $value, $args = '' ) {
 	$args[ 0 ] = apply_filters_ref_array( $tag, $args ); // apply the generic filter first
 
 	// apply context-specific filters after
-	foreach ( $Slimline->context as $context )
+	foreach ( $slimline->context as $context )
 		$args[ 0 ] = apply_filters_ref_array( "{$tag}-{$context}", $args );
 
 	return $args[ 0 ];
@@ -61,20 +61,20 @@ function slimline_apply_filters( $tag, $value, $args = '' ) {
  * generic hooks with more specific ones (for example, removing a "slimline_main_before" hook
  * via a function hooked to "slimline_main_before-front-page").
  * 
- * @global obj $Slimline The Slimline theme object.
+ * @global obj $slimline The Slimline theme object.
  * @param string $tag The base name of the action hook.
  * @param mixed $args All additional arguments for the action.
  * @since 0.0.0
  */
 function slimline_do_action( $tag, $args = '' ) {
-	global $Slimline;
+	global $slimline;
 
 	// retrieve the action arguments, minus the $tag
 	$args = func_get_args();
 	$args = array_splice( $args, 0, 1 );
 
 	// do context-specific actions first
-	foreach ( $Slimline->context as $context )
+	foreach ( $slimline->context as $context )
 		do_action_ref_array( "{$tag}-{$context}", $args );
 
 	do_action_ref_array( $tag, $args ); // do the generic action last
@@ -83,13 +83,13 @@ function slimline_do_action( $tag, $args = '' ) {
 /**
  * slimline_get_context function
  *
- * Retrieves the current context and stores it in the $Slimline->context property.
+ * Retrieves the current context and stores it in the $slimline->context property.
  *
- * @global obj $Slimline The Slimline theme object
+ * @global obj $slimline The Slimline theme object
  * @since 0.0.0
  */
 function slimline_get_context() {
-	global $Slimline;
+	global $slimline;
 
-	$Slimline->context = array();
+	$slimline->context = array();
 }

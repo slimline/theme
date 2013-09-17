@@ -94,21 +94,21 @@ function slimline_or( $function_names ) {
  * page of the blog home. Developers can modify the returned boolean using the 
  * slimline_show_content filter.
  *
- * @global obj $Slimline The Slimline theme object.
+ * @global obj $slimline The Slimline theme object.
  * @return bool Whether or not to show the content
  * @since 0.0.0
  */
 function slimline_show_content() {
-	global $Slimline;
+	global $slimline;
 
 	/**
-	 * Set the show_content $Slimline property. This allows us to use the boolean on archive
+	 * Set the show_content $slimline property. This allows us to use the boolean on archive
 	 * or index pages without checking each individual post.
 	 */
 	if ( ! isset( $slimline->show_content ) )
 		$slimline->show_content = apply_filters( 'slimline_show_content', ( is_single() || ( is_home() && ! is_paged() ) ) );
 
-	return $Slimline->show_content;
+	return $slimline->show_content;
 }
 
 /**
@@ -119,19 +119,19 @@ function slimline_show_content() {
  * where a custom excerpt is present. Developers can modify the returned boolean
  * using the slimline_show_excerpt filter.
  *
- * @global obj $Slimline The Slimline theme object.
+ * @global obj $slimline The Slimline theme object.
  * @return bool Whether or not to show the excerpt
  * @since 0.0.0
  */
 function slimline_show_excerpt() {
-	global $Slimline;
+	global $slimline;
 
 	/**
-	 * Set the show_excerpt $Slimline property. This allows us to use the boolean on archive
+	 * Set the show_excerpt $slimline property. This allows us to use the boolean on archive
 	 * or index pages without checking each individual post.
 	 */
 	if ( ! isset( $slimline->show_excerpt ) )
 		$slimline->show_excerpt = apply_filters( 'slimline_show_excerpt', ( is_archive() || is_paged() || ( is_single() && has_excerpt() ) ) );
 
-	return $Slimline->show_excerpt;
+	return $slimline->show_excerpt;
 }
