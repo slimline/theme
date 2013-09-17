@@ -63,7 +63,7 @@ function slimline_conditional_safe( $function_name ) {
  */
 function slimline_is_blog( $check_single_posts = false ) {
 
-	return apply_filters( 'slimline_is_blog', ( get_post_type() == 'post' && ( is_home() || is_archive || ( $check_single_posts && is_single() ) ) ), $check_single_posts );
+	return apply_filters( 'slimline_is_blog', ( 'post' == get_post_type() && ( is_home() || is_archive || ( $check_single_posts && is_single() ) ) ), $check_single_posts );
 }
 
 /**
