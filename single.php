@@ -50,6 +50,13 @@ get_header(); // load the header.php template.
 
 		<?php endwhile; // have_posts() ?>
 
+		<?php
+			/**
+			 * slimline_single_after hook
+			 */
+			slimline_do_action( 'slimline_single_after' );
+		?>
+
 	<?php
 		else: // have_posts()
 			get_template_part( 'content', 'none' ); // load content-none.php (not found) template
