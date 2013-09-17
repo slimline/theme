@@ -12,6 +12,8 @@
  * @see http://codex.wordpress.org/Template_Hierarchy
  */
 
+if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
+
 get_header(); // load the header.php template. @see http://codex.wordpress.org/Function_Reference/get_header
 ?>
 
@@ -32,7 +34,11 @@ get_header(); // load the header.php template. @see http://codex.wordpress.org/F
 
 				<?php
 					/**
-					 * Call specific template for content type and format. Template hierarchy is:
+					 * Load the specific template for the post format if one exists. Otherwise
+					 * defaults to a more generic template. We are using slimline_get_template_part()
+					 * instead of get_template_part() to expand the range of possible template matches.
+					 * 
+					 * Template hierarchy for content files is:
 					 * content-{post_type}-{post_format}.php
 					 * content-{post_type}.php
 					 * content-{post_format}.php
