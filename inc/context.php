@@ -29,7 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
  * @return mixed The result after all filter hooks are applied to $value
  * @since 0.0.0
  */
-function slimline_apply_filters( $tag, $value, $args = '' ) {
+function slimline_apply_filters( $tag, $value = '', $args = '' ) {
 	global $slimline;
 
 	// retrieve the action arguments, minus the $tag
