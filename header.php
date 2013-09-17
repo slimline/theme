@@ -10,7 +10,7 @@
  * @subpackage Template
  */
 
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 ?><!doctype html>
 <!--[if IE]><![endif]--><!-- fix for conditional comment CSS blocking: http://www.phpied.com/conditional-comments-block-downloads/ -->
 <!--[if lt IE 7]><html class="no-js lt-ie10 lt-ie9 lt-ie8 lt-ie7" <?php language_attributes(); ?>><![endif]-->
