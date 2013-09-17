@@ -104,7 +104,7 @@ function slimline_get_comment_attributes( $attributes = '' ) {
 			'itemprop'  => 'comment',
 			'itemscope' => 'itemscope',
 			'itemtype'  => 'http://schema.org/UserComments'
-		)
+		);
 
 	// convert query strings to array and merge with defaults
 	$attributes = wp_parse_args(
@@ -147,7 +147,7 @@ function slimline_get_post_attributes( $attributes = '' ) {
 			'itemprop'  => ( slimline_is_blog( true ) ? 'blogPost' : '' ),
 			'itemscope' => 'itemscope',
 			'itemtype'  => ( slimline_is_blog( true ) ? 'http://schema.org/BlogPosting' : 'http://schema.org/CreativeWork' )
-		)
+		);
 
 	// convert query strings to array and merge with defaults
 	$attributes = wp_parse_args(
