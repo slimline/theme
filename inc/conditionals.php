@@ -24,9 +24,10 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
  */
 function slimline_and( $function_names ) {
 
-	foreach ( $function_names as $function_name )
+	foreach ( $function_names as $function_name ) {
 		if ( ! slimline_conditional_safe( $function_name() ) )
 			return false;
+	}
 
 	return true;
 }
@@ -79,9 +80,10 @@ function slimline_is_blog( $check_single_posts = false ) {
  */
 function slimline_or( $function_names ) {
 
-	foreach ( $function_names as $function_name )
+	foreach ( $function_names as $function_name ) {
 		if ( slimline_conditional_safe( $function_name() ) )
 			return true;
+	}
 
 	return false;
 }
