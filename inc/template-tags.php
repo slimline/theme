@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
  *
  * @param array|string $attributes An array or query string of attribute / value pairs.
  * @uses slimline_get_attributes | post-template.php
- * @since 0.0.0
+ * @since 0.1.0
  */
 function slimline_attributes( $attributes = '' ) {
 
@@ -33,7 +33,7 @@ function slimline_attributes( $attributes = '' ) {
  *
  * @param array|string $attributes (Optional). An array or query string of attribute / value pairs.
  * @uses slimline_get_body_attributes | post-template.php
- * @since 0.0.0
+ * @since 0.1.0
  */
 function slimline_body_attributes( $attributes = '' ) {
 
@@ -47,7 +47,7 @@ function slimline_body_attributes( $attributes = '' ) {
  *
  * @param array|string $attributes (Optional). An array or query string of attribute / value pairs.
  * @uses slimline_get_comment_attributes | comment-template.php
- * @since 0.0.0
+ * @since 0.1.0
  */
 function slimline_comment_attributes( $attributes = '' ) {
 
@@ -61,7 +61,7 @@ function slimline_comment_attributes( $attributes = '' ) {
  *
  * @param array|string $attributes (Optional). An array or query string of attribute / value pairs.
  * @uses slimline_get_post_attributes | post-template.php
- * @since 0.0.0
+ * @since 0.1.0
  */
 function slimline_post_attributes( $attributes = '' ) {
 
