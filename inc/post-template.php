@@ -11,6 +11,32 @@
 if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 
 /**
+ * slimline_get_ancestors_class function
+ *
+ * Generates a set of classes based on the post ancestors.
+ *
+ * @param string $stem (Optional). The stem to prepend to the ancestor class
+ * @param array $classes (Optional). An array of classes to filter.
+ * @since 0.1.0
+ */
+function slimline_get_ancestors_class( $stem = '', $classes = array() ) {
+
+	if ( $post_ancestors = get_post_ancestors() ) {
+
+		$post_ancestors = array_splice( $post_ancestors, 0, 1 ); // remove post_parent from array
+
+		foreach ( $post_ancestors as $ancestor ) {
+			$classes[] = "{$stem}-{$ancestor}";
+		}
+
+	} else {
+		$classes[] = "{$stem}-" . get_the_ID();
+	}
+
+	return $classes;
+}
+
+/**
  * slimline_get_attributes function
  *
  * Generates an alphabetized string of HTML attributes with values from an array. Developers
@@ -22,7 +48,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
  *
  * @param array|string $attributes An array or query string of attribute / value pairs.
  * @return string $return_attributes The generated string of attributes
- * @since 0.0.0
+ * @since 0.1.0
  */
 function slimline_get_attributes( $attributes = '' ) {
 
@@ -55,7 +81,7 @@ function slimline_get_attributes( $attributes = '' ) {
  * @param array|string $attributes (Optional). An array or query string of attribute / value pairs.
  * @return string $return_attributes The generated string of attributes
  * @uses slimline_get_attributes
- * @since 0.0.0
+ * @since 0.1.0
  */
 function slimline_get_body_attributes( $attributes = '' ) {
 
@@ -88,7 +114,7 @@ function slimline_get_body_attributes( $attributes = '' ) {
  * @param array|string $attributes (Optional). An array or query string of attribute / value pairs.
  * @return string $return_attributes The generated string of attributes
  * @uses slimline_get_attributes
- * @since 0.0.0
+ * @since 0.1.0
  */
 function slimline_get_comment_attributes( $attributes = '' ) {
 	global $slimline;
@@ -131,7 +157,7 @@ function slimline_get_comment_attributes( $attributes = '' ) {
  * @param array|string $attributes (Optional). An array or query string of attribute / value pairs.
  * @return string $return_attributes The generated string of attributes
  * @uses slimline_get_attributes
- * @since 0.0.0
+ * @since 0.1.0
  */
 function slimline_get_post_attributes( $attributes = '' ) {
 	global $slimline;
@@ -162,4 +188,45 @@ function slimline_get_post_attributes( $attributes = '' ) {
 	$return_attributes = slimline_apply_filters( 'slimline_post_attributes', $return_attributes, $attributes );
 
 	return $return_attributes;
+}
+
+/**
+ * slimline_post_ancestors_body_class filter
+ *
+ * Adds ancestor-{post_type}id-{ID} class to hierarchical posts.
+ *
+ * @param array $classes The array of classes retrieved from get_body_class()
+ * @return array $classes The filtered classes array
+ * @since 0.1.0
+ */
+function slimline_post_ancestors_body_class( $classes ) {
+
+	$post_type = get_post_type();
+
+	if ( is_singular() && is_post_type_hierarchical( $post_type ) )
+		$classes = slimline_get_ancestors_class( "ancestor-{$post_type}id", $classes );
+
+	return $classes;
+}
+
+/**
+ * slimline_post_ancestors_post_class filter
+ *
+ * Adds post-parent-{ID} and post-ancestor-{ID} classes to hierarchical posts.
+ *
+ * @param array $classes The array of classes retrieved from get_body_class()
+ * @return array $classes The filtered classes array
+ * @since 0.1.0
+ */
+function slimline_post_ancestors_body_class( $classes ) {
+
+	if ( is_post_type_hierarchical( get_post_type() ) ) {
+
+		$classes[] = 'post-parent-' . slimline_get_post_parent_id();
+
+		$classes = slimline_get_ancestors_class( 'post-ancestor', $classes );
+
+	}
+
+	return $classes;
 }
