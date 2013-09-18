@@ -25,9 +25,9 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 
 		<?php
 			/**
-			 * wp_head hook
+			 * wp_head function
 			 *
-			 * The wp_head hook is a default WordPress hook and is required by the Theme Repository Guidelines. Many themes
+			 * The wp_head function calls a default WordPress hook and is required by the Theme Repository Guidelines. Many themes
 			 * and plugins use this hook for outputting content that should appear between the <head></head> tags of the site.
 			 * Note that there are many other hooks that are also used to modify the wp_head output, such as wp_enqueue_scripts,
 			 * wp_enqueue_styles, wp_print_scripts and so on.
