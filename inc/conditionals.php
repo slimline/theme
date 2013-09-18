@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
  * @param array $function_names An array of function names to evaluate.
  * @return bool Returns TRUE if all functions in $function_names evaluate to true, FALSE if not.
  * @uses slimline_conditional_safe To check if each function exists before evaluating
- * @since 0.0.0
+ * @since 0.1.0
  */
 function slimline_and( $function_names ) {
 
@@ -41,7 +41,7 @@ function slimline_and( $function_names ) {
  *
  * @param string $function_name The specific function to evaluate
  * @return bool Returns TRUE if the function exists and evaluates to true, FALSE if not.
- * @since 0.0.0
+ * @since 0.1.0
  */
 function slimline_conditional_safe( $function_name ) {
 
@@ -60,7 +60,7 @@ function slimline_conditional_safe( $function_name ) {
  *
  * @param bool $check_single_posts Whether or not to count single posts as a blog page. Default is false.
  * @return bool Whether or not the user is viewing a blog page.
- * @since 0.0.0
+ * @since 0.1.0
  */
 function slimline_is_blog( $check_single_posts = false ) {
 
@@ -76,7 +76,7 @@ function slimline_is_blog( $check_single_posts = false ) {
  * @param array $function_names An array of function names to evaluate.
  * @return bool Returns TRUE if any functions in $function_names evaluate to true, FALSE if not.
  * @uses slimline_conditional_safe To check if each function exists before evaluating
- * @since 0.0.0
+ * @since 0.1.0
  */
 function slimline_or( $function_names ) {
 
@@ -98,7 +98,7 @@ function slimline_or( $function_names ) {
  *
  * @global obj $slimline The Slimline theme object.
  * @return bool Whether or not to show the content
- * @since 0.0.0
+ * @since 0.1.0
  */
 function slimline_show_content() {
 	global $slimline;
@@ -123,7 +123,7 @@ function slimline_show_content() {
  *
  * @global obj $slimline The Slimline theme object.
  * @return bool Whether or not to show the excerpt
- * @since 0.0.0
+ * @since 0.1.0
  */
 function slimline_show_excerpt() {
 	global $slimline;
