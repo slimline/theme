@@ -34,7 +34,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 			 *
 			 * @see http://codex.wordpress.org/Function_Reference/wp_head
 			 *
-			 * @hook slimline_viewport_attributes - 10 (outputs meta-viewport tags)
+			 * @hook slimline_viewport_meta_tags - 10 (outputs meta-viewport tags)
 			 */
 			wp_head();
 		?>
