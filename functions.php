@@ -10,22 +10,15 @@
  * 1. Is this an initialization function for a core Slimline module?
  *    Yes: slimline_{module name} (ex: `slimine_admin`)
  *    No : Continue.
- * 2. Is the function hooked to a core WordPress action?
- *    Yes: Does it ONLY fire `slimline_do_action()`?
- *         Yes: slimline_{WordPress action name} (ex: `slimline_wp_head`}
- *         No : Continue.
+ * 2. Is the function hooked to a core WordPress filter?
+ *    Yes: slimline_{descriptive name}_{WordPress filter name} (ex: `slimline_post_ancestors_body_class`}
  *    No : Continue.
- * 3. Is the function hooked to a core WordPress filter?
- *    Yes: Does it ONLY filter the content through `slimline_apply_filters()`?
- *         Yes: slimline_{WordPress filter name} (ex: `slimline_body_class`}
- *         No : slimline_{descriptive name}_{WordPress filter name} (ex: `slimline_post_ancestors_body_class`}
- *    No : Continue.
- * 4. Does the function ONLY call one core WordPress function one or more times (note that if both a single and
+ * 3. Does the function ONLY call one core WordPress function one or more times (note that if both a single and
  *    a plural form of a function exists -- such as register_sidebar() and register_sidebars() -- they are 
  *    counted as the same function for this purpose)?
  *    Yes: slimline_{WordPress function name [plural version if applicable]} (ex: `slimline_register_sidebars`)
  *    No: Continue.
- * 5. Is the function part of a family of similar functions differentiated only by context or location?
+ * 4. Is the function part of a family of similar functions differentiated only by context or location?
  *    Yes: slimline_{context/location}_{descriptive name} (ex: `slimline_body_attributes`, `slimline_post_attributes`)
  *    No : slimline_{descriptive name} (ex: `slimline_show_content`)
  * 
@@ -96,14 +89,16 @@ function slimline_core() {
 	/* 4. Remove unwanted default and/or plugin-added filters */
 
 	/* 5. Add custom actions and action assignments */
-	add_action( 'wp_enqueue_scripts', 'slimline_wp_enqueue_scripts', 0 ); // fire context-aware hook | inc/default-actions.php
-	add_action( 'wp_head', 'slimline_wp_head', 0 ); // fire context-aware hook | inc/default-actions.php
-	add_action( 'wp_footer', 'slimline_wp_footer', 0 ); // fire context-aware hook | inc/default-actions.php
+	add_action( 'wp_enqueue_scripts', 'slimline_add_context_action', 0 ); // fire context-aware hook | inc/context.php
+	add_action( 'wp_head', 'slimline_add_context_action', 0 ); // fire context-aware hook | inc/context.php
+	add_action( 'wp_footer', 'slimline_add_context_action', 0 ); // fire context-aware hook | inc/context.php
 
 	/* 6. Add custom filters and filter assignments */
-	add_filter( 'body_class', 'slimline_body_class', 999 ); // add context-aware filtering for body classes | inc/default-filters.php
-	add_filter( 'comment_class', 'slimline_comment_class', 999 ); // add context-aware filtering for comment classes | inc/default-filters.php
-	add_filter( 'post_class', 'slimline_post_class', 999 ); // add context-aware filtering for post classes | inc/default-filters.php
+	add_filter( 'body_class', 'slimline_add_context_filter', 999 ); // add context-aware filtering for body classes | inc/context.php
+	add_filter( 'body_class', 'slimline_post_ancestors_body_class' ); // add ancestor class to hierarchical posts | inc/post-template.php
+	add_filter( 'comment_class', 'slimline_add_context_filter', 999 ); // add context-aware filtering for comment classes | inc/context.php
+	add_filter( 'post_class', 'slimline_add_context_filter', 999 ); // add context-aware filtering for post classes | inc/context.php
+	add_filter( 'post_class', 'slimline_post_ancestors_post_class' ); // add parent and ancestor classes to hierarchical posts | inc/post-template.php
 	add_filter( 'slimline_content', 'do_shortcode' ); // add shortcode awareness for alternative filter to the_content
 	add_filter( 'slimline_content', 'wpautop' ); // add automatic paragraphs for alternative filter to the_content
 	add_filter( 'slimline_content', 'wptexturize' ); // add character substitution for alternative filter to the_content
