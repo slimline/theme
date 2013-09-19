@@ -11,7 +11,12 @@
  *    Yes: slimline_{module name} (ex: `slimine_admin`)
  *    No : Continue.
  * 2. Is the function hooked to a core WordPress filter?
- *    Yes: slimline_{descriptive name}_{WordPress filter name} (ex: `slimline_post_ancestors_body_class`}
+ *    Yes: Is the function meant to replace the core filtered data?
+ *         Yes: slimline_{WordPressfilter name} (ex: `slimline_body_class`) [note the function should run at 
+ *              priority 0 so it does not also eliminate theme/plugin filter results.]
+ *         No : Can the function ONLY be run appropriately on one specific WordPress filter?
+ *              Yes: slimline_{descriptive name}_{WordPress filter name} (ex: `slimline_post_ancestors_body_class`}
+ *              No : Continue.
  *    No : Continue.
  * 3. Does the function ONLY call one core WordPress function one or more times (note that if both a single and
  *    a plural form of a function exists -- such as register_sidebar() and register_sidebars() -- they are 
