@@ -29,25 +29,15 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 			slimline_do_action( 'slimline_entry_content_before' );
 		?>
 
-		<?php if ( slimline_show_entry_excerpt() ) : ?>
-
-			<div <?php slimline_class( 'entry-summary' ); ?> itemprop="description">
-
-				<?php the_excerpt(); ?>
-
-			</div><!-- .entry-summary -->
-
-		<?php endif; // slimline_show_entry_excerpt() ?>
-
-		<?php if ( slimline_show_entry_content() ) : ?>
-
-			<div <?php slimline_class( 'entry-content' ); ?> itemprop="text">
-
-				<?php the_content( slimline_the_content_more_text() ); ?>
-
-			</div><!-- .entry-content -->
-
-		<?php endif; // slimline_show_entry_content() ?>
+		<?php
+			/**
+			 * slimline_entry_content hook
+			 *
+			 * @hook slimline_entry_excerpt - 10 (gets excerpt template part for search, 404, paged archives and singular posts)
+			 * @hook slimline_entry_content - 20 (gets content template part for archive first pages and singular posts)
+			 */
+			 slimline_do_action( 'slimline_entry_content' );
+		?>
 
 		<?php
 			/**
