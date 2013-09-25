@@ -33,8 +33,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 			/**
 			 * slimline_entry_content hook
 			 *
-			 * @hook slimline_entry_excerpt - 10 (gets excerpt template part for search, 404, paged archives and singular posts)
-			 * @hook slimline_entry_content - 20 (gets content template part for archive first pages and singular posts)
+			 * @hook slimline_entry_excerpt - 10 (gets excerpt template part)
+			 * @hook slimline_entry_content - 20 (gets content template part)
 			 */
 			 slimline_do_action( 'slimline_entry_content' );
 		?>
@@ -53,5 +53,5 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 			slimline_do_action( 'slimline_entry_content_after' );
 		?>
 
-	</article>
+	</article><!-- .entry -->
 
