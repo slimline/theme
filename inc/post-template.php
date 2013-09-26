@@ -23,8 +23,6 @@ function slimline_get_ancestors_class( $stem = '', $classes = array() ) {
 
 	if ( $post_ancestors = get_post_ancestors() ) {
 
-		$post_ancestors = array_splice( $post_ancestors, 0, 1 ); // remove post_parent from array
-
 		foreach ( $post_ancestors as $ancestor ) {
 			$classes[] = "{$stem}-{$ancestor}";
 		}

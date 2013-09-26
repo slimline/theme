@@ -51,8 +51,7 @@ get_header(); // load the header.php template. @see http://codex.wordpress.org/F
 			/**
 			 * slimline_404_content_after hook
 			 *
-			 * Code that runs before the 404 content regardless of whether the 404 widget area 
-			 active or not.
+			 * Code that runs after the 404 content.
 			 */
 			slimline_do_action( 'slimline_404_content_after' );
 		?>
