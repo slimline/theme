@@ -85,6 +85,21 @@ function slimline_html_tag( $tag = 'div', $args = '', $close = false ) {
 }
 
 /**
+ * slimline_html_tag_close tag
+ *
+ * Outputs a single HTML closing tag
+ *
+ * @param string $tag HTML element to close. Defaults to div
+ * @param string $after Additional content for after the closing tag, such as HTML comments
+ * @uses slimline_get_html_tag_close | general-template.php
+ * @since 0.1.0
+ */
+function slimline_html_tag_close( $tag = 'div', $after = '' ) {
+
+	echo slimline_get_html_tag_close( $tag, $after );
+}
+
+/**
  * slimline_post_attributes tag
  *
  * Outputs HTML attributes meant for the post wrapper tag (<article>).

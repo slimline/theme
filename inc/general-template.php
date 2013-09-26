@@ -46,7 +46,7 @@ function slimline_get_header_meta_tags( $tags = array() ) {
 /**
  * slimline_get_html_tag function
  *
- * Generates a single html tag from given arguments
+ * Generates a single HTML tag from given arguments
  *
  * @param string $tag HTML element to generate
  * @param array $attributes An array of attribute / value pairs
@@ -56,11 +56,30 @@ function slimline_get_header_meta_tags( $tags = array() ) {
  */
 function slimline_get_html_tag( $tag = 'div', $args = '', $close = false ) {
 
-	$args = wp_parse_arges( $args );
+	$args = wp_parse_args( $args );
 
 	$return_tag = "<{$tag} " . slimline_get_attributes( $args ) . ( $close ? ' />' : ' >' );
 
 	$return_tag = slimline_apply_filters( "slimline_get_html_tag-{$tag}", $return_tag, $tag, $args, $close );
+
+	return $return_tag;
+}
+
+/**
+ * slimline_get_html_tag_close function
+ *
+ * Generates a closing tag for a single HTML element
+ *
+ * @param string $tag HTML element to close
+ * @param string $after Additional content for after the closing tag, such as HTML comments
+ * @return sting $return_tag The HTML string
+ * @since 0.1.0
+ */
+function slimline_get_html_tag_close( $tag = 'div', $after = '' ) {
+
+	$return_tag = "</{$tag}>{$after}";
+
+	$return_tag = slimline_apply_filters( "slimline_get_html_tag_close-{$tag}", $return_tag, $tag, $after );
 
 	return $return_tag;
 }
