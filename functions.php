@@ -84,6 +84,8 @@ function slimline_core() {
 	/* 2. Include Slimline core files */
 	require( trailingslashit( SLIMLINE_INC ) . 'conditionals.php' );
 	require( trailingslashit( SLIMLINE_INC ) . 'context.php' );
+	require( trailingslashit( SLIMLINE_INC ) . 'general-template.php' );
+	require( trailingslashit( SLIMLINE_INC ) . 'hooks.php' );
 	require( trailingslashit( SLIMLINE_INC ) . 'post-template.php' );
 	require( trailingslashit( SLIMLINE_INC ) . 'template-tags.php' );
 

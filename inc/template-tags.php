@@ -55,6 +55,36 @@ function slimline_comment_attributes( $attributes = '' ) {
 }
 
 /**
+ * slimline_viewport_meta_tags function
+ *
+ * Outputs meta-viewport tags. Meant to be used in wp_head()
+ *
+ * @param array $tags An array of meta tags. Each tag is an array of attibute / value pairs
+ * @uses slimline_get_viewport_meta_tags | general-template.php
+ * @since 0.1.0
+ */
+function slimline_header_meta_tags( $tags = array() ) {
+
+	echo slimline_get_header_meta_tags( $tags );
+}
+
+/**
+ * slimline_html_tag tag
+ *
+ * Outputs a single HTML tag
+ *
+ * @param string $tag HTML element to generate. Defaults to div
+ * @param array $attributes (Optional). An array of attribute / value pairs.
+ * @param bool $close Whether or not to self-close the tag. Default false.
+ * @uses slimline_get_html_tag | general-template.php
+ * @since 0.1.0
+ */
+function slimline_html_tag( $tag = 'div', $args = '', $close = false ) {
+
+	echo slimline_get_html_tag( $tag, $args, $close );
+}
+
+/**
  * slimline_post_attributes tag
  *
  * Outputs HTML attributes meant for the post wrapper tag (<article>).

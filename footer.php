@@ -26,7 +26,19 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 			slimline_do_action( 'slimline_main_after' );
 		?>
 
-		<?php wp_footer(); // @see http://codex.wordpress.org/Function_Reference/wp_footer ?>
+		<?php
+			/**
+			 * wp_footer function
+			 *
+			 * Fires the `wp_footer` action. Used by many plugins to add additional scripts and other content
+			 * at the end of the site.
+			 *
+			 * @see http://codex.wordpress.org/Function_Reference/wp_footer
+			 *
+			 * @hook slimline_add_context_action - 0 (runs additional contextual actions)
+			 */
+			wp_footer();
+		?>
 
 	</body>
 

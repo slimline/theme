@@ -17,11 +17,11 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 <!--[if IE 7]><html class="no-js lt-ie10 lt-ie9 lt-ie8 gt-ie6 ie7" <?php language_attributes(); ?>><![endif]-->
 <!--[if IE 8]><html class="no-js lt-ie10 lt-ie9 gt-ie6 gt-ie7 ie8" <?php language_attributes(); ?>><![endif]-->
 <!--[if IE 9]><html class="no-js lt-ie10 gt-ie6 gt-ie7 gt-ie8 ie9" <?php language_attributes(); ?>><![endif]-->
-<!--[if gt IE 9]><!--><html class="no-js gt-ie6 gt-ie7 gt-ie8 gt-ie9 no-ie" <?php language_attributes(); ?>><!--<![endif]-->
+<!--[if gt IE 9]><!--><html class="no-js gt-ie6 gt-ie7 gt-ie8 gt-ie9 no-ie" <?php language_attributes(); // {@see http://codex.wordpress.org/Theme_Development#Document_Head_.28header.php.29} ?>><!--<![endif]-->
 	<head>
-		<meta charset="<?php bloginfo( 'charset' ); ?>" />
+		<meta charset="<?php bloginfo( 'charset' ); // {@see http://codex.wordpress.org/Theme_Development#Document_Head_.28header.php.29} ?>" />
 
-		<title><?php wp_title( '|' ); // @see http://codex.wordpress.org/Function_Reference/wp_title ?></title>
+		<title><?php wp_title( '|' ); // {@see http://codex.wordpress.org/Function_Reference/wp_title} ?></title>
 
 		<?php
 			/**
@@ -34,7 +34,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 			 *
 			 * @see http://codex.wordpress.org/Function_Reference/wp_head
 			 *
-			 * @hook slimline_viewport_meta_tags - 10 (outputs meta-viewport tags)
+			 * @hook slimline_add_context_action - 0 (runs additional contextual actions)
+			 * @hook slimline_header_meta_tags - 10 (outputs additional meta tags for the header)
 			 */
 			wp_head();
 		?>
