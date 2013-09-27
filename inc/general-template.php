@@ -11,45 +11,37 @@
 if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 
 /**
- * slimline_get_header_meta_tags function
+ * slimline_get_viewport_meta_tag function
  *
- * Generates meta tags for use between the site's <head></head> tags.
+ * Generates a viewport meta tag for use in the site's <head>. Developers can modify
+ * the returned tag using the `slimline_viewport_meta_tag` filter.
  *
- * @param array $tags An array of meta tags. Each tag should be an associative array of attibute / value pairs
- * @return string $return_tags The generated string of meta tags
+ * @return string $tag The generated HTML string
  * @uses slimline_get_html_tag
  * @since 0.1.0
  */
-function slimline_get_header_meta_tags( $tags = array() ) {
+function slimline_get_viewport_meta_tag() {
 
-	$tags = wp_parse_args(
-		$tags,
-		array(
-			'meta_viewport' => array(
-				'content' => 'width=device-width',
-				'name'    => 'viewport'
-			)
-		)
+	$args = array(
+		'content' => 'width=device-width',
+		'name'    => 'viewport'
 	);
 
-	$return_tags = ''; // initialize empty string for later use so we do not trigger PHP notices
+	$tag = slimline_get_html_tag( 'meta', $args, true );
 
-	foreach ( $tags as $tag_args ) {
-		$return_tags .= slimline_get_html_tag( 'meta', $tag_args, true );
-	}
+	$tag = slimline_apply_filters( 'slimline_viewport_meta_tag', $tag, $args );
 
-	$return_tags = slimline_apply_filters( 'slimline_header_meta_tags', $return_tags, $tags );
-
-	return $return_tags;
+	return $tag;
 }
 
 /**
  * slimline_get_html_tag function
  *
- * Generates a single HTML tag from given arguments
+ * Generates a single HTML tag from given arguments. Developers can modify the returned
+ * tag using the `slimline_get_html_tag` and/or `slimline_get_html_tag-{$tag}` filters.
  *
  * @param string $tag HTML element to generate
- * @param array $attributes An array of attribute / value pairs
+ * @param array|string $attributes An array or query string of attribute / value pairs
  * @param bool $close Whether or not to self-close the tag
  * @return string $return_tag The generated HTML string
  * @since 0.1.0
@@ -60,6 +52,8 @@ function slimline_get_html_tag( $tag = 'div', $args = '', $close = false ) {
 
 	$return_tag = "<{$tag} " . slimline_get_attributes( $args ) . ( $close ? ' />' : ' >' );
 
+	$return_tag = slimline_apply_filters( 'slimline_get_html_tag', $return_tag, $tag, $args, $close );
+
 	$return_tag = slimline_apply_filters( "slimline_get_html_tag-{$tag}", $return_tag, $tag, $args, $close );
 
 	return $return_tag;
@@ -68,7 +62,9 @@ function slimline_get_html_tag( $tag = 'div', $args = '', $close = false ) {
 /**
  * slimline_get_html_tag_close function
  *
- * Generates a closing tag for a single HTML element
+ * Generates a closing tag for a single HTML element. Developers can modify the returned
+ * tag using the `slimline_get_html_tag_close` and/or `slimline_get_html_tag_close-{$tag}` 
+ * filters.
  *
  * @param string $tag HTML element to close
  * @param string $after Additional content for after the closing tag, such as HTML comments
@@ -78,6 +74,8 @@ function slimline_get_html_tag( $tag = 'div', $args = '', $close = false ) {
 function slimline_get_html_tag_close( $tag = 'div', $after = '' ) {
 
 	$return_tag = "</{$tag}>{$after}";
+
+	$return_tag = slimline_apply_filters( 'slimline_get_html_tag_close', $return_tag, $tag, $after );
 
 	$return_tag = slimline_apply_filters( "slimline_get_html_tag_close-{$tag}", $return_tag, $tag, $after );
 

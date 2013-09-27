@@ -45,7 +45,7 @@ get_header(); // load the header.php template.
 				 * content-{post_format}.php
 				 * content.php
 				 */
-				slimline_get_template_part( 'content', get_post_type(), 'single', get_post_format() );
+				slimline_get_template_part( 'content', get_post_type(), 'single', get_post_format(), get_the_ID() );
 			?>
 
 		<?php endwhile; // have_posts() ?>

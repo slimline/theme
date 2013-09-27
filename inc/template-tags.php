@@ -27,6 +27,19 @@ function slimline_attributes( $attributes = '' ) {
 }
 
 /**
+ * slimline_base_theme tag
+ *
+ * Outputs information about the Slimline theme framework.
+ *
+ * @param string $property The theme property to return. Function echoes an empty string if no property specified.
+ * @since 0.1.0
+ */
+function slimline_base_theme( $property = '' ) {
+
+	echo ( $property ? slimline_get_base_theme( $property ) : '' );
+}
+
+/**
  * slimline_body_attributes tag
  *
  * Outputs HTML attributes meant for the <body> tag.
@@ -55,17 +68,30 @@ function slimline_comment_attributes( $attributes = '' ) {
 }
 
 /**
- * slimline_viewport_meta_tags function
+ * slimline_current_theme tag
  *
- * Outputs meta-viewport tags. Meant to be used in wp_head()
+ * Outputs information about the current (child) theme. If not using a child theme, outputs information
+ * about the Slimline theme framework instead.
  *
- * @param array $tags An array of meta tags. Each tag is an array of attibute / value pairs
- * @uses slimline_get_viewport_meta_tags | general-template.php
+ * @param string $property The theme property to return. Function echoes an empty string if no property specified.
  * @since 0.1.0
  */
-function slimline_header_meta_tags( $tags = array() ) {
+function slimline_current_theme( $property = '' ) {
 
-	echo slimline_get_header_meta_tags( $tags );
+	echo ( $property ? slimline_get_current_theme( $property ) : '' );
+}
+
+/**
+ * slimline_viewport_meta_tags tag
+ *
+ * Outputs viewport meta tag. Meant to be used in a site's <head> and hooked to wp_head() by default.
+ *
+ * @uses slimline_get_viewport_meta_tag | general-template.php
+ * @since 0.1.0
+ */
+function slimline_viewport_meta_tag() {
+
+	echo slimline_get_header_meta_tag();
 }
 
 /**

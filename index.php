@@ -23,7 +23,7 @@ get_header(); // load the header.php template. @see http://codex.wordpress.org/F
 			/**
 			 * slimline_index_before hook
 			 *
-			 * @hook slimline_index_wrapper - 10 (outputs opening div for the index wrapper)
+			 * @hook slimline_blog_wrapper - 10 (outputs opening div for the index wrapper)
 			 * @hook slimline_get_blog_header - 20 (gets the blog-header template part)
 			 * @hook slimline_entries_wrapper - 30 (outputs opening div for the entries wrapper)
 			 */
@@ -44,7 +44,7 @@ get_header(); // load the header.php template. @see http://codex.wordpress.org/F
 					 * content-{post_format}.php
 					 * content.php
 					 */
-					slimline_get_template_part( 'content', get_post_type(), get_post_format() );
+					slimline_get_template_part( 'content', get_post_type(), get_post_format(), get_the_ID() );
 				?>
 
 			<?php endwhile; // have_posts() ?>

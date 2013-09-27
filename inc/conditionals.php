@@ -24,6 +24,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
  */
 function slimline_and( $function_names ) {
 
+
+
 	foreach ( $function_names as $function_name ) {
 		if ( ! slimline_conditional_safe( $function_name() ) )
 			return false;
@@ -92,7 +94,7 @@ function slimline_or( $function_names ) {
  * slimline_show_content conditional
  *
  * This conditional determines whether or not post content is meant to be displayed
- * on the current post. By default it returns true on single posts and on the first
+ * on the current post. By default it returns true on singular posts and on the first
  * page of the blog home. Developers can modify the returned boolean using the 
  * `slimline_show_content` filter.
  *
@@ -108,7 +110,7 @@ function slimline_show_content() {
 	 * or index pages without checking each individual post.
 	 */
 	if ( ! isset( $slimline->show_content ) )
-		$slimline->show_content = slimline_apply_filters( 'slimline_show_content', ( is_single() || ( is_home() && ! is_paged() ) ) );
+		$slimline->show_content = slimline_apply_filters( 'slimline_show_content', ( is_singular() || ( is_home() && ! is_paged() ) ) );
 
 	return $slimline->show_content;
 }
@@ -117,8 +119,8 @@ function slimline_show_content() {
  * slimline_show_excerpt conditional
  *
  * This conditional determines whether or not a post excerpt is meant to be shown
- * on the current post. By default it returns true on archive pages or on single posts
- * where a custom excerpt is present. Developers can modify the returned boolean
+ * on the current post. By default it returns true on archive pages or on singular 
+ * posts where a custom excerpt is present. Developers can modify the returned boolean
  * using the `slimline_show_excerpt` filter.
  *
  * @global obj $slimline The Slimline theme object.
@@ -133,7 +135,7 @@ function slimline_show_excerpt() {
 	 * or index pages without checking each individual post.
 	 */
 	if ( ! isset( $slimline->show_excerpt ) )
-		$slimline->show_excerpt = slimline_apply_filters( 'slimline_show_excerpt', ( is_archive() || is_paged() || ( is_single() && has_excerpt() ) ) );
+		$slimline->show_excerpt = slimline_apply_filters( 'slimline_show_excerpt', ( is_archive() || is_paged() || ( is_singular() && has_excerpt() ) ) );
 
 	return $slimline->show_excerpt;
 }

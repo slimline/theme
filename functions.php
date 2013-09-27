@@ -41,7 +41,7 @@
  *
  * @package Slimline
  * @subpackage Functions
- * @version 0.0.0
+ * @version 0.1.0
  * @author Michael Dozark <michael@michaeldozark.com>
  * @copyright Copyright (c) 2013, Michael Dozark
  * @link http://www.michaeldozark.com/wordpress/themes/slimline
@@ -74,6 +74,7 @@ function slimline_core() {
 	/* 1. Define globals and constants */
 	$content_width = slimline_apply_filters( 'slimline_content_width', 980 );
 	$slimline = new stdClass;
+	define( 'SLIMLINE_VERSION', slimline_get_theme( 'Version' ) );
 	define( 'SLIMLINE_DIR', get_template_directory() );
 	define( 'SLIMLINE_INC', trailingslashit( SLIMLINE_DIR ) . 'inc' );
 	define( 'SLIMLINE_URI', get_template_directory_uri() );
@@ -87,6 +88,7 @@ function slimline_core() {
 	require( trailingslashit( SLIMLINE_INC ) . 'general-template.php' );
 	require( trailingslashit( SLIMLINE_INC ) . 'hooks.php' );
 	require( trailingslashit( SLIMLINE_INC ) . 'post-template.php' );
+	require( trailingslashit( SLIMLINE_INC ) . 'theme.php' );
 	require( trailingslashit( SLIMLINE_INC ) . 'template-tags.php' );
 
 	/* 3. Remove unwanted default and/or plugin-added actions */
@@ -98,6 +100,7 @@ function slimline_core() {
 	/* 5. Add custom actions and action assignments */
 	add_action( 'wp_enqueue_scripts', 'slimline_add_context_action', 0 ); // fire context-aware hook | inc/context.php
 	add_action( 'wp_head', 'slimline_add_context_action', 0 ); // fire context-aware hook | inc/context.php
+	add_action( 'wp_head', 'slimline_viewport_meta_tag' ); // outputs a viewport meta tag | inc/template-tags.php
 	add_action( 'wp_footer', 'slimline_add_context_action', 0 ); // fire context-aware hook | inc/context.php
 
 	/* 6. Add custom filters and filter assignments */
