@@ -82,6 +82,20 @@ function slimline_current_theme( $property = '' ) {
 }
 
 /**
+ * slimline_site_header_attributes tag
+ *
+ * Outputs HTML attibutes meant for the website <header> tag.
+ *
+ * @param array|string $attributes (Optional). An array or query string of attribute / value pairs.
+ * @uses slimline_get_site_header_attributes | general-template.php
+ * @since 0.1.0
+ */
+function slimline_site_header_attributes( $attributes = '' ) {
+
+	echo slimline_get_site_header_attributes( $attributes );
+}
+
+/**
  * slimline_viewport_meta_tags tag
  *
  * Outputs viewport meta tag. Meant to be used in a site's <head> and hooked to wp_head() by default.

@@ -189,6 +189,56 @@ function slimline_get_post_attributes( $attributes = '' ) {
 }
 
 /**
+ * slimline_get_queried_object_type function
+ *
+ * Returns the type for the currently queried object.
+ *
+ * @global object $slimline The Slimline theme object
+ * @return string $type The object's type (post type if a singular post, taxonomy type if a term, etc.)
+ * @since 0.1.0
+ */
+function slimline_get_queried_object_type() {
+	global $slimline;
+
+	if ( isset( $slimline->queried_object_type ) )
+		return $slimline->queried_object_type;
+
+	if ( is_singular() || is_post_type_archive() || is_home() ) {
+
+		$type = get_post_type();
+
+	} elseif ( is_category() || is_tag() || is_term() ) {
+
+		$object = get_queried_object();
+
+		$type = $object->taxonomy;
+
+	} elseif ( is_author() ) {
+
+		$type = 'author';
+	} elseif ( is_date() ) {
+
+		$type = 'date';
+	} elseif ( is_archive() ) {
+
+		$type = 'archive';
+	} elseif ( is_404() ) {
+
+		$type = '404';
+	} elseif ( is_search() ) {
+
+		$type = 'search';
+	} else {
+
+		$type = 'none';
+	}
+
+	$slimline->queried_object_type = slimline_apply_filters( 'slimline_queried_object_type', $type );
+
+	return $slimline->queried_object_type;
+}
+
+/**
  * slimline_post_ancestors_body_class filter
  *
  * Adds ancestor-{post_type}id-{ID} class to hierarchical posts.

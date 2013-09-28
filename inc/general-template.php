@@ -81,3 +81,35 @@ function slimline_get_html_tag_close( $tag = 'div', $after = '' ) {
 
 	return $return_tag;
 }
+
+/**
+ * slimline_get_site_header_attributes function
+ *
+ * Generates an alphabetized string of HTML attributes for the main <header> tag from an array.
+ * Essentially a wrapper function for `slimline_get_attributes()` that includes default attributes.
+ * Developers can modify the returned string using the `slimline_site_header_attributes` filter.
+ *
+ * @param array|string $attributes (Optional). An array or query string of attribute / value pairs.
+ * @return string $return_attributes The generated string of attributes
+ * @uses slimline_get_attributes
+ * @since 0.1.0
+ */
+function slimline_get_site_header_attributes( $attributes = '' ) {
+
+	// convert query strings to array and merge with defaults
+	$attributes = wp_parse_args(
+		$attributes,
+		array(
+			'class'     => slimline_get_class( 'site-header' ),
+			'itemscope' => 'itemscope',
+			'itemtype'  => 'http://schema.org/WPHeader'
+		)
+	);
+
+	$return_attributes = slimline_get_attributes( $attributes );
+
+	$return_attributes = slimline_apply_filters( 'slimline_site_header_attributes', $return_attributes, $attributes );
+
+	return $return_attributes;
+
+}
