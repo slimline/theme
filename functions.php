@@ -12,7 +12,7 @@
  *    No : Continue.
  * 2. Is the function hooked to a core WordPress filter?
  *    Yes: Is the function meant to replace the core filtered data?
- *         Yes: slimline_{WordPressfilter name} (ex: `slimline_body_class`) [note the function should run at 
+ *         Yes: slimline_{WordPress filter name} (ex: `slimline_body_class`) [note the function should run at 
  *              priority 0 so it does not also eliminate theme/plugin filter results.]
  *         No : Can the function ONLY be run appropriately on one specific WordPress filter?
  *              Yes: slimline_{descriptive name}_{WordPress filter name} (ex: `slimline_post_ancestors_body_class`}
@@ -74,7 +74,7 @@ function slimline_core() {
 	/* 1. Define globals and constants */
 	$content_width = slimline_apply_filters( 'slimline_content_width', 980 );
 	$slimline = new stdClass;
-	define( 'SLIMLINE_VERSION', slimline_get_theme( 'Version' ) );
+	define( 'SLIMLINE_VERSION', slimline_get_base_theme( 'Version' ) );
 	define( 'SLIMLINE_DIR', get_template_directory() );
 	define( 'SLIMLINE_INC', trailingslashit( SLIMLINE_DIR ) . 'inc' );
 	define( 'SLIMLINE_URI', get_template_directory_uri() );
@@ -89,6 +89,7 @@ function slimline_core() {
 	require( trailingslashit( SLIMLINE_INC ) . 'hooks.php' );
 	require( trailingslashit( SLIMLINE_INC ) . 'post-template.php' );
 	require( trailingslashit( SLIMLINE_INC ) . 'theme.php' );
+	require( trailingslashit( SLIMLINE_INC ) . 'template.php' );
 	require( trailingslashit( SLIMLINE_INC ) . 'template-tags.php' );
 
 	/* 3. Remove unwanted default and/or plugin-added actions */
@@ -98,20 +99,29 @@ function slimline_core() {
 	/* 4. Remove unwanted default and/or plugin-added filters */
 
 	/* 5. Add custom actions and action assignments */
+	add_action( 'slimline_wp_enqueue_scripts-singular', 'slimline_enqueue_comment_reply' ); // add support for threaded comments | inc/script-loader.php
 	add_action( 'wp_enqueue_scripts', 'slimline_add_context_action', 0 ); // fire context-aware hook | inc/context.php
 	add_action( 'wp_head', 'slimline_add_context_action', 0 ); // fire context-aware hook | inc/context.php
 	add_action( 'wp_head', 'slimline_viewport_meta_tag' ); // outputs a viewport meta tag | inc/template-tags.php
 	add_action( 'wp_footer', 'slimline_add_context_action', 0 ); // fire context-aware hook | inc/context.php
 
 	/* 6. Add custom filters and filter assignments */
+	add_filter( 'attachment_template', 'slimline_single_template', 0 ); // replace default template hierarchy for single posts | inc/template.php
+	add_filter( 'author_template', 'slimline_author_template', 0 ); // replace default template hierarchy for author archives | inc/template.php
 	add_filter( 'body_class', 'slimline_add_context_filter', 999 ); // add context-aware filtering for body classes | inc/context.php
 	add_filter( 'body_class', 'slimline_post_ancestors_body_class' ); // add ancestor class to hierarchical posts | inc/post-template.php
+	add_filter( 'category_template', 'slimline_taxonomy_template', 0 ); // replace default template hierarchy for taxonomy archive | inc/template.php
 	add_filter( 'comment_class', 'slimline_add_context_filter', 999 ); // add context-aware filtering for comment classes | inc/context.php
+	add_filter( 'page_template', 'slimline_single_template', 0 ); // replace default template hierarchy for single posts | inc/template.php
 	add_filter( 'post_class', 'slimline_add_context_filter', 999 ); // add context-aware filtering for post classes | inc/context.php
 	add_filter( 'post_class', 'slimline_post_ancestors_post_class' ); // add parent and ancestor classes to hierarchical posts | inc/post-template.php
+	add_filter( 'single_template', 'slimline_single_template', 0 ); // replace default template hierarchy for single posts | inc/template.php
 	add_filter( 'slimline_content', 'do_shortcode' ); // add shortcode awareness for alternative filter to the_content
 	add_filter( 'slimline_content', 'wpautop' ); // add automatic paragraphs for alternative filter to the_content
 	add_filter( 'slimline_content', 'wptexturize' ); // add character substitution for alternative filter to the_content
+	add_filter( 'style_loader_tag', 'slimline_style_loader_tag', 10, 2 ); // filter style tags by style handle | inc/context.php
+	add_filter( 'tag_template', 'slimline_taxonomy_template', 0 ); // replace default template hierarchy for taxonomy archive | inc/template.php
+	add_filter( 'taxonomy_template', 'slimline_taxonomy_template', 0 ); // replace default template hierarchy for taxonomy archive | inc/template.php
 	add_filter( 'term_description', 'do_shortcode' ); // make term descriptions shortcode-aware
 	add_filter( 'widget_text', 'do_shortcode' ); // make text widget shortcode-aware
 
