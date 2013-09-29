@@ -7,6 +7,54 @@
  */
 
 /**
+ * slimline_author_template filter
+ *
+ * Adjusts the user template hierarchy by adding additional role-based templates.
+ *
+ * @since 0.1.0
+ */
+function slimline_author_template() {
+
+	$user = get_queried_object();
+
+	/**
+	 * Set up the user-specific templates
+	 */
+	$templates = array(
+		"author-{$user->data->user_nicename}.php",
+		"author-{$user->ID}.php"
+	);
+
+	/**
+	 * Add role-specific templates
+	 */
+	if ( is_array( $user->roles ) ) {
+		foreach ( $user->roles as $role ) {
+			$templates[] = "author-{$role}.php";
+		}
+	}
+
+	/**
+	 * Add generic templates
+	 */
+	$templates = array_merge(
+		$templates,
+		array(
+			'author.php',
+			'archive.php',
+			'paged.php',
+			'index.php'
+		)
+	);
+
+	/**
+	 * Allow for custom templates. If found, prepend to the templates array
+	 */
+	if ( $custom_template = get_user_meta( $user_id, '_wp_user_template', true ) )
+		array_unshift( $templates, $custom_template );
+}
+
+/**
  * slimline_single_template filter
  *
  * Standardizes single post template hierarchy and adds post-specific template support to all post
@@ -120,7 +168,8 @@ function slimline_taxonomy_template() {
 	}
 
 	/**
-	 * If the site is also using the term meta plugin, allow for custom term templates.
+	 * If the site is also using the term meta plugin, allow for custom term templates.  If found, prepend 
+	 * to the templates array
 	 */
 	if ( function_exists( 'slimline_get_term_meta' ) && ( $custom_template = slimline_get_term_meta( get_queried_object_id(), "_wp_{$term->taxonomy}_template", true ) ) )
 		array_unshift( $templates, $custom_template );

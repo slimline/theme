@@ -11,7 +11,7 @@
 if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 
 /**
- * slimline_get_site_header hook
+ * slimline_get_site_header hook (pluggable)
  *
  * Gets site header template part
  *
@@ -26,7 +26,7 @@ if ( ! function_exists( 'slimline_get_site_header' ) ) {
 }
 
 /**
- * slimline_get_site_footer hook
+ * slimline_get_site_footer hook (pluggable)
  *
  * Gets site footer template part
  *
@@ -41,7 +41,7 @@ if ( ! function_exists( 'slimline_get_site_footer' ) ) {
 }
 
 /**
- * slimline_site_wrapper hook
+ * slimline_site_wrapper hook (pluggable)
  *
  * Ouputs the site wrapper HTML tag. Developers can modify the echoed tag using the
  * `slimline_site_wrapper` filter.
@@ -65,7 +65,7 @@ if ( ! function_exists( 'slimline_site_wrapper' ) ) {
 }
 
 /**
- * slimline_site_wrapper_close hook
+ * slimline_site_wrapper_close hook (pluggable)
  *
  * Ouputs the site wrapper HTML tag. Developers can modify the echoed tag using the
  * `slimline_site_wrapper_close` filter.
