@@ -63,10 +63,8 @@ function slimline_get_attributes( $attributes = '' ) {
 		$return_attributes .= ' ' . $attribute . '="' . esc_attr( $value ) . '"';
 	}
 
-	// filter so developers can alter this values
-	$return_attributes = slimline_apply_filters( 'slimline_attributes', $return_attributes, $attributes );
-
-	return $return_attributes;
+	// filter so developers can alter these values
+	return slimline_apply_filters( 'slimline_attributes', $return_attributes, $attributes );
 }
 
 /**
@@ -96,9 +94,7 @@ function slimline_get_body_attributes( $attributes = '' ) {
 
 	$return_attributes = slimline_get_attributes( $attributes );
 
-	$return_attributes = slimline_apply_filters( 'slimline_body_attributes', $return_attributes, $attributes );
-
-	return $return_attributes;
+	return slimline_apply_filters( 'slimline_body_attributes', $return_attributes, $attributes );
 }
 
 /**
@@ -140,9 +136,7 @@ function slimline_get_comment_attributes( $attributes = '' ) {
 
 	$return_attributes = slimline_get_attributes( $attributes );
 
-	$return_attributes = slimline_apply_filters( 'slimline_comment_attributes', $return_attributes, $attributes );
-
-	return $return_attributes;
+	return slimline_apply_filters( 'slimline_comment_attributes', $return_attributes, $attributes );
 }
 /**
  * slimline_get_post_attributes function
@@ -183,9 +177,7 @@ function slimline_get_post_attributes( $attributes = '' ) {
 
 	$return_attributes = slimline_get_attributes( $attributes );
 
-	$return_attributes = slimline_apply_filters( 'slimline_post_attributes', $return_attributes, $attributes );
-
-	return $return_attributes;
+	return slimline_apply_filters( 'slimline_post_attributes', $return_attributes, $attributes );
 }
 
 /**

@@ -126,6 +126,10 @@ function slimline_core() {
 	add_filter( 'widget_text', 'do_shortcode' ); // make text widget shortcode-aware
 
 	/* 7. Add theme support */
+	add_theme_support( 'automatic-feed-links' ); // add RSS feed links to wp_head(). {@see http://codex.wordpress.org/Function_Reference/add_theme_support#Feed_Links}
+	add_theme_support( 'custom-header', slimline_custom_header_support_args() ); // allow custom header upload {@see http://codex.wordpress.org/Custom_Headers}
+	add_theme_support( 'html5', slimline_html5_support_args() ); // allow HTML5 markup. Not necessary for Slimline themes, but included here for completeness {@see http://codex.wordpress.org/Function_Reference/add_theme_support#HTML5}
+	add_theme_support( 'post-thumbnails', slimline_post_thumbnails_support_args() ); // allow "featured image" upload. {@see http://codex.wordpress.org/Post_Thumbnails}
 
 	/* 8. Miscellaneous and/or additions dependent on the above, such as adding image sizes */
 

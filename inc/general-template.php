@@ -11,30 +11,6 @@
 if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 
 /**
- * slimline_get_viewport_meta_tag function
- *
- * Generates a viewport meta tag for use in the site's <head>. Developers can modify
- * the returned tag using the `slimline_viewport_meta_tag` filter.
- *
- * @return string $tag The generated HTML string
- * @uses slimline_get_html_tag
- * @since 0.1.0
- */
-function slimline_get_viewport_meta_tag() {
-
-	$args = array(
-		'content' => 'width=device-width',
-		'name'    => 'viewport'
-	);
-
-	$tag = slimline_get_html_tag( 'meta', $args, true );
-
-	$tag = slimline_apply_filters( 'slimline_viewport_meta_tag', $tag, $args );
-
-	return $tag;
-}
-
-/**
  * slimline_get_html_tag function
  *
  * Generates a single HTML tag from given arguments. Developers can modify the returned
@@ -54,9 +30,7 @@ function slimline_get_html_tag( $tag = 'div', $args = '', $close = false ) {
 
 	$return_tag = slimline_apply_filters( 'slimline_get_html_tag', $return_tag, $tag, $args, $close );
 
-	$return_tag = slimline_apply_filters( "slimline_get_html_tag-{$tag}", $return_tag, $tag, $args, $close );
-
-	return $return_tag;
+	return slimline_apply_filters( "slimline_get_html_tag-{$tag}", $return_tag, $tag, $args, $close );
 }
 
 /**
@@ -77,9 +51,7 @@ function slimline_get_html_tag_close( $tag = 'div', $after = '' ) {
 
 	$return_tag = slimline_apply_filters( 'slimline_get_html_tag_close', $return_tag, $tag, $after );
 
-	$return_tag = slimline_apply_filters( "slimline_get_html_tag_close-{$tag}", $return_tag, $tag, $after );
-
-	return $return_tag;
+	return slimline_apply_filters( "slimline_get_html_tag_close-{$tag}", $return_tag, $tag, $after );
 }
 
 /**
@@ -108,8 +80,28 @@ function slimline_get_site_header_attributes( $attributes = '' ) {
 
 	$return_attributes = slimline_get_attributes( $attributes );
 
-	$return_attributes = slimline_apply_filters( 'slimline_site_header_attributes', $return_attributes, $attributes );
+	return slimline_apply_filters( 'slimline_site_header_attributes', $return_attributes, $attributes );
 
-	return $return_attributes;
+}
 
+/**
+ * slimline_get_viewport_meta_tag function
+ *
+ * Generates a viewport meta tag for use in the site's <head>. Developers can modify
+ * the returned tag using the `slimline_viewport_meta_tag` filter.
+ *
+ * @return string $tag The generated HTML string
+ * @uses slimline_get_html_tag
+ * @since 0.1.0
+ */
+function slimline_get_viewport_meta_tag() {
+
+	$args = array(
+		'content' => 'width=device-width',
+		'name'    => 'viewport'
+	);
+
+	$tag = slimline_get_html_tag( 'meta', $args, true );
+
+	return slimline_apply_filters( 'slimline_viewport_meta_tag', $tag, $args );
 }

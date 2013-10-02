@@ -13,10 +13,10 @@
 if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 ?><!doctype html>
 <!--[if IE]><![endif]--><!-- fix for conditional comment CSS blocking: http://www.phpied.com/conditional-comments-block-downloads/ -->
-<!--[if lt IE 7]><html class="no-js lt-ie10 lt-ie9 lt-ie8 lt-ie7" <?php language_attributes(); ?>><![endif]-->
-<!--[if IE 7]><html class="no-js lt-ie10 lt-ie9 lt-ie8 gt-ie6 ie7" <?php language_attributes(); ?>><![endif]-->
-<!--[if IE 8]><html class="no-js lt-ie10 lt-ie9 gt-ie6 gt-ie7 ie8" <?php language_attributes(); ?>><![endif]-->
-<!--[if IE 9]><html class="no-js lt-ie10 gt-ie6 gt-ie7 gt-ie8 ie9" <?php language_attributes(); ?>><![endif]-->
+<!--[if lt IE 7]><html class="no-js lt-ie10 lt-ie9 lt-ie8 lt-ie7 ie" <?php language_attributes(); ?>><![endif]-->
+<!--[if IE 7]><html class="no-js lt-ie10 lt-ie9 lt-ie8 gt-ie6 ie7 ie" <?php language_attributes(); ?>><![endif]-->
+<!--[if IE 8]><html class="no-js lt-ie10 lt-ie9 gt-ie6 gt-ie7 ie8 ie" <?php language_attributes(); ?>><![endif]-->
+<!--[if IE 9]><html class="no-js lt-ie10 gt-ie6 gt-ie7 gt-ie8 ie9 ie" <?php language_attributes(); ?>><![endif]-->
 <!--[if gt IE 9]><!--><html class="no-js gt-ie6 gt-ie7 gt-ie8 gt-ie9 no-ie" <?php language_attributes(); // {@see http://codex.wordpress.org/Theme_Development#Document_Head_.28header.php.29} ?>><!--<![endif]-->
 	<head>
 		<meta charset="<?php bloginfo( 'charset' ); // {@see http://codex.wordpress.org/Theme_Development#Document_Head_.28header.php.29} ?>" />

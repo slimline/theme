@@ -46,7 +46,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 			 * @hook slimline_entry_footer - 10 (outputs the opening footer tag for entry footer)
 			 * @hook slimline_entry_tags - 20 (outputs the post_tags, if any)
 			 * @hook slimline_entry_author - 30 (gets author bio template part)
-			 * @hook slimline_entry_pagination - 40 (gets nav-pagination-single template part)
+			 * @hook slimline_entry_pagination - 40 (gets pagination-entry template part)
 			 * @hook slimline_entry_footer_close - 50 (outputs the closing footer tag for entry footer)
 			 * @hook slimline_entry_comments - 60 (gets comments.php template)
 			 */
