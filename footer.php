@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 			 *
 			 * @hook slimline_get_primary_sidebar - 10 (gets the primary sidebar)
 			 * @hook slimline_content_wrapper_close - 20 (outputs the closing div for the content wrapper)
-			 * @hook slimline_get_secondary_content - 30 (gets secondary-content sidebar)
+			 * @hook slimline_get_secondary_sidebar - 30 (gets secondary content sidebar)
 			 * @hook slimline_get_site_footer - 40 (gets site-footer template part)
 			 * @hook slimline_site_wrapper_close - 50 (outputs closing div for the site wrapper)
 			 */

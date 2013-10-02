@@ -6,6 +6,8 @@
  * @subpackage Includes
  */
 
+if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
+
 /**
  * slimline_author_template filter
  *
