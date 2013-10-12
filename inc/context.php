@@ -106,7 +106,8 @@ function slimline_apply_filters( $tag, $value = '', $args = '' ) {
  *
  * Actions run from most specific to most generic so developers can modify or interrupt
  * generic hooks with more specific ones (for example, removing a "slimline_main_before" hook
- * via a function hooked to "slimline_main_before-front-page").
+ * via a function hooked to "slimline_main_before-front-page"). The base hook can then be run 
+ * as a catch-all after all specific actions have run.
  * 
  * @global obj $slimline The Slimline theme object.
  * @param string $tag The base name of the action hook.

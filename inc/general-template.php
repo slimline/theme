@@ -97,7 +97,7 @@ function slimline_get_site_header_attributes( $attributes = '' ) {
 function slimline_get_viewport_meta_tag() {
 
 	$args = array(
-		'content' => 'width=device-width',
+		'content' => 'width=device-width, initial-scale=1',
 		'name'    => 'viewport'
 	);
 

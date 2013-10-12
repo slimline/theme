@@ -32,9 +32,7 @@ if ( ! function_exists( 'slimline_blog_wrapper' ) ) {
 
 		$blog_wrapper = slimline_get_html_tag( 'div', $args, false );
 
-		$blog_wrapper = slimline_apply_filters( 'slimline_blog_wrapper', $blog_wrapper );
-
-		echo $blog_wrapper;
+		echo slimline_apply_filters( 'slimline_blog_wrapper', $blog_wrapper, $args );
 	}
 }
 
@@ -52,9 +50,7 @@ if ( ! function_exists( 'slimline_blog_wrapper_close' ) ) {
 
 		$blog_wrapper_close = slimline_get_html_tag_close( 'div', '<!-- .index -->' );
 
-		$blog_wrapper_close = slimline_apply_filters( 'slimline_blog_wrapper_close', $blog_wrapper_close );
-
-		echo $blog_wrapper;
+		echo slimline_apply_filters( 'slimline_blog_wrapper_close', $blog_wrapper_close );
 	}
 }
 
@@ -76,9 +72,7 @@ if ( ! function_exists( 'slimline_content_wrapper' ) ) {
 
 		$content_wrapper = slimline_get_html_tag( 'div', $args, false );
 
-		$content_wrapper = slimline_apply_filters( 'slimline_content_wrapper', $content_wrapper );
-
-		echo $content_wrapper;
+		echo slimline_apply_filters( 'slimline_content_wrapper', $content_wrapper, $args );
 	}
 }
 
@@ -96,9 +90,7 @@ if ( ! function_exists( 'slimline_content_wrapper_close' ) ) {
 
 		$content_wrapper_close = slimline_get_html_tag_close( 'div', '<!-- .content -->' );
 
-		$content_wrapper_close = slimline_apply_filters( 'slimline_content_wrapper_close', $content_wrapper_close );
-
-		echo $content_wrapper;
+		echo slimline_apply_filters( 'slimline_content_wrapper_close', $content_wrapper_close );
 	}
 }
 
@@ -120,9 +112,7 @@ if ( ! function_exists( 'slimline_entries_wrapper' ) ) {
 
 		$entries_wrapper = slimline_get_html_tag( 'div', $args, false );
 
-		$entries_wrapper = slimline_apply_filters( 'slimline_entries_wrapper', $entries_wrapper );
-
-		echo $entries_wrapper;
+		echo slimline_apply_filters( 'slimline_entries_wrapper', $entries_wrapper, $args );
 	}
 }
 
@@ -140,9 +130,118 @@ if ( ! function_exists( 'slimline_entries_wrapper_close' ) ) {
 
 		$entries_wrapper_close = slimline_get_html_tag_close( 'div', '<!-- .entries -->' );
 
-		$entries_wrapper_close = slimline_apply_filters( 'slimline_entries_wrapper_close', $entries_wrapper_close );
+		echo slimline_apply_filters( 'slimline_entries_wrapper_close', $entries_wrapper_close );
+	}
+}
 
-		echo $entries_wrapper;
+/**
+ * slimline_entry_header hook (pluggable)
+ *
+ * Ouputs the entry header HTML tag. Developers can modify the echoed tag using the
+ * `slimline_entry_header` filter.
+ *
+ * @uses slimline_get_html_tag to create the HTML tag
+ * @since 0.1.0
+ */
+if ( ! function_exists( 'slimline_entry_header' ) ) {
+	function slimline_entry_header() {
+
+		$args = array(
+			'class' => slimline_get_class( 'entry-header' )
+		);
+
+		$entry_header = slimline_get_html_tag( 'div', $args, false );
+
+		echo slimline_apply_filters( 'slimline_entry_header', $entry_header, $args );
+	}
+}
+
+/**
+ * slimline_entry_header_close hook (pluggable)
+ *
+ * Ouputs the entry header closing HTML tag. Developers can modify the echoed tag using the
+ * `slimline_entry_header_close` filter.
+ *
+ * @uses slimline_get_html_tag_close to create the HTML tag
+ * @since 0.1.0
+ */
+if ( ! function_exists( 'slimline_entry_header_close' ) ) {
+	function slimline_entry_header_close() {
+
+		$entry_header_close = slimline_get_html_tag_close( 'div', '<!-- .entry-header -->' );
+
+		echo slimline_apply_filters( 'slimline_entry_header_close', $entry_header_close );
+	}
+}
+
+/**
+ * slimline_entry_thumbnail hook (pluggable)
+ *
+ * Outputs the entry's post thumbnail (if any). Developers can modify the echoed markup using the 
+ * `slimline_entry_thumbnail` filter.
+ *
+ * @uses get_the_post_thumbnail to generate the post thumbnail image
+ * @since 0.1.0
+ */
+if ( ! function_exists( 'slimline_entry_thumbnail' ) ) {
+	function slimline_entry_thumbnail() {
+
+		$entry_thumbnail = get_the_post_thumbnail( get_the_ID(), slimline_entry_thumbnail_size(), slimline_entry_thumbnail_args() );
+
+		/**
+		 * slimline_entry_thumbnail filter
+		 *
+		 * @hook [home|archive] slimline_entry_thumbnail_link - 10 (wraps the thumbnail in an anchor tag on index and archive pages)
+		 */
+		echo slimline_apply_filters( 'slimline_entry_thumbnail', $entry_thumbnail );
+	}
+}
+
+/**
+ * slimline_entry_thumbnail_link hook (pluggable)
+ *
+ * Wraps the entry thumbnail image in an anchor tag. By default this is hooked to run on archives and 
+ * the blog home page. Developers can modify the output using the `slimline_entry_thumbnail_link` filter.
+ *
+ * @param string $thumbnail The thumbnail's HTML markup
+ * @return string $thumbnail The thumbnail wrapped in an anchor tag
+ * @uses slimline_get_html_tag and slimline_get_html_tag_close to create the HTML tag
+ * @since 0.1.0
+ */
+if ( ! function_exists( 'slimline_entry_thumbnail_link' ) ) {
+	function slimline_entry_thumbnail_link( $thumbnail ) {
+
+		$args = array(
+			'class' => slimline_get_class( 'entry-thumbnail-link' )
+		);
+
+		$thumbnail = slimline_get_html_tag( 'a', $args, false ) . $thumbnail . slimline_get_html_tag_close( 'a' );
+
+		return slimline_apply_filters( 'slimline_entry_thumbnail_link', $thumbnail, $args );
+	}
+}
+
+/**
+ * slimline_entry_title hook (pluggable)
+ *
+ * Outputs the entry title. Developers can modify the output using the `slimline_entry_title`
+ * filter.
+ *
+ * @uses get_the_title to generate the post title.
+ * @since 0.1.0
+ */
+if ( ! function_exists( 'slimline_entry_title' ) {
+	function slimline_entry_title() {
+
+		$entry_title = get_the_title();
+
+		/**
+		 * slimline_entry_title filter
+		 *
+		 * @hook slimline_entry_title_link - 10 (wraps the title in an anchor tag)
+		 * @hook slimline_entry_title_html - 20 (wraps the title in the appropriate header tag)
+		 */
+		echo slimline_apply_filters( 'slimline_entry_title', $entry_title );
 	}
 }
 
@@ -269,9 +368,7 @@ if ( ! function_exists( 'slimline_site_wrapper' ) ) {
 
 		$site_wrapper = slimline_get_html_tag( 'div', $args, false );
 
-		$site_wrapper = slimline_apply_filters( 'slimline_site_wrapper', $site_wrapper );
-
-		echo $site_wrapper;
+		echo slimline_apply_filters( 'slimline_site_wrapper', $site_wrapper, $args );
 	}
 }
 
@@ -289,8 +386,6 @@ if ( ! function_exists( 'slimline_site_wrapper_close' ) ) {
 
 		$site_wrapper_close = slimline_get_html_tag_close( 'div', '<!-- .site -->' );
 
-		$site_wrapper_close = slimline_apply_filters( 'slimline_site_wrapper_close', $site_wrapper_close );
-
-		echo $site_wrapper;
+		echo slimline_apply_filters( 'slimline_site_wrapper_close', $site_wrapper_close );
 	}
 }

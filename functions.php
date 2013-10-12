@@ -46,6 +46,7 @@
  * @copyright Copyright (c) 2013, Michael Dozark
  * @link http://www.michaeldozark.com/wordpress/themes/slimline
  * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * @see http://codex.wordpress.org/Functions_File_Explained
  */
 
 /*
@@ -119,6 +120,7 @@ function slimline_core() {
 	add_filter( 'slimline_content', 'do_shortcode' ); // add shortcode awareness for alternative filter to the_content
 	add_filter( 'slimline_content', 'wpautop' ); // add automatic paragraphs for alternative filter to the_content
 	add_filter( 'slimline_content', 'wptexturize' ); // add character substitution for alternative filter to the_content
+	add_filter( 'slimline_entry_thumbnail-index', 'slimline_entry_thumbnail_link' ); // wrap entry thumbnails in anchor tag on archives and blog home | inc/hooks.php
 	add_filter( 'style_loader_tag', 'slimline_style_loader_tag', 10, 2 ); // filter style tags by style handle | inc/context.php
 	add_filter( 'tag_template', 'slimline_taxonomy_template', 0 ); // replace default template hierarchy for taxonomy archive | inc/template.php
 	add_filter( 'taxonomy_template', 'slimline_taxonomy_template', 0 ); // replace default template hierarchy for taxonomy archive | inc/template.php
