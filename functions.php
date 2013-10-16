@@ -49,6 +49,8 @@
  * @see http://codex.wordpress.org/Functions_File_Explained
  */
 
+if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
+
 /*
  * Call initialization function. This should be the only instance of add_action that
  * is not contained within a defined function.
@@ -56,6 +58,8 @@
 add_action( 'after_setup_theme', 'slimline_core' );
 
 /**
+ * slimline_core function
+ *
  * Initializes the theme like so:
  * 1. Define globals and constants
  * 2. Include Slimline core files
@@ -89,9 +93,10 @@ function slimline_core() {
 	require( trailingslashit( SLIMLINE_INC ) . 'general-template.php' );
 	require( trailingslashit( SLIMLINE_INC ) . 'hooks.php' );
 	require( trailingslashit( SLIMLINE_INC ) . 'post-template.php' );
-	require( trailingslashit( SLIMLINE_INC ) . 'theme.php' );
+	require( trailingslashit( SLIMLINE_INC ) . 'script-loader.php' );
 	require( trailingslashit( SLIMLINE_INC ) . 'template.php' );
 	require( trailingslashit( SLIMLINE_INC ) . 'template-tags.php' );
+	require( trailingslashit( SLIMLINE_INC ) . 'theme.php' );
 
 	/* 3. Remove unwanted default and/or plugin-added actions */
 	remove_action( 'wp_head', 'wp_generator' ); // don't show WordPress version number
@@ -105,6 +110,8 @@ function slimline_core() {
 	add_action( 'wp_head', 'slimline_add_context_action', 0 ); // fire context-aware hook | inc/context.php
 	add_action( 'wp_head', 'slimline_viewport_meta_tag' ); // outputs a viewport meta tag | inc/template-tags.php
 	add_action( 'wp_footer', 'slimline_add_context_action', 0 ); // fire context-aware hook | inc/context.php
+	add_action( 'wp_loaded', 'slimline_login' ); // initialize login area
+	add_action( 'wp_loaded', 'slimline_admin' ); // initialize admin area
 
 	/* 6. Add custom filters and filter assignments */
 	add_filter( 'attachment_template', 'slimline_single_template', 0 ); // replace default template hierarchy for single posts | inc/template.php
@@ -130,9 +137,45 @@ function slimline_core() {
 	/* 7. Add theme support */
 	add_theme_support( 'automatic-feed-links' ); // add RSS feed links to wp_head(). {@see http://codex.wordpress.org/Function_Reference/add_theme_support#Feed_Links}
 	add_theme_support( 'custom-header', slimline_custom_header_support_args() ); // allow custom header upload {@see http://codex.wordpress.org/Custom_Headers}
-	add_theme_support( 'html5', slimline_html5_support_args() ); // allow HTML5 markup. Not necessary for Slimline themes, but included here for completeness {@see http://codex.wordpress.org/Function_Reference/add_theme_support#HTML5}
+	add_theme_support( 'html5', slimline_html5_support_args() ); // allow HTML5 markup. Not necessary for Slimline themes, but included here for completeness and possible future non-HTML5 support {@see http://codex.wordpress.org/Function_Reference/add_theme_support#HTML5}
 	add_theme_support( 'post-thumbnails', slimline_post_thumbnails_support_args() ); // allow "featured image" upload. {@see http://codex.wordpress.org/Post_Thumbnails}
 
 	/* 8. Miscellaneous and/or additions dependent on the above, such as adding image sizes */
+
+}
+
+/**
+ * slimline_admin function
+ *
+ * Initializes the admin area like so:
+ *
+ * @since 0.1.0
+ */
+function slimline_admin() {
+
+	if ( ! is_admin() )
+		return; // stop processing if not in the dashboard
+
+	define( 'SLIMLINE_ADMIN', trailingslashit( SLIMLINE_PATH ) . 'admin' );
+
+	include( trailingslashit( SLIMLINE_ADMIN ) . 'edit-tags.php' );
+	include( trailingslashit( SLIMLINE_ADMIN ) . 'settings.php' );
+
+	add_action( 'load-edit-tags.php', 'slimline_add_taxonomy_tinymce' ); // replace default description textarea with a TinyMCE editor
+}
+
+/**
+ * slimline_login function
+ *
+ * Initializes the login area like so:
+ *
+ * @since 0.1.0
+ */
+function slimline_login() {
+	global $pagenow;
+
+	if ( ! in_array( $pagenow, array( 'wp-login.php', 'wp-register.php' ) ) )
+		return; // prevent loading login-specific files on non-login screens
+
 
 }
