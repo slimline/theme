@@ -101,7 +101,7 @@ function slimline_single_template() {
 
 	/**
 	 * Include general template types. Allows both a {$post_type}.php template (e.g., page.php) and a 
-	 * single-{$post_type}.php template for compatiability and to allow developers to use whichever is
+	 * single-{$post_type}.php template for compatibility and to allow developers to use whichever is
 	 * more intuitive to them.
 	 */
 	$templates = array_merge(

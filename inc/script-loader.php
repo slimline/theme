@@ -8,6 +8,8 @@
  * @subpackage Includes
  */
 
+if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
+
 /**
  * slimline_ie_enqueue_script function
  *
