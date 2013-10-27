@@ -63,15 +63,11 @@ function slimline_tinymce_taxonomy_description( $tag ) {
 	 * Set up wp_editor parameters based on which screen we are on.
 	 */
 	if ( strpos( current_filter(), 'add' ) ) {
-
 		$description_id = 'tag-description';
-
-		$description_text = '';
+		$description_text = ''; // empty since it has not been set yet
 
 	} else { // strpos( current_filter(), 'add' )
-		
 		$description_id = 'description';
-
 		$description_text = $tag->description;
 
 	} // strpos( current_filter(), 'add' )

@@ -98,6 +98,37 @@ function slimline_get_body_attributes( $attributes = '' ) {
 }
 
 /**
+ * slimline_get_class template tag
+ *
+ * Generates a filterable class for miscellaneous elements. Developers can modify the returned
+ * classes using the `slimline_class` and `slimline-class-{element}` filters.
+ *
+ * @param string $element The element identifier. Also serves as the intial class
+ * @param array|string $classes (Optional). An array or space-separated string of additional classes to apply to the element.
+ * @return string HTML class attribute
+ * @since 0.1.0
+ */
+if ( ! function_exists( 'slimline_get_class' ) ) {
+
+	function slimline_get_class( $element = '', $classes = '' ) {
+
+		if ( ! $element )
+			return ''; // stop processing if no arguments passed
+
+		if ( is_string( $classes ) )
+			$classes = explode( ' ', $classes ); // get an array for easier filtering
+
+		$classes = slimline_apply_filters( 'slimline_class', $classes, $element );
+
+		$classes = slimline_apply_filters( "slimline_class-{$element}", $classes, $element );
+
+		$classes = array_unshift( $element, $classes );
+
+		return implode( ' ', $classes );
+	}
+}
+
+/**
  * slimline_get_comment_attributes function
  *
  * Generates an alphabetized string of HTML attributes for the comment wrapper (<article>) tag from 

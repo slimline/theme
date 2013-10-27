@@ -175,6 +175,20 @@ if ( ! function_exists( 'slimline_entry_header_close' ) ) {
 }
 
 /**
+ * slimline_entry_meta hook (pluggable)
+ *
+ * Outputs the 
+ *
+ * @since 0.1.0
+ */
+if ( ! function_exists( 'slimline_entry_meta' ) ) {
+	function slimline_entry_meta() {
+
+		
+	}
+}
+
+/**
  * slimline_entry_thumbnail hook (pluggable)
  *
  * Outputs the entry's post thumbnail (if any). Developers can modify the echoed markup using the 

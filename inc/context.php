@@ -59,7 +59,7 @@ function slimline_add_context_filter( $value = '', $args = '' ) {
 }
 
 /**
- * slimline_apply_filters function
+ * slimline_apply_filters function (pluggable)
  *
  * Allows theme developers to apply context-specific filters without having to run conditional
  * checks in their callback functions.
@@ -69,6 +69,10 @@ function slimline_add_context_filter( $value = '', $args = '' ) {
  * and "slimline_class-post-single-{ID}". Filters run from most generic to most specific to allow
  * developers to define broad filters that are later fine-tuned by more specific filters.
  *
+ * This function has been made pluggable to allow developers to use the Slimline Compatability
+ * file in their plugins. It is not recommended that themes or plugins modify the function.
+ * {@see https://github.com/SlimlineFramework/Slimline-Compatibility}
+ *
  * @global obj $slimline The Slimline theme object.
  * @param string $tag The base name of the filter hook.
  * @param mixed $value The value which the filters hooked to $tag may modify.
@@ -76,24 +80,26 @@ function slimline_add_context_filter( $value = '', $args = '' ) {
  * @return mixed The result after all filter hooks are applied to $value
  * @since 0.1.0
  */
-function slimline_apply_filters( $tag, $value = '', $args = '' ) {
-	global $slimline;
+if ( ! function_exists( 'slimline_apply_filters' ) ) {
+	function slimline_apply_filters( $tag, $value = '', $args = '' ) {
+		global $slimline;
 
-	// retrieve the filter arguments, minus the $tag
-	$args = func_get_args();
-	$args = array_splice( $args, 0, 1 );
+		// retrieve the filter arguments, minus the $tag
+		$args = func_get_args();
+		$args = array_splice( $args, 0, 1 );
 
-	$args[ 0 ] = apply_filters_ref_array( $tag, $args ); // apply the generic filter first
+		$args[ 0 ] = apply_filters_ref_array( $tag, $args ); // apply the generic filter first
 
-	// apply context-specific filters after
-	foreach ( $slimline->context as $context )
-		$args[ 0 ] = apply_filters_ref_array( "{$tag}-{$context}", $args );
+		// apply context-specific filters after
+		foreach ( $slimline->context as $context )
+			$args[ 0 ] = apply_filters_ref_array( "{$tag}-{$context}", $args );
 
-	return $args[ 0 ];
+		return $args[ 0 ];
+	}
 }
 
 /**
- * slimline_do_action function
+ * slimline_do_action function (pluggable)
  *
  * Allows theme developers to run hooks in conditional contexts without having to add
  * conditional checks to their callback function.
@@ -109,26 +115,32 @@ function slimline_apply_filters( $tag, $value = '', $args = '' ) {
  * via a function hooked to "slimline_main_before-front-page"). The base hook can then be run 
  * as a catch-all after all specific actions have run.
  * 
+ * This function has been made pluggable to allow developers to use the Slimline Compatability
+ * file in their plugins. It is not recommended that themes or plugins modify the function.
+ * {@see https://github.com/SlimlineFramework/Slimline-Compatibility}
+ *
  * @global obj $slimline The Slimline theme object.
  * @param string $tag The base name of the action hook.
  * @param mixed $args All additional arguments for the action.
  * @since 0.1.0
  */
-function slimline_do_action( $tag, $args = '' ) {
-	global $slimline;
+if ( ! function_exists( 'slimline_do_action' ) ) {
+	function slimline_do_action( $tag, $args = '' ) {
+		global $slimline;
 
-	// retrieve the action arguments, minus the $tag
-	$args = func_get_args();
-	$args = array_splice( $args, 0, 1 );
+		// retrieve the action arguments, minus the $tag
+		$args = func_get_args();
+		$args = array_splice( $args, 0, 1 );
 
-	// put context array in order from most specific to most generic
-	$contexts = array_reverse( $slimline->context );
+		// put context array in order from most specific to most generic
+		$contexts = array_reverse( $slimline->context );
 
-	// do context-specific actions first
-	foreach ( $contexts as $context )
-		do_action_ref_array( "{$tag}-{$context}", $args );
+		// do context-specific actions first
+		foreach ( $contexts as $context )
+			do_action_ref_array( "{$tag}-{$context}", $args );
 
-	do_action_ref_array( $tag, $args ); // do the generic action last
+		do_action_ref_array( $tag, $args ); // do the generic action last
+	}
 }
 
 /**

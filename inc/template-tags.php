@@ -54,6 +54,25 @@ function slimline_body_attributes( $attributes = '' ) {
 }
 
 /**
+ * slimline_class template tag
+ *
+ * Gives miscellaneous objects a filterable class.
+ *
+ * @param string $element The element identifier. Also serves as the intial class
+ * @param array|string $classes (Optional). An array or space-separated string of additional classes to apply to the element.
+ * @return string HTML class attribute
+ * @uses slimline_get_class | post-template.php
+ * @since 0.1.0
+ */
+if ( ! function_exists( 'slimline_class' ) ) {
+
+	function slimline_class( $element = '', $classes = '' ) {
+
+		echo ' class="', slimline_get_class( $element, $classes ), '"';
+	}
+}
+
+/**
  * slimline_comment_attributes tag
  *
  * Outputs HTML attributes meant for the comment wrapper tag (<article>).
