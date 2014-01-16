@@ -18,7 +18,7 @@
 			 * @hook slimline_get_custom_header - 10 (gets custom-header template part)
 			 * @hook slimline_get_header_nav - 20 (gets nav-header template part)
 			 */
-			slimline_do_action( 'slimline_site_header' );
+			do_action( 'slimline_site_header' );
 		?>
 
 	</header><!-- .site-header -->

@@ -24,7 +24,7 @@ get_header(); // load the header.php template.
 			/**
 			 * slimline_single_before hook
 			 */
-			slimline_do_action( 'slimline_single_before' );
+			do_action( 'slimline_single_before' );
 		?>
 
 		<?php while ( have_posts() ) : the_post(); ?>
@@ -54,7 +54,7 @@ get_header(); // load the header.php template.
 			/**
 			 * slimline_single_after hook
 			 */
-			slimline_do_action( 'slimline_single_after' );
+			do_action( 'slimline_single_after' );
 		?>
 
 	<?php

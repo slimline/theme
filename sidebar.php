@@ -18,7 +18,7 @@
 			 *
 			 * Code that runs before sidebar content, regardless of whether or not the sidebar is active
 			 */
-			slimline_do_action( 'slimline_primary_sidebar_before' );
+			do_action( 'slimline_primary_sidebar_before' );
 		?>
 
 		<?php
@@ -33,7 +33,7 @@
 				 *
 				 * Ouputs default content if the registered sidebar is not active.
 				 */
-				slimline_do_action( 'slimline_primary_sidebar_content' );
+				do_action( 'slimline_primary_sidebar_content' );
 			}
 		?>
 
@@ -43,7 +43,7 @@
 			 *
 			 * Code that runs after sidebar content, regardless of whether or not the sidebar is active
 			 */
-			slimline_do_action( 'slimline_primary_sidebar_before' );
+			do_action( 'slimline_primary_sidebar_before' );
 		?>
 
 	</div>

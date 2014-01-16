@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
  * @param bool $in_footer (optional) Whether to enqueue the script before </head> or before </body>
  * @see http://msdn.microsoft.com/en-us/library/ms537512(v=vs.85).aspx
  * @since 0.1.0
- * @todo Hook into script_loader_tag when / if WordPress adds one.
+ * @todo Hook into script_loader_tag instead when/if WordPress adds one.
  */
 function slimline_ie_enqueue_script( $handle, $src, $deps = false, $ver = '', $in_footer = false, $ie = false ) {
 
@@ -175,6 +175,9 @@ function slimline_style_loader_tag( $link, $handle ) {
 if ( ! function_exists( 'slimline_wp_enqueue_scripts' ) ) {
 	function slimline_wp_enqueue_scripts() {
 
+		if ( is_singular() && comments_open() && get_option( 'thread_comments' ) )
+			wp_enqueue_script( 'comment-reply' );
+
 		/* includes HTML5 w/ printshiv, input attribute detection, add classes, touch detection. */
 		wp_enqueue_script( 'modernizr', trailingslashit( SLIMLINE_JS ) . 'vendor/modernizr.js', array( 'jquery' ), '2.6.2', false );
 
@@ -183,21 +186,8 @@ if ( ! function_exists( 'slimline_wp_enqueue_scripts' ) ) {
 		/*
 		 * Default stylesheet. Must be included using get_stylesheet_uri()
 		 *
-		 * @uses slimline_get_current_theme to automatically update the style version number whenever the stylesheet version number is incremented
+		 * @uses SLIMLINE_VERSION to automatically update the style version number whenever the stylesheet version number is incremented
 		 */
-		wp_enqueue_style( 'slimline', get_stylesheet_uri(), false, slimline_get_current_theme( 'Version' ), 'all' );
+		wp_enqueue_style( 'slimline', get_stylesheet_uri(), false, SLIMLINE_VERSION, 'all' );
 	}
-}
-
-/**
- * slimline_enqueue_comment_reply function
- *
- * Enqueue the comment reply script on singular posts to support threaded comments.
- *
- * @since 0.1.0
- */
-function slimline_enqueue_comment_reply() {
-
-	if ( comments_open() && get_option( 'thread_comments' ) )
-		wp_enqueue_script( 'comment-reply' );
 }

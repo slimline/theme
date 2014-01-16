@@ -26,10 +26,10 @@ function slimline_add_taxonomy_tinymce() {
 	/**
 	 * Add actions to priority 0 to hopefully fire before all other template and plugin actions.
 	 */
-	add_action( "{$taxonomy}_pre_add_form", 'insidetrack_pods_ob_start', 0 );
-	add_action( "{$taxonomy}_add_form_fields", 'insidetrack_pods_tinymce_form_fields', 0 );
-	add_action( "{$taxonomy}_pre_edit_form", 'insidetrack_pods_ob_start', 0 );
-	add_action( "{$taxonomy}_edit_form_fields", 'insidetrack_pods_tinymce_form_fields', 0 );
+	add_action( "{$taxonomy}_pre_add_form", 'slimline_ob_start', 0 );
+	add_action( "{$taxonomy}_add_form_fields", 'slimline_tinymce_taxonomy_description', 0 );
+	add_action( "{$taxonomy}_pre_edit_form", 'slimline_ob_start', 0 );
+	add_action( "{$taxonomy}_edit_form_fields", 'slimline_tinymce_taxonomy_description', 0 );
 }
 
 /**

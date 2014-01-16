@@ -32,7 +32,7 @@ if ( ! function_exists( 'slimline_blog_wrapper' ) ) {
 
 		$blog_wrapper = slimline_get_html_tag( 'div', $args, false );
 
-		echo slimline_apply_filters( 'slimline_blog_wrapper', $blog_wrapper, $args );
+		echo apply_filters( 'slimline_blog_wrapper', $blog_wrapper, $args );
 	}
 }
 
@@ -50,7 +50,7 @@ if ( ! function_exists( 'slimline_blog_wrapper_close' ) ) {
 
 		$blog_wrapper_close = slimline_get_html_tag_close( 'div', '<!-- .index -->' );
 
-		echo slimline_apply_filters( 'slimline_blog_wrapper_close', $blog_wrapper_close );
+		echo apply_filters( 'slimline_blog_wrapper_close', $blog_wrapper_close );
 	}
 }
 
@@ -72,7 +72,7 @@ if ( ! function_exists( 'slimline_content_wrapper' ) ) {
 
 		$content_wrapper = slimline_get_html_tag( 'div', $args, false );
 
-		echo slimline_apply_filters( 'slimline_content_wrapper', $content_wrapper, $args );
+		echo apply_filters( 'slimline_content_wrapper', $content_wrapper, $args );
 	}
 }
 
@@ -90,7 +90,7 @@ if ( ! function_exists( 'slimline_content_wrapper_close' ) ) {
 
 		$content_wrapper_close = slimline_get_html_tag_close( 'div', '<!-- .content -->' );
 
-		echo slimline_apply_filters( 'slimline_content_wrapper_close', $content_wrapper_close );
+		echo apply_filters( 'slimline_content_wrapper_close', $content_wrapper_close );
 	}
 }
 
@@ -112,7 +112,7 @@ if ( ! function_exists( 'slimline_entries_wrapper' ) ) {
 
 		$entries_wrapper = slimline_get_html_tag( 'div', $args, false );
 
-		echo slimline_apply_filters( 'slimline_entries_wrapper', $entries_wrapper, $args );
+		echo apply_filters( 'slimline_entries_wrapper', $entries_wrapper, $args );
 	}
 }
 
@@ -130,7 +130,7 @@ if ( ! function_exists( 'slimline_entries_wrapper_close' ) ) {
 
 		$entries_wrapper_close = slimline_get_html_tag_close( 'div', '<!-- .entries -->' );
 
-		echo slimline_apply_filters( 'slimline_entries_wrapper_close', $entries_wrapper_close );
+		echo apply_filters( 'slimline_entries_wrapper_close', $entries_wrapper_close );
 	}
 }
 
@@ -152,7 +152,7 @@ if ( ! function_exists( 'slimline_entry_header' ) ) {
 
 		$entry_header = slimline_get_html_tag( 'div', $args, false );
 
-		echo slimline_apply_filters( 'slimline_entry_header', $entry_header, $args );
+		echo apply_filters( 'slimline_entry_header', $entry_header, $args );
 	}
 }
 
@@ -170,7 +170,7 @@ if ( ! function_exists( 'slimline_entry_header_close' ) ) {
 
 		$entry_header_close = slimline_get_html_tag_close( 'div', '<!-- .entry-header -->' );
 
-		echo slimline_apply_filters( 'slimline_entry_header_close', $entry_header_close );
+		echo apply_filters( 'slimline_entry_header_close', $entry_header_close );
 	}
 }
 
@@ -207,7 +207,7 @@ if ( ! function_exists( 'slimline_entry_thumbnail' ) ) {
 		 *
 		 * @hook [home|archive] slimline_entry_thumbnail_link - 10 (wraps the thumbnail in an anchor tag on index and archive pages)
 		 */
-		echo slimline_apply_filters( 'slimline_entry_thumbnail', $entry_thumbnail );
+		echo apply_filters( 'slimline_entry_thumbnail', $entry_thumbnail );
 	}
 }
 
@@ -225,13 +225,16 @@ if ( ! function_exists( 'slimline_entry_thumbnail' ) ) {
 if ( ! function_exists( 'slimline_entry_thumbnail_link' ) ) {
 	function slimline_entry_thumbnail_link( $thumbnail ) {
 
+		if ( ! slimline_is_blog() )
+			return $thumbnail; // stop processing if not on an index or archive page
+
 		$args = array(
 			'class' => slimline_get_class( 'entry-thumbnail-link' )
 		);
 
 		$thumbnail = slimline_get_html_tag( 'a', $args, false ) . $thumbnail . slimline_get_html_tag_close( 'a' );
 
-		return slimline_apply_filters( 'slimline_entry_thumbnail_link', $thumbnail, $args );
+		return apply_filters( 'slimline_entry_thumbnail_link', $thumbnail, $args );
 	}
 }
 
@@ -255,7 +258,7 @@ if ( ! function_exists( 'slimline_entry_title' ) {
 		 * @hook slimline_entry_title_link - 10 (wraps the title in an anchor tag)
 		 * @hook slimline_entry_title_html - 20 (wraps the title in the appropriate header tag)
 		 */
-		echo slimline_apply_filters( 'slimline_entry_title', $entry_title );
+		echo apply_filters( 'slimline_entry_title', $entry_title );
 	}
 }
 
@@ -382,7 +385,7 @@ if ( ! function_exists( 'slimline_site_wrapper' ) ) {
 
 		$site_wrapper = slimline_get_html_tag( 'div', $args, false );
 
-		echo slimline_apply_filters( 'slimline_site_wrapper', $site_wrapper, $args );
+		echo apply_filters( 'slimline_site_wrapper', $site_wrapper, $args );
 	}
 }
 
@@ -400,6 +403,6 @@ if ( ! function_exists( 'slimline_site_wrapper_close' ) ) {
 
 		$site_wrapper_close = slimline_get_html_tag_close( 'div', '<!-- .site -->' );
 
-		echo slimline_apply_filters( 'slimline_site_wrapper_close', $site_wrapper_close );
+		echo apply_filters( 'slimline_site_wrapper_close', $site_wrapper_close );
 	}
 }

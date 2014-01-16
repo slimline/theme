@@ -24,10 +24,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
  */
 function slimline_and( $function_names ) {
 
-
-
 	foreach ( $function_names as $function_name ) {
-		if ( ! slimline_conditional_safe( $function_name() ) )
+		if ( ! slimline_conditional_safe( $function_name ) )
 			return false;
 	}
 
@@ -66,7 +64,7 @@ function slimline_conditional_safe( $function_name ) {
  */
 function slimline_is_blog( $check_single_posts = false ) {
 
-	return slimline_apply_filters( 'slimline_is_blog', ( 'post' == get_post_type() && ( is_home() || is_archive || ( $check_single_posts && is_single() ) ) ), $check_single_posts );
+	return apply_filters( 'slimline_is_blog', ( 'post' == get_post_type() && ( is_home() || is_archive || ( $check_single_posts && is_single() ) ) ), $check_single_posts );
 }
 
 /**
@@ -83,7 +81,7 @@ function slimline_is_blog( $check_single_posts = false ) {
 function slimline_or( $function_names ) {
 
 	foreach ( $function_names as $function_name ) {
-		if ( slimline_conditional_safe( $function_name() ) )
+		if ( slimline_conditional_safe( $function_name ) )
 			return true;
 	}
 
@@ -110,7 +108,7 @@ function slimline_show_content() {
 	 * or index pages without checking each individual post.
 	 */
 	if ( ! isset( $slimline->show_content ) )
-		$slimline->show_content = slimline_apply_filters( 'slimline_show_content', ( is_singular() || ( is_home() && ! is_paged() ) ) );
+		$slimline->show_content = apply_filters( 'slimline_show_content', ( is_singular() || ( is_home() && ! is_paged() ) ) );
 
 	return $slimline->show_content;
 }
@@ -135,7 +133,7 @@ function slimline_show_excerpt() {
 	 * or index pages without checking each individual post.
 	 */
 	if ( ! isset( $slimline->show_excerpt ) )
-		$slimline->show_excerpt = slimline_apply_filters( 'slimline_show_excerpt', ( is_archive() || is_paged() || ( is_singular() && has_excerpt() ) ) );
+		$slimline->show_excerpt = apply_filters( 'slimline_show_excerpt', ( is_archive() || is_paged() || ( is_singular() && has_excerpt() ) ) );
 
 	return $slimline->show_excerpt;
 }

@@ -18,7 +18,7 @@
 			 * @hook slimline_get_footer_nav - 10 (gets nav-footer template part)
 			 * @hook slimline_get_copyright_notice - 20 (gets notice-copyright template part)
 			 */
-			slimline_do_action( 'slimline_site_footer' );
+			do_action( 'slimline_site_footer' );
 		?>
 
 	</footer><!-- .site-footer -->

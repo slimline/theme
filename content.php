@@ -26,7 +26,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 			 * @hook slimline_entry_meta - 40 (outputs post byline information)
 			 * @hook slimline_entry_header_close - 50 (outputs the closing header tag for entry header)
 			 */
-			slimline_do_action( 'slimline_entry_content_before' );
+			do_action( 'slimline_entry_content_before' );
 		?>
 
 		<?php
@@ -36,7 +36,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 			 * @hook slimline_entry_excerpt - 10 (gets excerpt template part)
 			 * @hook slimline_entry_content - 20 (gets content template part)
 			 */
-			 slimline_do_action( 'slimline_entry_content' );
+			 do_action( 'slimline_entry_content' );
 		?>
 
 		<?php
@@ -50,7 +50,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 			 * @hook slimline_entry_footer_close - 50 (outputs the closing footer tag for entry footer)
 			 * @hook slimline_entry_comments - 60 (gets comments.php template)
 			 */
-			slimline_do_action( 'slimline_entry_content_after' );
+			do_action( 'slimline_entry_content_after' );
 		?>
 
 	</article><!-- .entry -->

@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 			 * @hook slimline_get_site_footer - 40 (gets site-footer template part)
 			 * @hook slimline_site_wrapper_close - 50 (outputs closing div for the site wrapper)
 			 */
-			slimline_do_action( 'slimline_main_after' );
+			do_action( 'slimline_main_after' );
 		?>
 
 		<?php
@@ -34,8 +34,6 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 			 * at the end of the site.
 			 *
 			 * @see http://codex.wordpress.org/Function_Reference/wp_footer
-			 *
-			 * @hook slimline_add_context_action - 0 (runs additional contextual actions)
 			 */
 			wp_footer();
 		?>

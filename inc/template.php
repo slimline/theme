@@ -54,6 +54,8 @@ function slimline_author_template() {
 	 */
 	if ( $custom_template = get_user_meta( $user_id, '_wp_user_template', true ) )
 		array_unshift( $templates, $custom_template );
+
+	return locate_template( $templates );
 }
 
 /**

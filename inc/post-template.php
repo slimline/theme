@@ -48,7 +48,7 @@ function slimline_get_ancestors_class( $stem = '', $classes = array() ) {
  * @return string $return_attributes The generated string of attributes
  * @since 0.1.0
  */
-function slimline_get_attributes( $attributes = '' ) {
+function slimline_get_attributes( $attributes = '', $context = '' ) {
 
 	if ( empty( $attributes ) )
 		return ''; // return empty string if no arguments passed
@@ -56,15 +56,17 @@ function slimline_get_attributes( $attributes = '' ) {
 	$return_attributes = ''; // initialize empty string for later use
 
 	$attributes = wp_parse_args( $attributes ); // convert query string style arguments to array
+	$attributes = apply_filters( 'slimline_get_attributes', $attributes ); // allow filtering of attribute array for all attributes
+	$attributes = apply_filters( "slimline_get_{$context}_attributes", $attributes ); // allow filtering of attribute array based on context
 	$attributes = array_filter( $attributes ); // eliminate empties
-	ksort( $attributes ); // alphabetize by attribute name
 
 	foreach ( $attributes as $attribute => $value {
 		$return_attributes .= ' ' . $attribute . '="' . esc_attr( $value ) . '"';
 	}
 
 	// filter so developers can alter these values
-	return slimline_apply_filters( 'slimline_attributes', $return_attributes, $attributes );
+	$attributes = apply_filters( 'slimline_attributes', $return_attributes, $attributes );
+	return apply_filters( "slimline_{$context}_attributes", $return_attributes, $attributes );
 }
 
 /**
@@ -92,9 +94,7 @@ function slimline_get_body_attributes( $attributes = '' ) {
 
 	unset( $attributes[ 'class' ] ); // classes should be declared using `body_class()`
 
-	$return_attributes = slimline_get_attributes( $attributes );
-
-	return slimline_apply_filters( 'slimline_body_attributes', $return_attributes, $attributes );
+	return slimline_get_attributes( $attributes, 'body' );
 }
 
 /**
@@ -118,9 +118,9 @@ if ( ! function_exists( 'slimline_get_class' ) ) {
 		if ( is_string( $classes ) )
 			$classes = explode( ' ', $classes ); // get an array for easier filtering
 
-		$classes = slimline_apply_filters( 'slimline_class', $classes, $element );
+		$classes = apply_filters( 'slimline_class', $classes, $element );
 
-		$classes = slimline_apply_filters( "slimline_class-{$element}", $classes, $element );
+		$classes = apply_filters( "slimline_class-{$element}", $classes, $element );
 
 		$classes = array_unshift( $element, $classes );
 
@@ -165,9 +165,7 @@ function slimline_get_comment_attributes( $attributes = '' ) {
 
 	unset( $attributes[ 'class' ] ); // classes should be declared using `comment_class()`
 
-	$return_attributes = slimline_get_attributes( $attributes );
-
-	return slimline_apply_filters( 'slimline_comment_attributes', $return_attributes, $attributes );
+	return slimline_get_attributes( $attributes, 'comment' );
 }
 /**
  * slimline_get_post_attributes function
@@ -206,9 +204,7 @@ function slimline_get_post_attributes( $attributes = '' ) {
 
 	unset( $attributes[ 'class' ] ); // classes should be declared using `post_class()`
 
-	$return_attributes = slimline_get_attributes( $attributes );
-
-	return slimline_apply_filters( 'slimline_post_attributes', $return_attributes, $attributes );
+	return slimline_get_attributes( $attributes, 'post' );
 }
 
 /**
@@ -256,7 +252,7 @@ function slimline_get_queried_object_type() {
 		$type = 'none';
 	}
 
-	$slimline->queried_object_type = slimline_apply_filters( 'slimline_queried_object_type', $type );
+	$slimline->queried_object_type = apply_filters( 'slimline_queried_object_type', $type );
 
 	return $slimline->queried_object_type;
 }
@@ -289,7 +285,7 @@ function slimline_post_ancestors_body_class( $classes ) {
  * @return array $classes The filtered classes array
  * @since 0.1.0
  */
-function slimline_post_ancestors_body_class( $classes ) {
+function slimline_post_ancestors_post_class( $classes ) {
 
 	if ( is_post_type_hierarchical( get_post_type() ) ) {
 

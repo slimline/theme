@@ -25,7 +25,7 @@ get_header(); // load the header.php template. @see http://codex.wordpress.org/F
 			 *
 			 * Code that runs before the 404 content regardless of whether the 404 widget area is active or not.
 			 */
-			slimline_do_action( 'slimline_404_content_before' );
+			do_action( 'slimline_404_content_before' );
 
 			if ( is_active_sidebar( 'slimline-404' ) ) {
 
@@ -44,7 +44,7 @@ get_header(); // load the header.php template. @see http://codex.wordpress.org/F
 				 * @hook slimline_404_widget - 30 (uses the_widget() to display a Slimline_404_Widget)
 				 * @hook slimline_404_wp_widget_search - 40 (uses the_widget() to display a WP_Widget_Search)
 				 */
-				slimline_do_action( 'slimline_404_content' );
+				do_action( 'slimline_404_content' );
 
 			} // is_active_sidebar( 'slimline-404' )
 
@@ -53,7 +53,7 @@ get_header(); // load the header.php template. @see http://codex.wordpress.org/F
 			 *
 			 * Code that runs after the 404 content.
 			 */
-			slimline_do_action( 'slimline_404_content_after' );
+			do_action( 'slimline_404_content_after' );
 		?>
 
 	</article>

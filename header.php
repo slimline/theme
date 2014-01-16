@@ -34,7 +34,6 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 			 *
 			 * @see http://codex.wordpress.org/Function_Reference/wp_head
 			 *
-			 * @hook slimline_add_context_action - 0 (runs additional contextual actions)
 			 * @hook slimline_viewport_meta_tag - 10 (outputs the viewport meta tag)
 			 */
 			wp_head();
@@ -51,5 +50,5 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 			 * @hook slimline_get_site_header - 20 (gets the site-header template part)
 			 * @hook slimline_content_wrapper - 30 (outputs opening div for the content wrapper)
 			 */
-			slimline_do_action( 'slimline_main_before' );
+			do_action( 'slimline_main_before' );
 		?>

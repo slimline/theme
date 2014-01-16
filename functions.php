@@ -8,7 +8,7 @@
  * {@see http://make.wordpress.org/themes/guidelines/guidelines-recommended/}. Theme functions are named 
  * according to the following decision tree:
  * 1. Is this an initialization function for a core Slimline module?
- *    Yes: slimline_{module name} (ex: `slimine_admin`)
+ *    Yes: slimline_{module name} (ex: `slimline_admin`)
  *    No : Continue.
  * 2. Is the function hooked to a core WordPress filter?
  *    Yes: Is the function meant to replace the core filtered data?
@@ -43,7 +43,7 @@
  * @subpackage Functions
  * @version 0.1.0
  * @author Michael Dozark <michael@michaeldozark.com>
- * @copyright Copyright (c) 2013, Michael Dozark
+ * @copyright Copyright (c) 2014, Michael Dozark
  * @link http://www.michaeldozark.com/wordpress/themes/slimline
  * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * @see http://codex.wordpress.org/Functions_File_Explained
@@ -77,7 +77,7 @@ function slimline_core() {
 	global $content_width, $slimline;
 
 	/* 1. Define globals and constants */
-	$content_width = slimline_apply_filters( 'slimline_content_width', 980 );
+	$content_width = apply_filters( 'slimline_content_width', 980 );
 	$slimline = new stdClass;
 	define( 'SLIMLINE_VERSION', slimline_get_base_theme( 'Version' ) );
 	define( 'SLIMLINE_DIR', get_template_directory() );
@@ -89,7 +89,7 @@ function slimline_core() {
 
 	/* 2. Include Slimline core files */
 	require( trailingslashit( SLIMLINE_INC ) . 'conditionals.php' );
-	require( trailingslashit( SLIMLINE_INC ) . 'context.php' );
+	require( trailingslashit( SLIMLINE_INC ) . 'default-args.php' );
 	require( trailingslashit( SLIMLINE_INC ) . 'general-template.php' );
 	require( trailingslashit( SLIMLINE_INC ) . 'hooks.php' );
 	require( trailingslashit( SLIMLINE_INC ) . 'post-template.php' );
@@ -105,30 +105,24 @@ function slimline_core() {
 	/* 4. Remove unwanted default and/or plugin-added filters */
 
 	/* 5. Add custom actions and action assignments */
-	add_action( 'slimline_wp_enqueue_scripts-singular', 'slimline_enqueue_comment_reply' ); // add support for threaded comments | inc/script-loader.php
-	add_action( 'wp_enqueue_scripts', 'slimline_add_context_action', 0 ); // fire context-aware hook | inc/context.php
-	add_action( 'wp_head', 'slimline_add_context_action', 0 ); // fire context-aware hook | inc/context.php
 	add_action( 'wp_head', 'slimline_viewport_meta_tag' ); // outputs a viewport meta tag | inc/template-tags.php
-	add_action( 'wp_footer', 'slimline_add_context_action', 0 ); // fire context-aware hook | inc/context.php
 	add_action( 'wp_loaded', 'slimline_login' ); // initialize login area
 	add_action( 'wp_loaded', 'slimline_admin' ); // initialize admin area
 
 	/* 6. Add custom filters and filter assignments */
 	add_filter( 'attachment_template', 'slimline_single_template', 0 ); // replace default template hierarchy for single posts | inc/template.php
 	add_filter( 'author_template', 'slimline_author_template', 0 ); // replace default template hierarchy for author archives | inc/template.php
-	add_filter( 'body_class', 'slimline_add_context_filter', 999 ); // add context-aware filtering for body classes | inc/context.php
 	add_filter( 'body_class', 'slimline_post_ancestors_body_class' ); // add ancestor class to hierarchical posts | inc/post-template.php
 	add_filter( 'category_template', 'slimline_taxonomy_template', 0 ); // replace default template hierarchy for taxonomy archive | inc/template.php
-	add_filter( 'comment_class', 'slimline_add_context_filter', 999 ); // add context-aware filtering for comment classes | inc/context.php
 	add_filter( 'page_template', 'slimline_single_template', 0 ); // replace default template hierarchy for single posts | inc/template.php
-	add_filter( 'post_class', 'slimline_add_context_filter', 999 ); // add context-aware filtering for post classes | inc/context.php
 	add_filter( 'post_class', 'slimline_post_ancestors_post_class' ); // add parent and ancestor classes to hierarchical posts | inc/post-template.php
 	add_filter( 'single_template', 'slimline_single_template', 0 ); // replace default template hierarchy for single posts | inc/template.php
 	add_filter( 'slimline_content', 'do_shortcode' ); // add shortcode awareness for alternative filter to the_content
 	add_filter( 'slimline_content', 'wpautop' ); // add automatic paragraphs for alternative filter to the_content
 	add_filter( 'slimline_content', 'wptexturize' ); // add character substitution for alternative filter to the_content
-	add_filter( 'slimline_entry_thumbnail-index', 'slimline_entry_thumbnail_link' ); // wrap entry thumbnails in anchor tag on archives and blog home | inc/hooks.php
-	add_filter( 'style_loader_tag', 'slimline_style_loader_tag', 10, 2 ); // filter style tags by style handle | inc/context.php
+	add_filter( 'slimline_entry_thumbnail', 'slimline_entry_thumbnail_link' ); // wrap entry thumbnails in anchor tag on archives and blog home | inc/hooks.php
+	add_filter( 'slimline_get_attributes', 'slimline_ksort', 0 ); // alphabetize attributes by attribute name | functions.php
+	add_filter( 'style_loader_tag', 'slimline_style_loader_tag', 10, 2 ); // filter style tags by style handle | inc/script-loader.php
 	add_filter( 'tag_template', 'slimline_taxonomy_template', 0 ); // replace default template hierarchy for taxonomy archive | inc/template.php
 	add_filter( 'taxonomy_template', 'slimline_taxonomy_template', 0 ); // replace default template hierarchy for taxonomy archive | inc/template.php
 	add_filter( 'term_description', 'do_shortcode' ); // make term descriptions shortcode-aware
@@ -177,5 +171,29 @@ function slimline_login() {
 	if ( ! in_array( $pagenow, array( 'wp-login.php', 'wp-register.php' ) ) )
 		return; // prevent loading login-specific files on non-login screens
 
+	include( trailingslashit( SLIMLINE_DIR ) . 'login.php' );
 
+	add_action( 'login_head', 'slimline_login_logo' ); // replace the default login logo with the uploaded custom header | inc/login.php
+
+	add_filter( 'login_headertitle', 'slimline_login_headertitle' ); // replace login logo title with site name | inc/login.php
+	add_filter( 'login_headerurl', 'slimline_login_headerurl' ); // replace login logo url with home url | inc/login.php
+}
+
+/**
+ * slimline_ksort function
+ *
+ * Sorts an associative array by key. A wrapper for the ksort() function that returns the sorted
+ * array instead of returning a boolean. Useful for add_action() and add_filter() calls where ksort
+ * cannot be called directly.
+ *
+ * @param array $array The array to be sorted
+ * @return array $array Sorted array
+ * @uses ksort()
+ * @since 0.1.0
+ */
+function slimline_ksort( $array = array() ) {
+
+	ksort( $array );
+
+	return $array;
 }
