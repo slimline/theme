@@ -24,7 +24,7 @@ function slimline_author_template() {
 	 */
 	$templates = array(
 		"author-{$user->data->user_nicename}.php",
-		"author-{$user->ID}.php"
+		"author-{$user->ID}.php",
 	);
 
 	/**
@@ -44,10 +44,12 @@ function slimline_author_template() {
 		array(
 			'author.php',
 			'archive.php',
-			'paged.php',
-			'index.php'
-		)
-	);
+		);
+
+	if ( is_paged() )
+		$templates[] = 'paged.php';
+
+	$templates[] = 'index.php';
 
 	/**
 	 * Allow for custom templates. If found, prepend to the templates array
@@ -75,7 +77,7 @@ function slimline_single_template() {
 	$templates = array(
 		"{$post->post_type}-{$post->post_name}.php",
 		"{$post->post_type}-{$post->ID}.php",
-		"single-{$post->ID}.php"
+		"single-{$post->ID}.php",
 	);
 
 	/**
@@ -96,7 +98,7 @@ function slimline_single_template() {
 				"{$mime_type[ 1 ]}.php",
 				"attachment-{$mime_type[ 1 ]}.php",
 				"{$mime_type[ 0 ]}.php",
-				"attachment-{$mime_type[ 0 ]}.php"
+				"attachment-{$mime_type[ 0 ]}.php",
 			)
 		)
 	}
@@ -151,9 +153,6 @@ function slimline_taxonomy_template() {
 		"taxonomy-{$term->taxonomy}-{$term->term_id}.php",
 		"taxonomy-{$term->taxonomy}.php",
 		'taxonomy.php',
-		'archive.php',
-		'paged.php',
-		'index.php'
 	);
 
 	/**
@@ -165,17 +164,27 @@ function slimline_taxonomy_template() {
 			array(
 				"{$taxonomy}-{$term->slug}.php",
 				"{$taxonomy}-{$term->term_id}.php",
-				"{$taxonomy}.php"
+				"{$taxonomy}.php",
 			),
 			$templates
 		)
 	}
 
 	/**
+	 * Standard, catch-all templates
+	 */
+	$templates[] = 'archive.php';
+
+	if ( is_paged() )
+		$templates[] = 'paged.php';
+
+	$templates[] = 'index.php';
+
+	/**
 	 * If the site is also using the term meta plugin, allow for custom term templates.  If found, prepend 
 	 * to the templates array
 	 */
-	if ( function_exists( 'slimline_get_term_meta' ) && ( $custom_template = slimline_get_term_meta( get_queried_object_id(), "_wp_{$term->taxonomy}_template", true ) ) )
+	if ( function_exists( 'slimline_get_term_taxonomy_meta' ) && ( $custom_template = slimline_get_term_taxonomy_meta( $term->term_taxonomy_id, "_wp_{$term->taxonomy}_template", true ) ) )
 		array_unshift( $templates, $custom_template );
 
 	return locate_template( $templates );
