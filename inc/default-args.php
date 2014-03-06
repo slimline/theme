@@ -49,7 +49,7 @@ function slimline_html5_support_args() {
  *
  * Parameters for add_theme_support( 'post-thumbnails' )
  *
- * By default adds featured image support to posts and pages. Theme developers can 
+ * By default adds featured image support to all public post types. Theme developers can 
  * alter these values using the `slimline_post_thumbnails_support_args` filter.
  *
  * @return array List of post types to add featured image support to
@@ -59,5 +59,5 @@ function slimline_html5_support_args() {
  */
 function slimline_post_thumbnails_support_args() {
 
-	return apply_filters( 'slimline_post_thumbnails_support_args', array( 'page', 'post' ) );
+	return apply_filters( 'slimline_post_thumbnails_support_args', get_post_types( array( 'public' => true ), 'names' ) );
 }
