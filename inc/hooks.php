@@ -263,6 +263,62 @@ if ( ! function_exists( 'slimline_entry_title' ) {
 }
 
 /**
+ * slimline_entry_title_html hook (pluggable)
+ *
+ * Wraps the entry title in a heading tag. By default this wraps titles in an h1 tag on singular
+ * pages/posts or an h2 tag on archives and the blog home page. Developers can modify the output 
+ * using the `slimline_entry_title_html` filter.
+ *
+ * @param string $title The entry title
+ * @return string $title The entry title wrapped in a heading tag
+ * @uses slimline_get_html_tag and slimline_get_html_tag_close to create the HTML tag
+ * @since 0.1.0
+ */
+if ( ! function_exists( 'slimline_entry_title_html' ) ) {
+	function slimline_entry_title_html( $title ) {
+
+		$args = array(
+			'class'    => slimline_get_class( 'entry-title' ),
+			'itemprop' => 'headline',
+		);
+
+		$heading = ( is_singular() ? 'h1' : 'h2' );
+
+		$title = slimline_get_html_tag( $heading, $args, false ) . $title . slimline_get_html_tag_close( $heading, '<!-- .entry-title -->' );
+
+		return apply_filters( 'slimline_entry_title_html', $title, $args );
+	}
+}
+
+/**
+ * slimline_entry_title_link hook (pluggable)
+ *
+ * Wraps the entry title in an anchor tag. By default this is hooked to run on archives and 
+ * the blog home page. Developers can modify the output using the `slimline_entry_title_link` filter.
+ *
+ * @param string $title The entry title
+ * @return string $title The entry title wrapped in an anchor tag
+ * @uses slimline_get_html_tag and slimline_get_html_tag_close to create the HTML tag
+ * @since 0.1.0
+ */
+if ( ! function_exists( 'slimline_entry_title_link' ) ) {
+	function slimline_entry_title_link( $title ) {
+
+		if ( ! slimline_is_blog() )
+			return $title; // stop processing if not on an index or archive page
+
+		$args = array(
+			'class'    => slimline_get_class( 'entry-title-link' ),
+			'itemprop' => 'url',
+		);
+
+		$title = slimline_get_html_tag( 'a', $args, false ) . $title . slimline_get_html_tag_close( 'a' );
+
+		return apply_filters( 'slimline_entry_title_link', $title, $args );
+	}
+}
+
+/**
  * slimline_get_blog_header hook (pluggable)
  *
  * Gets blog-header template part
