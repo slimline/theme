@@ -61,26 +61,6 @@ function slimline_ie_enqueue_style( $handle, $src, $deps = false, $ver = false, 
 }
 
 /**
- * slimline_ie_enqueue_script function
- *
- * Registers a script to be used with IE conditional statements.
- *
- * @param string $handle Script name
- * @param string $src Script url
- * @param array $deps (optional) Array of script names on which this script depends
- * @param string|bool $ver (optional) Script version (used for cache busting), set to null to disable
- * @param bool $in_footer (optional) Whether to enqueue the script before </head> or before </body>
- * @see http://msdn.microsoft.com/en-us/library/ms537512(v=vs.85).aspx
- * @since 0.1.0
- * @todo Hook into script_loader_tag when / if WordPress adds one.
- */
-function slimline_ie_enqueue_script( $handle, $src, $deps = false, $ver = '', $in_footer = false, $ie = false ) {
-
-	wp_register_script( $handle, $src, $deps, $ver, $in_footer );
-}
-
-
-/**
  * Check to see if IE-enqueued script dependencies have printed or not and print them now if
  * needed. Necessary since our IE-enqueued scripts cannot be enqueued via wp_enqueue_scripts.
  *
@@ -116,6 +96,25 @@ function slimline_ie_handle_script_deps( $handle ) {
 
 	return true; // all dependencies should be printed at this point.
 
+}
+
+/**
+ * slimline_ie_register_script function
+ *
+ * Registers a script to be used with IE conditional statements.
+ *
+ * @param string $handle Script name
+ * @param string $src Script url
+ * @param array $deps (optional) Array of script names on which this script depends
+ * @param string|bool $ver (optional) Script version (used for cache busting), set to null to disable
+ * @param bool $in_footer (optional) Whether to enqueue the script before </head> or before </body>
+ * @see http://msdn.microsoft.com/en-us/library/ms537512(v=vs.85).aspx
+ * @since 0.1.0
+ * @todo Hook into script_loader_tag when / if WordPress adds one.
+ */
+function slimline_ie_register_script( $handle, $src, $deps = false, $ver = '', $in_footer = false ) {
+
+	wp_register_script( $handle, $src, $deps, $ver, $in_footer );
 }
 
 /**
