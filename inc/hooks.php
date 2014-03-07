@@ -107,7 +107,8 @@ if ( ! function_exists( 'slimline_entries_wrapper' ) ) {
 	function slimline_entries_wrapper() {
 
 		$args = array(
-			'class' => slimline_get_class( 'entries' )
+			'class' => slimline_get_class( 'entries' ),
+			'id'    => 'entries-wrap',
 		);
 
 		$entries_wrapper = slimline_get_html_tag( 'div', $args, false );

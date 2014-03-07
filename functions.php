@@ -97,6 +97,7 @@ function slimline_core() {
 	require( trailingslashit( SLIMLINE_INC ) . 'template.php' );
 	require( trailingslashit( SLIMLINE_INC ) . 'template-tags.php' );
 	require( trailingslashit( SLIMLINE_INC ) . 'theme.php' );
+	require( trailingslashit( SLIMLINE_INC ) . 'vendor.php' );
 
 	/* 3. Remove unwanted default and/or plugin-added actions */
 	remove_action( 'wp_head', 'wp_generator' ); // don't show WordPress version number
@@ -108,6 +109,7 @@ function slimline_core() {
 	add_action( 'wp_head', 'slimline_viewport_meta_tag' ); // outputs a viewport meta tag | inc/template-tags.php
 	add_action( 'wp_loaded', 'slimline_login' ); // initialize login area
 	add_action( 'wp_loaded', 'slimline_admin' ); // initialize admin area
+	add_action( 'wp_loaded', 'slimline_vendor' ); // initialize third-party plugin support
 
 	/* 6. Add custom filters and filter assignments */
 	add_filter( 'attachment_template', 'slimline_single_template', 0 ); // replace default template hierarchy for single posts | inc/template.php
@@ -132,6 +134,7 @@ function slimline_core() {
 	add_theme_support( 'automatic-feed-links' ); // add RSS feed links to wp_head(). {@see http://codex.wordpress.org/Function_Reference/add_theme_support#Feed_Links}
 	add_theme_support( 'custom-header', slimline_custom_header_support_args() ); // allow custom header upload {@see http://codex.wordpress.org/Custom_Headers}
 	add_theme_support( 'html5', slimline_html5_support_args() ); // allow HTML5 markup. Not necessary for Slimline themes, but included here for completeness and possible future non-HTML5 support {@see http://codex.wordpress.org/Function_Reference/add_theme_support#HTML5}
+	add_theme_support( 'infinite-scroll', slimline_infinite_scroll_args() ); // add support for JetPack infinite scroll {@see http://jetpack.me/support/infinite-scroll/}
 	add_theme_support( 'post-thumbnails', slimline_post_thumbnails_support_args() ); // allow "featured image" upload. {@see http://codex.wordpress.org/Post_Thumbnails}
 
 	/* 8. Miscellaneous and/or additions dependent on the above, such as adding image sizes */
@@ -177,6 +180,86 @@ function slimline_login() {
 
 	add_filter( 'login_headertitle', 'slimline_login_headertitle' ); // replace login logo title with site name | inc/login.php
 	add_filter( 'login_headerurl', 'slimline_login_headerurl' ); // replace login logo url with home url | inc/login.php
+}
+
+/**
+ * slimline_vendor function
+ *
+ * Conditional actions, filters and support for third-party plugins.
+ *
+ * @since 0.1.0
+ */
+function slimline_vendor() {
+
+	if ( class_exists( 'GA_Filter' ) ) {
+		global $yoast_ga;
+
+		add_filter( 'slimline_content', array( $yoast_ga, 'the_content' ), 99 ); // add Google analytics tracking to links filtered by slimline_content
+	}
+
+	/**
+	 * Theme Hook Alliance Support
+	 *
+	 * Add support for Theme Hook Alliance actions. Theme developers may need to unhook some default
+	 * Slimline hooks for these to perform as expected.
+	 *
+	 * Note that the hooks below are listed in the same order as in the THA hooks document; top of the
+	 * html document to bottom. No add_theme_support call is used since this is assumed to be declared
+	 * via including the tha-theme-hooks.php file.
+	 *
+	 * @see https://github.com/zamoose/themehookalliance
+	 */
+	if ( defined( 'THA_HOOKS_VERSION' ) ) {
+
+		// HTML <html> hook
+		add_action( 'get_header', 'tha_html_before', 0 );
+
+		// semantic <body> hooks
+		add_action( 'slimline_main_before', 'tha_body_top', 0 );
+		add_action( 'slimline_main_after', 'tha_body_bottom', 99 );
+
+		// semantic <head> hooks
+		add_action( 'wp_head', 'tha_head_top', 0 );
+		add_action( 'wp_head', 'tha_head_bottom', 99 );
+
+		// semantic <header> hooks
+		add_action( 'slimline_main_before', 'tha_header_before', 19 );
+		add_action( 'slimline_main_before', 'tha_header_after', 21 );
+		add_action( 'slimline_site_header', 'tha_header_top', 0 );
+		add_action( 'slimline_site_header', 'tha_header_bottom', 99 );
+
+		// semantic <content> hooks
+		add_action( 'slimline_main_before', 'tha_content_before', 29 );
+		add_action( 'slimline_main_after', 'tha_content_after', 21 );
+		add_action( 'slimline_main_before', 'tha_content_top', 41 );
+		add_action( 'slimline_main_after', 'tha_content_bottom', 19 );
+
+		// semantic <entry> hooks
+		add_action( 'slimline_404_content_before', 'tha_entry_before' );
+		add_action( 'slimline_index_before', 'tha_entry_before' );
+		add_action( 'slimline_single_before', 'tha_entry_before' );
+		add_action( 'slimline_404_content_after', 'tha_entry_after' );
+		add_action( 'slimline_index_after', 'tha_entry_after' );
+		add_action( 'slimline_single_after', 'tha_entry_after' );
+		add_action( 'slimline_entry_content_before', 'tha_entry_top' );
+		add_action( 'slimline_entry_content_after', 'tha_entry_bottom', 51 );
+
+		// comments block hooks
+		add_action( 'slimline_entry_content_after', 'tha_comments_before', 59 );
+		add_action( 'slimline_entry_content_after', 'tha_comments_after', 61 );
+
+		// semantic <sidebar> hooks
+		add_action( 'slimline_main_after', 'tha_sidebars_before', 9 );
+		add_action( 'slimline_main_after', 'tha_sidebars_after', 11 );
+		add_action( 'slimline_primary_sidebar_before', 'tha_sidebar_top' );
+		add_action( 'slimline_primary_sidebar_after', 'tha_sidebar_bottom' );
+
+		// semantic <footer> hooks
+		add_action( 'slimline_main_after', 'tha_footer_before', 39 );
+		add_action( 'slimline_main_after', 'tha_footer_after', 41 );
+		add_action( 'slimline_site_footer', 'tha_footer_top', 0 );
+		add_action( 'slimline_site_footer', 'tha_footer_bottom', 99 );
+	}
 }
 
 /**
