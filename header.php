@@ -34,7 +34,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 			 *
 			 * @see http://codex.wordpress.org/Function_Reference/wp_head
 			 *
-			 * @hook slimline_viewport_meta_tag - 10 (outputs the viewport meta tag)
+			 * @hook slimline_viewport_meta_tag - 10 (outputs the viewport meta tag) | inc/hooks.php
 			 */
 			wp_head();
 		?>
@@ -46,9 +46,10 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 			/**
 			 * slimline_main_before hook
 			 *
-			 * @hook slimline_site_wrapper - 10 (outputs opening div for the site wrapper)
-			 * @hook slimline_get_site_header - 20 (gets the site-header template part)
-			 * @hook slimline_content_wrapper - 30 (outputs opening div for the content wrapper)
+			 * @hook slimline_site_wrapper - 10 (outputs opening div for the site wrapper) | inc/hooks.php
+			 * @hook slimline_get_site_header - 20 (gets the site-header template part) | inc/hooks.php
+			 * @hook slimline_content_wrapper - 30 (outputs opening div for the content wrapper) | inc/hooks.php
+			 * @hook slimline_yoast_breadcrumbs - 40 (outputs breadcrumbs if the WordPress SEO plugin is installed and breadcrumbs are active) | inc/vendor.php
 			 */
 			do_action( 'slimline_main_before' );
 		?>
