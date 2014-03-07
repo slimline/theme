@@ -23,9 +23,9 @@ get_header(); // load the header.php template. @see http://codex.wordpress.org/F
 			/**
 			 * slimline_index_before hook
 			 *
-			 * @hook slimline_blog_wrapper - 10 (outputs opening div for the index wrapper)
-			 * @hook slimline_get_blog_header - 20 (gets the blog-header template part)
-			 * @hook slimline_entries_wrapper - 30 (outputs opening div for the entries wrapper)
+			 * @hook slimline_blog_wrapper - 10 (outputs opening div for the index wrapper) | inc/hooks.php
+			 * @hook slimline_get_blog_header - 20 (gets the blog-header template part) | inc/hooks.php
+			 * @hook slimline_entries_wrapper - 30 (outputs opening div for the entries wrapper) | inc/hooks.php
 			 */
 			do_action( 'slimline_index_before' );
 		?>
@@ -53,9 +53,9 @@ get_header(); // load the header.php template. @see http://codex.wordpress.org/F
 			/**
 			 * slimline_index_after hook
 			 *
-			 * @hook slimline_entries_wrapper_close - 10 (outputs the closing div for the entries wrapper)
-			 * @hook slimline_get_index_pagination - 20 (gets pagination-index template part)
-			 * @hook slimline_index_wrapper_close - 30 (outputs the closing div for the index wrapper)
+			 * @hook slimline_entries_wrapper_close - 10 (outputs the closing div for the entries wrapper) | inc/hooks.php
+			 * @hook slimline_get_index_pagination - 20 (gets pagination-index template part) | inc/hooks.php
+			 * @hook slimline_index_wrapper_close - 30 (outputs the closing div for the index wrapper) | inc/hooks.php
 			 */
 			do_action( 'slimline_index_after' );
 		?>
