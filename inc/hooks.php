@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
  * Ouputs the blog wrapper HTML tag. Developers can modify the echoed tag using the
  * `slimline_blog_wrapper` filter.
  *
- * @uses slimline_get_html_tag to create the HTML tag
+ * @uses slimline_get_html_tag() to create the HTML tag | inc/general-template.php
  * @since 0.1.0
  */
 if ( ! function_exists( 'slimline_blog_wrapper' ) ) {
@@ -34,7 +34,7 @@ if ( ! function_exists( 'slimline_blog_wrapper' ) ) {
 
 		echo apply_filters( 'slimline_blog_wrapper', $blog_wrapper, $args );
 	}
-}
+} // if ( ! function_exists( 'slimline_blog_wrapper' ) )
 
 /**
  * slimline_blog_wrapper_close hook (pluggable)
@@ -42,7 +42,7 @@ if ( ! function_exists( 'slimline_blog_wrapper' ) ) {
  * Ouputs the blog wrapper closing HTML tag. Developers can modify the echoed tag using the
  * `slimline_blog_wrapper_close` filter.
  *
- * @uses slimline_get_html_tag_close to create the HTML tag
+ * @uses slimline_get_html_tag_close() to create the HTML tag | inc/general-template.php
  * @since 0.1.0
  */
 if ( ! function_exists( 'slimline_blog_wrapper_close' ) ) {
@@ -52,7 +52,7 @@ if ( ! function_exists( 'slimline_blog_wrapper_close' ) ) {
 
 		echo apply_filters( 'slimline_blog_wrapper_close', $blog_wrapper_close );
 	}
-}
+} // if ( ! function_exists( 'slimline_blog_wrapper_close' ) )
 
 /**
  * slimline_content_wrapper hook (pluggable)
@@ -60,7 +60,7 @@ if ( ! function_exists( 'slimline_blog_wrapper_close' ) ) {
  * Ouputs the content wrapper HTML tag. Developers can modify the echoed tag using the
  * `slimline_content_wrapper` filter.
  *
- * @uses slimline_get_html_tag to create the HTML tag
+ * @uses slimline_get_html_tag() to create the HTML tag | inc/general-template.php
  * @since 0.1.0
  */
 if ( ! function_exists( 'slimline_content_wrapper' ) ) {
@@ -74,7 +74,7 @@ if ( ! function_exists( 'slimline_content_wrapper' ) ) {
 
 		echo apply_filters( 'slimline_content_wrapper', $content_wrapper, $args );
 	}
-}
+} // if ( ! function_exists( 'slimline_content_wrapper' ) )
 
 /**
  * slimline_content_wrapper_close hook (pluggable)
@@ -82,7 +82,7 @@ if ( ! function_exists( 'slimline_content_wrapper' ) ) {
  * Ouputs the content wrapper closing HTML tag. Developers can modify the echoed tag using the
  * `slimline_content_wrapper_close` filter.
  *
- * @uses slimline_get_html_tag_close to create the HTML tag
+ * @uses slimline_get_html_tag_close() to create the HTML tag | inc/general-template.php
  * @since 0.1.0
  */
 if ( ! function_exists( 'slimline_content_wrapper_close' ) ) {
@@ -92,7 +92,7 @@ if ( ! function_exists( 'slimline_content_wrapper_close' ) ) {
 
 		echo apply_filters( 'slimline_content_wrapper_close', $content_wrapper_close );
 	}
-}
+} // if ( ! function_exists( 'slimline_content_wrapper_close' ) )
 
 /**
  * slimline_entries_wrapper hook (pluggable)
@@ -100,7 +100,7 @@ if ( ! function_exists( 'slimline_content_wrapper_close' ) ) {
  * Ouputs the entries wrapper HTML tag. Developers can modify the echoed tag using the
  * `slimline_entries_wrapper` filter.
  *
- * @uses slimline_get_html_tag to create the HTML tag
+ * @uses slimline_get_html_tag() to create the HTML tag | inc/general-template.php
  * @since 0.1.0
  */
 if ( ! function_exists( 'slimline_entries_wrapper' ) ) {
@@ -115,7 +115,7 @@ if ( ! function_exists( 'slimline_entries_wrapper' ) ) {
 
 		echo apply_filters( 'slimline_entries_wrapper', $entries_wrapper, $args );
 	}
-}
+} // if ( ! function_exists( 'slimline_entries_wrapper' ) )
 
 /**
  * slimline_entries_wrapper_close hook (pluggable)
@@ -123,7 +123,7 @@ if ( ! function_exists( 'slimline_entries_wrapper' ) ) {
  * Ouputs the entries wrapper closing HTML tag. Developers can modify the echoed tag using the
  * `slimline_entries_wrapper_close` filter.
  *
- * @uses slimline_get_html_tag_close to create the HTML tag
+ * @uses slimline_get_html_tag_close() to create the HTML tag | inc/general-template.php
  * @since 0.1.0
  */
 if ( ! function_exists( 'slimline_entries_wrapper_close' ) ) {
@@ -133,7 +133,7 @@ if ( ! function_exists( 'slimline_entries_wrapper_close' ) ) {
 
 		echo apply_filters( 'slimline_entries_wrapper_close', $entries_wrapper_close );
 	}
-}
+} // if ( ! function_exists( 'slimline_entries_wrapper_close' ) )
 
 /**
  * slimline_entry_header hook (pluggable)
@@ -141,7 +141,7 @@ if ( ! function_exists( 'slimline_entries_wrapper_close' ) ) {
  * Ouputs the entry header HTML tag. Developers can modify the echoed tag using the
  * `slimline_entry_header` filter.
  *
- * @uses slimline_get_html_tag to create the HTML tag
+ * @uses slimline_get_html_tag() to create the HTML tag | inc/general-template.php
  * @since 0.1.0
  */
 if ( ! function_exists( 'slimline_entry_header' ) ) {
@@ -155,7 +155,7 @@ if ( ! function_exists( 'slimline_entry_header' ) ) {
 
 		echo apply_filters( 'slimline_entry_header', $entry_header, $args );
 	}
-}
+} // if ( ! function_exists( 'slimline_entry_header' ) )
 
 /**
  * slimline_entry_header_close hook (pluggable)
@@ -163,7 +163,7 @@ if ( ! function_exists( 'slimline_entry_header' ) ) {
  * Ouputs the entry header closing HTML tag. Developers can modify the echoed tag using the
  * `slimline_entry_header_close` filter.
  *
- * @uses slimline_get_html_tag_close to create the HTML tag
+ * @uses slimline_get_html_tag_close() to create the HTML tag | inc/general-template.php
  * @since 0.1.0
  */
 if ( ! function_exists( 'slimline_entry_header_close' ) ) {
@@ -173,7 +173,7 @@ if ( ! function_exists( 'slimline_entry_header_close' ) ) {
 
 		echo apply_filters( 'slimline_entry_header_close', $entry_header_close );
 	}
-}
+} // if ( ! function_exists( 'slimline_entry_header_close' ) )
 
 /**
  * slimline_entry_meta hook (pluggable)
@@ -187,7 +187,7 @@ if ( ! function_exists( 'slimline_entry_meta' ) ) {
 
 		
 	}
-}
+} // if ( ! function_exists( 'slimline_entry_meta' ) )
 
 /**
  * slimline_entry_thumbnail hook (pluggable)
@@ -195,7 +195,7 @@ if ( ! function_exists( 'slimline_entry_meta' ) ) {
  * Outputs the entry's post thumbnail (if any). Developers can modify the echoed markup using the 
  * `slimline_entry_thumbnail` filter.
  *
- * @uses get_the_post_thumbnail to generate the post thumbnail image
+ * @uses get_the_post_thumbnail() to generate the post thumbnail image
  * @since 0.1.0
  */
 if ( ! function_exists( 'slimline_entry_thumbnail' ) ) {
@@ -210,7 +210,7 @@ if ( ! function_exists( 'slimline_entry_thumbnail' ) ) {
 		 */
 		echo apply_filters( 'slimline_entry_thumbnail', $entry_thumbnail );
 	}
-}
+} // if ( ! function_exists( 'slimline_entry_thumbnail' ) )
 
 /**
  * slimline_entry_thumbnail_link hook (pluggable)
@@ -220,7 +220,7 @@ if ( ! function_exists( 'slimline_entry_thumbnail' ) ) {
  *
  * @param string $thumbnail The thumbnail's HTML markup
  * @return string $thumbnail The thumbnail wrapped in an anchor tag
- * @uses slimline_get_html_tag and slimline_get_html_tag_close to create the HTML tag
+ * @uses slimline_get_html_tag() and slimline_get_html_tag_close() to create the HTML tag | inc/general-template.php
  * @since 0.1.0
  */
 if ( ! function_exists( 'slimline_entry_thumbnail_link' ) ) {
@@ -237,7 +237,7 @@ if ( ! function_exists( 'slimline_entry_thumbnail_link' ) ) {
 
 		return apply_filters( 'slimline_entry_thumbnail_link', $thumbnail, $args );
 	}
-}
+} // if ( ! function_exists( 'slimline_entry_thumbnail_link' ) )
 
 /**
  * slimline_entry_title hook (pluggable)
@@ -248,7 +248,7 @@ if ( ! function_exists( 'slimline_entry_thumbnail_link' ) ) {
  * @uses get_the_title to generate the post title.
  * @since 0.1.0
  */
-if ( ! function_exists( 'slimline_entry_title' ) {
+if ( ! function_exists( 'slimline_entry_title' ) ) {
 	function slimline_entry_title() {
 
 		$entry_title = get_the_title();
@@ -261,7 +261,7 @@ if ( ! function_exists( 'slimline_entry_title' ) {
 		 */
 		echo apply_filters( 'slimline_entry_title', $entry_title );
 	}
-}
+} // if ( ! function_exists( 'slimline_entry_title' ) )
 
 /**
  * slimline_entry_title_html hook (pluggable)
@@ -272,7 +272,7 @@ if ( ! function_exists( 'slimline_entry_title' ) {
  *
  * @param string $title The entry title
  * @return string $title The entry title wrapped in a heading tag
- * @uses slimline_get_html_tag and slimline_get_html_tag_close to create the HTML tag
+ * @uses slimline_get_html_tag() and slimline_get_html_tag_close() to create the HTML tag | inc/general-template.php
  * @since 0.1.0
  */
 if ( ! function_exists( 'slimline_entry_title_html' ) ) {
@@ -289,7 +289,7 @@ if ( ! function_exists( 'slimline_entry_title_html' ) ) {
 
 		return apply_filters( 'slimline_entry_title_html', $title, $args );
 	}
-}
+} // if ( ! function_exists( 'slimline_entry_title_html' ) )
 
 /**
  * slimline_entry_title_link hook (pluggable)
@@ -299,7 +299,7 @@ if ( ! function_exists( 'slimline_entry_title_html' ) ) {
  *
  * @param string $title The entry title
  * @return string $title The entry title wrapped in an anchor tag
- * @uses slimline_get_html_tag and slimline_get_html_tag_close to create the HTML tag
+ * @uses slimline_get_html_tag() and slimline_get_html_tag_close() to create the HTML tag | inc/general-template.php
  * @since 0.1.0
  */
 if ( ! function_exists( 'slimline_entry_title_link' ) ) {
@@ -317,14 +317,14 @@ if ( ! function_exists( 'slimline_entry_title_link' ) ) {
 
 		return apply_filters( 'slimline_entry_title_link', $title, $args );
 	}
-}
+} // if ( ! function_exists( 'slimline_entry_title_link' ) )
 
 /**
  * slimline_get_blog_header hook (pluggable)
  *
  * Gets blog-header template part
  *
- * @uses slimline_get_template_part To find and load the template part
+ * @uses slimline_get_template_part() To find and load the template part | inc/general-template.php
  * @since 0.1.0
  */
 if ( ! function_exists( 'slimline_get_blog_header' ) ) {
@@ -332,14 +332,14 @@ if ( ! function_exists( 'slimline_get_blog_header' ) ) {
 
 		slimline_get_template_part( 'blog', 'header', slimline_get_queried_object_type(), get_queried_object_id() );
 	}
-}
+} // if ( ! function_exists( 'slimline_get_blog_header' ) )
 
 /**
  * slimline_get_custom_header hook (pluggable)
  *
  * Gets custom header template part
  *
- * @uses slimline_get_template_part To find and load the template part
+ * @uses slimline_get_template_part() To find and load the template part | inc/general-template.php
  * @since 0.1.0
  */
 if ( ! function_exists( 'slimline_get_custom_header' ) ) {
@@ -347,14 +347,14 @@ if ( ! function_exists( 'slimline_get_custom_header' ) ) {
 
 		slimline_get_template_part( 'custom', 'header', slimline_get_queried_object_type(), get_queried_object_id() );
 	}
-}
+} // if ( ! function_exists( 'slimline_get_custom_header' ) )
 
 /**
  * slimline_get_header_nav hook (pluggable)
  *
  * Gets nav-header template part
  *
- * @uses slimline_get_template_part To find and load the template part
+ * @uses slimline_get_template_part() To find and load the template part | inc/general-template.php
  * @since 0.1.0
  */
 if ( ! function_exists( 'slimline_get_header_nav' ) ) {
@@ -362,7 +362,7 @@ if ( ! function_exists( 'slimline_get_header_nav' ) ) {
 
 		slimline_get_template_part( 'nav', 'header', slimline_get_queried_object_type(), get_queried_object_id() );
 	}
-}
+} // if ( ! function_exists( 'slimline_get_header_nav' ) )
 
 /**
  * slimline_get_primary_sidebar hook (pluggable)
@@ -377,7 +377,7 @@ if ( ! function_exists( 'slimline_get_primary_sidebar' ) ) {
 
 		get_sidebar();
 	}
-}
+} // if ( ! function_exists( 'slimline_get_primary_sidebar' ) )
 
 /**
  * slimline_get_secondary_sidebar hook (pluggable)
@@ -392,14 +392,14 @@ if ( ! function_exists( 'slimline_get_secondary_sidebar' ) ) {
 
 		get_sidebar( 'secondary' );
 	}
-}
+} // if ( ! function_exists( 'slimline_get_secondary_sidebar' ) )
 
 /**
  * slimline_get_site_header hook (pluggable)
  *
  * Gets site header template part
  *
- * @uses slimline_get_template_part To find and load the template part
+ * @uses slimline_get_template_part() To find and load the template part | inc/general-template.php
  * @since 0.1.0
  */
 if ( ! function_exists( 'slimline_get_site_header' ) ) {
@@ -407,14 +407,14 @@ if ( ! function_exists( 'slimline_get_site_header' ) ) {
 
 		slimline_get_template_part( 'site', 'header', slimline_get_queried_object_type(), get_queried_object_id() );
 	}
-}
+} // if ( ! function_exists( 'slimline_get_site_header' ) )
 
 /**
  * slimline_get_site_footer hook (pluggable)
  *
  * Gets site footer template part
  *
- * @uses slimline_get_template_part To find and load the template part
+ * @uses slimline_get_template_part() To find and load the template part | inc/general-template.php
  * @since 0.1.0
  */
 if ( ! function_exists( 'slimline_get_site_footer' ) ) {
@@ -422,7 +422,7 @@ if ( ! function_exists( 'slimline_get_site_footer' ) ) {
 
 		slimline_get_template_part( 'site', 'footer', slimline_get_queried_object_type(), get_queried_object_id() );
 	}
-}
+} // if ( ! function_exists( 'slimline_get_site_footer' ) )
 
 /**
  * slimline_site_wrapper hook (pluggable)
@@ -430,7 +430,7 @@ if ( ! function_exists( 'slimline_get_site_footer' ) ) {
  * Ouputs the site wrapper HTML tag. Developers can modify the echoed tag using the
  * `slimline_site_wrapper` filter.
  *
- * @uses slimline_get_html_tag to create the HTML tag
+ * @uses slimline_get_html_tag() to create the HTML tag | inc/general-template.php
  * @since 0.1.0
  */
 if ( ! function_exists( 'slimline_site_wrapper' ) ) {
@@ -444,7 +444,7 @@ if ( ! function_exists( 'slimline_site_wrapper' ) ) {
 
 		echo apply_filters( 'slimline_site_wrapper', $site_wrapper, $args );
 	}
-}
+} // if ( ! function_exists( 'slimline_site_wrapper' ) )
 
 /**
  * slimline_site_wrapper_close hook (pluggable)
@@ -452,7 +452,7 @@ if ( ! function_exists( 'slimline_site_wrapper' ) ) {
  * Ouputs the site wrapper closing HTML tag. Developers can modify the echoed tag using the
  * `slimline_site_wrapper_close` filter.
  *
- * @uses slimline_get_html_tag_close to create the HTML tag
+ * @uses slimline_get_html_tag_close() to create the HTML tag | inc/general-template.php
  * @since 0.1.0
  */
 if ( ! function_exists( 'slimline_site_wrapper_close' ) ) {
@@ -462,4 +462,4 @@ if ( ! function_exists( 'slimline_site_wrapper_close' ) ) {
 
 		echo apply_filters( 'slimline_site_wrapper_close', $site_wrapper_close );
 	}
-}
+} // if ( ! function_exists( 'slimline_site_wrapper_close' ) )

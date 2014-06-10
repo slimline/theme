@@ -10,6 +10,8 @@
  * @subpackage Includes
  */
 
+if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
+
 /**
  * slimline_custom_header_support_args function
  *
@@ -41,7 +43,7 @@ function slimline_custom_header_support_args() {
  */
 function slimline_html5_support_args() {
 
-	return apply_filters( 'slimline_html5_support_args', array( 'comment-form', 'comment-list', 'gallery', 'search-form' ) );
+	return apply_filters( 'slimline_html5_support_args', array( 'caption', 'comment-form', 'comment-list', 'gallery', 'search-form' ) );
 }
 
 /**
@@ -59,11 +61,11 @@ function slimline_infinite_scroll_args() {
 	return apply_filters(
 		'slimline_infinite_scroll_args',
 		array(
-			'type'           => 'scroll', // allow posts to load as user scrolls
-			'footer_widgets' => is_active_sidebar( 'sidebar-3' ), // change to click option if footer widgets are active
+			'type'           => 'scroll', // allow posts to auto-load as user scrolls
+			'footer_widgets' => is_active_sidebar( 'sidebar-3' ), // change auto-load option to click option if footer widgets are active
 			'container'      => 'entries-wrap', // default wrapper id {@see slimline_entries_wrapper() | inc/hooks.php}
 			'wrapper'        => false, // do not wrap loaded posts in an extra div
-			'render'         => 'slimline_infinite_scroll_render', // replace default rendering function with standard Slimline WordPress loop {@see index.php template}
+			'render'         => 'slimline_infinite_scroll_render', // replace default rendering function with standard Slimline WordPress loop {@see index.php template} | inc/vendor.php
 			'posts_per_page' => get_option( 'posts_per_page' ), // let user set number of posts to load
 		)
 	);

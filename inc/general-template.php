@@ -18,19 +18,20 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
  *
  * @param string $tag HTML element to generate
  * @param array|string $attributes An array or query string of attribute / value pairs
- * @param bool $close Whether or not to self-close the tag
+ * @param bool $self_close Whether or not to self-close the tag
  * @return string $return_tag The generated HTML string
+ * @uses slimline_get_attributes() | inc/general-template.php
  * @since 0.1.0
  */
-function slimline_get_html_tag( $tag = 'div', $args = '', $close = false ) {
+function slimline_get_html_tag( $tag = 'div', $args = '', $self_close = false ) {
 
 	$args = wp_parse_args( $args );
 
-	$return_tag = "<{$tag} " . slimline_get_attributes( $args ) . ( $close ? ' />' : ' >' );
+	$return_tag = "<{$tag} " . slimline_get_attributes( $args ) . ( $self_close ? ' />' : ' >' );
 
-	$return_tag = apply_filters( 'slimline_get_html_tag', $return_tag, $tag, $args, $close );
+	$return_tag = apply_filters( 'slimline_get_html_tag', $return_tag, $tag, $args, $self_close );
 
-	return apply_filters( "slimline_get_html_tag-{$tag}", $return_tag, $tag, $args, $close );
+	return apply_filters( "slimline_get_html_tag-{$tag}", $return_tag, $tag, $args, $self_close );
 }
 
 /**
@@ -63,7 +64,7 @@ function slimline_get_html_tag_close( $tag = 'div', $after = '' ) {
  *
  * @param array|string $attributes (Optional). An array or query string of attribute / value pairs.
  * @return string $return_attributes The generated string of attributes
- * @uses slimline_get_attributes
+ * @uses slimline_get_attributes() | inc/general-template.php
  * @since 0.1.0
  */
 function slimline_get_site_header_attributes( $attributes = '' ) {

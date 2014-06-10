@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
  * Slimline WordPress loop
  *
  * @since 0.1.0
- * @uses slimline_get_template_part() To load the template parts
+ * @uses slimline_get_template_part() To load the template parts | inc/general-template.php
  */
 if ( ! function_exists( 'slimline_infinite_scroll_render' ) ) {
 	function slimline_infinite_scroll_render() {
@@ -34,8 +34,10 @@ if ( ! function_exists( 'slimline_infinite_scroll_render' ) ) {
 			 * content-{post_type}.php
 			 * content-{post_format}.php
 			 * content.php
+			 *
+			 * @uses slimline_get_template_part() | inc/general-template.php
 			 */
-			slimline_get_template_part( 'content', get_post_type(), get_post_format(), get_the_ID() );
+			slimline_get_template_part( 'content', get_post_type(), get_post_format() );
 
 		endwhile; // have_posts()
 	}
@@ -52,9 +54,8 @@ if ( ! function_exists( 'slimline_infinite_scroll_render' ) ) {
 if ( ! function_exists( 'slimline_yoast_breadcrumbs' ) ) {
 	function slimline_yoast_breadcrumbs() {
 
-		if ( function_exists( 'yoast_breadcrumb' ) ){
-
+		if ( function_exists( 'yoast_breadcrumb' ) ) {
 			yoast_breadcrumb( '<p class="breadcrumbs">', '</p>' );
-		}
+		} // if ( function_exists( 'yoast_breadcrumb' ) )
 	}
-}
+} // if ( ! function_exists( 'slimline_yoast_breadcrumbs' ) )

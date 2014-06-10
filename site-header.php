@@ -7,6 +7,8 @@
  * @package Slimline
  * @subpackage Templates
  */
+
+if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 ?>
 
 	<header <?php slimline_site_header_attributes(); ?>>

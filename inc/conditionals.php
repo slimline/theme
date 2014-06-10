@@ -25,9 +25,10 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 function slimline_and( $function_names ) {
 
 	foreach ( $function_names as $function_name ) {
-		if ( ! slimline_conditional_safe( $function_name ) )
+		if ( ! slimline_conditional_safe( $function_name ) ) {
 			return false;
-	}
+		} // if ( ! slimline_conditional_safe( $function_name ) )
+	} // foreach ( $function_names as $function_name )
 
 	return true;
 }
@@ -45,8 +46,9 @@ function slimline_and( $function_names ) {
  */
 function slimline_conditional_safe( $function_name ) {
 
-	if ( function_exists( $function_name ) )
+	if ( function_exists( $function_name ) ) {
 		return $function_name();
+	} // if ( function_exists( $function_name ) )
 
 	return false;
 }
@@ -81,9 +83,10 @@ function slimline_is_blog( $check_single_posts = false ) {
 function slimline_or( $function_names ) {
 
 	foreach ( $function_names as $function_name ) {
-		if ( slimline_conditional_safe( $function_name ) )
+		if ( slimline_conditional_safe( $function_name ) ) {
 			return true;
-	}
+		} // if ( slimline_conditional_safe( $function_name ) )
+	} // foreach ( $function_names as $function_name )
 
 	return false;
 }
@@ -107,8 +110,9 @@ function slimline_show_content() {
 	 * Set the show_content $slimline property. This allows us to use the boolean on archive
 	 * or index pages without checking each individual post.
 	 */
-	if ( ! isset( $slimline->show_content ) )
+	if ( ! isset( $slimline->show_content ) ) {
 		$slimline->show_content = apply_filters( 'slimline_show_content', ( is_singular() || ( is_home() && ! is_paged() ) ) );
+	} // if ( ! isset( $slimline->show_content ) )
 
 	return $slimline->show_content;
 }
@@ -132,8 +136,9 @@ function slimline_show_excerpt() {
 	 * Set the show_excerpt $slimline property. This allows us to use the boolean on archive
 	 * or index pages without checking each individual post.
 	 */
-	if ( ! isset( $slimline->show_excerpt ) )
+	if ( ! isset( $slimline->show_excerpt ) ) {
 		$slimline->show_excerpt = apply_filters( 'slimline_show_excerpt', ( is_archive() || is_paged() || ( is_singular() && has_excerpt() ) ) );
+	} // if ( ! isset( $slimline->show_excerpt ) )
 
 	return $slimline->show_excerpt;
 }

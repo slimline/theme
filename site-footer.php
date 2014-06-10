@@ -7,6 +7,8 @@
  * @package Slimline
  * @subpackage Templates
  */
+
+if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 ?>
 
 	<footer <?php slimline_site_footer_attributes(); ?>>

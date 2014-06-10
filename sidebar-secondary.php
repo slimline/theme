@@ -8,6 +8,8 @@
  * @package Slimline
  * @subpackage Template
  */
+
+if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 ?>
 	<div <?php slimline_secondary_sidebar_attributes(); ?>>
 

@@ -43,8 +43,10 @@ get_header(); // load the header.php template. @see http://codex.wordpress.org/F
 					 * content-{post_type}.php
 					 * content-{post_format}.php
 					 * content.php
+					 *
+					 * @uses slimline_get_template_part() | inc/general-template.php
 					 */
-					slimline_get_template_part( 'content', get_post_type(), get_post_format(), get_the_ID() );
+					slimline_get_template_part( 'content', get_post_type(), get_post_format() );
 				?>
 
 			<?php endwhile; // have_posts() ?>
@@ -60,10 +62,9 @@ get_header(); // load the header.php template. @see http://codex.wordpress.org/F
 			do_action( 'slimline_index_after' );
 		?>
 
-	<?php
-		else: // have_posts()
-			get_template_part( 'content', 'none' ); // load content-none.php (not found) template
-	?>
+	<?php else: // have_posts() ?>
+
+		<?php get_template_part( 'content', 'none' ); // load content-none.php (not found) template. @see http://codex.wordpress.org/Function_Reference/get_template_part ?>
 
 	<?php endif; // have_posts() ?>
 
