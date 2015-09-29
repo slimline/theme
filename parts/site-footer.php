@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 		do_action( 'slimline_footer_before' );
 	?>
 
-	<footer id="site-footer">
+	<footer <?php slimline_site_footer_attributes(); ?>>
 
 		<?php
 			/**

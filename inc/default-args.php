@@ -14,7 +14,7 @@
 if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 
 /**
- * Parameters for add_theme_support( 'html5' )
+ * Parameters for `add_theme_support( 'html5' )`
  *
  * By default adds HTML5 support for comment forms, comment lists, search forms and
  * galleries. Theme developers can alter these values using the
@@ -51,7 +51,7 @@ if ( ! function_exists( 'slimline_html5_support_args' ) ) {
 } // if ( ! function_exists( 'slimline_html5_support_args' ) )
 
 /**
- * Arguments for add_theme_support( 'infinite-scroll' )
+ * Arguments for `add_theme_support( 'infinite-scroll' )`
  *
  * Adds custom arguments for JetPack's infinite scroll module.
  *
@@ -59,9 +59,9 @@ if ( ! function_exists( 'slimline_html5_support_args' ) ) {
  *                     markup
  * @since  0.1.0
  */
-if ( ! function_exists( 'slimline_infinite_scroll_args' ) ) {
+if ( ! function_exists( 'slimline_infinite_scroll_support_args' ) ) {
 
-	function slimline_infinite_scroll_args() {
+	function slimline_infinite_scroll_support_args() {
 
 		/**
 		 * Default arguments
@@ -81,9 +81,80 @@ if ( ! function_exists( 'slimline_infinite_scroll_args' ) ) {
 		/**
 		 * Filter the arguments
 		 *
-		 * @see https://github.com/slimline/theme/wiki/slimline_infinite_scroll_args
+		 * @see https://github.com/slimline/theme/wiki/slimline_infinite_scroll_support_args
 		 */
-		return apply_filters( 'slimline_infinite_scroll_args', $args );
+		return apply_filters( 'slimline_infinite_scroll_support_args', $args );
 	}
 
 } // if ( ! function_exists( 'slimline_infinite_scroll_args' ) )
+
+/**
+ * Arguments for `paginate_links()` on index pages
+ *
+ * @global object $wp_query the WP_Query object
+ * @return array  $args Associative array of function arguments
+ * @since  0.2.0
+ */
+if ( ! function_exists( 'slimline_paginate_links_args' ) ) {
+
+	function slimline_paginate_links_args() {
+
+		/**
+		 * Current WP_Query
+		 *
+		 * @see https://developer.wordpress.org/reference/classes/wp_query/
+		 */
+		global $wp_query;
+
+		/**
+		 * Default arguments
+		 *
+		 * @see https://developer.wordpress.org/reference/functions/paginate_links/
+		 *      Explanation of `paginate_links` arguments
+		 */
+		$args = array(
+			'base'    => str_replace( $wp_query->found_posts, '%#%', esc_url( get_pagenum_link( $wp_query->found_posts ) ) ),
+			'current' => max( 1, get_query_var( 'paged' ) ),
+			'format'  => '?paged=%#%',
+			'total'   => $wp_query->max_num_pages,
+			'type'    => 'list',
+		);
+
+		/**
+		 * Filter the defaults
+		 *
+		 * @see https://github.com/slimline/theme/wiki/slimline_paginate_links_args
+		 */
+		return apply_filters( 'slimline_paginate_links_args', $args );
+	}
+
+} // if ( ! function_exists( 'slimline_paginate_links_args' ) )
+
+/**
+ * Arguments for `add_theme_support( 'post-thumbnails' )`
+ *
+ * By default adds featured image meta box to all post types that support it. Theme
+ * developers can alter this using the `slimline_post_thumbnails_support_args`
+ * filter.
+ *
+ * @return bool|array TRUE to enable featured images on all post types (defaule), or
+ *                    an array of post types for adding featured image UI
+ * @see    https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
+ * @since  0.1.0
+ */
+if ( ! function_exists( 'slimline_post_thumbnails_support_args' ) ) {
+
+	function slimline_post_thumbnails_support_args() {
+
+		/**
+		 * Filter the default
+		 *
+		 * TRUE to add featured image UI to all post types that support it.
+		 *
+		 * @see https://github.com/slimline/theme/wiki/slimline_post_thumbnails_support_args
+		 */
+		return apply_filters( 'slimline_post_thumbnails_support_args', true );
+	}
+
+} // if ( ! function_exists( 'slimline_post_thumbnails_support_args' ) )
+

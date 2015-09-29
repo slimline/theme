@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 		do_action( 'slimline_header_before' );
 	?>
 
-	<header id="site-header">
+	<header <?php slimline_site_header_attributes(); ?>>
 
 		<?php
 			/**
