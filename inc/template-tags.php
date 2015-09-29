@@ -139,6 +139,20 @@ function slimline_404_title( $before = '', $after = '', $echo = true ) {
 }
 
 /**
+ * Outputs HTML attributes meant for the search heading tag on 404 pages (<h2>).
+ *
+ * @param array|string $attributes (Optional). An array or query string of
+ *                                 attribute / value pairs.
+ * @uses  slimline_get_404_search_title_attributes() to generate attributes
+ * @link  https://github.com/slimline/theme/wiki/slimline_404_search_title_attributes()
+ * @since 0.1.0
+ */
+function slimline_404_search_title_attributes( $attributes = '' ) {
+
+	echo slimline_get_404_search_title_attributes( $attributes );
+}
+
+/**
  * Outputs attributes for the 404 title <h1> tag.
  *
  * @param array|string $attributes (Optional). An array or query string of
