@@ -14,8 +14,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 
 	<section <?php slimline_404_search_attributes(); ?>>
 
-		<h2>
-			<?php _e( 'Search the site', 'slimline' ); ?>
+		<h2 <?php slimline_404_search_title_attributes(); ?>>
+			<?php slimline_404_search_title(); ?>
 		</h2>
 
 		<?php
