@@ -47,4 +47,4 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 
 		<?php endif; // if ( slimline_show_entry_header_excerpt() ) ?>
 
-	</header><!-- .entry-he
+	</header><!-- .entry-header -->
