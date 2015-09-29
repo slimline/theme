@@ -21,6 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
  * `slimline_html5_support_args` filter.
  *
  * @return array $args List of elements that should rendered using HTML5 markup
+ * @see    https://github.com/slimline/theme/wiki/slimline_html5_support_args()
  * @since  0.1.0
  */
 if ( ! function_exists( 'slimline_html5_support_args' ) ) {
@@ -57,6 +58,7 @@ if ( ! function_exists( 'slimline_html5_support_args' ) ) {
  *
  * @return array $args Infinite Scroll arguments set to work with Slimline theme
  *                     markup
+ * @see    https://github.com/slimline/theme/wiki/slimline_infinite_scroll_support_args()
  * @since  0.1.0
  */
 if ( ! function_exists( 'slimline_infinite_scroll_support_args' ) ) {
@@ -93,6 +95,7 @@ if ( ! function_exists( 'slimline_infinite_scroll_support_args' ) ) {
  *
  * @global object $wp_query the WP_Query object
  * @return array  $args Associative array of function arguments
+ * @see    https://github.com/slimline/theme/wiki/slimline_paginate_links_args()
  * @since  0.2.0
  */
 if ( ! function_exists( 'slimline_paginate_links_args' ) ) {
@@ -140,6 +143,7 @@ if ( ! function_exists( 'slimline_paginate_links_args' ) ) {
  * @return bool|array TRUE to enable featured images on all post types (defaule), or
  *                    an array of post types for adding featured image UI
  * @see    https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
+ * @see    https://github.com/slimline/theme/wiki/slimline_post_thumbnails_support_args()
  * @since  0.1.0
  */
 if ( ! function_exists( 'slimline_post_thumbnails_support_args' ) ) {
@@ -158,3 +162,110 @@ if ( ! function_exists( 'slimline_post_thumbnails_support_args' ) ) {
 
 } // if ( ! function_exists( 'slimline_post_thumbnails_support_args' ) )
 
+/**
+ * Closing tag for entry title
+ *
+ * Defaults to <h1> for singular entries, <h3> for entries on an index page. Meant to
+ * be used as the second argument in `the_title()`.
+ *
+ * @return string HTML closing tag with comment
+ * @see    https://github.com/slimline/theme/wiki/slimline_the_entry_title_after()
+ * @since  0.2.0
+ */
+if ( ! function_exists( 'slimline_the_entry_title_after' ) ) {
+
+	function slimline_the_entry_title_after() {
+
+		/**
+		 * Get the correct heading tag
+		 *
+		 * @see slimline_the_entry_title_tag() | inc/default-args.php
+		 */
+		$tag = slimline_the_entry_title_tag();
+
+		/**
+		 * Filter and return the markup
+		 *
+		 * @param string      HTML closing tag with comment
+		 * @param string $tag The closing tag element (e.g., "h1" or "h3")
+		 * @see   https://github.com/slimline/theme/wiki/slimline_the_entry_title_after
+		 */
+		return apply_filters( 'slimline_the_entry_title_after', "</{$tag}><!-- .entry-title -->", $tag );
+
+	}
+
+} // if ( ! function_exists( 'slimline_the_entry_title_after') )
+
+/**
+ * Opening tag for entry title
+ *
+ * Defaults to <h1> for singular entries, <h3> for entries on an index page. Meant to
+ * be used as the first argument in `the_title()`.
+ *
+ * @return string HTML opening tag
+ * @see    https://github.com/slimline/theme/wiki/slimline_the_entry_title_before()
+ * @since  0.2.0
+ */
+if ( ! function_exists( 'slimline_the_entry_title_before' ) ) {
+
+	function slimline_the_entry_title_before() {
+
+		/**
+		 * Get the correct heading tag
+		 *
+		 * @see slimline_the_entry_title_tag() | inc/default-args.php
+		 */
+		$tag = slimline_the_entry_title_tag();
+
+		/**
+		 * Get the title tag attributes
+		 *
+		 * @see slimline_get_entry_title_attributes() | inc/post-template.php
+		 */
+		$attributes = slimline_get_entry_title_attributes();
+
+		/**
+		 * Filter and return the markup
+		 *
+		 * @param string             HTML opening tag
+		 * @param string $tag        The opening tag element (e.g., "h1" or "h3")
+		 * @param string $attributes HTML attributes for the tag
+		 * @see   https://github.com/slimline/theme/wiki/slimline_the_entry_title_before
+		 */
+		return apply_filters( 'slimline_the_entry_title_before', "<{$tag} {$attributes}>", $tag, $attributes );
+
+	}
+
+} // if ( ! function_exists( 'slimline_the_entry_title_before') )
+
+/**
+ * Title tag for entry title
+ *
+ * Defaults to <h1> for singular entries, <h3> for entries on an index page.
+ *
+ * @return string $tag The heading identifier (i.e., "h1" or "h3")
+ * @see    https://github.com/slimline/theme/wiki/slimline_the_entry_title_tag()
+ * @since  0.2.0
+ */
+if ( ! function_exists( 'slimline_the_entry_title_tag' ) ) {
+
+	function slimline_the_entry_title_tag() {
+
+		/**
+		 * Set to h1 if on a singular post, otherwise h3
+		 *
+		 * @see https://developer.wordpress.org/reference/functions/is_singular/
+		 *      Description of `is_singular` conditional
+		 */
+		$tag = ( is_singular() ? 'h1' : 'h3' );
+
+		/**
+		 * Filter and return the markup
+		 *
+		 * @param string $tag The heading identifier (i.e., "h1" or "h3")
+		 * @see   https://github.com/slimline/theme/wiki/slimline_the_entry_title_tag
+		 */
+		return apply_filters( 'slimline_the_entry_title_tag', $tag );
+	}
+
+} // if ( ! function_exists( 'slimline_the_entry_title_tag' ) )
