@@ -18,16 +18,16 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 			/**
 			 * Display tags only if at least one tag assigned to post.
 			 *
-			 * @see https://developer.wordpress.org/reference/functions/has_tag/
-			 *      Documentation of has_tag function
+			 * @link https://developer.wordpress.org/reference/functions/has_tag/
+			 *       Documentation of `has_tag` function
 			 */
 			if ( has_tag() ) {
 
 				/**
 				 * Separate tags by space
 				 *
-				 * @see https://developer.wordpress.org/reference/functions/the_tags/
-				 *      Documentation for the_tags function
+				 * @link https://developer.wordpress.org/reference/functions/the_tags/
+				 *       Documentation for `the_tags` function
 				 */
 				the_tags(
 					sprintf( '<p class="entry-tags">%1$s', __( 'Tagged: ', 'slimline' ),
@@ -44,7 +44,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 			 *
 			 * Only show this if we are using Schema.org markup
 			 *
-			 * @see https://github.com/slimline/theme/wiki/slimline_use_schema_org()
+			 * @see slimline_use_schema_org()
 			 */
 			if ( slimline_use_schema_org() ) {
 
@@ -68,11 +68,11 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 			 * Note that we are adding a title attribute to the link via filter for
 			 * accessibility.
 			 *
-			 * @see https://developer.wordpress.org/reference/functions/edit_post_link/
-			 *      Documentation of the edit_post_link function
-			 * @see https://developer.wordpress.org/reference/hooks/edit_post_link/
-			 *      Documentation of the edit_post_link filter
-			 * @see slimline_edit_post_link_title() | inc/post-template.php
+			 * @link https://developer.wordpress.org/reference/functions/edit_post_link/
+			 *       Documentation of the edit_post_link function
+			 * @link https://developer.wordpress.org/reference/hooks/edit_post_link/
+			 *       Documentation of the edit_post_link filter
+			 * @see  slimline_edit_post_link_title()
 			 */
 			edit_post_link( __( 'Edit', 'slimline' ), '<span class="edit-link">[', ']</span>' );
 		?>
