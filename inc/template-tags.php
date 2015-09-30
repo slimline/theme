@@ -364,6 +364,20 @@ function slimline_entry_title_attributes( $attributes = '' ) {
 }
 
 /**
+ * Outputs attributes for the html wrapper <html> tag.
+ *
+ * @param array|string $attributes (Optional). An array or query string of
+ *                                 attribute / value pairs.
+ * @uses  slimline_get_html_attributes() to generate attributes
+ * @link  https://github.com/slimline/theme/wiki/slimline_html_attributes()
+ * @since 0.2.0
+ */
+function slimline_html_attributes( $attributes = '' ) {
+
+	echo slimline_get_html_attributes( $attributes );
+}
+
+/**
  * Outputs HTML attributes meant for the index wrapper tag (<article>).
  *
  * @param array|string $attributes (Optional). An array or query string of
