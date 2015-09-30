@@ -122,18 +122,18 @@ function slimline_404_search_attributes( $attributes = '' ) {
 }
 
 /**
- * Ouput a title for 404 error pages
+ * Ouput a title for the search area on 404 error pages
  *
- * Meant to function similar to `the_title`, but used for 404 pages.
+ * Meant to function similar to `the_title`, but used to label the search area
  *
  * @param string $before (Optional). Content to prepend to the title. Default empty.
  * @param string $after  (Optional). Content to append to the title. Default empty.
  * @param bool   $echo   (Optional). Whether to output the title. Default TRUE.
- * @uses  slimline_get_404_title() to generate the title
- * @link  https://github.com/slimline/theme/wiki/slimline_404_title()
+ * @uses  slimline_get_404_search_title() to generate the title
+ * @link  https://github.com/slimline/theme/wiki/slimline_404_search_title()
  * @since 0.2.0
  */
-function slimline_404_title( $before = '', $after = '', $echo = true ) {
+function slimline_404_search_title( $before = '', $after = '', $echo = true ) {
 
 	echo slimline_get_404_title( $before, $after, $echo );
 }
@@ -150,6 +150,23 @@ function slimline_404_title( $before = '', $after = '', $echo = true ) {
 function slimline_404_search_title_attributes( $attributes = '' ) {
 
 	echo slimline_get_404_search_title_attributes( $attributes );
+}
+
+/**
+ * Ouput a title for 404 error pages
+ *
+ * Meant to function similar to `the_title`, but used for 404 pages.
+ *
+ * @param string $before (Optional). Content to prepend to the title. Default empty.
+ * @param string $after  (Optional). Content to append to the title. Default empty.
+ * @param bool   $echo   (Optional). Whether to output the title. Default TRUE.
+ * @uses  slimline_get_404_title() to generate the title
+ * @link  https://github.com/slimline/theme/wiki/slimline_404_title()
+ * @since 0.2.0
+ */
+function slimline_404_title( $before = '', $after = '', $echo = true ) {
+
+	echo slimline_get_404_title( $before, $after, $echo );
 }
 
 /**
