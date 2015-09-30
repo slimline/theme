@@ -56,8 +56,8 @@ function slimline_get_404_attributes( $attributes ) {
 	/**
 	 * Convert query strings to array and merge with defaults
 	 *
-	 * @see https://developer.wordpress.org/reference/functions/wp_parse_args/
-	 *      Description of `wp_parse_args` function
+	 * @link https://developer.wordpress.org/reference/functions/wp_parse_args/
+	 *       Description of `wp_parse_args` function
 	 */
 	$attributes = wp_parse_args( $attributes, $defaults );
 
@@ -156,8 +156,8 @@ function slimline_get_404_description_attributes( $attributes ) {
 	/**
 	 * Convert query strings to array and merge with defaults
 	 *
-	 * @see https://developer.wordpress.org/reference/functions/wp_parse_args/
-	 *      Description of `wp_parse_args` function
+	 * @link https://developer.wordpress.org/reference/functions/wp_parse_args/
+	 *       Description of `wp_parse_args` function
 	 */
 	$attributes = wp_parse_args( $attributes, $defaults );
 
@@ -207,8 +207,8 @@ function slimline_get_404_entries_attributes( $attributes ) {
 	/**
 	 * Convert query strings to array and merge with defaults
 	 *
-	 * @see https://developer.wordpress.org/reference/functions/wp_parse_args/
-	 *      Description of `wp_parse_args` function
+	 * @link https://developer.wordpress.org/reference/functions/wp_parse_args/
+	 *       Description of `wp_parse_args` function
 	 */
 	$attributes = wp_parse_args( $attributes, $defaults );
 
@@ -280,8 +280,8 @@ function slimline_get_404_entries_title_attributes( $attributes ) {
 	/**
 	 * Convert query strings to array and merge with defaults
 	 *
-	 * @see https://developer.wordpress.org/reference/functions/wp_parse_args/
-	 *      Description of `wp_parse_args` function
+	 * @link https://developer.wordpress.org/reference/functions/wp_parse_args/
+	 *       Description of `wp_parse_args` function
 	 */
 	$attributes = wp_parse_args( $attributes, $defaults );
 
@@ -331,8 +331,8 @@ function slimline_get_404_search_attributes( $attributes ) {
 	/**
 	 * Convert query strings to array and merge with defaults
 	 *
-	 * @see https://developer.wordpress.org/reference/functions/wp_parse_args/
-	 *      Description of `wp_parse_args` function
+	 * @link https://developer.wordpress.org/reference/functions/wp_parse_args/
+	 *       Description of `wp_parse_args` function
 	 */
 	$attributes = wp_parse_args( $attributes, $defaults );
 
@@ -404,8 +404,8 @@ function slimline_get_404_search_title_attributes( $attributes ) {
 	/**
 	 * Convert query strings to array and merge with defaults
 	 *
-	 * @see https://developer.wordpress.org/reference/functions/wp_parse_args/
-	 *      Description of `wp_parse_args` function
+	 * @link https://developer.wordpress.org/reference/functions/wp_parse_args/
+	 *       Description of `wp_parse_args` function
 	 */
 	$attributes = wp_parse_args( $attributes, $defaults );
 
@@ -475,10 +475,26 @@ function slimline_get_404_title_attributes( $attributes ) {
 	);
 
 	/**
+	 * Schema.org attributes
+	 *
+	 * Define the title as the "headline" of the page.
+	 *
+	 * @link https://schema.org/docs/gs.html#microdata_itemprop
+	 *       Explanation of itemprop
+	 * @link http://schema.org/headline Documentation of "headline" property
+	 * @see  slimline_use_schema_org()
+	 */
+	if ( slimline_use_schema_org() ) {
+
+		$defaults[ 'itemprop' ] = 'headline';
+
+	} // if ( slimline_use_schema_org() )
+
+	/**
 	 * Convert query strings to array and merge with defaults
 	 *
-	 * @see https://developer.wordpress.org/reference/functions/wp_parse_args/
-	 *      Description of `wp_parse_args` function
+	 * @link https://developer.wordpress.org/reference/functions/wp_parse_args/
+	 *       Description of `wp_parse_args` function
 	 */
 	$attributes = wp_parse_args( $attributes, $defaults );
 
@@ -501,3 +517,72 @@ function slimline_get_404_title_attributes( $attributes ) {
 	return slimline_get_attributes( $attributes );
 }
 
+/**
+ * Generates a string of HTML attributes with values from an array.
+ *
+ * Developers can modify the returned string using the `slimline_attributes` filter.
+ *
+ * NOTE: following WordPress HTML coding standards, all attributes MUST have a value.
+ * For boolean attributes this value should be the attribute name; e.g.,
+ * itemscope="itemscope", disabled="disabled", etc. Attributes passed to this
+ * function without a value are removed from final output.
+ *
+ * @param  array|string $attributes        (Optional). An array or query string of
+ *                                         attribute / value pairs.
+ * @return string       $return_attributes The generated string of attributes
+ * @link   https://github.com/slimline/theme/wiki/slimline_get_attributes()
+ * @since  0.1.0
+ */
+function slimline_get_attributes( $attributes = '' ) {
+
+	/**
+	 * Convert query string style arguments to array
+	 *
+	 * @link https://developer.wordpress.org/reference/functions/wp_parse_args/
+	 *       Description of `wp_parse_args` function
+	 */
+	$attributes = wp_parse_args( $attributes );
+
+	/**
+	 * Allow filtering of attributes before we modify the array
+	 *
+	 * @link https://github.com/slimline/theme/wiki/slimline_attributes_pre
+	 */
+	$attributes = apply_filters( 'slimline_attributes_pre', $attributes );
+
+	/**
+	 * Create temporary array of sanitized key/value pairs
+	 *
+	 * @see slimline_sanitize_attribute_array()
+	 */
+	$parse_attributes = slimline_sanitize_attribute_array( $attributes );
+
+	/**
+	 * Remove empties
+	 *
+	 * @link http://php.net/manual/en/function.array-filter.php
+	 *       Documentation of `array_filter` function
+	 */
+	$parse_attributes = array_filter( $attributes );
+
+	/**
+	 * Create array of return values
+	 */
+	foreach ( $parse_attributes as $attribute => $value ) {
+
+		$return_attributes[] = "{$attribute}='{$value}'";
+
+	} // foreach ( $attributes as $attribute => $value )
+
+	/**
+	 * Turn array into a string for filtering and return
+	 */
+	$return_attributes = join( ' ', $return_attributes );
+
+	/**
+	 * Filter and return attributes
+	 *
+	 * @link https://github.com/slimline/theme/wiki/slimline_attributes
+	 */
+	return apply_filters( 'slimline_attributes', $return_attributes, $parse_attributes, $attributes );
+}
