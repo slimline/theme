@@ -15,7 +15,7 @@
 if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 
 ?><!doctype html>
-<html class="no-js" <?php slimline_html_attributes(); ?> <?php language_attributes(); ?>>
+<html <?php slimline_html_attributes(); ?> <?php language_attributes(); ?>>
 	<head>
 
 		<?php
