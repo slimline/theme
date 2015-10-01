@@ -217,18 +217,18 @@ function slimline_body_attributes( $attributes = '' ) {
  * This is meant to work similarly to the `body_class` and/or `post_class` functions,
  * but for miscellaneous or arbitrary elements.
  *
- * @param  string       $element The element identifier. Also serves as the intial
- *                               class (e.g., passing 'site-header' will identify the
- *                               element as the site header for the purposes of
- *                               filters and/or actions and will also create
- *                               class="site-header").
- * @param  array|string $classes (Optional). An array or space-separated string of
- *                               additional classes to apply to the element.
- * @uses   slimline_get_class() to generate the class string
+ * @param string       $element The element identifier. Also serves as an additional
+ *                              class (e.g., passing 'site-header' will identify the
+ *                              element as the site header for the purposes of
+ *                              filters and/or actions and will also create
+ *                              class="site-header").
+ * @param array|string $classes (Optional). An array or space-separated string of
+ *                              additional classes to apply to the element.
+ * @uses  slimline_get_class() to generate the class string
  * @link  https://github.com/slimline/theme/wiki/slimline_class()
- * @since  0.1.0
+ * @since 0.1.0
  */
-function slimline_class( $element = '', $classes = '' ) {
+function slimline_class( $element, $classes = '' ) {
 
 	echo slimline_get_class( $element, $classes );
 }
