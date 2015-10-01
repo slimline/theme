@@ -411,7 +411,7 @@ function slimline_index_description() {
  *
  * @param array|string $attributes (Optional). An array or query string of
  *                                 attribute / value pairs.
- * @uses slimline_get_index_description_attributes() to generate attributes
+ * @uses  slimline_get_index_description_attributes() to generate attributes
  * @link  https://github.com/slimline/theme/wiki/slimline_index_description_attributes()
  * @since 0.1.0
  */
@@ -442,7 +442,7 @@ function slimline_index_title( $before = '', $after = '', $echo = true ) {
  *
  * @param array|string $attributes (Optional). An array or query string of
  *                                 attribute / value pairs.
- * @uses slimline_get_index_title_attributes() to generate attributes
+ * @uses  slimline_get_index_title_attributes() to generate attributes
  * @link  https://github.com/slimline/theme/wiki/slimline_index_title_attributes()
  * @since 0.1.0
  */
@@ -485,7 +485,7 @@ function slimline_not_found_description() {
  *
  * @param array|string $attributes (Optional). An array or query string of
  *                                 attribute / value pairs.
- * @uses slimline_get_not_found_description_attributes() to generate attributes
+ * @uses  slimline_get_not_found_description_attributes() to generate attributes
  * @link  https://github.com/slimline/theme/wiki/slimline_not_found_description_attributes()
  * @since 0.1.0
  */
