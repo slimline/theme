@@ -31,21 +31,27 @@ function slimline_get_404_attributes( $attributes ) {
 	 * Default attributes
 	 */
 	$defaults = array(
-		'class' => slimline_get_class( '404', array( 'not-found', 'error-404' ) ), // class="404 not-found error-404"
-		'id'    => '404',                                                          // id="404"
+		'class' => slimline_get_class( '404', array( 'not-found' ) ), // class="not-found 404"
+		'id'    => '404',                                             // id="404"
 	);
 
 	/**
 	 * Schema.org attributes
 	 *
-	 * Sets the container as an item of type "CreativeWork"
+	 * Sets the container as an item of type "CreativeWork" and describes it as the
+	 * "mainEntity" of the page.
 	 *
+	 * @link https://schema.org/docs/gs.html#microdata_itemprop
+	 *       Explanation of itemprop
 	 * @link https://schema.org/docs/gs.html#microdata_itemscope_itemtype
 	 *       Explanation of itemscope and itemtype
+	 * @link http://schema.org/mainEntity Documentation of "mainEntity" property
 	 * @link http://schema.org/CreativeWork Documentation of "CreativeWork" type
 	 * @see  slimline_use_schema_org()
 	 */
 	if ( slimline_use_schema_org() ) {
+
+		$defaults[ 'itemprop' ] = 'mainEntity';
 
 		$defaults[ 'itemscope' ] = 'itemscope';
 
@@ -62,22 +68,14 @@ function slimline_get_404_attributes( $attributes ) {
 	$attributes = wp_parse_args( $attributes, $defaults );
 
 	/**
-	 * Filter attributes
-	 *
-	 * @param array $attributes Default generated attributes
-	 * @link  https://github.com/slimline/theme/wiki/slimline_404_attributes
-	 */
-	$attributes = apply_filters( 'slimline_404_attributes', $attributes );
-
-	/**
 	 * Return attributes string
 	 *
-	 * Note that the `slimline_attributes` filter will be applied by
-	 * `slimline_get_attributes()`.
+	 * Note that the `slimline_attributes` and `slimline_404_attributes` filters will
+	 * be applied by `slimline_get_attributes()`.
 	 *
 	 * @see slimline_get_attributes()
 	 */
-	return slimline_get_attributes( $attributes );
+	return slimline_get_attributes( $attributes, '404' );
 }
 
 /**
@@ -134,7 +132,7 @@ function slimline_get_404_description_attributes( $attributes ) {
 	 * Default attributes
 	 */
 	$defaults = array(
-		'class' => slimline_get_class( '404-description', array( 'main-description description' ) ), // class="404-description main-description description"
+		'class' => slimline_get_class( '404-description', array( 'description main-description' ) ), // class="description main-description 404-description"
 	);
 
 	/**
@@ -162,22 +160,14 @@ function slimline_get_404_description_attributes( $attributes ) {
 	$attributes = wp_parse_args( $attributes, $defaults );
 
 	/**
-	 * Filter attributes
-	 *
-	 * @param array $attributes Default generated attributes
-	 * @link  https://github.com/slimline/theme/wiki/slimline_404_description_attributes
-	 */
-	$attributes = apply_filters( 'slimline_404_description_attributes', $attributes );
-
-	/**
 	 * Return attributes string
 	 *
-	 * Note that the `slimline_attributes` filter will be applied by
-	 * `slimline_get_attributes()`.
+	 * Note that the `slimline_attributes` and `slimline_404-description_attributes`
+	 * filters will be applied by `slimline_get_attributes()`.
 	 *
 	 * @see slimline_get_attributes()
 	 */
-	return slimline_get_attributes( $attributes );
+	return slimline_get_attributes( $attributes, '404-description' );
 }
 
 /**
@@ -200,7 +190,7 @@ function slimline_get_404_entries_attributes( $attributes ) {
 	 * Default attributes
 	 */
 	$defaults = array(
-		'class' => slimline_get_class( '404-entries', array( 'entries' ) ), // class="404-entries entries"
+		'class' => slimline_get_class( '404-entries', array( 'entries' ) ), // class="entries 404-entries"
 		'id'    => 'entries',                                               // id="entries"
 	);
 
@@ -213,22 +203,14 @@ function slimline_get_404_entries_attributes( $attributes ) {
 	$attributes = wp_parse_args( $attributes, $defaults );
 
 	/**
-	 * Filter attributes
-	 *
-	 * @param array $attributes Default generated attributes
-	 * @link  https://github.com/slimline/theme/wiki/slimline_404_entries_attributes
-	 */
-	$attributes = apply_filters( 'slimline_404_entries_attributes', $attributes );
-
-	/**
 	 * Return attributes string
 	 *
-	 * Note that the `slimline_attributes` filter will be applied by
-	 * `slimline_get_attributes()`.
+	 * Note that the `slimline_attributes` and `slimline_404-entries_attributes`
+	 * filters will be applied by `slimline_get_attributes()`.
 	 *
 	 * @see slimline_get_attributes()
 	 */
-	return slimline_get_attributes( $attributes );
+	return slimline_get_attributes( $attributes, '404-entries' );
 }
 
 /**
@@ -274,7 +256,7 @@ function slimline_get_404_entries_title_attributes( $attributes ) {
 	 * Default attributes
 	 */
 	$defaults = array(
-		'class' => slimline_get_class( '404-entries-title', array( 'entries-title' ) ), // class="404-entries-title entries-title"
+		'class' => slimline_get_class( '404-entries-title', array( 'title', 'subtitle', 'entries-title' ) ), // class="title subtitle entries-title 404-entries-title"
 	);
 
 	/**
@@ -286,22 +268,15 @@ function slimline_get_404_entries_title_attributes( $attributes ) {
 	$attributes = wp_parse_args( $attributes, $defaults );
 
 	/**
-	 * Filter attributes
-	 *
-	 * @param array $attributes Default generated attributes
-	 * @link  https://github.com/slimline/theme/wiki/slimline_404_entries_title_attributes
-	 */
-	$attributes = apply_filters( 'slimline_404_entries_title_attributes', $attributes );
-
-	/**
 	 * Return attributes string
 	 *
-	 * Note that the `slimline_attributes` filter will be applied by
+	 * Note that the `slimline_attributes` and
+	 * `slimline_404-entries-title_attributes` filters will be applied by
 	 * `slimline_get_attributes()`.
 	 *
 	 * @see slimline_get_attributes()
 	 */
-	return slimline_get_attributes( $attributes );
+	return slimline_get_attributes( $attributes, '404-entries-title' );
 }
 
 /**
@@ -324,7 +299,7 @@ function slimline_get_404_search_attributes( $attributes ) {
 	 * Default attributes
 	 */
 	$defaults = array(
-		'class' => slimline_get_class( '404-search', array( 'search' ) ), // class="404-search search"
+		'class' => slimline_get_class( '404-search', array( 'search' ) ), // class="search 404-search"
 		'id'    => 'search',                                              // id="search"
 	);
 
@@ -337,22 +312,14 @@ function slimline_get_404_search_attributes( $attributes ) {
 	$attributes = wp_parse_args( $attributes, $defaults );
 
 	/**
-	 * Filter attributes
-	 *
-	 * @param array $attributes Default generated attributes
-	 * @link  https://github.com/slimline/theme/wiki/slimline_404_search_attributes
-	 */
-	$attributes = apply_filters( 'slimline_404_search_attributes', $attributes );
-
-	/**
 	 * Return attributes string
 	 *
-	 * Note that the `slimline_attributes` filter will be applied by
-	 * `slimline_get_attributes()`.
+	 * Note that the `slimline_attributes` and `slimline_404-search_attributes`
+	 * filters will be applied by `slimline_get_attributes()`.
 	 *
 	 * @see slimline_get_attributes()
 	 */
-	return slimline_get_attributes( $attributes );
+	return slimline_get_attributes( $attributes, '404-search' );
 }
 
 /**
@@ -398,7 +365,7 @@ function slimline_get_404_search_title_attributes( $attributes ) {
 	 * Default attributes
 	 */
 	$defaults = array(
-		'class' => slimline_get_class( '404-search-title', array( 'search-title' ) ), // class="404-search-title search-title"
+		'class' => slimline_get_class( '404-search-title', array( 'title', 'subtitle', 'search-title' ) ), // class="title subtitle search-title 404-search-title"
 	);
 
 	/**
@@ -410,22 +377,14 @@ function slimline_get_404_search_title_attributes( $attributes ) {
 	$attributes = wp_parse_args( $attributes, $defaults );
 
 	/**
-	 * Filter attributes
-	 *
-	 * @param array $attributes Default generated attributes
-	 * @link  https://github.com/slimline/theme/wiki/slimline_404_search_title_attributes
-	 */
-	$attributes = apply_filters( 'slimline_404_search_title_attributes', $attributes );
-
-	/**
 	 * Return attributes string
 	 *
-	 * Note that the `slimline_attributes` filter will be applied by
-	 * `slimline_get_attributes()`.
+	 * Note that the `slimline_attributes` and `slimline_404-search-title_attributes`
+	 * filters will be applied by `slimline_get_attributes()`.
 	 *
 	 * @see slimline_get_attributes()
 	 */
-	return slimline_get_attributes( $attributes );
+	return slimline_get_attributes( $attributes, '404-search-title' );
 }
 
 /**
@@ -471,7 +430,7 @@ function slimline_get_404_title_attributes( $attributes ) {
 	 * Default attributes
 	 */
 	$defaults = array(
-		'class' => slimline_get_class( '404-title', array( 'main-title' ) ), // class="404-title main-title"
+		'class' => slimline_get_class( '404-title', array( 'title main-title' ) ), // class="title main-title 404-title"
 	);
 
 	/**
@@ -499,22 +458,14 @@ function slimline_get_404_title_attributes( $attributes ) {
 	$attributes = wp_parse_args( $attributes, $defaults );
 
 	/**
-	 * Filter attributes
-	 *
-	 * @param array $attributes Default generated attributes
-	 * @link  https://github.com/slimline/theme/wiki/slimline_404_title_attributes
-	 */
-	$attributes = apply_filters( 'slimline_404_title_attributes', $attributes );
-
-	/**
 	 * Return attributes string
 	 *
-	 * Note that the `slimline_attributes` filter will be applied by
-	 * `slimline_get_attributes()`.
+	 * Note that the `slimline_attributes` and `slimline_404-title_attributes`
+	 * filters will be applied by `slimline_get_attributes()`.
 	 *
 	 * @see slimline_get_attributes()
 	 */
-	return slimline_get_attributes( $attributes );
+	return slimline_get_attributes( $attributes, '404-title' );
 }
 
 /**
@@ -529,11 +480,13 @@ function slimline_get_404_title_attributes( $attributes ) {
  *
  * @param  array|string $attributes        (Optional). An array or query string of
  *                                         attribute / value pairs.
+ * @param  string       $element           (Optional). The element to generate
+ *                                         attributes for (e.g., "404", "body", etc.)
  * @return string       $return_attributes The generated string of attributes
  * @link   https://github.com/slimline/theme/wiki/slimline_get_attributes()
  * @since  0.1.0
  */
-function slimline_get_attributes( $attributes = '' ) {
+function slimline_get_attributes( $attributes = '', $element = '' ) {
 
 	/**
 	 * Convert query string style arguments to array
@@ -548,7 +501,7 @@ function slimline_get_attributes( $attributes = '' ) {
 	 *
 	 * @link https://github.com/slimline/theme/wiki/slimline_attributes_pre
 	 */
-	$attributes = apply_filters( 'slimline_attributes_pre', $attributes );
+	$attributes = apply_filters( 'slimline_attributes_pre', $attributes, $element );
 
 	/**
 	 * Create temporary array of sanitized key/value pairs
@@ -580,9 +533,359 @@ function slimline_get_attributes( $attributes = '' ) {
 	$return_attributes = join( ' ', $return_attributes );
 
 	/**
-	 * Filter and return attributes
+	 * Generic filtering
 	 *
+	 * @param string $return_attributes The generated attributes string
+	 * @param array  $parse_attributes  Filtered and sanitized attributes array
+	 * @param array  $attributes        The original array passed to the function
+	 * @param string $element           The element or context for filtering
 	 * @link https://github.com/slimline/theme/wiki/slimline_attributes
 	 */
-	return apply_filters( 'slimline_attributes', $return_attributes, $parse_attributes, $attributes );
+	$return_attributes = apply_filters( 'slimline_attributes', $return_attributes, $parse_attributes, $attributes, $element );
+
+	/**
+	 * Element- / context-specific filtering
+	 *
+	 * @param string $return_attributes The generated attributes string
+	 * @param array  $parse_attributes  Filtered and sanitized attributes array
+	 * @param array  $attributes        The original array passed to the function
+	 * @link https://github.com/slimline/theme/wiki/slimline_$element_attributes
+	 */
+	$return_attributes = apply_filters( "slimline_{$element}_attributes", $return_attributes, $parse_attributes, $attributes );
+
+	/**
+	 * Return attributes string
+	 */
+	return $return_attributes;
+}
+
+/**
+ * Generate HTML attributes for the document <body> tag
+ *
+ * Essentially a wrapper function for `slimline_get_attributes()` that includes
+ * default attributes. Developers can modify the returned string using the
+ * `slimline_body_attributes` filter.
+ *
+ * @param  array|string $attributes (Optional). An array or query string of
+ *                                  attribute / value pairs.
+ * @return string       $attributes The generated string of attributes
+ * @uses   slimline_get_attributes() to generate the attributes
+ * @link   https://github.com/slimline/theme/wiki/slimline_get_body_attributes()
+ * @since  0.1.0
+ */
+function slimline_get_body_attributes( $attributes ) {
+
+	/**
+	 * Default attributes
+	 */
+	$defaults = array();
+
+	/**
+	 * Convert query strings to array and merge with defaults
+	 *
+	 * @link https://developer.wordpress.org/reference/functions/wp_parse_args/
+	 *       Description of `wp_parse_args` function
+	 */
+	$attributes = wp_parse_args( $attributes, $defaults );
+
+	/**
+	 * Unset "class" attribute
+	 *
+	 * Per WordPress Theme Development guidelines, body class should be set using the
+	 * `body_class()` function.
+	 *
+	 * @link https://codex.wordpress.org/Theme_Development#Theme_Classes
+	 *       Use `body_class()` to set classes on <body>
+	 */
+	unset( $attributes[ 'class' ] );
+
+	/**
+	 * Return attributes string
+	 *
+	 * Note that the `slimline_attributes` and `slimline_body_attributes` filters
+	 * will be applied by `slimline_get_attributes()`.
+	 *
+	 * @see slimline_get_attributes()
+	 */
+	return slimline_get_attributes( $attributes, 'body' );
+}
+
+/**
+ * Generate a filterable class for miscellaneous elements
+ *
+ * Meant to work like `body_class()`, `post_class()` and/or `comment_class()` but for
+ * miscellaneous or arbitrary elements. Developers can modify the returned classes
+ * using the `slimline_class` and `slimline_{element}_class` filters.
+ *
+ * NOTE: Unlike `body_class()`, `post_class()` or `comment_class()`, this function
+ * returns the actual "class=" string ready to be echoed rather than the array of
+ * classes.
+ *
+ * @param  string       $element The element identifier. Also serves as an additional
+ *                               class (e.g., passing 'site-header' will identify the
+ *                               element as the site header for the purposes of
+ *                               filters and/or actions and will also create
+ *                               class="site-header").
+ * @param  array|string $classes (Optional). An array or space-separated string of
+ *                               additional classes to apply to the element.
+ * @return string       $classes HTML class attribute
+ * @since  0.1.0
+ */
+function slimline_get_class( $element, $classes = '' ) {
+
+	/**
+	 * Convert space-separated string into an array
+	 */
+	if ( is_string( $classes ) ) {
+		$classes = explode( ' ', $classes );
+	}
+
+	/**
+	 * Sanitize element name
+	 *
+	 * Element names must be alphanumerics, dashes and/or underscores only since they
+	 * will be used as part of a filter name and a CSS class later.
+	 *
+	 * @link https://developer.wordpress.org/reference/functions/sanitize_key/
+	 *       Description of the `sanitize_key` function
+	 */
+	$element = sanitize_key( $element );
+
+	/**
+	 * Generic filtering
+	 *
+	 * @param array  $classes Array of initial classes
+	 * @param string $element The element identifier
+	 * @link  https://github.com/slimline/theme/wiki/slimline_class
+	 */
+	$classes = apply_filters( 'slimline_class', $classes, $element );
+
+	/**
+	 * Per-element filtering
+	 *
+	 * @param array $classes Array of initial classes
+	 * @link  https://github.com/slimline/theme/wiki/slimline_$element_class
+	 */
+	$classes = apply_filters( "slimline_{$element}_class", $classes );
+
+	/**
+	 * Sanitize class names
+	 *
+	 * Class names must be suitable for including in single or double quotes.
+	 *
+	 * @link https://developer.wordpress.org/reference/functions/esc_attr/
+	 *       Description of the `esc_attr` function
+	 */
+	$classes = array_map( 'esc_attr', $classes );
+
+	/**
+	 * Remove empties
+	 *
+	 * Just in case sanitizing left any array elements empty, let's remove them.
+	 *
+	 * @link http://php.net/manual/en/function.array-filter.php
+	 *       Documentation of `array_filter` function
+	 */
+	$classes = array_filter( $classes );
+
+	/**
+	 * Add element name as last class in array.
+	 *
+	 * This makes sure there is at least one class in the attribute declaration
+	 */
+	$classes[] = $element;
+
+	/**
+	 * Create "class=" string
+	 */
+	$classes = 'class="' . join( ' ', $classes ) . '"';
+
+	/**
+	 * Return string
+	 */
+	return $classes;
+}
+
+/**
+ * Generate HTML attributes for the document <html> tag
+ *
+ * Essentially a wrapper function for `slimline_get_attributes()` that includes
+ * default attributes. Developers can modify the returned string using the
+ * `slimline_html_attributes` filter.
+ *
+ * @param  array|string $attributes (Optional). An array or query string of
+ *                                  attribute / value pairs.
+ * @return string       $attributes The generated string of attributes
+ * @uses   slimline_get_attributes() to generate the attributes
+ * @link   https://github.com/slimline/theme/wiki/slimline_get_html_attributes()
+ * @since  0.1.0
+ */
+function slimline_get_html_attributes( $attributes ) {
+
+	/**
+	 * Default attributes
+	 */
+	$defaults = array(
+		'class' => slimline_get_class( 'html', array( 'no-js' ) ), // class="no-js html"
+	);
+
+	/**
+	 * Schema.org attributes
+	 *
+	 * Sets the <html> document as an item of type "WebPage"
+	 *
+	 * @link https://schema.org/docs/gs.html#microdata_itemscope_itemtype
+	 *       Explanation of itemscope and itemtype
+	 * @link http://schema.org/WebPage Documentation of "WebPage" type
+	 * @see  slimline_use_schema_org()
+	 */
+	if ( slimline_use_schema_org() ) {
+
+		$defaults[ 'itemscope' ] = 'itemscope';
+
+		$defaults[ 'itemtype' ] = 'http://schema.org/WebPage';
+
+	} // if ( slimline_use_schema_org() )
+
+	/**
+	 * Convert query strings to array and merge with defaults
+	 *
+	 * @link https://developer.wordpress.org/reference/functions/wp_parse_args/
+	 *       Description of `wp_parse_args` function
+	 */
+	$attributes = wp_parse_args( $attributes, $defaults );
+
+	/**
+	 * Unset "lang" attribute
+	 *
+	 * Per WordPress Theme Development guidelines,  "lang" attribute should be set
+	 * using the `language_attributes()` function.
+	 *
+	 * @link http://codex.wordpress.org/Theme_Development#Document_Head_.28header.php.29
+	 *       The opening <html> tag should include `language_attributes()`.
+	 */
+	unset( $attributes[ 'lang' ] );
+
+	/**
+	 * Return attributes string
+	 *
+	 * Note that the `slimline_attributes` and `slimline_html_attributes` filters
+	 * will be applied by `slimline_get_attributes()`.
+	 *
+	 * @see slimline_get_attributes()
+	 */
+	return slimline_get_attributes( $attributes, 'html' );
+}
+
+/**
+ * Generate HTML attributes for the comment wrapper <article> tag
+ *
+ * Essentially a wrapper function for `slimline_get_attributes()` that includes
+ * default attributes. Developers can modify the returned string using the
+ * `slimline_comment_attributes` filter.
+ *
+ * @param  array|string $attributes (Optional). An array or query string of
+ *                                  attribute / value pairs.
+ * @return string       $attributes The generated string of attributes
+ * @uses   slimline_get_attributes() to generate the attributes
+ * @link   https://github.com/slimline/theme/wiki/slimline_get_comment_attributes()
+ * @since  0.1.0
+ */
+function slimline_get_comment_attributes( $attributes ) {
+
+	/**
+	 * Default attributes
+	 */
+	$defaults = array();
+
+	/**
+	 * Schema.org attributes
+	 *
+	 * Sets the container as an item of type "Comment" and property "comment"
+	 *
+	 * @link https://schema.org/docs/gs.html#microdata_itemprop
+	 *       Explanation of itemprop
+	 * @link https://schema.org/docs/gs.html#microdata_itemscope_itemtype
+	 *       Explanation of itemscope and itemtype
+	 * @link http://schema.org/Comment Documentation of "Comment" type
+	 * @see  slimline_use_schema_org()
+	 */
+	if ( slimline_use_schema_org() ) {
+
+		$defaults[ 'itemprop' ] = 'comment';
+
+		$defaults[ 'itemscope' ] = 'itemscope';
+
+		$defaults[ 'itemtype' ] = 'http://schema.org/Comment';
+
+	} // if ( slimline_use_schema_org() )
+
+	/**
+	 * Convert query strings to array and merge with defaults
+	 *
+	 * @link https://developer.wordpress.org/reference/functions/wp_parse_args/
+	 *       Description of `wp_parse_args` function
+	 */
+	$attributes = wp_parse_args( $attributes, $defaults );
+
+	/**
+	 * Unset "class" attribute
+	 *
+	 * Per WordPress Theme Development guidelines, comment class should be set using
+	 * the `comment_class()` function.
+	 *
+	 * @link https://codex.wordpress.org/Theme_Development#Theme_Classes
+	 *       Use `comment_class()` to set classes on comment
+	 */
+	unset( $attributes[ 'class' ] );
+
+	/**
+	 * Return attributes string
+	 *
+	 * Note that the `slimline_attributes` and `slimline_comment_attributes` filters
+	 * will be applied by `slimline_get_attributes()`.
+	 *
+	 * @see slimline_get_attributes()
+	 */
+	return slimline_get_attributes( $attributes, 'comment' );
+}
+
+/**
+ * Generate HTML attributes for the comments wrapper <section> tag
+ *
+ * Essentially a wrapper function for `slimline_get_attributes()` that includes
+ * default attributes. Developers can modify the returned string using the
+ * `slimline_comments_attributes` filter.
+ *
+ * @param  array|string $attributes (Optional). An array or query string of
+ *                                  attribute / value pairs.
+ * @return string       $attributes The generated string of attributes
+ * @uses   slimline_get_attributes() to generate the attributes
+ * @link   https://github.com/slimline/theme/wiki/slimline_get_comments_attributes()
+ * @since  0.1.0
+ */
+function slimline_get_comments_attributes( $attributes ) {
+
+	/**
+	 * Default attributes
+	 */
+	$defaults = array();
+
+	/**
+	 * Convert query strings to array and merge with defaults
+	 *
+	 * @link https://developer.wordpress.org/reference/functions/wp_parse_args/
+	 *       Description of `wp_parse_args` function
+	 */
+	$attributes = wp_parse_args( $attributes, $defaults );
+
+	/**
+	 * Return attributes string
+	 *
+	 * Note that the `slimline_attributes` and `slimline_comments_attributes` filters
+	 * will be applied by `slimline_get_attributes()`.
+	 *
+	 * @see slimline_get_attributes()
+	 */
+	return slimline_get_attributes( $attributes, 'comments' );
 }
