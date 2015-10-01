@@ -58,7 +58,7 @@ function slimline_sanitize_attributes_array( $attributes ) {
 	/**
 	 * Sanitize attribute keys
 	 *
-	 * Attribute names be alphanumerics, dashes and/or underscores only
+	 * Attribute names must be alphanumerics, dashes and/or underscores only
 	 *
 	 * @link https://developer.wordpress.org/reference/functions/sanitize_key/
 	 *       Description of the `sanitize_key` function
