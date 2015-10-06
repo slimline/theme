@@ -59,7 +59,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 			 * @see https://developer.wordpress.org/reference/functions/get_template_part/
 			 *      Documentation of the `get_template_part` function
 			 */
-			get_template_part( 'site-header' );
+			slimline_get_template_part( 'site-header', slimline_get_context() );
 		?>
 
 		<main <?php slimline_main_attributes(); ?>>
