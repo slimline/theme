@@ -6,7 +6,7 @@
  *
  * @package    Slimline / Theme
  * @subpackage Includes
- * @see        https://developer.wordpress.org/themes/basics/conditional-tags/
+ * @link       https://developer.wordpress.org/themes/basics/conditional-tags/
  *             Description of conditional tags
  * @since      0.1.0
  */
@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
  * using the `slimline_show_entry_header_excerpt` filter.
  *
  * @return bool TRUE to show the excerpt, otherwise FALSE
- * @see    https://github.com/slimline/theme/wiki/slimline_show_entry_header_excerpt()
+ * @link   https://github.com/slimline/theme/wiki/slimline_show_entry_header_excerpt()
  * @since  0.2.0
  */
 function slimline_show_entry_header_excerpt() {
@@ -29,11 +29,11 @@ function slimline_show_entry_header_excerpt() {
 	/**
 	 * Filter the result
 	 *
-	 * @see https://github.com/slimline/theme/wiki/slimline_show_entry_header_excerpt
-	 * @see https://developer.wordpress.org/reference/functions/is_singular/
-	 *      Description of the `is_singular` function
-	 * @see https://developer.wordpress.org/reference/functions/has_excerpt/
-	 *      Description of the `has_excerpt` function
+	 * @link https://github.com/slimline/theme/wiki/slimline_show_entry_header_excerpt
+	 * @link https://developer.wordpress.org/reference/functions/is_singular/
+	 *       Description of the `is_singular` function
+	 * @link https://developer.wordpress.org/reference/functions/has_excerpt/
+	 *       Description of the `has_excerpt` function
 	 */
 	return apply_filters( 'slimline_show_entry_header_excerpt', ( is_singular() && has_excerpt() ) );
 }
@@ -46,7 +46,7 @@ function slimline_show_entry_header_excerpt() {
  * home.
  *
  * @return bool TRUE to show the content, otherwise FALSE
- * @see    https://github.com/slimline/theme/wiki/slimline_show_entry_content()
+ * @link   https://github.com/slimline/theme/wiki/slimline_show_entry_content()
  * @since  0.2.0
  */
 function slimline_show_entry_content() {
@@ -54,13 +54,13 @@ function slimline_show_entry_content() {
 	/**
 	 * Filter the result
 	 *
-	 * @see https://github.com/slimline/theme/wiki/slimline_show_entry_content
-	 * @see https://developer.wordpress.org/reference/functions/is_singular/
-	 *      Description of the `is_singular` function
-	 * @see https://developer.wordpress.org/reference/functions/is_home/
-	 *      Description of the `is_home` function
-	 * @see https://developer.wordpress.org/reference/functions/is_paged/
-	 *      Description of the `is_paged` function
+	 * @link https://github.com/slimline/theme/wiki/slimline_show_entry_content
+	 * @link https://developer.wordpress.org/reference/functions/is_singular/
+	 *       Description of the `is_singular` function
+	 * @link https://developer.wordpress.org/reference/functions/is_home/
+	 *       Description of the `is_home` function
+	 * @link https://developer.wordpress.org/reference/functions/is_paged/
+	 *       Description of the `is_paged` function
 	 */
 	return apply_filters( 'slimline_show_entry_content', ( is_singular() || ( is_home() && ! is_paged() ) ) );
 }
@@ -73,7 +73,7 @@ function slimline_show_entry_content() {
  * filter.
  *
  * @return bool TRUE to show the meta, otherwise FALSE
- * @see    https://github.com/slimline/theme/wiki/slimline_show_entry_header_meta()
+ * @link   https://github.com/slimline/theme/wiki/slimline_show_entry_header_meta()
  * @since  0.2.0
  */
 function slimline_show_entry_meta() {
@@ -81,18 +81,18 @@ function slimline_show_entry_meta() {
 	/**
 	 * Filter the result
 	 *
-	 * @see https://github.com/slimline/theme/wiki/slimline_show_entry_meta
-	 * @see https://developer.wordpress.org/reference/functions/is_single/
-	 *      Description of the `is_single` function
+	 * @link https://github.com/slimline/theme/wiki/slimline_show_entry_meta
+	 * @link https://developer.wordpress.org/reference/functions/is_single/
+	 *       Description of the `is_single` function
 	 */
 	return apply_filters( 'slimline_show_entry_meta', is_single() );
 }
 
 /**
- * Does the theme support Schema.org markup?
+ * Show Schema.org markup?
  *
- * @return bool TRUE is yes, otherwise FALSE
- * @see    https://github.com/slimline/theme/wiki/slimline_use_schema_org()
+ * @return bool TRUE for yes, otherwise FALSE
+ * @link   https://github.com/slimline/theme/wiki/slimline_use_schema_org()
  * @since  0.2.0
  */
 function slimline_use_schema_org() {
@@ -100,9 +100,8 @@ function slimline_use_schema_org() {
 	/**
 	 * Filter the result
 	 *
-	 * @see https://github.com/slimline/theme/wiki/slimline_use_schema_org
-	 * @see https://developer.wordpress.org/reference/functions/current_theme_supports/
-	 *      Description of the `current_theme_supports` function
+	 * @param bool Default TRUE to use Schema.org markup
+	 * @link  https://github.com/slimline/theme/wiki/slimline_use_schema_org
 	 */
-	return apply_filters( 'slimline_use_schema_org', current_theme_supports( 'slimline_schema_org' ) );
+	return apply_filters( 'slimline_use_schema_org', true );
 }
