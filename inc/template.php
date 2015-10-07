@@ -93,7 +93,7 @@ function slimline_get_template_slugs( $stems ) {
 
 	$templates = array();
 
-	$parts = slimline_get_parts_directory();
+	$parts = slimline_get_template_parts_directory();
 
 	$base = array_shift( $stems );
 
@@ -117,15 +117,21 @@ function slimline_get_template_slugs( $stems ) {
 	} // foreach ( $stems as $stem )
 
 	/**
-	 * slimline_get_template_slugs filters
+	 * Filter template slugs
 	 *
-	 * @param array $templates Array of template slugs to locate
-	 * @param string $base First slug/stem in the passed parameters
-	 * @param array $stems Array of stems passed to the function
+	 * @param array  $templates Array of template slugs to locate
+	 * @param string $base      First slug/stem in the passed parameters
+	 * @param array  $stems     Array of stems passed to the function
 	 */
 	$templates = apply_filters( 'slimline_get_template_slugs', $templates, $base, $stems );
 
-	$templates = apply_filters( "slimline_get_template_slugs-{$base}", $templates, $base, $stems );
+	/**
+	 * Base-specific template slug filtering
+	 *
+	 * @param array $templates Array of template slugs to locate
+	 * @param array $stems     Array of stems passed to the function
+	 */
+	$templates = apply_filters( "slimline_get_template_slugs-{$base}", $templates, $stems );
 
 	$templates[] = "{$parts}/{$base}";
 
