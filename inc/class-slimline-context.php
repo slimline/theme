@@ -9,7 +9,7 @@
 class Slimline_Context {
 
 	/**
-	 * @var Slimine_Context $_instance The single instance of the class
+	 * @var Slimine_Context $_instance The class instance
 	 */
 	protected static $_instance = null;
 
@@ -41,9 +41,10 @@ class Slimline_Context {
 	/**
 	 * Assemble the object
 	 *
-	 *
+	 * @link http://php.net/manual/en/language.oop5.decon.php#language.oop5.decon.constructor
+	 *       Description of `__construct` method
 	 */
-	function __construct() {
+	protected function __construct() {
 
 		/**
 		 * Singular posts
@@ -68,7 +69,7 @@ class Slimline_Context {
 
 			$this->context[] = 'singular';
 
-			$this->context[] = $post_object;
+			$this->context[] = $post_object->post_type;;
 
 			/**
 			 * Mime type handling for attachments
@@ -390,7 +391,7 @@ class Slimline_Context {
 	} // function __construct()
 
 	/**
-	 * Singleton instance function
+	 * Return the class instance
 	 *
 	 */
 	public static function get_instance() {
