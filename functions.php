@@ -97,22 +97,144 @@ function slimline_theme_setup() {
 	 * The `$content_width` global represents the width (in pixels) of the theme
 	 * content area, excluding margins and padding.
 	 *
-	 * @see https://developer.wordpress.com/themes/content-width/
-	 *      Explanation of the `$content_width` global
+	 * @link https://developer.wordpress.com/themes/content-width/
+	 *       Explanation of the `$content_width` global
 	 */
 	@global $content_width;
 
 	/**
-	 * 1. Define globals and constants
+	 * 1. DEFINE GLOBALS AND CONSTANTS
 	 */
 
 	/**
 	 * Define content width
 	 *
-	 * @see   https://github.com/slimline/theme/wiki/slimline_content_width
+	 * @link  https://github.com/slimline/theme/wiki/slimline_content_width
 	 * @since 0.1.0
 	 */
 	$content_width = apply_filters( 'slimline_content_width', 1024 );
 
+	/**
+	 * Define version number
+	 *
+	 * In version 0.2.0 this is included only for future comparison purposes
+	 *
+	 * @link https://developer.wordpress.org/reference/functions/wp_get_theme/
+	 *       Description of `wp_get_theme` function
+	 * @link https://github.com/slimline/theme/wiki/SLIMLINE_VERSION
+	 */
+	define( 'SLIMLINE_VERSION', wp_get_theme( 'slimline' )->get( 'Version' ) );
+
+	/**
+	 * Define Slimline directory
+	 *
+	 * @link https://developer.wordpress.org/reference/functions/get_template_directory/
+	 *       Description of `get_template_directory` function
+	 * @link https://github.com/slimline/theme/wiki/SLIMLINE_DIR
+	 */
+	define( 'SLIMLINE_DIR', get_template_directory() );
+
+	/**
+	 * Define directory for Slimline include files
+	 *
+	 * @link https://developer.wordpress.org/reference/functions/trailingslashit/
+	 *       Description of `trailingslashit` function
+	 * @link https://github.com/slimline/theme/wiki/SLIMLINE_INC
+	 */
+	define( 'SLIMLINE_INC', trailingslashit( SLIMLINE_DIR ) . 'inc' );
+
+	/**
+	 * Define Slimline directory URI
+	 *
+	 * @link https://developer.wordpress.org/reference/functions/get_template_directory_uri/
+	 *       Description of `get_template_directory_uri` function
+	 * @link https://github.com/slimline/theme/wiki/SLIMLINE_URI
+	 */
+	define( 'SLIMLINE_URI', get_template_directory_uri() );
+
+	/**
+	 * Define Slimline stylesheet directory URI
+	 *
+	 * Stylesheet directory is used for stylesheets other than the core stylesheet
+	 *
+	 * @link https://developer.wordpress.org/reference/functions/trailingslashit/
+	 *       Description of `trailingslashit` function
+	 * @link https://github.com/slimline/theme/wiki/SLIMLINE_CSS
+	 */
+	define( 'SLIMLINE_CSS', trailingslashit( SLIMLINE_URI ) . 'css' );
+
+	/**
+	 * Define Slimline image directory URI
+	 *
+	 * @link https://developer.wordpress.org/reference/functions/trailingslashit/
+	 *       Description of `trailingslashit` function
+	 * @link https://github.com/slimline/theme/wiki/SLIMLINE_IMG
+	 */
+	define( 'SLIMLINE_IMG', trailingslashit( SLIMLINE_URI ) . 'img' );
+
+	/**
+	 * Define Slimline javascript directory URI
+	 *
+	 * @link https://developer.wordpress.org/reference/functions/trailingslashit/
+	 *       Description of `trailingslashit` function
+	 * @link https://github.com/slimline/theme/wiki/SLIMLINE_JS
+	 */
+	define( 'SLIMLINE_JS', trailingslashit( SLIMLINE_URI ) . 'js' );
+
+	/**
+	 * 2. REQUIRE CORE FILES
+	 */
+
+	/**
+	 * Conditional argument functions
+	 *
+	 * All functions in this file MUST return bool TRUE or FALSE
+	 */
+	require_once( slimline_includes_directory() . 'conditionals.php' );
+
+	/**
+	 * Default arguments for functions
+	 *
+	 * Arguments for add_theme_support and other arguments. All functions are in this
+	 * file MUST 1) be pluggable and 2) filter their return result
+	 */
+	require_once( slimline_includes_directory() . 'default-args.php' );
+
+	/**
+	 * Formatting functions
+	 *
+	 * Helper functions for formatting the results of other functions (e.g.,
+	 * alphabetizing arrays, appending file name extensions, etc.)
+	 */
+	require_once( slimline_includes_directory() . 'formatting.php' );
+
+	/**
+	 * Post template functions
+	 *
+	 * Functions for outputting content into a template. These functions SHOULD
+	 * return results (as opposed to echoing) and MUST allow filtering of results
+	 */
+	require_once( slimline_includes_directory() . 'post-template.php' );
+
+	/**
+	 * Templating functions
+	 *
+	 * Functions for getting templates and template parts
+	 */
+	require_once( slimline_includes_directory() . 'template.php' );
+
+	/**
+	 * Custom theme template tags
+	 *
+	 * Functions for putting content into templates. Generally these functions SHOULD
+	 * echo the output of another related function (found in post-template.php, for
+	 * example).
+	 */
+	require_once( slimline_includes_directory() . 'template-tags.php' );
+
+	/**
+	 * 3. REMOVE UNWANTED DEFAULT AND/OR PLUGIN-BASED ACTIONS
+	 */
+	remove_action( 'wp_head', 'wp_generator' );
 
 }
