@@ -12,6 +12,23 @@
 if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 
 /**
+ * Add .php extension to a string
+ *
+ * Useful for array mapping. Strips existing trailing ".php" (if it exists) before
+ * appending.
+ *
+ * @param  string $string The string to append ".php" to
+ * @return string $string String with ".php" appended
+ * @since  0.2.0
+ */
+function slimline_add_php_extension( $string = '' ) {
+
+	$string = rtrim( $string, '.php' );
+
+	return "{$string}.php";
+}
+
+/**
  * Sort an associative array by key.
  *
  * A wrapper for the ksort() function that returns the sorted array instead of
