@@ -8,7 +8,7 @@
  * @package Slimline / Theme
  * @see     https://developer.mozilla.org/en-US/docs/Mozilla/Mobile/Viewport_meta_tag
  *          Description of `viewport` meta tag
- * @since   0.3.0
+ * @since   0.2.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly

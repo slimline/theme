@@ -7,7 +7,7 @@
  * @package Slimline / Theme
  * @see     https://codex.wordpress.org/Introduction_to_Blogging#Pingbacks
  *          Description of pingbacks
- * @since   0.3.0
+ * @since   0.2.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
