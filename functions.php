@@ -87,6 +87,7 @@ add_action( 'after_setup_theme', 'slimline_theme_setup' );
  * 8. Miscellaneous and/or additions dependent on the above, such as adding image sizes
  *
  * @global int $content_width Defines the maximum width of embedded media
+ * @link   https://github.com/slimline/theme/wiki/slimline_theme_setup()
  * @since  0.2.0
  */
 function slimline_theme_setup() {
@@ -183,6 +184,8 @@ function slimline_theme_setup() {
 
 	/**
 	 * 2. REQUIRE CORE FILES
+	 *
+	 * @see slimline_includes_directory()
 	 */
 
 	/**
@@ -234,7 +237,214 @@ function slimline_theme_setup() {
 
 	/**
 	 * 3. REMOVE UNWANTED DEFAULT AND/OR PLUGIN-BASED ACTIONS
+	 *
+	 * @link https://developer.wordpress.org/reference/functions/remove_action/
+	 *       Description of `remove_action` function
+	 */
+
+	/**
+	 * Remove WordPress version number from <head>
+	 *
+	 * @link https://developer.wordpress.org/reference/hooks/wp_head/
+	 *       Description of `wp_head` action
+	 * @link https://developer.wordpress.org/reference/functions/wp_generator/
+	 *       Description of `wp_generator` function
 	 */
 	remove_action( 'wp_head', 'wp_generator' );
 
+
+	/**
+	 * 5. ADD CUSTOM ACTIONS AND ACTION ASSIGNMENTS
+	 *
+	 * @link https://developer.wordpress.org/reference/functions/add_action/
+	 *       Description of `add_action` function
+	 */
+
+	/**
+	 * Add login page handling
+	 */
+	add_action( 'after_setup_theme', 'slimline_login', 20 );
+
+	/**
+	 * Add content filtering to 404 descriptions
+	 *
+	 * @link https://github.com/slimline/theme/wiki/slimline_404_description
+	 * @see  slimline_content()
+	 */
+	add_filter( 'slimline_404_description', 'slimline_content' );
+
+	/**
+	 * Add content filtering to index descriptions
+	 *
+	 * @link https://github.com/slimline/theme/wiki/slimline_index_description
+	 * @see  slimline_content()
+	 */
+	add_filter( 'slimline_index_description', 'slimline_content' );
+
+	/**
+	 * Add content filtering to not found descriptions
+	 *
+	 * @link https://github.com/slimline/theme/wiki/slimline_not_found_description
+	 * @see  slimline_content()
+	 */
+	add_filter( 'slimline_not_found_description', 'slimline_content' );
+
+	/**
+	 * Make arbitrary content shortcode-aware
+	 *
+	 * @link https://github.com/slimline/theme/wiki/slimline_content
+	 * @link https://developer.wordpress.org/reference/functions/do_shortcode/
+	 *       Description of `do_shortcode` function
+	 */
+	add_filter( 'slimline_content', 'do_shortcode' );
+
+	/**
+	 * Add automatic paragraphs to arbitrary content
+	 *
+	 * @link https://github.com/slimline/theme/wiki/slimline_content
+	 * @link https://developer.wordpress.org/reference/functions/wpautop/
+	 *       Description of `wpautop` function
+	 */
+	add_filter( 'slimline_content', 'wpautop' );
+
+	/**
+	 * Add character substitution to arbitrary content
+	 *
+	 * @link https://github.com/slimline/theme/wiki/slimline_content
+	 * @link https://developer.wordpress.org/reference/functions/wptexturize/
+	 *       Description of `wptexturize` function
+	 */
+	add_filter( 'slimline_content', 'wptexturize' );
+
+	/**
+	 * Make term descriptions shortcode-aware
+	 *
+	 * @link https://developer.wordpress.org/reference/hooks/term_description/
+	 *       Description of `term_description` filter
+	 * @link https://developer.wordpress.org/reference/functions/do_shortcode/
+	 *       Description of `do_shortcode` function
+	 */
+	add_filter( 'term_description', 'do_shortcode' );
+
+	/**
+	 * Make text widgets shortcode-aware
+	 *
+	 * @link https://developer.wordpress.org/reference/hooks/term_description/
+	 *       Description of `widget_text` filter
+	 * @link https://developer.wordpress.org/reference/functions/do_shortcode/
+	 *       Description of `do_shortcode` function
+	 */
+	add_filter( 'widget_text', 'do_shortcode' );
+
+	/**
+	 * 7. ADD THEME SUPPORTS
+	 *
+	 * @link https://developer.wordpress.org/reference/functions/add_theme_support/
+	 *       Description of `add_theme_support` function
+	 */
+
+	/**
+	 * Add RSS Feed links
+	 *
+	 * @link https://codex.wordpress.org/Automatic_Feed_Links
+	 */
+	add_theme_support( 'automatic-feed-links' );
+
+	/**
+	 * Use HTML5 Markup for comments, galleries, etc.
+	 *
+	 * @link https://codex.wordpress.org/Theme_Markup
+	 * @see  slimline_html5_support_args()
+	 */
+	add_theme_support( 'html5', slimline_html5_support_args() );
+
+	/**
+	 * Add support for JetPack's infinite scroll
+	 *
+	 * @link http://jetpack.me/support/infinite-scroll/
+	 * @see  slimline_infinite_scroll_support_args()
+	 */
+	add_theme_support( 'infinite-scroll', slimline_infinite_scroll_args() );
+
+	/**
+	 * Add featured image UI to post types that support them
+	 *
+	 * @link https://codex.wordpress.org/Post_Thumbnails
+	 * @see  slimline_post_thumbnails_support_args()
+	 */
+	add_theme_support( 'post-thumbnails', slimline_post_thumbnails_support_args() );
+
+	/**
+	 * Add automatic <title> tag output
+	 *
+	 * @link https://codex.wordpress.org/Title_Tag
+	 */
+	add_theme_support( 'title-tag' );
+
+	/**
+	 *
+	 */
+
+	/**
+	 * Add logo size
+	 *
+	 * @see slimline_logo_width()
+	 * @see slimline_logo_height()
+	 * @see slimline_logo_crop()
+	 */
+	add_image_size( 'slimline-logo', slimline_logo_width(), slimline_logo_height(), slimline_logo_crop() );
+}
+
+/**
+ * Setup login screen handling
+ *
+ * @link  https://github.com/slimline/theme/wiki/slimline_login()
+ * @since 0.1.0
+ */
+function slimline_login() {
+
+	/**
+	 * Exit if not on login screen
+	 *
+	 * @global string $pagenow The current page filename
+	 */
+	global $pagenow;
+
+	if ( 'wp-login.php' !== $pagenow ) {
+		return;
+	} // if ( 'wp-login.php' !== $pagenow )
+
+	/**
+	 * Login functions
+	 */
+	require_once( slimline_includes_directory() . 'login.php' );
+
+	/**
+	 * Output login logo css
+	 *
+	 * Replaces the default login logo with the custom logo
+	 *
+	 * @link https://developer.wordpress.org/reference/hooks/login_head/
+	 *       Description of `login_head` action
+	 * @see  slimline_login_logo()
+	 */
+	add_action( 'login_head', 'slimline_login_logo_css' );
+
+	/**
+	 * Replace login logo title with site name
+	 *
+	 * @link https://developer.wordpress.org/reference/hooks/login_headertitle/
+	 *       Description of `login_headertitle` action
+	 * @@see slimline_login_headertitle()
+	 */
+	add_filter( 'login_headertitle', 'slimline_login_headertitle' );
+
+	/**
+	 * Replace login logo url with home url
+	 *
+	 * @link https://developer.wordpress.org/reference/hooks/login_headerurl/
+	 *       Description of `login_headerurl` action
+	 * @@see slimline_login_headerurl()
+	 */
+	add_filter( 'login_headerurl', 'slimline_login_headerurl' );
 }
