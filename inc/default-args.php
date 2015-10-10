@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
  * `slimline_html5_support_args` filter.
  *
  * @return array $args List of elements that should rendered using HTML5 markup
- * @see    https://github.com/slimline/theme/wiki/slimline_html5_support_args()
+ * @link   https://github.com/slimline/theme/wiki/slimline_html5_support_args()
  * @since  0.1.0
  */
 if ( ! function_exists( 'slimline_html5_support_args' ) ) {
@@ -31,7 +31,7 @@ if ( ! function_exists( 'slimline_html5_support_args' ) ) {
 		/**
 		 * Default arguments
 		 *
-		 * @see https://codex.wordpress.org/Theme_Markup
+		 * @link https://codex.wordpress.org/Theme_Markup
 		 */
 		$args = array(
 			'caption',
@@ -44,7 +44,7 @@ if ( ! function_exists( 'slimline_html5_support_args' ) ) {
 		/**
 		 * Filter the arguments
 		 *
-		 * @see https://github.com/slimline/theme/wiki/slimline_html5_support_args
+		 * @link https://github.com/slimline/theme/wiki/slimline_html5_support_args
 		 */
 		return apply_filters( 'slimline_html5_support_args', $args );
 	}
@@ -58,7 +58,7 @@ if ( ! function_exists( 'slimline_html5_support_args' ) ) {
  *
  * @return array $args Infinite Scroll arguments set to work with Slimline theme
  *                     markup
- * @see    https://github.com/slimline/theme/wiki/slimline_infinite_scroll_support_args()
+ * @link   https://github.com/slimline/theme/wiki/slimline_infinite_scroll_support_args()
  * @since  0.1.0
  */
 if ( ! function_exists( 'slimline_infinite_scroll_support_args' ) ) {
@@ -68,14 +68,14 @@ if ( ! function_exists( 'slimline_infinite_scroll_support_args' ) ) {
 		/**
 		 * Default arguments
 		 *
-		 * @see http://jetpack.me/support/infinite-scroll/ Explanation of of Infinite
-		 *      Scroll arguments
+		 * @link http://jetpack.me/support/infinite-scroll/ Explanation of of Infinite
+		 *       Scroll arguments
 		 */
 		$args = array(
 			'footer_widgets' => 'sidebar-3',                       // change auto-load option to click option if footer widgets are active
-			'container'      => 'entries',                         // default wrapper id {@see slimline_entries_attributes() | inc/template-tags.php}
+			'container'      => 'entries',                         // default wrapper id {@link slimline_entries_attributes() | inc/template-tags.php}
 			'posts_per_page' => get_option( 'posts_per_page' ),    // let user set number of posts to load
-			'render'         => 'slimline_infinite_scroll_render', // replace default rendering function with standard Slimline WordPress loop {@see index.php template} | inc/vendor.php
+			'render'         => 'slimline_infinite_scroll_render', // replace default rendering function with standard Slimline WordPress loop {@link index.php template} | inc/vendor.php
 			'type'           => 'scroll',                          // allow posts to auto-load as user scrolls
 			'wrapper'        => false,                             // do not wrap loaded posts in an extra div
 		);
@@ -83,7 +83,7 @@ if ( ! function_exists( 'slimline_infinite_scroll_support_args' ) ) {
 		/**
 		 * Filter the arguments
 		 *
-		 * @see https://github.com/slimline/theme/wiki/slimline_infinite_scroll_support_args
+		 * @link https://github.com/slimline/theme/wiki/slimline_infinite_scroll_support_args
 		 */
 		return apply_filters( 'slimline_infinite_scroll_support_args', $args );
 	}
@@ -95,7 +95,7 @@ if ( ! function_exists( 'slimline_infinite_scroll_support_args' ) ) {
  *
  * @global object $wp_query the WP_Query object
  * @return array  $args Associative array of function arguments
- * @see    https://github.com/slimline/theme/wiki/slimline_paginate_links_args()
+ * @link   https://github.com/slimline/theme/wiki/slimline_paginate_links_args()
  * @since  0.2.0
  */
 if ( ! function_exists( 'slimline_paginate_links_args' ) ) {
@@ -105,15 +105,15 @@ if ( ! function_exists( 'slimline_paginate_links_args' ) ) {
 		/**
 		 * Current WP_Query
 		 *
-		 * @see https://developer.wordpress.org/reference/classes/wp_query/
+		 * @link https://developer.wordpress.org/reference/classes/wp_query/
 		 */
 		global $wp_query;
 
 		/**
 		 * Default arguments
 		 *
-		 * @see https://developer.wordpress.org/reference/functions/paginate_links/
-		 *      Explanation of `paginate_links` arguments
+		 * @link https://developer.wordpress.org/reference/functions/paginate_links/
+		 *       Explanation of `paginate_links` arguments
 		 */
 		$args = array(
 			'base'    => str_replace( $wp_query->found_posts, '%#%', esc_url( get_pagenum_link( $wp_query->found_posts ) ) ),
@@ -126,7 +126,7 @@ if ( ! function_exists( 'slimline_paginate_links_args' ) ) {
 		/**
 		 * Filter the defaults
 		 *
-		 * @see https://github.com/slimline/theme/wiki/slimline_paginate_links_args
+		 * @link https://github.com/slimline/theme/wiki/slimline_paginate_links_args
 		 */
 		return apply_filters( 'slimline_paginate_links_args', $args );
 	}
@@ -142,8 +142,8 @@ if ( ! function_exists( 'slimline_paginate_links_args' ) ) {
  *
  * @return bool|array TRUE to enable featured images on all post types (defaule), or
  *                    an array of post types for adding featured image UI
- * @see    https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
- * @see    https://github.com/slimline/theme/wiki/slimline_post_thumbnails_support_args()
+ * @link   https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
+ * @link   https://github.com/slimline/theme/wiki/slimline_post_thumbnails_support_args()
  * @since  0.1.0
  */
 if ( ! function_exists( 'slimline_post_thumbnails_support_args' ) ) {
@@ -155,7 +155,7 @@ if ( ! function_exists( 'slimline_post_thumbnails_support_args' ) ) {
 		 *
 		 * TRUE to add featured image UI to all post types that support it.
 		 *
-		 * @see https://github.com/slimline/theme/wiki/slimline_post_thumbnails_support_args
+		 * @link https://github.com/slimline/theme/wiki/slimline_post_thumbnails_support_args
 		 */
 		return apply_filters( 'slimline_post_thumbnails_support_args', true );
 	}
@@ -169,7 +169,7 @@ if ( ! function_exists( 'slimline_post_thumbnails_support_args' ) ) {
  * be used as the second argument in `the_title()`.
  *
  * @return string HTML closing tag with comment
- * @see    https://github.com/slimline/theme/wiki/slimline_the_entry_title_after()
+ * @link   https://github.com/slimline/theme/wiki/slimline_the_entry_title_after()
  * @since  0.2.0
  */
 if ( ! function_exists( 'slimline_the_entry_title_after' ) ) {
@@ -179,7 +179,7 @@ if ( ! function_exists( 'slimline_the_entry_title_after' ) ) {
 		/**
 		 * Get the correct heading tag
 		 *
-		 * @see slimline_the_entry_title_tag() | inc/default-args.php
+		 * @link slimline_the_entry_title_tag() | inc/default-args.php
 		 */
 		$tag = slimline_the_entry_title_tag();
 
@@ -188,7 +188,7 @@ if ( ! function_exists( 'slimline_the_entry_title_after' ) ) {
 		 *
 		 * @param string      HTML closing tag with comment
 		 * @param string $tag The closing tag element (e.g., "h1" or "h3")
-		 * @see   https://github.com/slimline/theme/wiki/slimline_the_entry_title_after
+		 * @link  https://github.com/slimline/theme/wiki/slimline_the_entry_title_after
 		 */
 		return apply_filters( 'slimline_the_entry_title_after', "</{$tag}><!-- .entry-title -->", $tag );
 
@@ -203,7 +203,7 @@ if ( ! function_exists( 'slimline_the_entry_title_after' ) ) {
  * be used as the first argument in `the_title()`.
  *
  * @return string HTML opening tag
- * @see    https://github.com/slimline/theme/wiki/slimline_the_entry_title_before()
+ * @link   https://github.com/slimline/theme/wiki/slimline_the_entry_title_before()
  * @since  0.2.0
  */
 if ( ! function_exists( 'slimline_the_entry_title_before' ) ) {
@@ -213,14 +213,14 @@ if ( ! function_exists( 'slimline_the_entry_title_before' ) ) {
 		/**
 		 * Get the correct heading tag
 		 *
-		 * @see slimline_the_entry_title_tag() | inc/default-args.php
+		 * @link slimline_the_entry_title_tag() | inc/default-args.php
 		 */
 		$tag = slimline_the_entry_title_tag();
 
 		/**
 		 * Get the title tag attributes
 		 *
-		 * @see slimline_get_entry_title_attributes() | inc/post-template.php
+		 * @link slimline_get_entry_title_attributes() | inc/post-template.php
 		 */
 		$attributes = slimline_get_entry_title_attributes();
 
@@ -230,7 +230,7 @@ if ( ! function_exists( 'slimline_the_entry_title_before' ) ) {
 		 * @param string             HTML opening tag
 		 * @param string $tag        The opening tag element (e.g., "h1" or "h3")
 		 * @param string $attributes HTML attributes for the tag
-		 * @see   https://github.com/slimline/theme/wiki/slimline_the_entry_title_before
+		 * @link  https://github.com/slimline/theme/wiki/slimline_the_entry_title_before
 		 */
 		return apply_filters( 'slimline_the_entry_title_before', "<{$tag} {$attributes}>", $tag, $attributes );
 
@@ -244,7 +244,7 @@ if ( ! function_exists( 'slimline_the_entry_title_before' ) ) {
  * Defaults to <h1> for singular entries, <h3> for entries on an index page.
  *
  * @return string $tag The heading identifier (i.e., "h1" or "h3")
- * @see    https://github.com/slimline/theme/wiki/slimline_the_entry_title_tag()
+ * @link   https://github.com/slimline/theme/wiki/slimline_the_entry_title_tag()
  * @since  0.2.0
  */
 if ( ! function_exists( 'slimline_the_entry_title_tag' ) ) {
@@ -254,8 +254,8 @@ if ( ! function_exists( 'slimline_the_entry_title_tag' ) ) {
 		/**
 		 * Set to h1 if on a singular post, otherwise h3
 		 *
-		 * @see https://developer.wordpress.org/reference/functions/is_singular/
-		 *      Description of `is_singular` conditional
+		 * @link https://developer.wordpress.org/reference/functions/is_singular/
+		 *       Description of `is_singular` conditional
 		 */
 		$tag = ( is_singular() ? 'h1' : 'h3' );
 
@@ -263,9 +263,42 @@ if ( ! function_exists( 'slimline_the_entry_title_tag' ) ) {
 		 * Filter and return the markup
 		 *
 		 * @param string $tag The heading identifier (i.e., "h1" or "h3")
-		 * @see   https://github.com/slimline/theme/wiki/slimline_the_entry_title_tag
+		 * @link  https://github.com/slimline/theme/wiki/slimline_the_entry_title_tag
 		 */
 		return apply_filters( 'slimline_the_entry_title_tag', $tag );
 	}
 
 } // if ( ! function_exists( 'slimline_the_entry_title_tag' ) )
+
+/**
+ * Arguments for `the_title_attribute` on index pages
+ *
+ * @return array $args Associative array of function arguments
+ * @link   https://github.com/slimline/theme/wiki/slimline_the_title_attribute_args()
+ * @since  0.2.0
+ */
+if ( ! function_exists( 'slimline_the_title_attribute_args' ) ) {
+
+	function slimline_the_title_attribute_args() {
+
+		/**
+		 * Default arguments
+		 *
+		 * @link https://developer.wordpress.org/reference/functions/the_title_attribute/
+		 *       Explanation of `the_title_attribute` arguments
+		 */
+		$args = array(
+			'before' => __( 'Click here to continue reading "' ),
+			'after'  => '"',
+			'echo'   => false,
+		);
+
+		/**
+		 * Filter the arguments
+		 *
+		 * @link https://github.com/slimline/theme/wiki/slimline_the_title_attribute_args
+		 */
+		return apply_filters( 'slimline_the_title_attribute_args', $args );
+	}
+
+} // if ( ! function_exists( 'slimline_the_title_attribute_args' ) )
