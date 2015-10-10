@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 				/**
 				 * slimline_content_after hook
 				 *
-				 * @hook slimline_get_sidebar_primary - 50 (gets the primary sidebar)
+				 * @hook get_sidebar - 50 (gets the primary sidebar)
 				 * @see  https://github.com/slimline/theme/wiki/slimline_content_after
 				 */
 				do_action( 'slimline_content_after' );
