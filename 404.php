@@ -73,7 +73,7 @@ get_header();
 				 *        Documentation of the `get_template_part` function
 				 * @since 0.1.0
 				 */
-				get_template_part( '404/header' );
+				get_template_part( 'parts/404/header' );
 
 				/**
 				 * slimline_404_content hook
@@ -81,7 +81,7 @@ get_header();
 				 * @hook  slimline_get_404_posts       - 10 (gets recent posts loop template part)
 				 * @hook  slimline_get_404_search_form - 20 (gets search form template part)
 				 * @see   https://github.com/slimline/theme/wiki/slimline_404_content
-				 * @since 0.3.0
+				 * @since 0.2.0
 				 */
 				do_action( 'slimline_404_content' );
 
