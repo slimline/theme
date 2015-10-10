@@ -14,6 +14,18 @@
 if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 
 /**
+ * Whether the site has a logo set
+ *
+ * @uses  slimline_get_logo_id()
+ * @link  https://github.com/slimline/theme/wiki/slimline_has_logo()
+ * @since 0.2.0
+ */
+function slimline_has_logo() {
+
+	return (bool) slimline_get_logo_id();
+}
+
+/**
  * Decide whether to show the excerpt in the entry header
  *
  * By default, singular posts will show their excerpt (if set) in the entry's
@@ -86,6 +98,53 @@ function slimline_show_entry_meta() {
 	 *       Description of the `is_single` function
 	 */
 	return apply_filters( 'slimline_show_entry_meta', is_single() );
+}
+
+/**
+ * Use given feature as site logo?
+ *
+ * @param  string $feature Feature to check
+ * @return bool   $use     TRUE if yes, FALSE if no
+ * @since  0.2.0
+ */
+function slimline_use_as_logo( $feature = '' ) {
+
+	/**
+	 * Set feature defaults
+	 */
+	switch ( $feature ) {
+
+		/**
+		 * Use site identity and custom headers as logo
+		 */
+		case 'custom-header' :
+		case 'site-icon'     :
+			$use = true;
+			break;
+
+		/**
+		 * Use JetPack site logo if JetPack is installed and active
+		 */
+ 		case 'jetpack-site-logo' :
+			$use = function_exists( 'jetpack_the_site_logo' );
+			break;
+
+		/**
+		 * Don't use other features
+		 */
+		default :
+			$use = false;
+			break;
+
+	} // switch ( $feature )
+
+	/**
+	 * Filter the result
+	 *
+	 * @param bool $use Whether to use the given feature as the site logo
+	 * @link  https://github.com/slimline/theme/wiki/slimline_use_$feature_as_logo
+	 */
+	return apply_filters( "slimline_use_{$feature}_as_logo", $use );
 }
 
 /**
