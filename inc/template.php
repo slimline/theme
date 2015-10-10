@@ -10,6 +10,285 @@
 if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 
 /**
+ * Get entries header template part
+ *
+ * @since 0.2.0
+ */
+function slimline_get_404_entries_header() {
+
+	/**
+	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
+	 *       Description of `get_template_part` function
+	 */
+	get_template_part( 'parts/404/title-entries' );
+}
+
+/**
+ * Get recent posts loop template part
+ *
+ * @since 0.2.0
+ */
+function slimline_get_404_posts() {
+
+	/**
+	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
+	 *       Description of `get_template_part` function
+	 */
+	get_template_part( 'parts/404/posts' );
+}
+
+/**
+ * Get search form template part
+ *
+ * @since 0.2.0
+ */
+function slimline_get_404_search_form() {
+
+	/**
+	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
+	 *       Description of `get_template_part` function
+	 */
+	get_template_part( 'parts/404/searchform' );
+}
+
+/**
+ * Get charset template part
+ *
+ * @since 0.2.0
+ */
+function slimline_get_charset_tag() {
+
+	/**
+	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
+	 *       Description of `get_template_part` function
+	 */
+	get_template_part( 'parts/tag', 'charset' );
+}
+
+/**
+ * Get comments template part
+ *
+ * @since 0.2.0
+ */
+function slimline_get_comments_template() {
+
+	/**
+	 * @link https://developer.wordpress.org/reference/functions/comments_template/
+	 *       Description of `comments_template` function
+	 */
+	comments_template( 'parts/comments/comments.php' );
+}
+
+/**
+ * Get copyright template part
+ *
+ * @since 0.2.0
+ */
+function slimline_get_copyright_notice() {
+
+	/**
+	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
+	 *       Description of `get_template_part` function
+	 */
+	get_template_part( 'parts/notice', 'copyright' );
+}
+
+/**
+ * Get entries header template part
+ *
+ * @since 0.2.0
+ */
+function slimline_get_entries_header() {
+
+	/**
+	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
+	 *       Description of `get_template_part` function
+	 */
+	get_template_part( 'parts/index/title-entries' );
+}
+
+/**
+ * Get entry footer template part
+ *
+ * @since 0.2.0
+ */
+function slimline_get_entry_footer() {
+
+	/**
+	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
+	 *       Description of `get_template_part` function
+	 */
+	get_template_part( 'parts/entry/footer' );
+}
+
+/**
+ * Get entry header template part
+ *
+ * @since 0.2.0
+ */
+function slimline_get_entry_header() {
+
+	/**
+	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
+	 *       Description of `get_template_part` function
+	 */
+	get_template_part( 'parts/entry/header' );
+}
+
+/**
+ * Get entry meta template part
+ *
+ * @since 0.2.0
+ */
+function slimline_get_entry_meta() {
+
+	/**
+	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
+	 *       Description of `get_template_part` function
+	 */
+	get_template_part( 'parts/entry/meta' );
+}
+
+/**
+ * Get footer navigation template part
+ *
+ * @since 0.2.0
+ */
+function slimline_get_footer_nav() {
+
+	/**
+	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
+	 *       Description of `get_template_part` function
+	 */
+	get_template_part( 'parts/nav', 'footer' );
+}
+
+/**
+ * Get header navigation template part
+ *
+ * @since 0.2.0
+ */
+function slimline_get_header_nav() {
+
+	/**
+	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
+	 *       Description of `get_template_part` function
+	 */
+	get_template_part( 'parts/nav', 'header' );
+}
+
+/**
+ * Get index.php header template part
+ *
+ * @since 0.2.0
+ */
+function slimline_get_index_header() {
+
+	/**
+	 * @link https://github.com/slimline/theme/wiki/slimline_get_index_header()
+	 */
+	slimline_get_template_part( 'index/header', slimline_get_context() );
+}
+
+/**
+ * Get index.php navigation template part
+ *
+ * @since 0.2.0
+ */
+function slimline_get_index_navigation() {
+
+	/**
+	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
+	 *       Description of `get_template_part` function
+	 */
+	get_template_part( 'parts/index/navigation' );
+}
+
+/**
+ * Get not found description template part
+ *
+ * @since 0.2.0
+ */
+function slimline_get_not_found_description() {
+
+	/**
+	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
+	 *       Description of `get_template_part` function
+	 */
+	get_template_part( 'parts/not-found/description' );
+}
+
+/**
+ * Get not found header template part
+ *
+ * @since 0.2.0
+ */
+function slimline_get_not_found_header() {
+
+	/**
+	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
+	 *       Description of `get_template_part` function
+	 */
+	get_template_part( 'parts/not-found/header' );
+}
+
+/**
+ * Get pingback template part
+ *
+ * @since 0.2.0
+ */
+function slimline_get_pingback_tag() {
+
+	/**
+	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
+	 *       Description of `get_template_part` function
+	 */
+	get_template_part( 'parts/tag', 'pingback' );
+}
+
+/**
+ * Get footer widget area
+ *
+ * @since 0.2.0
+ */
+function slimline_get_sidebar_footer() {
+
+	/**
+	 * @link https://developer.wordpress.org/reference/functions/get_sidebar/
+	 *       Description of `get_sidebar` function
+	 */
+	get_sidebar( 'footer' );
+}
+
+/**
+ * Get site logo template part
+ *
+ * @since 0.2.0
+ */
+function slimline_get_site_logo() {
+
+	/**
+	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
+	 *       Description of `get_template_part` function
+	 */
+	get_template_part( 'parts/site-logo' );
+}
+
+/**
+ * Get viewport template part
+ *
+ * @since 0.2.0
+ */
+function slimline_get_viewport_tag() {
+
+	/**
+	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
+	 *       Description of `get_template_part` function
+	 */
+	get_template_part( 'parts/tag', 'viewport' );
+}
+
+/**
  * Get template parts
  *
  * Alternative function to get_template_part() allowing for a greater range of
