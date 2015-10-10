@@ -68,6 +68,47 @@ function slimline_attributes_unset_lang( $attributes = array() ) {
 }
 
 /**
+ * Filter and output text content
+ *
+ * Functions similar to `the_content`, but takes arbirtrary text. Also avoids the
+ * problem of applying third-party filters hooked to `the_content` (ex: JetPack
+ * sharing buttons) to text that should not have them.
+ *
+ * @link  https://github.com/slimline/theme/wiki/slimline_content()
+ * @since 0.2.0
+ */
+function slimline_content( $text ) {
+
+	/**
+	 * Return text content
+	 *
+	 * We are applying the `slimline_content` filter before returning to auto-add
+	 * line breaks and paragraphs, texturize punctuation and evaluate shortcodes.
+	 *
+	 * @param string $text The filtered description
+	 * @link  https://github.com/slimline/theme/wiki/slimline_content
+	 */
+	echo apply_filters( 'slimline_content', $text );
+}
+
+/**
+ * Output ellipses and a link to the post
+ *
+ * NOTE: this function MUST be used within the loop.
+ *
+ * @since 0.2.0
+ */
+function slimline_excerpt_more() {
+
+	return sprintf(
+			'&hellip; <a href="%1$s" title="%2$s">%3$s &rarr;</a>',
+			get_permalink(),
+			the_title_attribute( slimline_the_title_attribute_args() ),
+			__( 'Read more', 'slimline' )
+		);
+}
+
+/**
  * Generate HTML attributes for 404 <article> tag
  *
  * Essentially a wrapper function for `slimline_get_attributes()` that includes
@@ -122,18 +163,7 @@ function slimline_get_404_description() {
 	 * @param string $description The default generated description
 	 * @link  https://github.com/slimline/theme/wiki/slimline_404_description
 	 */
-	$description = apply_filters( 'slimline_404_description', $description );
-
-	/**
-	 * Return text content
-	 *
-	 * We are applying the `slimline_content` filter before returning to auto-add
-	 * line breaks and paragraphs, texturize punctuation and evaluate shortcodes.
-	 *
-	 * @param string $description The filtered description
-	 * @link  https://github.com/slimline/theme/wiki/slimline_content
-	 */
-	return apply_filters( 'slimline_content', $description );
+	return apply_filters( 'slimline_404_description', $description );
 }
 
 /**
@@ -1031,18 +1061,7 @@ function slimline_get_index_description() {
 	 * @param string $description The default generated description
 	 * @link  https://github.com/slimline/theme/wiki/slimline_index_description
 	 */
-	$description = apply_filters( 'slimline_index_description', $description );
-
-	/**
-	 * Return text content
-	 *
-	 * We are applying the `slimline_content` filter before returning to auto-add
-	 * line breaks and paragraphs, texturize punctuation and evaluate shortcodes.
-	 *
-	 * @param string $description The filtered description
-	 * @link  https://github.com/slimline/theme/wiki/slimline_content
-	 */
-	return apply_filters( 'slimline_content', $description );
+	return apply_filters( 'slimline_index_description', $description );
 }
 
 /**
@@ -1139,6 +1158,207 @@ function slimline_get_index_title_attributes( $attributes = '' ) {
 }
 
 /**
+ * Return logo HTML markup
+ *
+ * Returns the logo <img> wrapped in an <a> tag if a logo is set.
+ *
+ * @return string $logo HTML markup if logo set, empty string if not
+ * @link   https://github.com/slimline/theme/wiki/slimline_get_the_logo()
+ * @since  0.2.0
+ */
+function slimline_get_logo() {
+
+	/**
+	 * Filter the default logo output
+	 *
+	 * If the filtered output isn't empty, it will be used instead of generating the
+	 * the normal logo HTML.
+	 *
+	 * @param string $logo The logo ouput. Default is empty.
+	 * @link  https://github.com/slimline/theme/wiki/slimline_logo_pre
+	 */
+	$logo = apply_filters( 'slimline_logo_pre', '' );
+
+	/**
+	 * If logo is empty, generate the HTML
+	 */
+	if ( '' === $logo ) {
+
+		/**
+		 * Check for JetPack Site Logo
+		 *
+		 * We are buffering the logo function so we can return it as a string
+		 *
+		 * @link http://jetpack.me/support/site-logo/ Description of Site Logo
+		 */
+		if ( slimline_use_as_logo( 'jetpack-site-logo' ) && jetpack_has_site_logo() ) {
+
+			ob_start();
+
+			jetpack_the_site_logo();
+
+			$logo = ob_get_clean();
+
+		/**
+		 * Check for any other site logos
+		 *
+		 * @see slimline_get_logo_id()
+		 */
+		} else if ( ( $logo_id = slimline_get_logo_id() ) ) { // if ( slimline_use_as_logo( 'jetpack-site-logo' ) && jetpack_has_site_logo() )
+
+			$logo = sprintf(
+				'<a class="site-logo-link" href="%1$s" itemprop="url">%2$s</a>',
+				esc_url( home_url( '/' ) ),
+				wp_get_attachment_image(
+					$logo_id,
+					'slimline-logo',
+					false,
+					array(
+						'class'     => 'site-logo attachment-slimline-logo',
+						'data-size' => 'slimline-logo',
+						'itemprop'  => 'logo',
+					)
+				)
+			);
+
+		} // if ( slimline_use_as_logo( 'jetpack-site-logo' ) && jetpack_has_site_logo() )
+
+	} // if ( '' === $logo )
+
+	/**
+	 * Filter the returned string
+	 *
+	 * @param string $logo Logo HTML or empty string
+	 * @link  https://github.com/slimline/theme/wiki/slimline_logo
+	 */
+	return apply_filters( 'slimline_logo', $logo );
+}
+
+/**
+ * Retrieve image ID for site logo
+ *
+ * @return int $logo_id ID of image attachment if a site logo is found, otherwise 0
+ * @since  0.2.0
+ */
+function slimline_get_logo_id() {
+
+	/**
+	 * Pre-filter logo ID
+	 *
+	 * This allows developers to skip the additional logo checks below
+	 *
+	 * @link https://github.com/slimline/theme/wiki/slimline_logo_id_pre
+	 */
+	$logo_id = apply_filters( 'slimline_logo_id_pre', false );
+
+	if ( ! $logo_id ) {
+
+		/**
+		 * First check JetPack site logo
+		 *
+		 * @link http://jetpack.me/support/site-logo/
+		 */
+		if ( slimline_use_as_logo( 'jetpack-site-logo' ) ) {
+			$logo_id = jetpack_get_site_logo( 'id' );
+		} // if ( slimline_use_as_logo( 'jetpack-site-logo' ) )
+
+		/**
+		 * Next check WordPress site identity
+		 *
+		 * @see http://www.sitepoint.com/all-you-need-to-know-about-the-new-wordpress-site-icon-api/
+		 */
+		if ( ! $logo_id && slimline_use_as_logo( 'site-icon' ) ) {
+			$logo_id = get_option( 'site_icon', 0 );
+		} // if ( ! $logo_id && slimline_use_as_logo( 'site-icon' ) )
+
+		/**
+		 * Finally check WordPress custom header
+		 *
+		 * @link https://codex.wordpress.org/Custom_Headers
+		 */
+		if ( ! $logo_id && slimline_use_as_logo( 'custom-header' ) ) {
+
+			/**
+			 * Get custom header info
+			 *
+			 * @link https://developer.wordpress.org/reference/functions/get_theme_mod/
+			 *       Description of `get_theme_mod` function
+			 */
+			$header_image_data = get_theme_mod( 'header_image_data' );
+
+			$logo_id = ( isset( $header_image_data['attachment_id'] ) ? $header_image_data['attachment_id'] : 0 );
+
+		} // if ( ! $logo_id && slimline_use_as_logo( 'custom-header' ) )
+
+	} // if ( ! $logo_id )
+
+	/**
+	 * Filter final logo ID
+	 *
+	 * @link https://github.com/slimline/theme/wiki/slimline_logo_id
+	 */
+	$logo_id = apply_filters( 'slimline_logo_id', $logo_id );
+
+	/**
+	 * Force INT in case an empty string or FALSE
+	 *
+	 * @link https://developer.wordpress.org/reference/functions/absint/
+	 *       Description of `absint` function
+	 */
+	return absint( $logo_id );
+}
+
+/**
+ * Retrieve image information for site logo
+ *
+ * Effectively a wrapper for `wp_get_attachment_image_src` that first retrieves the
+ * site logo ID (if one is set).
+ *
+ * @param  string|array $size     (Optional) Registered image size to retrieve the
+ *                                source for or a flat array of height and width
+ *                                dimensions. Default size is 'slimline-logo'.
+ * @return array        $logo_src Returns an array (url, width, height), or false, if
+ *                                no image is available.
+ * @link  https://github.com/slimline/theme/wiki/slimline_get_logo_src()
+ * @since 0.2.0
+ */
+function slimline_get_logo_src( $size = 'slimline-logo' ) {
+
+	/**
+	 * Set up FALSE if no image info retrieved
+	 */
+	$logo_src = false;
+
+	/**
+	 * Retrieve image ID
+	 *
+	 * @see slimline_get_logo_id()
+	 */
+	$logo_id = slimline_get_logo_id();
+
+	/**
+	 * If we have a logo, retrieve logo image src
+	 *
+	 * @link https://developer.wordpress.org/reference/functions/wp_get_attachment_image_src/
+	 *       Description of `wp_get_attachment_image_src` function
+	 */
+	if ( $logo_id ) {
+		$logo_src = wp_get_attachment_image_src( $logo_id, $size );
+	} // if ( $logo_id )
+
+	/**
+	 * Filter the result
+	 *
+	 * @param array        $logo_src  URL, width and height of image
+	 * @param string|array $logo_size Registered image size or flat array of image
+	 *                                dimensions
+	 * @param int          $logo_id   ID for the attachment image
+	 * @link  https://github.com/slimline/theme/wiki/slimline_get_logo_src
+	 */
+	return apply_filters( 'slimline_logo_src', $logo_src, $logo_size, $logo_id );
+}
+
+/**
  * Generate HTML attributes for not main <main> tag
  *
  * Essentially a wrapper function for `slimline_get_attributes()` that includes
@@ -1220,18 +1440,7 @@ function slimline_get_not_found_description() {
 	 * @param string $description The default generated description
 	 * @link  https://github.com/slimline/theme/wiki/slimline_not_found_description
 	 */
-	$description = apply_filters( 'slimline_not_found_description', $description );
-
-	/**
-	 * Return text content
-	 *
-	 * We are applying the `slimline_content` filter before returning to auto-add
-	 * line breaks and paragraphs, texturize punctuation and evaluate shortcodes.
-	 *
-	 * @param string $description The filtered description
-	 * @link  https://github.com/slimline/theme/wiki/slimline_content
-	 */
-	return apply_filters( 'slimline_content', $description );
+	return apply_filters( 'slimline_not_found_description', $description );
 }
 
 /**

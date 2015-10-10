@@ -452,6 +452,18 @@ function slimline_index_title_attributes( $attributes = '' ) {
 }
 
 /**
+ * Outputs site logo wrapped in an <a> tag.
+ *
+ * @uses  slimline_get_the_logo() to get the logo
+ * #link  https://github.com/slimline/theme/wiki/slimline_logo()
+ * @since 0.2.0
+ */
+function slimline_logo() {
+
+	echo slimline_get_logo();
+}
+
+/**
  * Outputs HTML attributes meant for the main content tag (<main>).
  *
  * @param array|string $attributes (Optional). An array or query string of
@@ -556,6 +568,20 @@ function slimline_sidebar_primary_attributes( $attributes = '' ) {
 }
 
 /**
+ * Outputs HTML attibutes meant for the website <footer> tag.
+ *
+ * @param array|string $attributes (Optional). An array or query string of
+ *                                 attribute / value pairs.
+ * @uses  slimline_get_site_footer_attributes() to generate attributes
+ * @link  https://github.com/slimline/theme/wiki/slimline_site_footer_attributes()
+ * @since 0.1.0
+ */
+function slimline_site_footer_attributes( $attributes = '' ) {
+
+	echo slimline_get_site_footer_attributes( $attributes );
+}
+
+/**
  * Outputs HTML attibutes meant for the website <header> tag.
  *
  * @param array|string $attributes (Optional). An array or query string of
@@ -570,15 +596,15 @@ function slimline_site_header_attributes( $attributes = '' ) {
 }
 
 /**
- * Outputs HTML attibutes meant for the website <footer> tag.
+ * Outputs HTML attibutes meant for the title link <a>.
  *
  * @param array|string $attributes (Optional). An array or query string of
  *                                 attribute / value pairs.
- * @uses  slimline_get_site_footer_attributes() to generate attributes
- * @link  https://github.com/slimline/theme/wiki/slimline_site_footer_attributes()
- * @since 0.1.0
+ * @uses  limline_get_site_title_link_attributes() to generate attributes
+ * @link  https://github.com/slimline/theme/wiki/slimline_site_title_link_attributes()
+ * @since 0.2.0
  */
-function slimline_site_footer_attributes( $attributes = '' ) {
+function slimline_site_title_link_attributes( $attributes = '' ) {
 
-	echo slimline_get_site_footer_attributes( $attributes );
+	echo slimline_get_site_title_link_attributes( $attributes );
 }
