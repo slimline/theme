@@ -52,10 +52,10 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 					 *
 					 * The read more link displays when the `<!--more-->` quicktag.
 					 *
-					 * @see   slimline_get_read_more_text() | inc/post-template.php
+					 * @see slimline_excerpt_more()
 					 * @since 0.2.0
 					 */
-					the_content( slimline_get_read_more_text() );
+					the_content( slimline_excerpt_more() );
 
 				} else { // if ( slimline_show_entry_content() )
 
@@ -63,10 +63,10 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 					 * Display excerpt with a custom "read more" link
 					 *
 					 * The read more link displays by hooking the
-					 * `slimline_get_read_more_text` function to the `excerpt_more`
+					 * `slimline_excerpt_more` function to the `excerpt_more`
 					 * filter
 					 *
-					 * @see   slimline_get_read_more_text() | inc/post-template.php
+					 * @see   slimline_excerpt_more()
 					 * @see   https://developer.wordpress.org/reference/hooks/excerpt_more/
 					 *        Documentation of the `excerpt_more` filter.
 					 * @since 0.2.0
