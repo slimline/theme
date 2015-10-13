@@ -435,7 +435,7 @@ function slimline_login() {
 	 *
 	 * @link https://developer.wordpress.org/reference/hooks/login_headertitle/
 	 *       Description of `login_headertitle` action
-	 * @@see slimline_login_headertitle()
+	 * @see  slimline_login_headertitle()
 	 */
 	add_filter( 'login_headertitle', 'slimline_login_headertitle' );
 
@@ -444,7 +444,148 @@ function slimline_login() {
 	 *
 	 * @link https://developer.wordpress.org/reference/hooks/login_headerurl/
 	 *       Description of `login_headerurl` action
-	 * @@see slimline_login_headerurl()
+	 * @see  slimline_login_headerurl()
 	 */
 	add_filter( 'login_headerurl', 'slimline_login_headerurl' );
 }
+
+/**
+ * slimline_vendor function
+ *
+ * Conditional actions, filters and support for third-party plugins.
+ *
+ * @since 0.1.0
+ */
+function slimline_vendor() {
+
+	/**
+	 * Google Analytics by Yoast Support
+	 *
+	 * @link https://wordpress.org/plugins/googleanalytics/
+	 */
+	if ( defined( 'GAWP_VERSION' ) && ! is_admin() ) {
+
+		/**
+		 * @global object $yoast_ga_frontend The Front End object
+		 */
+		global $yoast_ga_frontend;
+
+		/**
+		 * Add Google Analytics filtering to slimline_content
+		 */
+		add_filter( 'slimline_content', array( $yoast_ga_frontend, 'the_content' ), 100 );
+
+	} // if ( defined( 'GAWP_VERSION' ) && ! is_admin() )
+
+	/**
+	 * Theme Hook Alliance Support
+	 *
+	 * Add support for Theme Hook Alliance actions. Theme developers may need to
+	 * unhook some default Slimline hooks for these to perform as expected.
+	 *
+	 * NOTE: the hooks below are listed in the same order as in the
+	 * tha-theme-hooks.php document.
+	 *
+	 * @link https://github.com/zamoose/themehookalliance
+	 */
+	if ( defined( 'THA_HOOKS_VERSION' ) ) {
+
+		/**
+		 * Declare THA hooks support
+		 *
+		 * @see slimline_vendor_tha_hooks_support()
+		 */
+		add_theme_support( 'tha_hooks', slimline_vendor_tha_hooks_support() );
+
+		/**
+		 * semantic <body> hooks
+		 */
+		add_action( 'slimline_body_top',    'tha_body_top' );
+		add_action( 'slimline_body_bottom', 'tha_body_bottom' );
+
+		/**
+		 * semantic <head> hooks
+		 */
+		add_action( 'wp_head', 'tha_head_top', 0 );
+		add_action( 'wp_head', 'tha_head_bottom', 1000 );
+
+		/**
+		 * semantic <header> hooks
+		 */
+		add_action( 'slimline_header_before', 'tha_header_before' );
+		add_action( 'slimline_header_after',  'tha_header_after' );
+		add_action( 'slimline_header_top',    'tha_header_top' );
+		add_action( 'slimline_header_bottom', 'tha_header_bottom' );
+
+		/**
+		 * semantic <content> hooks
+		 */
+		add_action( 'slimline_content_before',       'tha_content_before' );
+		add_action( 'slimline_content_after',        'tha_content_after' );
+		add_action( 'slimline_content_top',          'tha_content_top' );
+		add_action( 'slimline_content_bottom',       'tha_content_bottom' );
+		add_action( 'slimline_content_while_before', 'tha_content_while_before' );
+		add_action( 'slimline_content_while_after',  'tha_content_while_after' );
+
+		/**
+		 * semantic <entry> hooks
+		 */
+		add_action( 'slimline_entry_before',         'tha_entry_before' );
+		add_action( 'slimline_entry_after',          'tha_entry_after' );
+		add_action( 'slimline_entry_content_before', 'tha_entry_content_before' );
+		add_action( 'slimline_entry_content_after',  'tha_entry_content_after' );
+		add_action( 'slimline_entry_top',            'tha_entry_top' );
+		add_action( 'slimline_entry_bottom',         'tha_entry_bottom' );
+
+		/**
+		 * comments block hooks
+		 */
+		add_action( 'slimline_comments_before', 'tha_comments_before' );
+		add_action( 'slimline_comments_after',  'tha_comments_after' );
+
+		/**
+		 * semantic <sidebar> hooks
+		 */
+		add_action( 'slimline_sidebar_primary_before', 'tha_sidebars_before' );
+		add_action( 'slimline_sidebar_primary_after',  'tha_sidebars_after' );
+		add_action( 'slimline_sidebar_primary_top',    'tha_sidebar_top' );
+		add_action( 'slimline_sidebar_primary_bottom', 'tha_sidebar_bottom' );
+
+		/**
+		 * semantic <footer> hooks
+		 */
+		add_action( 'slimline_footer_before', 'tha_footer_before' );
+		add_action( 'slimline_footer_after',  'tha_footer_after' );
+		add_action( 'slimline_footer_top',    'tha_footer_top' );
+		add_action( 'slimline_footer_bottom', 'tha_footer_bottom' );
+
+	} // if ( defined( 'THA_HOOKS_VERSION' ) )
+
+	/**
+	 * WordPress SEO by Yoast Support
+	 *
+	 * @link https://wordpress.org/plugins/wordpress-seo/
+	 */
+	if ( defined( 'WPSEO_VERSION' ) ) {
+
+		/**
+		 * Automatically insert Yoast breadcrumbs
+		 *
+		 * @see slimline_yoast_breadcrumbs()
+		 */
+		add_action( 'slimline_content_before', slimline_yoast_breadcrumbs() );
+
+	} // if ( defined( 'WPSEO_VERSION' ) )
+}
+
+array(
+	'body',
+	'head',
+	'header',
+	'content',
+	'entry',
+	'comments',
+	'sidebars',
+	'sidebar',
+	'footer',
+)
