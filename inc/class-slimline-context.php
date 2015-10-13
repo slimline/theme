@@ -6,6 +6,9 @@
  * @since      0.2.0
  */
 
+if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
+
+
 class Slimline_Context {
 
 	/**
@@ -23,20 +26,20 @@ class Slimline_Context {
 	 * @var string $description HTML description of the current context (e.g, post
 	 *                          excerpt, term descrition, author bio, etc.)
 	 */
-	public $description = '';
+	protected $description = '';
 
 	/**
 	 * @var int $thumbnail_id ID of the thumbnail for the currenct context (e.g., the
 	 *                        post thumbnail ID on a single post, term thumbnail ID
 	 *                        if on a term archive and using a term meta plugin, etc.)
 	 */
-	public $thumbnail_id = 0;
+	protected $thumbnail_id = 0;
 
 	/**
 	 * @var string $title Text title of the current context (e.g., post title, term
 	 *                    title, post title of blog home, etc.)
 	 */
-	public $title = '';
+	protected $title = '';
 
 	/**
 	 * Assemble the object
@@ -390,9 +393,20 @@ class Slimline_Context {
 
 	} // function __construct()
 
+	public function get_context() {
+
+		return apply_filters( 'slimline_context', $this->context );
+	}
+
+	public function get_description() {
+
+		return $this->get_property( 'description' );
+	}
+
 	/**
 	 * Return the class instance
 	 *
+	 * @return object Slimline_Context::$_instance Slimline_Context object
 	 */
 	public static function get_instance() {
 
@@ -403,5 +417,26 @@ class Slimline_Context {
 		return self::$_instance;
 
 	} // public static function get_instance()
+
+	public function get_property( $property ) {
+
+		$context = $this->get_context();
+
+		foreach ( $context as $filter ) {
+			$property = apply_filters( "slimline_{$filter}_{$property}", $property );
+		} // foreach ( $context as $filter )
+
+		return $property;
+	}
+
+	public function get_thumbnail_id() {
+
+		return $this->get_property( 'thumbnail_id' );
+	}
+
+	public function get_title() {
+
+		return $this->get_property( 'title' );
+	}
 
 }
