@@ -326,6 +326,90 @@ function slimline_schema_add_itemtype_webpage( $attributes = array() ) {
 }
 
 /**
+ * Set itemtype to "WPFooter"
+ *
+ * Sets the itemtype attribute to "WPFooter". Meant to be used with
+ * `slimline_attributes` filters.
+ *
+ * @param  array $attributes The array of default attributes
+ * @return array $attributes Array of attributes with itemtype added
+ * @link   https://github.com/slimline/theme/wiki/slimline_schema_add_itemtype_wpfooter()
+ * @since  0.2.0
+ */
+function slimline_schema_add_itemtype_wpfooter( $attributes = array() ) {
+
+	/**
+	 * Add itemtype
+	 *
+	 * @link https://schema.org/docs/gs.html#microdata_itemscope_itemtype
+	 *       Explanation of itemtype
+	 * @link https://schema.org/WPFooter Documentation of "WPFooter" type
+	 */
+	$attributes[ 'itemtype' ] = 'https://schema.org/WPFooter';
+
+	/**
+	 * Return edited array
+	 */
+	return $attributes;
+}
+
+/**
+ * Set itemtype to "WPHeader"
+ *
+ * Sets the itemtype attribute to "WPHeader". Meant to be used with
+ * `slimline_attributes` filters.
+ *
+ * @param  array $attributes The array of default attributes
+ * @return array $attributes Array of attributes with itemtype added
+ * @link   https://github.com/slimline/theme/wiki/slimline_schema_add_itemtype_wpheader()
+ * @since  0.2.0
+ */
+function slimline_schema_add_itemtype_wpheader( $attributes = array() ) {
+
+	/**
+	 * Add itemtype
+	 *
+	 * @link https://schema.org/docs/gs.html#microdata_itemscope_itemtype
+	 *       Explanation of itemtype
+	 * @link https://schema.org/WPHeader Documentation of "WPHeader" type
+	 */
+	$attributes[ 'itemtype' ] = 'https://schema.org/WPHeader';
+
+	/**
+	 * Return edited array
+	 */
+	return $attributes;
+}
+
+/**
+ * Set itemtype to "WPSidebar"
+ *
+ * Sets the itemtype attribute to "WPSidebar". Meant to be used with
+ * `slimline_attributes` filters.
+ *
+ * @param  array $attributes The array of default attributes
+ * @return array $attributes Array of attributes with itemtype added
+ * @link   https://github.com/slimline/theme/wiki/slimline_schema_add_itemtype_wpsidebar()
+ * @since  0.2.0
+ */
+function slimline_schema_add_itemtype_wpsidebar( $attributes = array() ) {
+
+	/**
+	 * Add itemtype
+	 *
+	 * @link https://schema.org/docs/gs.html#microdata_itemscope_itemtype
+	 *       Explanation of itemtype
+	 * @link https://schema.org/WPSidebar Documentation of "WPSidebar" type
+	 */
+	$attributes[ 'itemtype' ] = 'https://schema.org/WPSidebar';
+
+	/**
+	 * Return edited array
+	 */
+	return $attributes;
+}
+
+/**
  * Remove "hentry" class
  *
  * The "hentry" class tells search engines that we are using the hAtom microformat
