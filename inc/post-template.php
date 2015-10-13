@@ -171,7 +171,7 @@ function slimline_get_404_description() {
  *
  * Essentially a wrapper function for `slimline_get_attributes()` that includes
  * default attributes. Developers can modify the returned string using the
- * `slimline_404_description_attributes` filter.
+ * `slimline_404-description_attributes` filter.
  *
  * @param  array|string $attributes (Optional). An array or query string of
  *                                  attribute / value pairs.
@@ -205,7 +205,7 @@ function slimline_get_404_description_attributes( $attributes = '' ) {
  *
  * Essentially a wrapper function for `slimline_get_attributes()` that includes
  * default attributes. Developers can modify the returned string using the
- * `slimline_404_entries_attributes` filter.
+ * `slimline_404-entries_attributes` filter.
  *
  * @param  array|string $attributes (Optional). An array or query string of
  *                                  attribute / value pairs.
@@ -263,7 +263,7 @@ function slimline_get_404_entries_title() {
  *
  * Essentially a wrapper function for `slimline_get_attributes()` that includes
  * default attributes. Developers can modify the returned string using the
- * `slimline_404_entries_title_attributes` filter.
+ * `slimline_404-entries-title_attributes` filter.
  *
  * @param  array|string $attributes (Optional). An array or query string of
  *                                  attribute / value pairs.
@@ -298,7 +298,7 @@ function slimline_get_404_entries_title_attributes( $attributes = '' ) {
  *
  * Essentially a wrapper function for `slimline_get_attributes()` that includes
  * default attributes. Developers can modify the returned string using the
- * `slimline_404_search_attributes` filter.
+ * `slimline_404-search_attributes` filter.
  *
  * @param  array|string $attributes (Optional). An array or query string of
  *                                  attribute / value pairs.
@@ -356,7 +356,7 @@ function slimline_get_404_search_title() {
  *
  * Essentially a wrapper function for `slimline_get_attributes()` that includes
  * default attributes. Developers can modify the returned string using the
- * `slimline_404_search_title_attributes` filter.
+ * `slimline_404-search-title_attributes` filter.
  *
  * @param  array|string $attributes (Optional). An array or query string of
  *                                  attribute / value pairs.
@@ -413,7 +413,7 @@ function slimline_get_404_title() {
  *
  * Essentially a wrapper function for `slimline_get_attributes()` that includes
  * default attributes. Developers can modify the returned string using the
- * `slimline_404_title_attributes` filter.
+ * `slimline_404-title_attributes` filter.
  *
  * @param  array|string $attributes (Optional). An array or query string of
  *                                  attribute / value pairs.
@@ -477,17 +477,17 @@ function slimline_get_attributes( $attributes = '', $element = '', $defaults = a
 	 *
 	 * @param array  $attributes Default array of attribute / value pairs
 	 * @param string $element    The element to generate attributes for
-	 * @link  https://github.com/slimline/theme/wiki/slimline_attributes_defaults
+	 * @link  https://github.com/slimline/theme/wiki/slimline_attributes_pre
 	 */
-	$attributes = apply_filters( 'slimline_attributes_default', $attributes, $element );
+	$attributes = apply_filters( 'slimline_attributes_pre', $attributes, $element );
 
 	/**
 	 * Element-specific filtering of default attributes
 	 *
 	 * @param array $attributes Default array of attribute / value pairs
-	 * @link  https://github.com/slimline/theme/wiki/slimline_$element_attributes_defaults
+	 * @link  https://github.com/slimline/theme/wiki/slimline_$element_attributes_pre
 	 */
-	$attributes = apply_filters( "slimline_{$element}_attributes_default", $attributes );
+	$attributes = apply_filters( "slimline_{$element}_attributes_pre", $attributes );
 
 	/**
 	 * Create temporary array of sanitized key/value pairs
@@ -785,7 +785,7 @@ function slimline_get_entries_title() {
  *
  * Essentially a wrapper function for `slimline_get_attributes()` that includes
  * default attributes. Developers can modify the returned string using the
- * `slimline_entries_title_attributes` filter.
+ * `slimline_entries-title_attributes` filter.
  *
  * @param  array|string $attributes (Optional). An array or query string of
  *                                  attribute / value pairs.
@@ -1069,7 +1069,7 @@ function slimline_get_index_description() {
  *
  * Essentially a wrapper function for `slimline_get_attributes()` that includes
  * default attributes. Developers can modify the returned string using the
- * `slimline_index_description_attributes` filter.
+ * `slimline_index-description_attributes` filter.
  *
  * @param  array|string $attributes (Optional). An array or query string of
  *                                  attribute / value pairs.
@@ -1128,7 +1128,7 @@ function slimline_get_index_title() {
  *
  * Essentially a wrapper function for `slimline_get_attributes()` that includes
  * default attributes. Developers can modify the returned string using the
- * `slimline_index_title_attributes` filter.
+ * `slimline_index-title_attributes` filter.
  *
  * @param  array|string $attributes (Optional). An array or query string of
  *                                  attribute / value pairs.
@@ -1235,80 +1235,6 @@ function slimline_get_logo() {
 }
 
 /**
- * Retrieve image ID for site logo
- *
- * @return int $logo_id ID of image attachment if a site logo is found, otherwise 0
- * @since  0.2.0
- */
-function slimline_get_logo_id() {
-
-	/**
-	 * Pre-filter logo ID
-	 *
-	 * This allows developers to skip the additional logo checks below
-	 *
-	 * @link https://github.com/slimline/theme/wiki/slimline_logo_id_pre
-	 */
-	$logo_id = apply_filters( 'slimline_logo_id_pre', false );
-
-	if ( ! $logo_id ) {
-
-		/**
-		 * First check JetPack site logo
-		 *
-		 * @link http://jetpack.me/support/site-logo/
-		 */
-		if ( slimline_use_as_logo( 'jetpack-site-logo' ) ) {
-			$logo_id = jetpack_get_site_logo( 'id' );
-		} // if ( slimline_use_as_logo( 'jetpack-site-logo' ) )
-
-		/**
-		 * Next check WordPress site identity
-		 *
-		 * @see http://www.sitepoint.com/all-you-need-to-know-about-the-new-wordpress-site-icon-api/
-		 */
-		if ( ! $logo_id && slimline_use_as_logo( 'site-icon' ) ) {
-			$logo_id = get_option( 'site_icon', 0 );
-		} // if ( ! $logo_id && slimline_use_as_logo( 'site-icon' ) )
-
-		/**
-		 * Finally check WordPress custom header
-		 *
-		 * @link https://codex.wordpress.org/Custom_Headers
-		 */
-		if ( ! $logo_id && slimline_use_as_logo( 'custom-header' ) ) {
-
-			/**
-			 * Get custom header info
-			 *
-			 * @link https://developer.wordpress.org/reference/functions/get_theme_mod/
-			 *       Description of `get_theme_mod` function
-			 */
-			$header_image_data = get_theme_mod( 'header_image_data' );
-
-			$logo_id = ( isset( $header_image_data['attachment_id'] ) ? $header_image_data['attachment_id'] : 0 );
-
-		} // if ( ! $logo_id && slimline_use_as_logo( 'custom-header' ) )
-
-	} // if ( ! $logo_id )
-
-	/**
-	 * Filter final logo ID
-	 *
-	 * @link https://github.com/slimline/theme/wiki/slimline_logo_id
-	 */
-	$logo_id = apply_filters( 'slimline_logo_id', $logo_id );
-
-	/**
-	 * Force INT in case an empty string or FALSE
-	 *
-	 * @link https://developer.wordpress.org/reference/functions/absint/
-	 *       Description of `absint` function
-	 */
-	return absint( $logo_id );
-}
-
-/**
  * Retrieve image information for site logo
  *
  * Effectively a wrapper for `wp_get_attachment_image_src` that first retrieves the
@@ -1390,7 +1316,7 @@ function slimline_get_main_attributes( $attributes = '' ) {
  *
  * Essentially a wrapper function for `slimline_get_attributes()` that includes
  * default attributes. Developers can modify the returned string using the
- * `slimline_not_found_attributes` filter.
+ * `slimline_not-found_attributes` filter.
  *
  * @param  array|string $attributes (Optional). An array or query string of
  *                                  attribute / value pairs.
@@ -1448,7 +1374,7 @@ function slimline_get_not_found_description() {
  *
  * Essentially a wrapper function for `slimline_get_attributes()` that includes
  * default attributes. Developers can modify the returned string using the
- * `slimline_not_found_description_attributes` filter.
+ * `slimline_not-found-description_attributes` filter.
  *
  * @param  array|string $attributes (Optional). An array or query string of
  *                                  attribute / value pairs.
@@ -1505,7 +1431,7 @@ function slimline_get_not_found_title() {
  *
  * Essentially a wrapper function for `slimline_get_attributes()` that includes
  * default attributes. Developers can modify the returned string using the
- * `slimline_not_found_title_attributes` filter.
+ * `slimline_not-found-title_attributes` filter.
  *
  * @param  array|string $attributes (Optional). An array or query string of
  *                                  attribute / value pairs.
@@ -1532,4 +1458,177 @@ function slimline_get_not_found_title_attributes( $attributes = '' ) {
 	 * @see slimline_get_attributes()
 	 */
 	return slimline_get_attributes( $attributes, 'not-found-title', $defaults );
+}
+
+/**
+ * Generate HTML attributes for footer widget area <aside> tag
+ *
+ * Essentially a wrapper function for `slimline_get_attributes()` that includes
+ * default attributes. Developers can modify the returned string using the
+ * `slimline_sidebar-footer_attributes` filter.
+ *
+ * @param  array|string $attributes (Optional). An array or query string of
+ *                                  attribute / value pairs.
+ * @return string       $attributes The generated string of attributes
+ * @uses   slimline_get_attributes() to generate the attributes
+ * @link   https://github.com/slimline/theme/wiki/slimline_get_sidebar_footer_attributes()
+ * @since  0.1.0
+ */
+function slimline_get_sidebar_footer_attributes( $attributes = '' ) {
+
+	/**
+	 * Default attributes
+	 */
+	$defaults = array(
+		'class' => slimline_get_class( 'sidebar-footer', array( 'sidebar' ) ), // class="sidebar sidebar-footer"
+		'id'    => 'sidebar-footer',                                           // id="sidebar-footer"
+	);
+
+	/**
+	 * Return attributes string
+	 *
+	 * Note that the `slimline_attributes` and `slimline_sidebar-footer_attributes`
+	 * filters will be applied by `slimline_get_attributes()`.
+	 *
+	 * @see slimline_get_attributes()
+	 */
+	return slimline_get_attributes( $attributes, 'sidebar-footer', $defaults );
+}
+
+/**
+ * Generate HTML attributes for primary widget area <aside> tag
+ *
+ * Essentially a wrapper function for `slimline_get_attributes()` that includes
+ * default attributes. Developers can modify the returned string using the
+ * `slimline_sidebar-primary_attributes` filter.
+ *
+ * @param  array|string $attributes (Optional). An array or query string of
+ *                                  attribute / value pairs.
+ * @return string       $attributes The generated string of attributes
+ * @uses   slimline_get_attributes() to generate the attributes
+ * @link   https://github.com/slimline/theme/wiki/slimline_get_sidebar_primary_attributes()
+ * @since  0.1.0
+ */
+function slimline_get_sidebar_primary_attributes( $attributes = '' ) {
+
+	/**
+	 * Default attributes
+	 */
+	$defaults = array(
+		'class' => slimline_get_class( 'sidebar-primary', array( 'sidebar' ) ), // class="sidebar sidebar-primary"
+		'id'    => 'sidebar-primary',                                           // id="sidebar-primary"
+	);
+
+	/**
+	 * Return attributes string
+	 *
+	 * Note that the `slimline_attributes` and `slimline_sidebar-primary_attributes`
+	 * filters will be applied by `slimline_get_attributes()`.
+	 *
+	 * @see slimline_get_attributes()
+	 */
+	return slimline_get_attributes( $attributes, 'sidebar-primary', $defaults );
+}
+
+/**
+ * Generate HTML attributes for site footer <footer> tag
+ *
+ * Essentially a wrapper function for `slimline_get_attributes()` that includes
+ * default attributes. Developers can modify the returned string using the
+ * `slimline_site-footer_attributes` filter.
+ *
+ * @param  array|string $attributes (Optional). An array or query string of
+ *                                  attribute / value pairs.
+ * @return string       $attributes The generated string of attributes
+ * @uses   slimline_get_attributes() to generate the attributes
+ * @link   https://github.com/slimline/theme/wiki/slimline_get_site_footer_attributes()
+ * @since  0.1.0
+ */
+function slimline_get_site_footer_attributes( $attributes = '' ) {
+
+	/**
+	 * Default attributes
+	 */
+	$defaults = array(
+		'class' => slimline_get_class( 'site-footer', array( 'footer' ) ), // class="footer site-footer"
+		'id'    => 'site-footer',                                          // id="site-footer"
+	);
+
+	/**
+	 * Return attributes string
+	 *
+	 * Note that the `slimline_attributes` and `slimline_site-footer_attributes`
+	 * filters will be applied by `slimline_get_attributes()`.
+	 *
+	 * @see slimline_get_attributes()
+	 */
+	return slimline_get_attributes( $attributes, 'site-footer', $defaults );
+}
+
+/**
+ * Generate HTML attributes for site header <header> tag
+ *
+ * Essentially a wrapper function for `slimline_get_attributes()` that includes
+ * default attributes. Developers can modify the returned string using the
+ * `slimline_site-header_attributes` filter.
+ *
+ * @param  array|string $attributes (Optional). An array or query string of
+ *                                  attribute / value pairs.
+ * @return string       $attributes The generated string of attributes
+ * @uses   slimline_get_attributes() to generate the attributes
+ * @link   https://github.com/slimline/theme/wiki/slimline_get_site_header_attributes()
+ * @since  0.1.0
+ */
+function slimline_get_site_header_attributes( $attributes = '' ) {
+
+	/**
+	 * Default attributes
+	 */
+	$defaults = array(
+		'class' => slimline_get_class( 'site-header', array( 'header' ) ), // class="header site-header"
+		'id'    => 'site-header',                                          // id="site-header"
+	);
+
+	/**
+	 * Return attributes string
+	 *
+	 * Note that the `slimline_attributes` and `slimline_site-header_attributes`
+	 * filters will be applied by `slimline_get_attributes()`.
+	 *
+	 * @see slimline_get_attributes()
+	 */
+	return slimline_get_attributes( $attributes, 'site-header', $defaults );
+}
+/**
+ * Generate HTML attributes for site link title <a> tag
+ *
+ * Essentially a wrapper function for `slimline_get_attributes()` that includes
+ * default attributes. Developers can modify the returned string using the
+ * `slimline_site-link-title_attributes` filter.
+ *
+ * @param  array|string $attributes (Optional). An array or query string of
+ *                                  attribute / value pairs.
+ * @return string       $attributes The generated string of attributes
+ * @uses   slimline_get_attributes() to generate the attributes
+ * @link   https://github.com/slimline/theme/wiki/slimline_get_site_link_title_attributes()
+ * @since  0.1.0
+ */
+function slimline_get_site_link_title_attributes( $attributes = '' ) {
+
+	/**
+	 * Default attributes
+	 */
+	$defaults = array(
+		'class' => slimline_get_class( 'site-link-title' ), // class="site-link-title"
+	);
+
+	/**
+	 * Return attributes string
+	 *
+	 * Note that the `slimline_attributes` and `slimline_site-link-title_attributes`
+	 * filters will be applied by `slimline_get_attributes()`.
+	 *
+	 * @see slimline_get_attributes()
+	 */
+	return slimline_get_attributes( $attributes, 'site-link-title', $defaults );
 }
