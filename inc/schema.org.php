@@ -13,6 +13,34 @@
 if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 
 /**
+ * Add "breadcrumb" itemprop attribute
+ *
+ * Sets the itemprop attribute to "breadcrumb". Meant to be used with
+ * `slimline_attributes` filters.
+ *
+ * @param  array $attributes The array of default attributes
+ * @return array $attributes Array of attributes with itemprop added
+ * @link   https://github.com/slimline/theme/wiki/slimline_schema_add_itemprop_breadcrumb()
+ * @since  0.2.0
+ */
+function slimline_schema_add_itemprop_breadcrumb( $attributes = array() ) {
+
+	/**
+	 * Add "breadcrumb" itemprop
+	 *
+	 * @link https://schema.org/docs/gs.html#microdata_itemprop
+	 *       Explanation of itemprop
+	 * @link https://schema.org/breadcrumb Documentation of "breadcrumb" property
+	 */
+	$attributes[ 'itemprop' ] = 'breadcrumb';
+
+	/**
+	 * Return edited array
+	 */
+	return $attributes;
+}
+
+/**
  * Add "comment" itemprop attribute
  *
  * Sets the itemprop attribute to "comment". Meant to be used with
