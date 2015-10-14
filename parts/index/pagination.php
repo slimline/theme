@@ -22,9 +22,9 @@ global $wp_query;
 /**
  * page # * posts per page + offset (if any) + 1
  *
- * Ex: on first page with default 10 posts per page and no offset, $min = ( (10 * 0) + 0 + 1 ) = 1
+ * Ex: on first page with default 10 posts per page and no offset, $min = ( (0 * 10) + 0 + 1 ) = 1
  */
-$min =  ( absint( get_query_var( 'posts_per_page' ) ) * absint( get_query_var( 'paged' ) ) + absint( get_query_var( 'offset' ) ) + 1;
+$min =  ( absint( get_query_var( 'paged' ) * absint( get_query_var( 'posts_per_page' ) ) ) + absint( get_query_var( 'offset' ) ) + 1;
 
 /**
  * $min + # posts showing on current page - 1
@@ -45,8 +45,8 @@ $max = $min + absint( $wp_query->post_count ) - 1;
 			 * output pagination links
 			 *
 			 * @see   https://developer.wordpress.org/reference/functions/paginate_links/
-			 *        Documentation of paginate_links function
-			 * @see   slimline_paginate_links_args() | inc/default-args.php
+			 *        Documentation of `paginate_links` function
+			 * @see   slimline_paginate_links_args()
 			 * @since 0.3.0
 			 */
 			paginate_links( slimline_paginate_links_args() );
