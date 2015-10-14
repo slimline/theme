@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 class Slimline {
 
 	/**
-	 * @var Slimine $_instance The class instance
+	 * @var Slimline $_instance The class instance
 	 */
 	protected static $_instance = null;
 
