@@ -196,9 +196,17 @@ function slimline_theme_setup() {
 	require_once( slimline_includes_directory() . 'conditionals.php' );
 
 	/**
+	 * Default theme configuration
+	 *
+	 * Configures core theme features (e.g., nav menus, sidebars, etc.). All
+	 * functions in this file MUST be pluggable
+	 */
+	require_once( slimline_includes_directory() . 'core.php' );
+
+	/**
 	 * Default arguments for functions
 	 *
-	 * Arguments for add_theme_support and other arguments. All functions are in this
+	 * Arguments for add_theme_support and other arguments. All functions in this
 	 * file MUST 1) be pluggable and 2) filter their return result
 	 */
 	require_once( slimline_includes_directory() . 'default-args.php' );
@@ -264,6 +272,26 @@ function slimline_theme_setup() {
 	 * Add login page handling
 	 */
 	add_action( 'after_setup_theme', 'slimline_login', 20 );
+
+	/**
+	 * Add third-party plugin support
+	 */
+	add_action( 'after_setup_theme', 'slimline_vendor', 20 );
+
+	/**
+	 * Register main navigation menus
+	 */
+	add_action( 'init', 'slimline_register_nav_menus' );
+
+	/**
+	 * Register main widget areas
+	 */
+	add_action( 'init', 'slimline_register_sidebars' );
+
+	/**
+	 * Enqueue theme scripts and styles
+	 */
+	add_action( 'wp_enqueue_scripts', 'slimline_wp_enqueue_scripts' );
 
 	/**
 	 * Add content filtering to 404 descriptions
@@ -337,7 +365,7 @@ function slimline_theme_setup() {
 	add_filter( 'widget_text', 'do_shortcode' );
 
 	/**
-	 * 7. ADD THEME SUPPORTS
+	 * 7. ADD THEME SUPPORT
 	 *
 	 * @link https://developer.wordpress.org/reference/functions/add_theme_support/
 	 *       Description of `add_theme_support` function
@@ -393,6 +421,15 @@ function slimline_theme_setup() {
 	 * @see slimline_logo_crop()
 	 */
 	add_image_size( 'slimline-logo', slimline_logo_width(), slimline_logo_height(), slimline_logo_crop() );
+
+	/**
+	 * Add logo size
+	 *
+	 * @see slimline_login_logo_width()
+	 * @see slimline_login_logo_height()
+	 * @see slimline_login_logo_crop()
+	 */
+	add_image_size( 'slimline-login-logo', slimline_login_logo_width(), slimline_login_logo_height(), slimline_login_logo_crop() );
 }
 
 /**
@@ -454,6 +491,7 @@ function slimline_login() {
  *
  * Conditional actions, filters and support for third-party plugins.
  *
+ * @link  https://github.com/slimline/theme/wiki/slimline_vendor()
  * @since 0.1.0
  */
 function slimline_vendor() {
@@ -493,9 +531,9 @@ function slimline_vendor() {
 		/**
 		 * Declare THA hooks support
 		 *
-		 * @see slimline_vendor_tha_hooks_support()
+		 * @see slimline_tha_hooks_support()
 		 */
-		add_theme_support( 'tha_hooks', slimline_vendor_tha_hooks_support() );
+		add_theme_support( 'tha_hooks', slimline_tha_hooks_support_args() );
 
 		/**
 		 * semantic <body> hooks
@@ -562,7 +600,7 @@ function slimline_vendor() {
 	} // if ( defined( 'THA_HOOKS_VERSION' ) )
 
 	/**
-	 * WordPress SEO by Yoast Support
+	 * Yoast SEO Support
 	 *
 	 * @link https://wordpress.org/plugins/wordpress-seo/
 	 */
@@ -571,21 +609,121 @@ function slimline_vendor() {
 		/**
 		 * Automatically insert Yoast breadcrumbs
 		 *
-		 * @see slimline_yoast_breadcrumbs()
+		 * @see slimline_yoast_breadcrumb()
 		 */
-		add_action( 'slimline_content_before', slimline_yoast_breadcrumbs() );
+		add_action( 'slimline_content_before', 'slimline_yoast_breadcrumb' );
 
 	} // if ( defined( 'WPSEO_VERSION' ) )
 }
 
-array(
-	'body',
-	'head',
-	'header',
-	'content',
-	'entry',
-	'comments',
-	'sidebars',
-	'sidebar',
-	'footer',
-)
+/**
+ * Returns the absolute path to the Slimline includes directory
+ *
+ * NOTE: returned path includes trailing slash.
+ *
+ * @return string $directory Absolute path for the directory
+ * @link   https://github.com/slimline/theme/wiki/slimline_includes_directory()
+ * @since  0.2.0
+ */
+function slimline_includes_directory() {
+
+	/**
+	 * Filter directory name
+	 *
+	 * @param string $directory Directory name. Defaults to value of SLIMLINE_INC
+	 * @link  https://github.com/slimline/theme/wiki/slimline_includes_directory
+	 */
+	$directory = apply_filters( 'slimline_includes_directory', SLIMLINE_INC );
+
+	/**
+	 * Add trailing slash and return
+	 *
+	 * @link https://developer.wordpress.org/reference/functions/trailingslashit/
+	 *       Description of `trailingslashit` function
+	 */
+	return trailingslashit( $directory );
+}
+
+/**
+ * Returns the URI to the Slimline image directory
+ *
+ * NOTE: returned URI includes trailing slash.
+ *
+ * @return string $directory URI for the directory
+ * @link   https://github.com/slimline/theme/wiki/slimline_image_directory_uri()
+ * @since  0.2.0
+ */
+function slimline_image_directory_uri() {
+
+	/**
+	 * Filter directory name
+	 *
+	 * @param string $directory Directory name. Defaults to value of SLIMLINE_IMG
+	 * @link  https://github.com/slimline/theme/wiki/slimline_image_directory_uri
+	 */
+	$directory = apply_filters( 'slimline_image_directory_uri', SLIMLINE_IMG );
+
+	/**
+	 * Add trailing slash and return
+	 *
+	 * @link https://developer.wordpress.org/reference/functions/trailingslashit/
+	 *       Description of `trailingslashit` function
+	 */
+	return trailingslashit( $directory );
+}
+
+/**
+ * Returns the URI to the Slimline javascript directory
+ *
+ * NOTE: returned URI includes trailing slash.
+ *
+ * @return string $directory URI for the directory
+ * @link   https://github.com/slimline/theme/wiki/slimline_javascript_directory_uri()
+ * @since  0.2.0
+ */
+function slimline_javascript_directory_uri() {
+
+	/**
+	 * Filter directory name
+	 *
+	 * @param string $directory Directory name. Defaults to value of SLIMLINE_JS
+	 * @link  https://github.com/slimline/theme/wiki/slimline_javascript_directory_uri
+	 */
+	$directory = apply_filters( 'slimline_javascript_directory_uri', SLIMLINE_JS );
+
+	/**
+	 * Add trailing slash and return
+	 *
+	 * @link https://developer.wordpress.org/reference/functions/trailingslashit/
+	 *       Description of `trailingslashit` function
+	 */
+	return trailingslashit( $directory );
+}
+
+/**
+ * Returns the URI to the Slimline stylesheet directory
+ *
+ * NOTE: returned URI includes trailing slash.
+ *
+ * @return string $directory URI for the directory
+ * @link   https://github.com/slimline/theme/wiki/slimline_stylesheet_directory_uri()
+ * @since  0.2.0
+ */
+function slimline_stylesheet_directory_uri() {
+
+	/**
+	 * Filter directory name
+	 *
+	 * @param string $directory Directory name. Defaults to value of SLIMLINE_CSS
+	 * @link  https://github.com/slimline/theme/wiki/slimline_stylesheet_directory_uri
+	 */
+	$directory = apply_filters( 'slimline_stylesheet_directory_uri', SLIMLINE_CSS );
+
+	/**
+	 * Add trailing slash and return
+	 *
+	 * @link https://developer.wordpress.org/reference/functions/trailingslashit/
+	 *       Description of `trailingslashit` function
+	 */
+	return trailingslashit( $directory );
+}
