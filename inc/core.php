@@ -10,10 +10,35 @@
 if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 
 /**
+ * Create primary navigation areas
+ *
+ * @link  https://github.com/slimline/theme/wiki/slimline_register_nav_menus()
+ * @since 0.2.0
+ */
+if ( ! function_exists( 'slimline_register_nav_menus' ) ) {
+
+	function slimline_register_nav_menus() {
+
+		/**
+		 * Register nav menus
+		 *
+		 * @link  https://developer.wordpress.org/reference/functions/register_nav_menus/
+		 *        Description of `register_nav_menus` function
+		 */
+		register_nav_menus(
+			array(
+				'header-menu' => _x( 'Header Menu', 'nav menu', 'slimline' ),
+				'footer-menu' => _x( 'Footer Menu', 'nav menu', 'slimline' ),
+			)
+		);
+
+	}
+
+} // if ( ! function_exists( 'slimline_register_nav_menus' ) )
+
+/**
  * Create primary widget areas
  *
- * @link  https://developer.wordpress.org/reference/functions/register_sidebar/
- *        Description of `register_sidebar` function
  * @link  https://github.com/slimline/theme/wiki/slimline_register_sidebars()
  * @since 0.2.0
  */
@@ -21,6 +46,12 @@ if ( ! function_exists( 'slimline_register_sidebars' ) ) {
 
 	function slimline_register_sidebars() {
 
+		/**
+		 * Sidebar widget area
+		 *
+		 * @link  https://developer.wordpress.org/reference/functions/register_sidebar/
+		 *        Description of `register_sidebar` function and parameters
+		 */
 		register_sidebar(
 			array(
 				'name'          => _x( 'Primary Sidebar', 'sidebar name', 'slimline' ),   // Label as "Primary Sidebar" in Appearance > Widgets
@@ -33,7 +64,12 @@ if ( ! function_exists( 'slimline_register_sidebars' ) ) {
 			)
 		);
 
-	}
+		/**
+		 * Footer widget area
+		 *
+		 * @link  https://developer.wordpress.org/reference/functions/register_sidebar/
+		 *        Description of `register_sidebar` function and parameters
+		 */
 		register_sidebar(
 			array(
 				'name'          => _x( 'Footer Widget Area', 'sidebar name', 'slimline' ),         // Label as "Footer Widget Area" in Appearance > Widgets
@@ -49,3 +85,21 @@ if ( ! function_exists( 'slimline_register_sidebars' ) ) {
 	}
 
 } // if ( ! function_exists( 'slimline_register_sidebars' ) )
+
+/**
+ * Enqueue core scripts and styles
+ *
+ * @link  https://github.com/slimline/theme/wiki/slimline_wp_enqueue_scripts()
+ * @since 0.2.0
+ */
+if ( ! function_exists( 'slimline_wp_enqueue_scripts' ) ) {
+
+	function slimline_wp_enqueue_scripts() {
+
+		wp_enqueue_script( 'slimline', slimline_javascript_directory_uri() . 'scripts.min.js', array( 'jquery' ), '0.1.0', true );
+
+		wp_enqueue_style( 'slimline', get_stylesheet_uri(), false, wp_get_theme()->get( 'Version' ), 'all' );
+
+	}
+
+} // if ( ! function_exists( 'slimline_wp_enqueue_scripts' ) )
