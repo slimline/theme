@@ -573,6 +573,40 @@ function slimline_get_body_attributes( $attributes = '' ) {
 }
 
 /**
+ * Generate HTML attributes for the breadcrumb <nav> tag
+ *
+ * Essentially a wrapper function for `slimline_get_attributes()` that includes
+ * default attributes. Developers can modify the returned string using the
+ * `slimline_breadcrumb_attributes` filter.
+ *
+ * @param  array|string $attributes (Optional). An array or query string of
+ *                                  attribute / value pairs.
+ * @return string       $attributes The generated string of attributes
+ * @uses   slimline_get_attributes() to generate the attributes
+ * @link   https://github.com/slimline/theme/wiki/slimline_get_breadcrumb_attributes()
+ * @since  0.2.0
+ */
+function slimline_get_breadcrumb_attributes( $attributes = '' ) {
+
+	/**
+	 * Default attributes
+	 */
+	$defaults = array(
+		'class' => slimline_get_class( 'breadcrumb' ), // class="breadcrumb"
+	);
+
+	/**
+	 * Return attributes string
+	 *
+	 * Note that the `slimline_attributes` and `slimline_breadcrumb_attributes`
+	 * filters will be applied by `slimline_get_attributes()`.
+	 *
+	 * @see slimline_get_attributes()
+	 */
+	return slimline_get_attributes( $attributes, 'breadcrumb', $defaults );
+}
+
+/**
  * Generate a filterable class for miscellaneous elements
  *
  * Meant to work like `body_class()`, `post_class()` and/or `comment_class()` but for
@@ -1631,4 +1665,53 @@ function slimline_get_site_link_title_attributes( $attributes = '' ) {
 	 * @see slimline_get_attributes()
 	 */
 	return slimline_get_attributes( $attributes, 'site-link-title', $defaults );
+}
+
+/**
+ * Generate breadcrumb links
+ *
+ * NOTE: only works if Yoast SEO is installed and active AND either 1) the theme
+ * declares yoast breadcrumb support (i.e.,
+ * `add_theme_support( 'yoast-seo-breadcrumbs' )` or 2) the breadcrumb links option
+ * is checked in the Yoast SEO settings.
+ *
+ * @link  http://kb.yoast.com/article/245-implement-wordpress-seo-breadcrumbs
+ *        Description of how to activate breadcrumbs
+ * @link  https://github.com/slimline/theme/wiki/slimline_get_yoast_breadcrumb()
+ * @since 0.2.0
+ */
+function slimline_yoast_breadcrumb() {
+
+	$breadcrumb = '';
+
+	/**
+	 * Make sure breadcrumb function is available.
+	 *
+	 * This makes sure that theme and plugin developers won't break anything if they
+	 * decide to drop the `slimline_yoast_breadcrumb` function directly into a
+	 * template without proper conditional checking.
+	 */
+	if ( function_exists( 'yoast_breadcrumb' ) ) {
+
+		$before = '<nav ' . slimline_get_breadcrumb_attributes() . '>';
+
+		$after = '</nav><!-- .breadcrumb -->';
+
+		/**
+		 * Create the breadcrumbs
+		 *
+		 * @param string $before  What to show before the breadcrumb.
+		 * @param string $after   What to show after the breadcrumb.
+		 * @param bool   $display FALSE to return the breadcrumb string
+		 */
+		$breadcrumb = yoast_breadcrumb( $before, $after, false );
+
+	} // if ( function_exists( 'yoast_breadcrumb' ) )
+
+	/**
+	 * Return breadcrumb string
+	 *
+	 * @link  https://github.com/slimline/theme/wiki/slimline_yoast_breadcrumb
+	 */
+	return apply_filters( 'slimline_yoast_breadcrumb', $breadcrumb );
 }
