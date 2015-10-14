@@ -73,10 +73,20 @@ function slimline_get_charset_tag() {
 function slimline_get_comments_template() {
 
 	/**
-	 * @link https://developer.wordpress.org/reference/functions/comments_template/
-	 *       Description of `comments_template` function
+	 * Check whether to show comments
+	 *
+	 * @see slimline_show_comments()
 	 */
-	comments_template( 'parts/comments/comments.php' );
+	if ( slimline_show_comments() ) {
+
+		/**
+		 * @link https://developer.wordpress.org/reference/functions/comments_template/
+		 *       Description of `comments_template` function
+		 */
+		comments_template( 'parts/comments/comments.php' );
+
+	} // if ( slimline_show_comments() )
+
 }
 
 /**
@@ -90,7 +100,7 @@ function slimline_get_copyright_notice() {
 	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
 	 *       Description of `get_template_part` function
 	 */
-	get_template_part( 'parts/notice', 'copyright' );
+	get_template_part( 'parts/footer/notice', 'copyright' );
 }
 
 /**
@@ -154,13 +164,27 @@ function slimline_get_entry_meta() {
  *
  * @since 0.2.0
  */
-function slimline_get_footer_nav() {
+function slimline_get_footer_navigation() {
 
 	/**
 	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
 	 *       Description of `get_template_part` function
 	 */
-	get_template_part( 'parts/nav', 'footer' );
+	get_template_part( 'parts/footer/navigation' );
+}
+
+/**
+ * Get header logo template part
+ *
+ * @since 0.2.0
+ */
+function slimline_get_header_logo() {
+
+	/**
+	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
+	 *       Description of `get_template_part` function
+	 */
+	get_template_part( 'parts/header/logo' );
 }
 
 /**
@@ -168,13 +192,13 @@ function slimline_get_footer_nav() {
  *
  * @since 0.2.0
  */
-function slimline_get_header_nav() {
+function slimline_get_header_navigation() {
 
 	/**
 	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
 	 *       Description of `get_template_part` function
 	 */
-	get_template_part( 'parts/nav', 'header' );
+	get_template_part( 'parts/header/navigation' );
 }
 
 /**
@@ -191,17 +215,17 @@ function slimline_get_index_header() {
 }
 
 /**
- * Get index.php navigation template part
+ * Get index.php pagination template part
  *
  * @since 0.2.0
  */
-function slimline_get_index_navigation() {
+function slimline_get_index_pagination() {
 
 	/**
 	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
 	 *       Description of `get_template_part` function
 	 */
-	get_template_part( 'parts/index/navigation' );
+	get_template_part( 'parts/index/pagination' );
 }
 
 /**
@@ -258,20 +282,6 @@ function slimline_get_sidebar_footer() {
 	 *       Description of `get_sidebar` function
 	 */
 	get_sidebar( 'footer' );
-}
-
-/**
- * Get site logo template part
- *
- * @since 0.2.0
- */
-function slimline_get_site_logo() {
-
-	/**
-	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
-	 *       Description of `get_template_part` function
-	 */
-	get_template_part( 'parts/site-logo' );
 }
 
 /**
