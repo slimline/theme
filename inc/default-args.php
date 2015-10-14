@@ -91,6 +91,158 @@ if ( ! function_exists( 'slimline_infinite_scroll_support_args' ) ) {
 } // if ( ! function_exists( 'slimline_infinite_scroll_args' ) )
 
 /**
+ * Default crop for `add_image( 'slimline-login-logo' )`
+ *
+ * @return bool Whether to crop the logo image. Default FALSE
+ * @link   https://github.com/slimline/theme/wiki/slimline_login_logo_crop()
+ * @since  0.2.0
+ */
+if ( ! function_exists( 'slimline_login_logo_crop' ) ) {
+
+	function slimline_login_logo_crop() {
+
+		/**
+		 * Filter and return value.
+		 *
+		 * @param  bool $crop Logo crop
+		 * @return bool $crop Logo crop
+		 * @link   https://github.com/slimline/theme/wiki/slimline_login_logo_crop
+		 */
+		return apply_filters( 'slimline_login_logo_crop', false )
+	}
+
+} // if ( ! function_exists( 'slimline_login_logo_crop' ) )
+
+/**
+ * Default height for `add_image( 'slimline-login-logo' )`
+ *
+ * @return int Height for logo (in pixels) on login page. Default is 10000
+ *             (effectively unlimited)
+ * @link   https://github.com/slimline/theme/wiki/slimline_login_logo_height()
+ * @since  0.2.0
+ */
+if ( ! function_exists( 'slimline_login_logo_height' ) ) {
+
+	function slimline_login_logo_height() {
+
+		/**
+		 * Filter and return value.
+		 *
+		 * NOTE: the default value of 10000 (pixels) is meant as an unlikely number
+		 * to make sure the image size is defined by its width.
+		 *
+		 * @param  int $height Logo height (in pixels)
+		 * @return int $height Logo height (in pixels)
+		 * @link   https://github.com/slimline/theme/wiki/slimline_login_logo_height
+		 */
+		return apply_filters( 'slimline_login_logo_height', 10000 )
+	}
+
+} // if ( ! function_exists( 'slimline_login_logo_height' ) )
+
+/**
+ * Default width for `add_image( 'slimline-login-logo' )`
+ *
+ * @return int Width for logo (in pixels) on login page. Default is 640
+ * @link   https://github.com/slimline/theme/wiki/slimline_login_logo_width()
+ * @since  0.2.0
+ */
+if ( ! function_exists( 'slimline_login_logo_width' ) ) {
+
+	function slimline_login_logo_width() {
+
+		/**
+		 * Filter and return value.
+		 *
+		 * NOTE: the default value of 640 (pixels) is twice the width of the standard
+		 * WordPress login form on the wp-login.php page. This is to support retina
+		 * devices.
+		 *
+		 * @param  int $width Logo width (in pixels)
+		 * @return int $width Logo width (in pixels)
+		 * @link   https://github.com/slimline/theme/wiki/slimline_login_logo_width
+		 */
+		return apply_filters( 'slimline_login_logo_width', 640 )
+	}
+
+} // if ( ! function_exists( 'slimline_login_logo_width' ) )
+
+/**
+ * Default crop for `add_image( 'slimline-logo' )`
+ *
+ * @return bool Whether to crop the logo image. Default FALSE
+ * @link   https://github.com/slimline/theme/wiki/slimline_logo_crop()
+ * @since  0.2.0
+ */
+if ( ! function_exists( 'slimline_logo_crop' ) ) {
+
+	function slimline_logo_crop() {
+
+		/**
+		 * Filter and return value.
+		 *
+		 * @param  bool $crop Logo crop
+		 * @return bool $crop Logo crop
+		 * @link   https://github.com/slimline/theme/wiki/slimline_logo_crop
+		 */
+		return apply_filters( 'slimline_logo_crop', false )
+	}
+
+} // if ( ! function_exists( 'slimline_logo_crop' ) )
+
+/**
+ * Default height for `add_image( 'slimline-logo' )`
+ *
+ * @return int Height for logo (in pixels). Default is 10000 (effectively unlimited)
+ * @link   https://github.com/slimline/theme/wiki/slimline_logo_height()
+ * @since  0.2.0
+ */
+if ( ! function_exists( 'slimline_logo_height' ) ) {
+
+	function slimline_logo_height() {
+
+		/**
+		 * Filter and return value.
+		 *
+		 * NOTE: the default value of 10000 (pixels) is meant as an unlikely number
+		 * to make sure the image size is defined by its width.
+		 *
+		 * @param  int $height Logo height (in pixels)
+		 * @return int $height Logo height (in pixels)
+		 * @link   https://github.com/slimline/theme/wiki/slimline_logo_height
+		 */
+		return apply_filters( 'slimline_logo_height', 10000 )
+	}
+
+} // if ( ! function_exists( 'slimline_logo_height' ) )
+
+/**
+ * Default width for `add_image( 'slimline-logo' )`
+ *
+ * @return int Width for logo (in pixels) on login page. Default is 640
+ * @link   https://github.com/slimline/theme/wiki/slimline_logo_width()
+ * @since  0.2.0
+ */
+if ( ! function_exists( 'slimline_logo_width' ) ) {
+
+	function slimline_logo_width() {
+
+		/**
+		 * Filter and return value.
+		 *
+		 * NOTE: the default value of 500 (pixels) is twice the logo width as defined
+		 * in the stylesheet. This is for retina device support.
+		 *
+		 * @param  int $width Logo width (in pixels)
+		 * @return int $width Logo width (in pixels)
+		 * @link   https://github.com/slimline/theme/wiki/slimline_login_logo_width
+		 */
+		return apply_filters( 'slimline_logo_width', 500 )
+	}
+
+} // if ( ! function_exists( 'slimline_logo_width' ) )
+
+/**
  * Arguments for `paginate_links()` on index pages
  *
  * @global object $wp_query the WP_Query object
@@ -161,6 +313,50 @@ if ( ! function_exists( 'slimline_post_thumbnails_support_args' ) ) {
 	}
 
 } // if ( ! function_exists( 'slimline_post_thumbnails_support_args' ) )
+
+/**
+ * Parameters for `add_theme_support( 'tha_hooks' )`
+ *
+ * Theme Hook Alliance hooks.
+ *
+ * @return array $args List of supported hook types
+ * @link   https://github.com/zamoose/themehookalliance Description of the Theme
+ *         Hooks Alliance
+ * @link   https://github.com/slimline/theme/wiki/slimline_tha_hooks_support_args()
+ * @since  0.2.0
+ */
+if ( ! function_exists( 'slimline_tha_hooks_support_args' ) ) {
+
+	function slimline_tha_hooks_support_args() {
+
+		/**
+		 * @link https://github.com/zamoose/themehookalliance/blob/master/tha-theme-hooks.php
+		 *       Explanation of possible arguments
+		 */
+		$args = array(
+			// 'all',   // All possible hooks. If this is enabled the other arguments are redundant
+			// 'html',  // <html> hook. Used for doctypes, etc.
+			'body',     // <body> hooks
+			'head',     // <head> hooks
+			'header',   // <header> hooks
+			'content',  // hooks (e.g., <main> and index <article>)
+			'entry',    // entry hooks (e.g., singular <article>)
+			'comments', // comment hooks (e.g., <section id="comments")
+			'sidebars', // sidebar hooks (e.g., <aside class="sidebar")
+			'sidebar',  // individual sidebar hooks (e.g., <aside class="sidebar")
+			'footer',   // <footer> hooks
+		);
+
+		/**
+		 * Filter the arguments
+		 *
+		 * @link https://github.com/slimline/theme/wiki/slimline_tha_hooks_support_args
+		 */
+		return apply_filters( 'slimline_tha_hooks_support_args', $args );
+
+	}
+
+} // if ( ! function_exists( 'slimline_tha_hooks_support_args' ) )
 
 /**
  * Closing tag for entry title
