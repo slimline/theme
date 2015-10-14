@@ -212,6 +212,20 @@ function slimline_body_attributes( $attributes = '' ) {
 }
 
 /**
+ * Outputs HTML attributes meant for the breadcrumb wrapper <nav> tag.
+ *
+ * @param array|string $attributes (Optional). An array or query string of
+ *                                 attribute / value pairs.
+ * @uses  slimline_get_breadcrumb_attributes() to generate attributes
+ * @link  https://github.com/slimline/theme/wiki/slimline_breadcrumb_attributes()
+ * @since 0.2.0
+ */
+function slimline_breadcrumb_attributes( $attributes = '' ) {
+
+	echo slimline_get_breadcrumb_attributes( $attributes );
+}
+
+/**
  * Gives miscellaneous objects a filterable class.
  *
  * This is meant to work similarly to the `body_class` and/or `post_class` functions,
@@ -607,4 +621,22 @@ function slimline_site_header_attributes( $attributes = '' ) {
 function slimline_site_title_link_attributes( $attributes = '' ) {
 
 	echo slimline_get_site_title_link_attributes( $attributes );
+}
+
+/**
+ * Outputs breadcrumb links
+ *
+ * NOTE: only works if Yoast SEO is installed and active AND either 1) the theme
+ * declares yoast breadcrumb support (i.e.,
+ * `add_theme_support( 'yoast-seo-breadcrumbs' )` or 2) the breadcrumb links option
+ * is checked in the Yoast SEO settings.
+ *
+ * @link  http://kb.yoast.com/article/245-implement-wordpress-seo-breadcrumbs
+ *        Description of how to activate breadcrumbs
+ * @uses  slimline_get_yoast_breadcrumb() to create the breadcrumb links
+ * @since 0.1.0
+ */
+function slimline_yoast_breadcrumb() {
+
+	echo slimline_get_yoast_breadcrumb();
 }
