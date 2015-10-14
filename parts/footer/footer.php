@@ -16,7 +16,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 		/**
 		 * slimline_footer_before hook
 		 *
-		 * @see https://github.com/slimline/theme/wiki/slimline_footer_before
+		 * @hook slimline_get_sidebar_footer - 10 (gets sidebar-footer.php widget area)
+		 * @see  https://github.com/slimline/theme/wiki/slimline_footer_before
 		 */
 		do_action( 'slimline_footer_before' );
 	?>
@@ -27,8 +28,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 			/**
 			 * slimline_footer_top hook
 			 *
-			 * @hook slimline_get_sidebar_footer - 10 (gets footer widget area)
-			 * @see  https://github.com/slimline/theme/wiki/slimline_footer_top
+			 * @see https://github.com/slimline/theme/wiki/slimline_footer_top
 			 */
 			do_action( 'slimline_footer_top' );
 		?>
@@ -37,8 +37,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 			/**
 			 * slimline_footer_bottom hook
 			 *
-			 * @hook slimline_get_footer_nav       - 10 (gets nav-footer template part)
-			 * @hook slimline_get_copyright_notice - 20 (gets notice-copyright template part)
+			 * @hook slimline_get_footer_nav       - 10 (gets footer/navigation.php template part)
+			 * @hook slimline_get_copyright_notice - 20 (gets footer/notice-copyright.php template part)
 			 * @see  https://github.com/slimline/theme/wiki/slimline_footer_bottom
 			 */
 			do_action( 'slimline_footer_bottom' );

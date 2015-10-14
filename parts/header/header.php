@@ -27,7 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 			/**
 			 * slimline_header_top hook
 			 *
-			 * @hook slimline_get_site_logo - 10 (gets site-logo.php template part)
+			 * @hook slimline_get_header_logo - 10 (gets header/logo.php template part)
 			 * @see  https://github.com/slimline/theme/wiki/slimline_header_top
 			 */
 			do_action( 'slimline_header_top' );
@@ -37,7 +37,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 			/**
 			 * slimline_header_bottom hook
 			 *
-			 * @hook slimline_get_header_nav - 10 (gets nav-header.php template part)
+			 * @hook slimline_get_header_navigation - 10 (gets header/navigation.php template part)
 			 * @see  https://github.com/slimline/theme/wiki/slimline_header_bottom
 			 */
 			do_action( 'slimline_header_bottom' );

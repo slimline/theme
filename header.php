@@ -47,7 +47,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 
 		<?php
 			/**
-			 * Load the site-header.php template part
+			 * Load the header/header.php template part
 			 *
 			 * The site-header.php file contains the <header> tag for the site and
 			 * the following action hooks:
@@ -59,7 +59,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 			 * @see https://developer.wordpress.org/reference/functions/get_template_part/
 			 *      Documentation of the `get_template_part` function
 			 */
-			slimline_get_template_part( 'site-header', slimline_get_context() );
+			slimline_get_template_part( 'header/header', slimline_get_context() );
 		?>
 
 		<main <?php slimline_main_attributes(); ?>>
