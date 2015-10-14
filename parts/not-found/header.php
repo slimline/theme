@@ -6,7 +6,7 @@
  *
  * @package    Slimline / Theme
  * @subpackage Template Parts
- * @since      0.3.0
+ * @since      0.2.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 			 * Output a default title
 			 *
 			 * @see   https://github.com/slimline/theme/wiki/slimline_not_found_title()
-			 * @since 0.3.0
+			 * @since 0.2.0
 			 */
 			slimline_not_found_title();
 		?>
