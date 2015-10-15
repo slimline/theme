@@ -29,7 +29,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 			/**
 			 * slimline_sidebar_footer_top hook
 			 *
-			 * @see https://github.com/slimline/theme/wiki/slimline_sidebar_footer_top
+			 * @hook slimline_get_sidebar_footer_top - 50 (gets opening <ul> template part)
+			 * @see  https://github.com/slimline/theme/wiki/slimline_sidebar_footer_top
 			 */
 			do_action( 'slimline_sidebar_footer_top' );
 		?>
@@ -48,7 +49,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 			/**
 			 * slimline_sidebar_footer_bottom hook
 			 *
-			 * @see https://github.com/slimline/theme/wiki/slimline_sidebar_footer_bottom
+			 * @hook slimline_get_sidebar_footer_bottom - 50 (gets closing </ul> template part)
+			 * @see  https://github.com/slimline/theme/wiki/slimline_sidebar_footer_bottom
 			 */
 			do_action( 'slimline_sidebar_footer_bottom' );
 		?>
