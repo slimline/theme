@@ -29,27 +29,29 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 			/**
 			 * slimline_sidebar_footer_top hook
 			 *
-			 * @hook slimline_get_sidebar_footer_top - 50 (gets opening <ul> template part)
 			 * @see  https://github.com/slimline/theme/wiki/slimline_sidebar_footer_top
 			 */
 			do_action( 'slimline_sidebar_footer_top' );
 		?>
 
-		<?php
-			/**
-			 * Output sidebar content
-			 *
-			 * @see https://developer.wordpress.org/reference/functions/dynamic_sidebar/
-			 *      Documentation of `dynamic_sidebar` function
-			 */
-			dynamic_sidebar( 'sidebar-3' );
-		?>
+		<ul <?php slimline_sidebar_footer_list_attributes(); ?>>
+
+			<?php
+				/**
+				 * Output sidebar content
+				 *
+				 * @see https://developer.wordpress.org/reference/functions/dynamic_sidebar/
+				 *      Documentation of `dynamic_sidebar` function
+				 */
+				dynamic_sidebar( 'sidebar-3' );
+			?>
+
+		</ul><!-- .block-list -->
 
 		<?php
 			/**
 			 * slimline_sidebar_footer_bottom hook
 			 *
-			 * @hook slimline_get_sidebar_footer_bottom - 50 (gets closing </ul> template part)
 			 * @see  https://github.com/slimline/theme/wiki/slimline_sidebar_footer_bottom
 			 */
 			do_action( 'slimline_sidebar_footer_bottom' );
