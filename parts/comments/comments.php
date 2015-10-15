@@ -47,26 +47,6 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 
 		<?php
 			/**
-			 * Get comments/list.php template part
-			 *
-			 * @see https://developer.wordpress.org/reference/functions/get_template_part/
-			 *      Documentation of the `get_template_part` function
-			 */
-			get_template_part( 'parts/comments/list', get_post_type() );
-		?>
-
-		<?php
-			/**
-			 * Get comments/pagintation.php template part
-			 *
-			 * @see https://developer.wordpress.org/reference/functions/get_template_part/
-			 *      Documentation of the `get_template_part` function
-			 */
-			get_template_part( 'parts/comments/pagination', get_post_type() );
-		?>
-
-		<?php
-			/**
 			 * Get comments/form.php template part
 			 *
 			 * @see https://developer.wordpress.org/reference/functions/get_template_part/

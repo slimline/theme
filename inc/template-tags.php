@@ -262,6 +262,20 @@ function slimline_comment_attributes( $attributes = '' ) {
 }
 
 /**
+ * Outputs HTML attributes meant for the comment content wrapper tag (<div>).
+ *
+ * @param array|string $attributes (Optional). An array or query string of
+ *                                 attribute / value pairs.
+ * @uses  slimline_get_comment_attributes() to generate attributes
+ * @link  https://github.com/slimline/theme/wiki/slimline_comment_content_attributes()
+ * @since 0.1.0
+ */
+function slimline_comment_content_attributes( $attributes = '' ) {
+
+	echo slimline_get_comment_content_attributes( $attributes );
+}
+
+/**
  * Outputs HTML attributes meant for the comments wrapper tag (<section>).
  *
  * @param array|string $attributes (Optional). An array or query string of

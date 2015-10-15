@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 if ( have_comments() ) :
 ?>
 
-	<ol id="comments-list">
+	<ol class="comment-list" id="comments-list">
 		<?php
 			/**
 			 * List comments

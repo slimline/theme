@@ -10,6 +10,22 @@
 if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 
 /**
+ * Output comment reply link
+ *
+ * @since 0.2.0
+ */
+function slimline_comment_reply_link() {
+
+	/**
+	 * Ouput a comment reply link
+	 *
+	 * @link https://developer.wordpress.org/reference/functions/comment_reply_link/
+	 *       Description of `comment_reply_link` function
+	 */
+	comment_reply_link();
+}
+
+/**
  * Get entries header template part
  *
  * @since 0.2.0
@@ -75,8 +91,8 @@ function slimline_get_comments_list() {
 	/**
 	 * Get comments/list.php template part
 	 *
-	 * @see https://developer.wordpress.org/reference/functions/get_template_part/
-	 *      Documentation of the `get_template_part` function
+	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
+	 *       Documentation of the `get_template_part` function
 	 */
 	get_template_part( 'parts/comments/list' );
 }
@@ -91,10 +107,52 @@ function slimline_get_comments_form() {
 	/**
 	 * Get comments/form.php template part
 	 *
-	 * @see https://developer.wordpress.org/reference/functions/get_template_part/
-	 *      Documentation of the `get_template_part` function
+	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
+	 *       Documentation of the `get_template_part` function
 	 */
 	get_template_part( 'parts/comments/form' );
+}
+
+/**
+ * Get comment template part
+ *
+ * @param object $comment WP_Comment object
+ * @since 0.2.0
+ */
+function slimline_get_comment_template( $comment ) {
+
+	/**
+	 * Get comments/comment.php template part
+	 *
+	 * We are using `slimline_get_template_part` to take advantage of the template
+	 * path caching.
+	 *
+	 * @link https://developer.wordpress.org/reference/functions/get_comment_type/
+	 *       Description of `get_comment_type` function
+	 * @see  slimline_get_template_part()
+	 */
+	slimline_get_template_part( 'comments/comment', get_comment_type( $comment->comment_ID ) );
+}
+
+/**
+ * Get comment end template part
+ *
+ * @param object $comment WP_Comment object
+ * @since 0.2.0
+ */
+function slimline_get_comment_end_template( $comment ) {
+
+	/**
+	 * Get comments/end.php template part
+	 *
+	 * We are using `slimline_get_template_part` to take advantage of the template
+	 * path caching.
+	 *
+	 * @link https://developer.wordpress.org/reference/functions/get_comment_type/
+	 *       Description of `get_comment_type` function
+	 * @see  slimline_get_template_part()
+	 */
+	slimline_get_template_part( 'comments/end', get_comment_type( $comment->comment_ID ) );
 }
 
 /**
@@ -107,7 +165,7 @@ function slimline_get_comments_template() {
 	/**
 	 * Check whether to show comments
 	 *
-	 * @see slimline_show_comments()
+	 * @link slimline_show_comments()
 	 */
 	if ( slimline_show_comments() ) {
 
@@ -131,8 +189,8 @@ function slimline_get_comments_title() {
 	/**
 	 * Get comments/title.php template part
 	 *
-	 * @see https://developer.wordpress.org/reference/functions/get_template_part/
-	 *      Documentation of the `get_template_part` function
+	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
+	 *       Documentation of the `get_template_part` function
 	 */
 	get_template_part( 'parts/comments/title' );
 }
@@ -326,10 +384,46 @@ function slimline_get_pingback_tag() {
 function slimline_get_sidebar_footer() {
 
 	/**
-	 * @link https://developer.wordpress.org/reference/functions/get_sidebar/
-	 *       Description of `get_sidebar` function
+	 * Only include sidebar if it is being used
+	 *
+	 * @link https://developer.wordpress.org/reference/functions/is_active_sidebar/
+	 *       Description of `is_active_sidebar` function
 	 */
-	get_sidebar( 'footer' );
+	if ( is_active_sidebar( 'sidebar-3' ) ) {
+
+		/**
+		 * @link https://developer.wordpress.org/reference/functions/get_sidebar/
+		 *       Description of `get_sidebar` function
+		 */
+		get_sidebar( 'footer' );
+
+	} // if ( is_active_sidebar( 'sidebar-3' ) )
+
+}
+
+/**
+ * Get primary widget area
+ *
+ * @since 0.2.0
+ */
+function slimline_get_sidebar_primary() {
+
+	/**
+	 * Only include sidebar if it is being used
+	 *
+	 * @link https://developer.wordpress.org/reference/functions/is_active_sidebar/
+	 *       Description of `is_active_sidebar` function
+	 */
+	if ( is_active_sidebar( 'sidebar-1' ) ) {
+
+		/**
+		 * @link https://developer.wordpress.org/reference/functions/get_sidebar/
+		 *       Description of `get_sidebar` function
+		 */
+		get_sidebar();
+
+	} // if ( is_active_sidebar( 'sidebar-1' ) )
+
 }
 
 /**
@@ -408,8 +502,8 @@ function slimline_get_template_part( $slug, $name = '' ) {
 	 * us to return the template more quickly in cases where the template is repeated
 	 * several times (such as on archive pages and in comments)
 	 *
-	 * @see slimline_get_template_path()
-	 * @see slimline_set_template_path()
+	 * @link slimline_get_template_path()
+	 * @link slimline_set_template_path()
 	 */
 	$template_string = join( '-', $args );
 

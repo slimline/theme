@@ -730,6 +730,33 @@ function slimline_get_comment_attributes( $attributes = '' ) {
 }
 
 /**
+ * Generate HTML attributes for the comment content wrapper <div> tag
+ *
+ * Essentially a wrapper function for `slimline_get_attributes()` that includes
+ * default attributes. Developers can modify the returned string using the
+ * `slimline_comment-content_attributes` filter.
+ *
+ * @param  array|string $attributes (Optional). An array or query string of
+ *                                  attribute / value pairs.
+ * @return string       $attributes The generated string of attributes
+ * @uses   slimline_get_attributes() to generate the attributes
+ * @link   https://github.com/slimline/theme/wiki/slimline_get_comment_attributes()
+ * @since  0.1.0
+ */
+function slimline_get_comment_content_attributes( $attributes = '' ) {
+
+	/**
+	 * Return attributes string
+	 *
+	 * Note that the `slimline_attributes` and `slimline_comment-content_attributes`
+	 * filters will be applied by `slimline_get_attributes()`.
+	 *
+	 * @see slimline_get_attributes()
+	 */
+	return slimline_get_attributes( $attributes, 'comment-content' );
+}
+
+/**
  * Generate HTML attributes for the comments wrapper <section> tag
  *
  * Essentially a wrapper function for `slimline_get_attributes()` that includes

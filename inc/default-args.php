@@ -14,6 +14,35 @@
 if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 
 /**
+ * Parameters for `comment_form`
+ *
+ * @return array $args Associative array of function arguments
+ * @link   https://github.com/slimline/theme/wiki/slimline_comment_form_args()
+ * @since  0.2.0
+ */
+if ( ! function_exists( 'slimline_comment_form_args' ) ) {
+
+	function slimline_comment_form_args() {
+
+		/**
+		 * Default arguments
+		 *
+		 * @link https://developer.wordpress.org/reference/functions/comment_form/
+		 *       Description of `comment_form` function arguments
+		 */
+		$args = array();
+
+		/**
+		 * Filter the defaults
+		 *
+		 * @link https://github.com/slimline/theme/wiki/slimline_comment_form_args
+		 */
+		return apply_filters( 'slimline_comment_form_args', $args );
+	}
+
+} // if ( ! function_exists( 'slimline_comment_form_args' ) )
+
+/**
  * Parameters for `add_theme_support( 'html5' )`
  *
  * By default adds HTML5 support for comment forms, comment lists, search forms and
@@ -530,3 +559,36 @@ if ( ! function_exists( 'slimline_the_title_attribute_args' ) ) {
 	}
 
 } // if ( ! function_exists( 'slimline_the_title_attribute_args' ) )
+
+/**
+ * Arguments for `wp_list_comments`
+ *
+ * @return array $args Associative array of function arguments
+ * @link   https://github.com/slimline/theme/wiki/slimline_wp_list_comments_args()
+ * @since  0.2.0
+ */
+if ( ! function_exists( 'slimline_wp_list_comments_args' ) ) {
+
+	function slimline_wp_list_comments_args() {
+
+		/**
+		 * Default arguments
+		 *
+		 * @link https://developer.wordpress.org/reference/functions/wp_list_comments/
+		 *       Explanation of `wp_list_comments` arguments
+		 */
+		$args = array(
+			'callback'      => 'slimline_get_comment_template',     // get comments/comment.php template part
+			'end-callback'  => 'slimline_get_comment_end_template', // get comments/end.php template part
+			'style'         => 'ol',                                // use <ol></ol> for comment list
+		);
+
+		/**
+		 * Filter the arguments
+		 *
+		 * @link https://github.com/slimline/theme/wiki/slimline_wp_list_comments_args
+		 */
+		return apply_filters( 'slimline_wp_list_comments_args', $args );
+	}
+
+} // if ( ! function_exists( 'slimline_wp_list_comments_args' ) )
