@@ -582,6 +582,20 @@ function slimline_sidebar_footer_attributes( $attributes = '' ) {
 }
 
 /**
+ * Outputs HTML attibutes meant for the footer sidebar internal wrapper <ul> tag.
+ *
+ * @param array|string $attributes (Optional). An array or query string of
+ *                                 attribute / value pairs.
+ * @uses  slimline_get_sidebar_footer_attributes() to generate attributes
+ * @link  https://github.com/slimline/theme/wiki/slimline_sidebar_footer_list_attributes()
+ * @since 0.2.0
+ */
+function slimline_sidebar_footer_list_attributes( $attributes = '' ) {
+
+	echo slimline_get_sidebar_footer_list_attributes( $attributes );
+}
+
+/**
  * Outputs HTML attibutes meant for the primary widget area <aside> tag.
  *
  * @param array|string $attributes (Optional). An array or query string of

@@ -1557,6 +1557,41 @@ function slimline_get_sidebar_footer_attributes( $attributes = '' ) {
 }
 
 /**
+ * Generate HTML attributes for footer sidebar internal wrapper <ul> tag.
+ *
+ * Essentially a wrapper function for `slimline_get_attributes()` that includes
+ * default attributes. Developers can modify the returned string using the
+ * `slimline_sidebar-footer-list_attributes` filter.
+ *
+ * @param  array|string $attributes (Optional). An array or query string of
+ *                                  attribute / value pairs.
+ * @return string       $attributes The generated string of attributes
+ * @uses   slimline_get_attributes() to generate the attributes
+ * @link   https://github.com/slimline/theme/wiki/slimline_get_sidebar_footer_list_attributes()
+ * @since  0.1.0
+ */
+function slimline_get_sidebar_footer_list_attributes( $attributes = '' ) {
+
+	/**
+	 * Default attributes
+	 */
+	$defaults = array(
+		'class' => slimline_get_class( 'sidebar-footer-list', array( 'small-block-grid-1 medium-block-grid-2 large-block-grid-3' ) ), // class="small-block-grid-1 medium-block-grid-2 large-block-grid-3 sidebar-footer-list"
+	);
+
+	/**
+	 * Return attributes string
+	 *
+	 * Note that the `slimline_attributes` and
+	 * `slimline_sidebar-footer-list_attributes` filters will be applied by
+	 * `slimline_get_attributes()`.
+	 *
+	 * @see slimline_get_attributes()
+	 */
+	return slimline_get_attributes( $attributes, 'sidebar-footer-list', $defaults );
+}
+
+/**
  * Generate HTML attributes for primary widget area <aside> tag
  *
  * Essentially a wrapper function for `slimline_get_attributes()` that includes
