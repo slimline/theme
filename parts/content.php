@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 			 * slimline_entry_top hook
 			 *
 			 * @hook slimline_get_entry_header - 50 (gets entry/header.php template part)
-			 * @see  https://github.com/slimline/theme/wiki/slimline_entry_top
+			 * @link https://github.com/slimline/theme/wiki/slimline_entry_top
 			 */
 			do_action( 'slimline_entry_top' );
 		?>
@@ -30,7 +30,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 			 * slimline_entry_content_before hook
 			 *
 			 * @hook slimline_get_entry_meta - 50 (gets entry/meta.php template part)
-			 * @see  https://github.com/slimline/theme/wiki/slimline_entry_content_before
+			 * @link https://github.com/slimline/theme/wiki/slimline_entry_content_before
 			 */
 			do_action( 'slimline_entry_content_before' );
 		?>
@@ -52,7 +52,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 					 *
 					 * The read more link displays when the `<!--more-->` quicktag.
 					 *
-					 * @see slimline_excerpt_more()
+					 * @see   slimline_excerpt_more()
 					 * @since 0.2.0
 					 */
 					the_content( slimline_excerpt_more() );
@@ -66,8 +66,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 					 * `slimline_excerpt_more` function to the `excerpt_more`
 					 * filter
 					 *
-					 * @see   slimline_excerpt_more()
-					 * @see   https://developer.wordpress.org/reference/hooks/excerpt_more/
+					 * @link  slimline_excerpt_more()
+					 * @link  https://developer.wordpress.org/reference/hooks/excerpt_more/
 					 *        Documentation of the `excerpt_more` filter.
 					 * @since 0.2.0
 					 */
@@ -82,7 +82,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 			 * slimline_entry_content_after hook
 			 *
 			 * @hook slimline_get_entry_footer - 50 (gets entry/footer.php template part)
-			 * @see  https://github.com/slimline/theme/wiki/slimline_entry_content_after
+			 * @link https://github.com/slimline/theme/wiki/slimline_entry_content_after
 			 */
 			do_action( 'slimline_entry_content_after' );
 		?>
@@ -92,7 +92,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 			 * slimline_entry_bottom hook
 			 *
 			 * @hook slimline_get_comments_template - 50 (conditionally gets comments.php template part)
-			 * @see  https://github.com/slimline/theme/wiki/slimline_entry_bottom
+			 * @link https://github.com/slimline/theme/wiki/slimline_entry_bottom
 			 */
 			do_action( 'slimline_entry_bottom' );
 		?>
