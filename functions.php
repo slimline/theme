@@ -293,6 +293,36 @@ function slimline_theme_setup() {
 	 */
 	add_action( 'wp_enqueue_scripts', 'slimline_wp_enqueue_scripts' );
 
+
+
+	add_action( 'slimline_404_content', 'slimline_get_404_posts', 10 );
+	add_action( 'slimline_404_content', 'slimline_get_404_search_form', 20 );
+	add_action( 'slimline_content_after', 'slimline_get_sidebar_primary', 50 );
+	add_action( 'wp_head', 'slimline_get_charset_tag', 0 );
+	add_action( 'wp_head', 'slimline_get_viewport_tag', 1 );
+	add_action( 'wp_head', 'slimline_get_pingback_tag', 2 );
+	add_action( 'slimline_content_top', 'slimline_get_index_header', 10 );
+	add_action( 'slimline_entries_before', 'slimline_get_entries_title', 10 );
+	add_action( 'slimline_content_bottom', 'slimline_get_index_pagination', 10 );
+	add_action( 'slimline_entry_top', 'slimline_get_entry_header', 50 );
+	add_action( 'slimline_entry_content_before', 'slimline_get_entry_meta', 50 );
+	add_action( 'slimline_entry_content_after', 'slimline_get_entry_footer', 50 );
+	add_action( 'slimline_entry_bottom', 'slimline_get_comments_template', 50 );
+	add_action( 'slimline_not_found_top',      'slimline_get_not_found_header', 10 );
+	add_action( 'slimline_not_found_bottom',   'slimline_get_not_found_description', 10 );
+	add_action( 'slimline_404_entries_before', 'slimline_404_get_entries_title', 10 );
+	add_action( 'slimline_comment_bottom',     'slimline_comment_reply_link', 10 );
+	add_action( 'slimline_comments_top',       'slimline_get_comments_title', 10 );
+	add_action( 'slimline_comments_bottom',    'slimline_get_comments_list', 10 );
+	add_action( 'slimline_comments_bottom',    'slimline_get_comments_pagination', 20 );
+	add_action( 'slimline_comments_bottom',    'slimline_get_comments_form', 30 );
+	add_action( 'slimline_footer_before',      'slimline_get_sidebar_footer', 10 );
+	add_action( 'slimline_footer_bottom',      'slimline_get_footer_navigation', 10 );
+	add_action( 'slimline_footer_bottom',      'slimline_get_copyright_notice', 20 );
+	add_action( 'slimline_header_top',         'slimline_get_header_logo', 10 );
+	add_action( 'slimline_header_bottom',      'slimline_get_header_navigation', 10 );
+
+
 	/**
 	 * Add content filtering to 404 descriptions
 	 *
