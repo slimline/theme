@@ -286,6 +286,38 @@ if ( ! function_exists( 'slimline_paginate_links_args' ) ) {
 } // if ( ! function_exists( 'slimline_paginate_links_args' ) )
 
 /**
+ * Arguments for `paginate_comments_links()` in comments template
+ *
+ * @return array  $args Associative array of function arguments
+ * @link   https://github.com/slimline/theme/wiki/slimline_paginate_comments_links_args()
+ * @since  0.2.0
+ */
+if ( ! function_exists( 'slimline_paginate_comments_links_args' ) ) {
+
+	function slimline_paginate_comments_links_args() {
+
+		/**
+		 * Default arguments
+		 *
+		 * @link https://developer.wordpress.org/reference/functions/paginate_comments_links/
+		 *       Description of `paginate_comments_links` function
+		 * @link https://developer.wordpress.org/reference/functions/paginate_links/
+		 *       Explanation of `paginate_links` arguments (used by
+		 *       `paginate_comments_links`)
+		 */
+		$args = array();
+
+		/**
+		 * Filter the defaults
+		 *
+		 * @link https://github.com/slimline/theme/wiki/slimline_paginate_comments_links_args
+		 */
+		return apply_filters( 'slimline_paginate_comments_links_args', $args );
+	}
+
+} // if ( ! function_exists( 'slimline_paginate_comments_links_args' ) )
+
+/**
  * Arguments for `add_theme_support( 'post-thumbnails' )`
  *
  * By default adds featured image meta box to all post types that support it. Theme

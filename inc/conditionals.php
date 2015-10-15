@@ -26,6 +26,38 @@ function slimline_has_logo() {
 }
 
 /**
+ * Decide whether to show comments
+ *
+ * By default comments are shown on singular posts that support comments, either
+ * 1) have comments and/or trackbacks/pings open or 2) already have comments and/or
+ * trackbacks/pings attached to them, and either 1) do not have have a post password
+ * or 2) have a post password that the user has already entered.
+ *
+ * @return bool TRUE to show comments, otherwise FALSE
+ * @link   https://github.com/slimline/theme/wiki/slimline_show_comments()
+ * @since  0.2.0
+ */
+function slimline_show_comments() {
+
+	/**
+	 * Filter the results
+	 *
+	 * @link https://github.com/slimline/theme/wiki/slimline_show_comments
+	 * @link https://developer.wordpress.org/reference/functions/is_singular/
+	 *       Description of the `is_singular` function
+	 * @link https://developer.wordpress.org/reference/functions/comments_open/
+	 *       Description of the `comments_open` function
+	 * @link https://developer.wordpress.org/reference/functions/pings_open/
+	 *       Description of the `pings_open` function
+	 * @link https://developer.wordpress.org/reference/functions/have_comments/
+	 *       Description of the `have_comments` function
+	 * @link https://developer.wordpress.org/reference/functions/post_password_required/
+	 *       Description of the `post_password_required` function
+	 */
+	return apply_filters( 'slimline_show_comments', ( is_singular() && ( comments_open() || pings_open() || have_comments() ) && ! post_password_required() ) );
+}
+
+/**
  * Decide whether to show the excerpt in the entry header
  *
  * By default, singular posts will show their excerpt (if set) in the entry's

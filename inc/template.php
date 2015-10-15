@@ -66,6 +66,38 @@ function slimline_get_charset_tag() {
 }
 
 /**
+ * Get comments list template part
+ *
+ * @since 0.2.0
+ */
+function slimline_get_comments_list() {
+
+	/**
+	 * Get comments/list.php template part
+	 *
+	 * @see https://developer.wordpress.org/reference/functions/get_template_part/
+	 *      Documentation of the `get_template_part` function
+	 */
+	get_template_part( 'parts/comments/list' );
+}
+
+/**
+ * Get comments form template part
+ *
+ * @since 0.2.0
+ */
+function slimline_get_comments_form() {
+
+	/**
+	 * Get comments/form.php template part
+	 *
+	 * @see https://developer.wordpress.org/reference/functions/get_template_part/
+	 *      Documentation of the `get_template_part` function
+	 */
+	get_template_part( 'parts/comments/form' );
+}
+
+/**
  * Get comments template part
  *
  * @since 0.2.0
@@ -87,6 +119,22 @@ function slimline_get_comments_template() {
 
 	} // if ( slimline_show_comments() )
 
+}
+
+/**
+ * Get comments title template part
+ *
+ * @since 0.2.0
+ */
+function slimline_get_comments_title() {
+
+	/**
+	 * Get comments/title.php template part
+	 *
+	 * @see https://developer.wordpress.org/reference/functions/get_template_part/
+	 *      Documentation of the `get_template_part` function
+	 */
+	get_template_part( 'parts/comments/title' );
 }
 
 /**
