@@ -37,8 +37,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 			/**
 			 * slimline_footer_bottom hook
 			 *
-			 * @hook slimline_get_footer_nav       - 10 (gets footer/navigation.php template part)
-			 * @hook slimline_get_copyright_notice - 20 (gets footer/notice-copyright.php template part)
+			 * @hook slimline_get_footer_navigation - 10 (gets footer/navigation.php template part)
+			 * @hook slimline_get_copyright_notice  - 20 (gets footer/notice-copyright.php template part)
 			 * @see  https://github.com/slimline/theme/wiki/slimline_footer_bottom
 			 */
 			do_action( 'slimline_footer_bottom' );
