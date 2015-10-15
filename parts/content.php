@@ -43,7 +43,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 				 * By default we will show full content if 1) we are on a singular
 				 * entry, or 2) we are on the blog home page.
 				 *
-				 * @see slimline_show_entry_content() | inc/conditionals.php
+				 * @see slimline_show_entry_content()
 				 */
 				if ( slimline_show_entry_content() ) {
 
