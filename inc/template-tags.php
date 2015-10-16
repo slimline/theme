@@ -244,7 +244,10 @@ function slimline_breadcrumb_attributes( $attributes = '' ) {
  */
 function slimline_class( $element, $classes = '' ) {
 
-	echo slimline_get_class( $element, $classes );
+	/**
+	 * Create "class=" string
+	 */
+	echo 'class="' . slimline_get_class( $element, $classes ) . '"';
 }
 
 /**

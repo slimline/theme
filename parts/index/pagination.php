@@ -24,7 +24,7 @@ global $wp_query;
  *
  * Ex: on first page with default 10 posts per page and no offset, $min = ( (0 * 10) + 0 + 1 ) = 1
  */
-$min =  ( absint( get_query_var( 'paged' ) * absint( get_query_var( 'posts_per_page' ) ) ) + absint( get_query_var( 'offset' ) ) + 1;
+$min =  ( absint( get_query_var( 'paged' ) ) * absint( get_query_var( 'posts_per_page' ) ) ) + absint( get_query_var( 'offset' ) ) + 1;
 
 /**
  * $min + # posts showing on current page - 1

@@ -31,8 +31,9 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 				 */
 				the_tags(
 					sprintf( '<p class="entry-tags">%1$s', __( 'Tagged: ', 'slimline' ),
-					' ',
-					'</p><!-- .entry-tags -->'
+						' ',
+						'</p><!-- .entry-tags -->'
+					)
 				);
 
 			} // if ( has_tag() )

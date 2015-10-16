@@ -215,7 +215,7 @@ class Slimline_Context {
 					 * @since 0.2.0
 					 */
 					if ( function_exists( 'slimline_get_page_for_posts' )
-						&& ( $page_for_posts = slimline_get_page_for_posts( $post_type )
+						&& ( $page_for_posts = slimline_get_page_for_posts( $post_type ) )
 						&& is_page( $page_for_posts ) ) {
 
 						$post_object = get_post( $page_for_posts );
@@ -347,7 +347,7 @@ class Slimline_Context {
 
 					$this->description = get_bloginfo( 'description' );
 
-					$this->thumbnail_id = slimline_get_site_thumbnail_id();
+					$this->thumbnail_id = slimline_get_default_thumbnail_id();
 
 					$this->title = get_bloginfo( 'name' );
 
@@ -366,7 +366,7 @@ class Slimline_Context {
 		if ( isset( $post_object ) && $post_object ) {
 
 			if ( ! empty( $post_object->post_excerpt ) ) {
-				$this->description = $post_object->post_excerpt
+				$this->description = $post_object->post_excerpt;
 			} else { // if ( ! empty( $post_object->post_excerpt ) )
 				$this->description = apply_filters( 'get_the_excerpt', $post_object->post_content );
 			} // if ( ! empty( $post_object->post_excerpt ) )
@@ -422,11 +422,13 @@ class Slimline_Context {
 
 		$context = $this->get_context();
 
+		$value = $this->$property;
+
 		foreach ( $context as $filter ) {
-			$property = apply_filters( "slimline_{$filter}_{$property}", $property );
+			$value = apply_filters( "slimline_{$filter}_{$property}", $value );
 		} // foreach ( $context as $filter )
 
-		return $property;
+		return $value;
 	}
 
 	public function get_thumbnail_id() {

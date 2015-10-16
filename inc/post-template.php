@@ -464,13 +464,15 @@ function slimline_get_404_title_attributes( $attributes = '' ) {
  */
 function slimline_get_attributes( $attributes = '', $element = '', $defaults = array() ) {
 
+	$return_attributes = array();
+
 	/**
 	 * Convert query string style arguments to array
 	 *
 	 * @link https://developer.wordpress.org/reference/functions/wp_parse_args/
 	 *       Description of `wp_parse_args` function
 	 */
-	$attributes = wp_parse_args( $attributes );
+	$attributes = wp_parse_args( $attributes, $defaults );
 
 	/**
 	 * Allow general filtering of attributes before we modify the array
@@ -492,9 +494,9 @@ function slimline_get_attributes( $attributes = '', $element = '', $defaults = a
 	/**
 	 * Create temporary array of sanitized key/value pairs
 	 *
-	 * @see slimline_sanitize_attribute_array()
+	 * @see slimline_sanitize_attributes_array()
 	 */
-	$parse_attributes = slimline_sanitize_attribute_array( $attributes );
+	$parse_attributes = slimline_sanitize_attributes_array( $attributes );
 
 	/**
 	 * Remove empties
@@ -694,7 +696,7 @@ function slimline_get_class( $element, $classes = '' ) {
 	/**
 	 * Create "class=" string
 	 */
-	$classes = 'class="' . join( ' ', $classes ) . '"';
+	$classes = join( ' ', $classes );
 
 	/**
 	 * Return string
@@ -781,6 +783,34 @@ function slimline_get_comments_attributes( $attributes = '' ) {
 	 * @see slimline_get_attributes()
 	 */
 	return slimline_get_attributes( $attributes, 'comments' );
+}
+
+/**
+ * Retrieve a default ID for thumbnail attachments
+ *
+ * @return int $thumbnail_id ID of the attachment file
+ * @link   https://github.com/slimline/theme/wiki/slimline_default_thumbnail_id()
+ * @since  0.2.0
+ */
+function slimline_get_default_thumbnail_id() {
+
+	/**
+	 * Get custom header info
+	 *
+	 * @link https://developer.wordpress.org/reference/functions/get_theme_mod/
+	 *       Description of `get_theme_mod` function
+	 */
+	$header_image_data = get_theme_mod( 'header_image_data' );
+
+	$thumbnail_id = ( isset( $header_image_data['attachment_id'] ) ? $header_image_data['attachment_id'] : 0 );
+
+	/**
+	 * Filter results
+	 *
+	 * @param int $thumbnail_id ID of the attachment file
+	 * @link  https://github.com/slimline/theme/wiki/slimline_default_thumbnail_id
+	 */
+	return apply_filters( 'slimline_default_thumbnail_id', $thumbnail_id );
 }
 
 /**
@@ -1369,7 +1399,7 @@ function slimline_get_main_attributes( $attributes = '' ) {
 	 *
 	 * @see slimline_get_attributes()
 	 */
-	return slimline_get_attributes( $attributes, 'main', $defaults );
+	return slimline_get_attributes( $attributes, 'main' );
 }
 
 /**
@@ -1700,33 +1730,34 @@ function slimline_get_site_header_attributes( $attributes = '' ) {
  *
  * Essentially a wrapper function for `slimline_get_attributes()` that includes
  * default attributes. Developers can modify the returned string using the
- * `slimline_site-link-title_attributes` filter.
+ * `slimline_site-title-link_attributes` filter.
  *
  * @param  array|string $attributes (Optional). An array or query string of
  *                                  attribute / value pairs.
  * @return string       $attributes The generated string of attributes
  * @uses   slimline_get_attributes() to generate the attributes
- * @link   https://github.com/slimline/theme/wiki/slimline_get_site_link_title_attributes()
+ * @link   https://github.com/slimline/theme/wiki/slimline_get_site_title_link_attributes()
  * @since  0.1.0
  */
-function slimline_get_site_link_title_attributes( $attributes = '' ) {
+function slimline_get_site_title_link_attributes( $attributes = '' ) {
 
 	/**
 	 * Default attributes
 	 */
 	$defaults = array(
-		'class' => slimline_get_class( 'site-link-title' ), // class="site-link-title"
+		'class' => slimline_get_class( 'site-title-link' ), // class="site-title-link"
+		'href'  => home_url( '/' ),
 	);
 
 	/**
 	 * Return attributes string
 	 *
-	 * Note that the `slimline_attributes` and `slimline_site-link-title_attributes`
+	 * Note that the `slimline_attributes` and `slimline_site-title-link_attributes`
 	 * filters will be applied by `slimline_get_attributes()`.
 	 *
 	 * @see slimline_get_attributes()
 	 */
-	return slimline_get_attributes( $attributes, 'site-link-title', $defaults );
+	return slimline_get_attributes( $attributes, 'site-title-link', $defaults );
 }
 
 /**
@@ -1742,7 +1773,7 @@ function slimline_get_site_link_title_attributes( $attributes = '' ) {
  * @link  https://github.com/slimline/theme/wiki/slimline_get_yoast_breadcrumb()
  * @since 0.2.0
  */
-function slimline_yoast_breadcrumb() {
+function slimline_get_yoast_breadcrumb() {
 
 	$breadcrumb = '';
 

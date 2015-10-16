@@ -137,7 +137,7 @@ if ( ! function_exists( 'slimline_login_logo_crop' ) ) {
 		 * @return bool $crop Logo crop
 		 * @link   https://github.com/slimline/theme/wiki/slimline_login_logo_crop
 		 */
-		return apply_filters( 'slimline_login_logo_crop', false )
+		return apply_filters( 'slimline_login_logo_crop', false );
 	}
 
 } // if ( ! function_exists( 'slimline_login_logo_crop' ) )
@@ -164,7 +164,7 @@ if ( ! function_exists( 'slimline_login_logo_height' ) ) {
 		 * @return int $height Logo height (in pixels)
 		 * @link   https://github.com/slimline/theme/wiki/slimline_login_logo_height
 		 */
-		return apply_filters( 'slimline_login_logo_height', 10000 )
+		return apply_filters( 'slimline_login_logo_height', 10000 );
 	}
 
 } // if ( ! function_exists( 'slimline_login_logo_height' ) )
@@ -191,7 +191,7 @@ if ( ! function_exists( 'slimline_login_logo_width' ) ) {
 		 * @return int $width Logo width (in pixels)
 		 * @link   https://github.com/slimline/theme/wiki/slimline_login_logo_width
 		 */
-		return apply_filters( 'slimline_login_logo_width', 640 )
+		return apply_filters( 'slimline_login_logo_width', 640 );
 	}
 
 } // if ( ! function_exists( 'slimline_login_logo_width' ) )
@@ -214,7 +214,7 @@ if ( ! function_exists( 'slimline_logo_crop' ) ) {
 		 * @return bool $crop Logo crop
 		 * @link   https://github.com/slimline/theme/wiki/slimline_logo_crop
 		 */
-		return apply_filters( 'slimline_logo_crop', false )
+		return apply_filters( 'slimline_logo_crop', false );
 	}
 
 } // if ( ! function_exists( 'slimline_logo_crop' ) )
@@ -240,7 +240,7 @@ if ( ! function_exists( 'slimline_logo_height' ) ) {
 		 * @return int $height Logo height (in pixels)
 		 * @link   https://github.com/slimline/theme/wiki/slimline_logo_height
 		 */
-		return apply_filters( 'slimline_logo_height', 10000 )
+		return apply_filters( 'slimline_logo_height', 10000 );
 	}
 
 } // if ( ! function_exists( 'slimline_logo_height' ) )
@@ -266,7 +266,7 @@ if ( ! function_exists( 'slimline_logo_width' ) ) {
 		 * @return int $width Logo width (in pixels)
 		 * @link   https://github.com/slimline/theme/wiki/slimline_login_logo_width
 		 */
-		return apply_filters( 'slimline_logo_width', 500 )
+		return apply_filters( 'slimline_logo_width', 500 );
 	}
 
 } // if ( ! function_exists( 'slimline_logo_width' ) )

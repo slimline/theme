@@ -173,7 +173,7 @@ function slimline_get_comments_template() {
 		 * @link https://developer.wordpress.org/reference/functions/comments_template/
 		 *       Description of `comments_template` function
 		 */
-		comments_template( 'parts/comments/comments.php' );
+		comments_template();
 
 	} // if ( slimline_show_comments() )
 
@@ -339,13 +339,13 @@ function slimline_get_index_pagination() {
  *
  * @since 0.2.0
  */
-function slimline_get_not_found_description() {
+function slimline_get_not_found_content() {
 
 	/**
 	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
 	 *       Description of `get_template_part` function
 	 */
-	get_template_part( 'parts/not-found/description' );
+	get_template_part( 'parts/not-found/content' );
 }
 
 /**

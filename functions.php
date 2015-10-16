@@ -101,7 +101,7 @@ function slimline_theme_setup() {
 	 * @link https://developer.wordpress.com/themes/content-width/
 	 *       Explanation of the `$content_width` global
 	 */
-	@global $content_width;
+	global $content_width;
 
 	/**
 	 * 1. DEFINE GLOBALS AND CONSTANTS
@@ -228,6 +228,13 @@ function slimline_theme_setup() {
 	require_once( slimline_includes_directory() . 'post-template.php' );
 
 	/**
+	 * Slimline object functions
+	 *
+	 * Functions for working with Slimline objects
+	 */
+	require_once( slimline_includes_directory() . 'slimline.php' );
+
+	/**
 	 * Templating functions
 	 *
 	 * Functions for getting templates and template parts
@@ -279,6 +286,11 @@ function slimline_theme_setup() {
 	add_action( 'after_setup_theme', 'slimline_vendor', 20 );
 
 	/**
+	 * Register autoload functions
+	 */
+	add_action( 'after_setup_theme', 'slimline_autoload_register', 15 );
+
+	/**
 	 * Register main navigation menus
 	 */
 	add_action( 'init', 'slimline_register_nav_menus' );
@@ -309,7 +321,7 @@ function slimline_theme_setup() {
 	add_action( 'slimline_entry_content_after', 'slimline_get_entry_footer', 50 );
 	add_action( 'slimline_entry_bottom', 'slimline_get_comments_template', 50 );
 	add_action( 'slimline_not_found_top',      'slimline_get_not_found_header', 10 );
-	add_action( 'slimline_not_found_bottom',   'slimline_get_not_found_description', 10 );
+	add_action( 'slimline_not_found_bottom',   'slimline_get_not_found_content', 10 );
 	add_action( 'slimline_404_entries_before', 'slimline_404_get_entries_title', 10 );
 	add_action( 'slimline_comment_bottom',     'slimline_comment_reply_link', 10 );
 	add_action( 'slimline_comments_top',       'slimline_get_comments_title', 10 );
@@ -422,7 +434,7 @@ function slimline_theme_setup() {
 	 * @link http://jetpack.me/support/infinite-scroll/
 	 * @see  slimline_infinite_scroll_support_args()
 	 */
-	add_theme_support( 'infinite-scroll', slimline_infinite_scroll_args() );
+	add_theme_support( 'infinite-scroll', slimline_infinite_scroll_support_args() );
 
 	/**
 	 * Add featured image UI to post types that support them
@@ -460,6 +472,26 @@ function slimline_theme_setup() {
 	 * @see slimline_login_logo_crop()
 	 */
 	add_image_size( 'slimline-login-logo', slimline_login_logo_width(), slimline_login_logo_height(), slimline_login_logo_crop() );
+}
+
+function slimline_autoload_register() {
+
+	if ( function_exists( '__autoload' ) ) {
+		spl_autoload_register( '__autoload' );
+	} // if ( function_exists( '__autoload' ) )
+
+	spl_autoload_register( 'slimline_autoload' );
+
+}
+
+function slimline_autoload( $class ) {
+
+	$class = strtolower( $class );
+
+	if ( 0 === strpos( $class, 'slimline' ) ) {
+		include_once( slimline_includes_directory() . 'class-' . str_replace( '_', '-', $class ) . '.php' );
+	} // if ( 0 === strpos( $class, 'slimline' ) )
+
 }
 
 /**
