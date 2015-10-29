@@ -293,6 +293,24 @@ function slimline_comments_attributes( $attributes = '' ) {
 }
 
 /**
+ * Ouput a title for the comments list on index pages
+ *
+ * Meant to function similar to `the_title`, but used to label the comments list on
+ * singular posts.
+ *
+ * @param string $before (Optional). Content to prepend to the title. Default empty.
+ * @param string $after  (Optional). Content to append to the title. Default empty.
+ * @param bool   $echo   (Optional). Whether to output the title. Default TRUE.
+ * @uses  slimline_get_comments_title() to generate the title
+ * @link  https://github.com/slimline/theme/wiki/slimline_comments_title()
+ * @since 0.2.0
+ */
+function slimline_comments_title( $before = '', $after = '', $echo = true ) {
+
+	echo slimline_get_comments_title( $before, $after, $echo );
+}
+
+/**
  * Outputs HTML attributes meant for the recent entries wrapper tag (<section>).
  *
  * @param array|string $attributes (Optional). An array or query string of

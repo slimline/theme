@@ -82,38 +82,6 @@ function slimline_get_charset_tag() {
 }
 
 /**
- * Get comments list template part
- *
- * @since 0.2.0
- */
-function slimline_get_comments_list() {
-
-	/**
-	 * Get comments/list.php template part
-	 *
-	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
-	 *       Documentation of the `get_template_part` function
-	 */
-	get_template_part( 'parts/comments/list' );
-}
-
-/**
- * Get comments form template part
- *
- * @since 0.2.0
- */
-function slimline_get_comments_form() {
-
-	/**
-	 * Get comments/form.php template part
-	 *
-	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
-	 *       Documentation of the `get_template_part` function
-	 */
-	get_template_part( 'parts/comments/form' );
-}
-
-/**
  * Get comment template part
  *
  * @param object $comment WP_Comment object
@@ -156,6 +124,68 @@ function slimline_get_comment_end_template( $comment ) {
 }
 
 /**
+ * Get comments list template part
+ *
+ * @since 0.2.0
+ */
+function slimline_get_comments_list() {
+
+	/**
+	 * Get comments/list.php template part
+	 *
+	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
+	 *       Documentation of the `get_template_part` function
+	 */
+	get_template_part( 'parts/comments/list' );
+}
+
+/**
+ * Get comments form template part
+ *
+ * @since 0.2.0
+ */
+function slimline_get_comments_form() {
+
+	/**
+	 * Get comments/form.php template part
+	 *
+	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
+	 *       Documentation of the `get_template_part` function
+	 */
+	get_template_part( 'parts/comments/form' );
+}
+
+/**
+ * Get comments title template part
+ *
+ * @since 0.2.0
+ */
+function slimline_get_comments_header() {
+
+	/**
+	 * Get comments/title.php template part
+	 *
+	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
+	 *       Documentation of the `get_template_part` function
+	 */
+	get_template_part( 'parts/comments/title' );
+}
+
+/**
+ * Get comments pagination template part
+ *
+ * @since 0.2.0
+ */
+function slimline_get_comments_pagination() {
+
+	/**
+	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
+	 *       Description of `get_template_part` function
+	 */
+	get_template_part( 'parts/comments/pagination' );
+}
+
+/**
  * Get comments template part
  *
  * @since 0.2.0
@@ -177,22 +207,6 @@ function slimline_get_comments_template() {
 
 	} // if ( slimline_show_comments() )
 
-}
-
-/**
- * Get comments title template part
- *
- * @since 0.2.0
- */
-function slimline_get_comments_title() {
-
-	/**
-	 * Get comments/title.php template part
-	 *
-	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
-	 *       Documentation of the `get_template_part` function
-	 */
-	get_template_part( 'parts/comments/title' );
 }
 
 /**

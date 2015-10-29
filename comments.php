@@ -4,9 +4,9 @@
  *
  * This area displays both the comments list and comment form.
  *
- * @package    Slimline / Theme
- * @subpackage Template Parts
- * @since      0.2.0
+ * @package Slimline / Theme
+ * @see     https://codex.wordpress.org/Theme_Development#Comments_.28comments.php.29
+ * @since   0.2.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
@@ -27,7 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 			/**
 			 * slimline_comments_top action
 			 *
-			 * @hook slimline_get_comments_title - 10 (gets comments/title.php template part)
+			 * @hook slimline_get_comments_header - 10 (gets comments/title.php template part)
 			 * @link https://github.com/slimline/theme/wiki/slimline_comments_top
 			 */
 			do_action( 'slimline_comments_top' );
@@ -43,16 +43,6 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 			 * @link https://github.com/slimline/theme/wiki/slimline_comments_bottom
 			 */
 			do_action( 'slimline_comments_bottom' );
-		?>
-
-		<?php
-			/**
-			 * Get comments/form.php template part
-			 *
-			 * @see https://developer.wordpress.org/reference/functions/get_template_part/
-			 *      Documentation of the `get_template_part` function
-			 */
-			get_template_part( 'parts/comments/form', get_post_type() );
 		?>
 
 	</section><!-- #comments -->

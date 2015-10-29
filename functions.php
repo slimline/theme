@@ -324,7 +324,7 @@ function slimline_theme_setup() {
 	add_action( 'slimline_not_found_bottom',   'slimline_get_not_found_content', 10 );
 	add_action( 'slimline_404_entries_before', 'slimline_404_get_entries_title', 10 );
 	add_action( 'slimline_comment_bottom',     'slimline_comment_reply_link', 10 );
-	add_action( 'slimline_comments_top',       'slimline_get_comments_title', 10 );
+	add_action( 'slimline_comments_top',       'slimline_get_comments_header', 10 );
 	add_action( 'slimline_comments_bottom',    'slimline_get_comments_list', 10 );
 	add_action( 'slimline_comments_bottom',    'slimline_get_comments_pagination', 20 );
 	add_action( 'slimline_comments_bottom',    'slimline_get_comments_form', 30 );

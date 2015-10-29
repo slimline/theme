@@ -786,6 +786,55 @@ function slimline_get_comments_attributes( $attributes = '' ) {
 }
 
 /**
+ * Generate default title for comments list on pages
+ *
+ * @return string $title Descriptive title
+ * @link   https://github.com/slimline/theme/wiki/slimline_get_comments_title()
+ * @since  0.2.0
+ */
+function slimline_get_comments_title() {
+
+	/**
+	 * Get number of comments
+	 *
+	 * @link https://developer.wordpress.org/reference/functions/get_comments_number/
+	 *       Description of `get_comments_number` function
+	 */
+	$comments_number = get_comments_number();
+
+	/**
+	 * Output comment title based on number of comments
+	 */
+	if ( $comments_number ) {
+
+		/**
+		 * Set singular or plural title
+		 *
+		 * @link https://developer.wordpress.org/reference/functions/_nx/
+		 *       Description of `_nx` function
+		 * @see  https://codex.wordpress.org/Function_Reference/comments_number#Title_For_Comments_Section
+		 */
+		$title = sprintf( _nx( 'One comment so far:', '%1$s comments:', $comments_number, 'comments title', 'slimline' ) );
+
+	/**
+	 * Special message when no comments have been left yet
+	 */
+	} else { // if ( $comments )
+
+		$title = __( 'No replies yet. Be the first!', 'slimline' );
+
+	} // if ( $comments )
+
+	/**
+	 * Filter and return the title
+	 *
+	 * @param string $title The default generated title
+	 * @link  https://github.com/slimline/theme/wiki/slimline_title
+	 */
+	return apply_filters( 'slimline_comments_title', $title );
+}
+
+/**
  * Retrieve a default ID for thumbnail attachments
  *
  * @return int $thumbnail_id ID of the attachment file
