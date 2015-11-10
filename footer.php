@@ -8,7 +8,7 @@
  * and </body> tags.
  *
  * @package Slimline / Theme
- * @link     http://codex.wordpress.org/Theme_Development#Footer_.28footer.php.29
+ * @link    http://codex.wordpress.org/Theme_Development#Footer_.28footer.php.29
  *          WordPress Theme Development guidelines for footer.php
  * @since   0.1.0
  */
