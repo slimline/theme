@@ -315,6 +315,16 @@ function slimline_get_header_logo() {
 function slimline_get_header_navigation() {
 
 	/**
+	 * Don't show if on a 404 page
+	 *
+	 * @link https://developer.wordpress.org/reference/functions/is_404/
+	 *       Description of the `is_404` function
+	 */
+	if ( is_404() ) {
+		return;
+	} // if ( is_404() )
+
+	/**
 	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
 	 *       Description of `get_template_part` function
 	 */
@@ -327,6 +337,16 @@ function slimline_get_header_navigation() {
  * @since 0.2.0
  */
 function slimline_get_index_header() {
+
+	/**
+	 * Don't show if on a 404 page (we add the header differently there)
+	 *
+	 * @link https://developer.wordpress.org/reference/functions/is_404/
+	 *       Description of the `is_404` function
+	 */
+	if ( is_404() ) {
+		return;
+	} // if ( is_404() )
 
 	/**
 	 * @link https://github.com/slimline/theme/wiki/slimline_get_index_header()
@@ -388,6 +408,62 @@ function slimline_get_pingback_tag() {
 	 *       Description of `get_template_part` function
 	 */
 	get_template_part( 'parts/tag', 'pingback' );
+}
+
+/**
+ * Get row close template part
+ *
+ * @since 0.2.0
+ */
+function slimline_get_row_close() {
+
+	/**
+	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
+	 *       Description of `get_template_part` function
+	 */
+	get_template_part( 'parts/html/row-close' );
+}
+
+/**
+ * Get full-width row close template part
+ *
+ * @since 0.2.0
+ */
+function slimline_get_row_close_full() {
+
+	/**
+	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
+	 *       Description of `get_template_part` function
+	 */
+	get_template_part( 'parts/html/row-close', 'full' );
+}
+
+/**
+ * Get row open template part
+ *
+ * @since 0.2.0
+ */
+function slimline_get_row_open() {
+
+	/**
+	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
+	 *       Description of `get_template_part` function
+	 */
+	get_template_part( 'parts/html/row-open' );
+}
+
+/**
+ * Get full-width row open template part
+ *
+ * @since 0.2.0
+ */
+function slimline_get_row_open_full() {
+
+	/**
+	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
+	 *       Description of `get_template_part` function
+	 */
+	get_template_part( 'parts/html/row-open', 'full' );
 }
 
 /**
@@ -552,7 +628,6 @@ function slimline_get_template_slugs( $stems ) {
 
 			foreach ( $slugs as $slug ) {
 				$templates[] = "{$parts}/{$base}-{$slug}";
-				$templates[] = "{$base}-{$slug}";
 			} // foreach ( $slugs as $slug )
 
 		} // if ( count( $names ) > 0 )
@@ -579,8 +654,6 @@ function slimline_get_template_slugs( $stems ) {
 	$templates = apply_filters( "slimline_get_template_slugs-{$base}", $templates, $stems );
 
 	$templates[] = "{$parts}/{$base}";
-
-	$templates[] = $base;
 
 	return $templates;
 }
