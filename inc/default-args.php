@@ -30,7 +30,9 @@ if ( ! function_exists( 'slimline_comment_form_args' ) ) {
 		 * @link https://developer.wordpress.org/reference/functions/comment_form/
 		 *       Description of `comment_form` function arguments
 		 */
-		$args = array();
+		$args = array(
+			'class_submit' => slimline_get_class( 'comment-form-submit', array( 'button', 'submit' ) ),
+		);
 
 		/**
 		 * Filter the defaults
@@ -41,6 +43,42 @@ if ( ! function_exists( 'slimline_comment_form_args' ) ) {
 	}
 
 } // if ( ! function_exists( 'slimline_comment_form_args' ) )
+
+if ( ! function_exists( 'slimline_footer_nav_columns' ) ) {
+
+	function slimline_footer_nav_columns( $classes ) {
+
+		return slimline_merge_classes( 'slimline_footer_nav_columns', $classes, array( 'small-12', 'medium-9', 'columns' ) );
+	}
+
+} // if ( ! function_exists( 'slimline_footer_nav_columns' ) )
+
+if ( ! function_exists( 'slimline_header_nav_columns' ) ) {
+
+	function slimline_header_nav_columns( $classes ) {
+
+		return slimline_merge_classes( 'slimline_header_nav_columns', $classes, array( 'small-12', 'medium-9', 'columns' ) );
+	}
+
+} // if ( ! function_exists( 'slimline_header_nav_columns' ) )
+
+if ( ! function_exists( 'slimline_entry_columns' ) ) {
+
+	function slimline_entry_columns( $classes ) {
+
+		if ( is_singular() ) {
+
+			$medium = ( is_active_sidebar( 'sidebar-1' ) ? 'medium-9' : '' );
+
+			return slimline_merge_classes( 'slimline_entry_columns', $classes, array( 'small-12', $medium, 'columns' ) );
+
+		} // if ( is_singular() )
+
+		return $classes;
+
+	}
+
+} // if ( ! function_exists( 'slimline_entry_columns' ) )
 
 /**
  * Parameters for `add_theme_support( 'html5' )`
@@ -80,6 +118,17 @@ if ( ! function_exists( 'slimline_html5_support_args' ) ) {
 
 } // if ( ! function_exists( 'slimline_html5_support_args' ) )
 
+if ( ! function_exists( 'slimline_index_columns' ) ) {
+
+	function slimline_index_columns( $classes ) {
+
+		$medium = ( is_active_sidebar( 'sidebar-1' ) ? 'medium-9' : '' );
+
+		return slimline_merge_classes( 'slimline_entry_columns', $classes, array( 'small-12', $medium, 'columns' ) );
+	}
+
+} // if ( ! function_exists( 'slimline_entry_columns' ) )
+
 /**
  * Arguments for `add_theme_support( 'infinite-scroll' )`
  *
@@ -102,9 +151,9 @@ if ( ! function_exists( 'slimline_infinite_scroll_support_args' ) ) {
 		 */
 		$args = array(
 			'footer_widgets' => 'sidebar-3',                       // change auto-load option to click option if footer widgets are active
-			'container'      => 'entries',                         // default wrapper id {@link slimline_entries_attributes() | inc/template-tags.php}
+			'container'      => 'entries',                         // default wrapper id
 			'posts_per_page' => get_option( 'posts_per_page' ),    // let user set number of posts to load
-			'render'         => 'slimline_infinite_scroll_render', // replace default rendering function with standard Slimline WordPress loop {@link index.php template} | inc/vendor.php
+			'render'         => 'slimline_infinite_scroll_render', // replace default rendering function with standard Slimline WordPress loop
 			'type'           => 'scroll',                          // allow posts to auto-load as user scrolls
 			'wrapper'        => false,                             // do not wrap loaded posts in an extra div
 		);
@@ -271,6 +320,15 @@ if ( ! function_exists( 'slimline_logo_width' ) ) {
 
 } // if ( ! function_exists( 'slimline_logo_width' ) )
 
+if ( ! function_exists( 'slimline_main_row' ) ) {
+
+	function slimline_main_row( $classes ) {
+
+		return slimline_merge_classes( 'slimline_main_row', $classes, 'row' );
+	}
+
+}
+
 /**
  * Arguments for `paginate_links()` on index pages
  *
@@ -374,6 +432,40 @@ if ( ! function_exists( 'slimline_post_thumbnails_support_args' ) ) {
 	}
 
 } // if ( ! function_exists( 'slimline_post_thumbnails_support_args' ) )
+
+/**
+ * Column widths for primary sidebar
+ *
+ * @param  array $attributes Array of HTML attributes passed from slimline_get_attributes()
+ * @return array $attributes Attribute array with columns widths added to classes
+ * @link   https://github.com/slimline/theme/wiki/slimline_site_title_link_columns()
+ * @since  0.2.0
+ */
+if ( ! function_exists( 'slimline_sidebar_primary_columns' ) ) {
+
+	function slimline_sidebar_primary_columns( $classes ) {
+
+		return slimline_merge_classes( 'slimline_sidebar-primary_columns', $classes, array( 'small-12', 'medium-3', 'columns' ) );
+	}
+
+} // if ( ! function_exists( 'slimline_sidebar_primary_columns' ) )
+
+/**
+ * Column widths for site title link
+ *
+ * @param  array $attributes Array of HTML attributes passed from slimline_get_attributes()
+ * @return array $attributes Attribute array with columns widths added to classes
+ * @link   https://github.com/slimline/theme/wiki/slimline_site_title_link_columns()
+ * @since  0.2.0
+ */
+if ( ! function_exists( 'slimline_site_title_link_columns' ) ) {
+
+	function slimline_site_title_link_columns( $classes ) {
+
+		return slimline_merge_classes( 'slimline_site_title_link_columns', $classes, array( 'small-12', 'medium-3', 'columns' ) );
+	}
+
+} // if ( ! function_exists( 'slimline_site_title_link_columns' ) )
 
 /**
  * Parameters for `add_theme_support( 'tha_hooks' )`
