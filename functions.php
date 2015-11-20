@@ -201,6 +201,13 @@ function slimline_theme_setup() {
 	 * Configures core theme features (e.g., nav menus, sidebars, etc.). All
 	 * functions in this file MUST be pluggable
 	 */
+	require_once( slimline_includes_directory() . 'config.php' );
+
+	/**
+	 * Core theme modules
+	 *
+	 * Setup functions for admin, login, etc.
+	 */
 	require_once( slimline_includes_directory() . 'core.php' );
 
 	/**
@@ -276,64 +283,86 @@ function slimline_theme_setup() {
 	 */
 
 	/**
-	 * Add login page handling
+	 * Setup core modules and functions (core.php)
 	 */
-	add_action( 'after_setup_theme', 'slimline_login', 20 );
+	add_action( 'after_setup_theme', 'slimline_autoload_register', 15 ); // Register autoload functions
+	add_action( 'after_setup_theme', 'slimline_default_layout',    20 ); // Use default rows, columns, etc.
+	add_action( 'after_setup_theme', 'slimline_login',             20 ); // Add login page handling
+	add_action( 'after_setup_theme', 'slimline_schema_org',        20 ); // Use Schema.org markup for structured data
+	add_action( 'after_setup_theme', 'slimline_vendor',            20 ); // Add third-party plugin support
 
 	/**
-	 * Add third-party plugin support
+	 * Configure core theme functionality (config.php)
 	 */
-	add_action( 'after_setup_theme', 'slimline_vendor', 20 );
+	add_action( 'init',               'slimline_register_nav_menus', 10 ); // Register main navigation menus
+	add_action( 'init',               'slimline_register_sidebars',  10 ); // Register main widget areas
+	add_action( 'wp_enqueue_scripts', 'slimline_wp_enqueue_scripts', 10 ); // Enqueue theme scripts and styles
 
 	/**
-	 * Register autoload functions
+	 * Add <meta> tags to <head>
+	 *
+	 * @link https://developer.wordpress.org/reference/hooks/wp_head/
+	 *       Description of `wp_head` action
 	 */
-	add_action( 'after_setup_theme', 'slimline_autoload_register', 15 );
+	add_action( 'wp_head', 'slimline_get_charset_tag',  0 ); // get tag-charset.php template part
+	add_action( 'wp_head', 'slimline_get_viewport_tag', 1 ); // get tag-viewport.php template part
+	add_action( 'wp_head', 'slimline_get_pingback_tag', 2 ); // get tag-pingback.php template part
 
 	/**
-	 * Register main navigation menus
+	 * Add site <header> hooks
 	 */
-	add_action( 'init', 'slimline_register_nav_menus' );
+	add_action( 'slimline_header_top',    'slimline_get_header_logo',       10 ); // get header/logo.php template part
+	add_action( 'slimline_header_bottom', 'slimline_get_header_navigation', 10 ); // get header/navigation.php template part
 
 	/**
-	 * Register main widget areas
+	 * 404.php
 	 */
-	add_action( 'init', 'slimline_register_sidebars' );
+	add_action( 'slimline_404_content',        'slimline_get_404_posts',         10 ); // get 404/posts.php template part
+	add_action( 'slimline_404_content',        'slimline_get_404_search_form',   20 ); // get 404/searchform.php template part
+	add_action( 'slimline_404_entries_before', 'slimline_404_get_entries_title', 10 ); // get 404/entries-title.php template part
+	add_action( 'slimline_404_entries_after',  'wp_reset_query',                 0  ); // reset $wp_query after showing recent posts
 
 	/**
-	 * Enqueue theme scripts and styles
+	 * Index.php
 	 */
-	add_action( 'wp_enqueue_scripts', 'slimline_wp_enqueue_scripts' );
+	add_action( 'slimline_content_top',    'slimline_get_index_header',     10 ); // get index/header.php template part
+	add_action( 'slimline_entries_before', 'slimline_get_entries_header',   10 ); // get index/entries-header.php template part
+	add_action( 'slimline_content_bottom', 'slimline_get_index_pagination', 10 ); // get index/pagination.php template part
 
+	/**
+	 * No entries found on index.php
+	 */
+	add_action( 'slimline_not_found_top',    'slimline_get_not_found_header',  10 ); // get not-found/header.php template part
+	add_action( 'slimline_not_found_bottom', 'slimline_get_not_found_content', 10 ); // get not-found/content.php template part
 
+	/**
+	 * Individual and single entries
+	 */
+	add_action( 'slimline_entry_top',            'slimline_get_entry_header',      50 ); // get entry/header.php template part
+	add_action( 'slimline_entry_content_before', 'slimline_get_entry_meta',        50 ); // get entry/meta.php template part
+	add_action( 'slimline_entry_content_after',  'slimline_get_entry_footer',      50 ); // get entry/footer.php template part
+	add_action( 'slimline_entry_bottom',         'slimline_get_comments_template', 50 ); // get comments.php
 
-	add_action( 'slimline_404_content', 'slimline_get_404_posts', 10 );
-	add_action( 'slimline_404_content', 'slimline_get_404_search_form', 20 );
-	add_action( 'slimline_content_after', 'slimline_get_sidebar_primary', 50 );
-	add_action( 'wp_head', 'slimline_get_charset_tag', 0 );
-	add_action( 'wp_head', 'slimline_get_viewport_tag', 1 );
-	add_action( 'wp_head', 'slimline_get_pingback_tag', 2 );
-	add_action( 'slimline_content_top', 'slimline_get_index_header', 10 );
-	add_action( 'slimline_entries_before', 'slimline_get_entries_title', 10 );
-	add_action( 'slimline_content_bottom', 'slimline_get_index_pagination', 10 );
-	add_action( 'slimline_entry_top', 'slimline_get_entry_header', 50 );
-	add_action( 'slimline_entry_content_before', 'slimline_get_entry_meta', 50 );
-	add_action( 'slimline_entry_content_after', 'slimline_get_entry_footer', 50 );
-	add_action( 'slimline_entry_bottom', 'slimline_get_comments_template', 50 );
-	add_action( 'slimline_not_found_top',      'slimline_get_not_found_header', 10 );
-	add_action( 'slimline_not_found_bottom',   'slimline_get_not_found_content', 10 );
-	add_action( 'slimline_404_entries_before', 'slimline_404_get_entries_title', 10 );
-	add_action( 'slimline_comment_bottom',     'slimline_comment_reply_link', 10 );
-	add_action( 'slimline_comments_top',       'slimline_get_comments_header', 10 );
-	add_action( 'slimline_comments_bottom',    'slimline_get_comments_list', 10 );
-	add_action( 'slimline_comments_bottom',    'slimline_get_comments_pagination', 20 );
-	add_action( 'slimline_comments_bottom',    'slimline_get_comments_form', 30 );
-	add_action( 'slimline_footer_before',      'slimline_get_sidebar_footer', 10 );
-	add_action( 'slimline_footer_bottom',      'slimline_get_footer_navigation', 10 );
-	add_action( 'slimline_footer_bottom',      'slimline_get_copyright_notice', 20 );
-	add_action( 'slimline_header_top',         'slimline_get_header_logo', 10 );
-	add_action( 'slimline_header_bottom',      'slimline_get_header_navigation', 10 );
+	/**
+	 * Comments
+	 */
+	add_action( 'slimline_comments_top',    'slimline_get_comments_header',     10 ); // get comments/header.php template part
+	add_action( 'slimline_comments_bottom', 'slimline_get_comments_list',       10 ); // get comments/list.php template part
+	add_action( 'slimline_comments_bottom', 'slimline_get_comments_pagination', 20 ); // get comments/pagination.php template part
+	add_action( 'slimline_comments_bottom', 'slimline_get_comments_form',       30 ); // get comments/form.php template part
+	add_action( 'slimline_comment_bottom',  'slimline_comment_reply_link',      10 ); // Output comment reply link
 
+	/**
+	 * Sidebars
+	 */
+	add_action( 'slimline_content_after', 'slimline_get_sidebar_primary', 50 ); // get sidebar.php
+
+	/**
+	 * Add site <footer> hooks
+	 */
+	add_action( 'slimline_footer_before', 'slimline_get_sidebar_footer',    10 ); // get sidebar-footer.php
+	add_action( 'slimline_footer_bottom', 'slimline_get_footer_navigation', 10 ); // get footer/navigation.php template part
+	add_action( 'slimline_footer_bottom', 'slimline_get_copyright_notice',  20 ); // get footer/notice-copyright.php template part
 
 	/**
 	 * Add content filtering to 404 descriptions
@@ -452,7 +481,7 @@ function slimline_theme_setup() {
 	add_theme_support( 'title-tag' );
 
 	/**
-	 *
+	 * Add image sizes
 	 */
 
 	/**
@@ -465,217 +494,13 @@ function slimline_theme_setup() {
 	add_image_size( 'slimline-logo', slimline_logo_width(), slimline_logo_height(), slimline_logo_crop() );
 
 	/**
-	 * Add logo size
+	 * Add logo size for login page
 	 *
 	 * @see slimline_login_logo_width()
 	 * @see slimline_login_logo_height()
 	 * @see slimline_login_logo_crop()
 	 */
 	add_image_size( 'slimline-login-logo', slimline_login_logo_width(), slimline_login_logo_height(), slimline_login_logo_crop() );
-}
-
-function slimline_autoload_register() {
-
-	if ( function_exists( '__autoload' ) ) {
-		spl_autoload_register( '__autoload' );
-	} // if ( function_exists( '__autoload' ) )
-
-	spl_autoload_register( 'slimline_autoload' );
-
-}
-
-function slimline_autoload( $class ) {
-
-	$class = strtolower( $class );
-
-	if ( 0 === strpos( $class, 'slimline' ) ) {
-		include_once( slimline_includes_directory() . 'class-' . str_replace( '_', '-', $class ) . '.php' );
-	} // if ( 0 === strpos( $class, 'slimline' ) )
-
-}
-
-/**
- * Setup login screen handling
- *
- * @link  https://github.com/slimline/theme/wiki/slimline_login()
- * @since 0.1.0
- */
-function slimline_login() {
-
-	/**
-	 * Exit if not on login screen
-	 *
-	 * @global string $pagenow The current page filename
-	 */
-	global $pagenow;
-
-	if ( 'wp-login.php' !== $pagenow ) {
-		return;
-	} // if ( 'wp-login.php' !== $pagenow )
-
-	/**
-	 * Login functions
-	 */
-	require_once( slimline_includes_directory() . 'login.php' );
-
-	/**
-	 * Output login logo css
-	 *
-	 * Replaces the default login logo with the custom logo
-	 *
-	 * @link https://developer.wordpress.org/reference/hooks/login_head/
-	 *       Description of `login_head` action
-	 * @see  slimline_login_logo()
-	 */
-	add_action( 'login_head', 'slimline_login_logo_css' );
-
-	/**
-	 * Replace login logo title with site name
-	 *
-	 * @link https://developer.wordpress.org/reference/hooks/login_headertitle/
-	 *       Description of `login_headertitle` action
-	 * @see  slimline_login_headertitle()
-	 */
-	add_filter( 'login_headertitle', 'slimline_login_headertitle' );
-
-	/**
-	 * Replace login logo url with home url
-	 *
-	 * @link https://developer.wordpress.org/reference/hooks/login_headerurl/
-	 *       Description of `login_headerurl` action
-	 * @see  slimline_login_headerurl()
-	 */
-	add_filter( 'login_headerurl', 'slimline_login_headerurl' );
-}
-
-/**
- * slimline_vendor function
- *
- * Conditional actions, filters and support for third-party plugins.
- *
- * @link  https://github.com/slimline/theme/wiki/slimline_vendor()
- * @since 0.1.0
- */
-function slimline_vendor() {
-
-	/**
-	 * Google Analytics by Yoast Support
-	 *
-	 * @link https://wordpress.org/plugins/googleanalytics/
-	 */
-	if ( defined( 'GAWP_VERSION' ) && ! is_admin() ) {
-
-		/**
-		 * @global object $yoast_ga_frontend The Front End object
-		 */
-		global $yoast_ga_frontend;
-
-		/**
-		 * Add Google Analytics filtering to slimline_content
-		 */
-		add_filter( 'slimline_content', array( $yoast_ga_frontend, 'the_content' ), 100 );
-
-	} // if ( defined( 'GAWP_VERSION' ) && ! is_admin() )
-
-	/**
-	 * Theme Hook Alliance Support
-	 *
-	 * Add support for Theme Hook Alliance actions. Theme developers may need to
-	 * unhook some default Slimline hooks for these to perform as expected.
-	 *
-	 * NOTE: the hooks below are listed in the same order as in the
-	 * tha-theme-hooks.php document.
-	 *
-	 * @link https://github.com/zamoose/themehookalliance
-	 */
-	if ( defined( 'THA_HOOKS_VERSION' ) ) {
-
-		/**
-		 * Declare THA hooks support
-		 *
-		 * @see slimline_tha_hooks_support()
-		 */
-		add_theme_support( 'tha_hooks', slimline_tha_hooks_support_args() );
-
-		/**
-		 * semantic <body> hooks
-		 */
-		add_action( 'slimline_body_top',    'tha_body_top' );
-		add_action( 'slimline_body_bottom', 'tha_body_bottom' );
-
-		/**
-		 * semantic <head> hooks
-		 */
-		add_action( 'wp_head', 'tha_head_top', 0 );
-		add_action( 'wp_head', 'tha_head_bottom', 1000 );
-
-		/**
-		 * semantic <header> hooks
-		 */
-		add_action( 'slimline_header_before', 'tha_header_before' );
-		add_action( 'slimline_header_after',  'tha_header_after' );
-		add_action( 'slimline_header_top',    'tha_header_top' );
-		add_action( 'slimline_header_bottom', 'tha_header_bottom' );
-
-		/**
-		 * semantic <content> hooks
-		 */
-		add_action( 'slimline_content_before',       'tha_content_before' );
-		add_action( 'slimline_content_after',        'tha_content_after' );
-		add_action( 'slimline_content_top',          'tha_content_top' );
-		add_action( 'slimline_content_bottom',       'tha_content_bottom' );
-		add_action( 'slimline_content_while_before', 'tha_content_while_before' );
-		add_action( 'slimline_content_while_after',  'tha_content_while_after' );
-
-		/**
-		 * semantic <entry> hooks
-		 */
-		add_action( 'slimline_entry_before',         'tha_entry_before' );
-		add_action( 'slimline_entry_after',          'tha_entry_after' );
-		add_action( 'slimline_entry_content_before', 'tha_entry_content_before' );
-		add_action( 'slimline_entry_content_after',  'tha_entry_content_after' );
-		add_action( 'slimline_entry_top',            'tha_entry_top' );
-		add_action( 'slimline_entry_bottom',         'tha_entry_bottom' );
-
-		/**
-		 * comments block hooks
-		 */
-		add_action( 'slimline_comments_before', 'tha_comments_before' );
-		add_action( 'slimline_comments_after',  'tha_comments_after' );
-
-		/**
-		 * semantic <sidebar> hooks
-		 */
-		add_action( 'slimline_sidebar_primary_before', 'tha_sidebars_before' );
-		add_action( 'slimline_sidebar_primary_after',  'tha_sidebars_after' );
-		add_action( 'slimline_sidebar_primary_top',    'tha_sidebar_top' );
-		add_action( 'slimline_sidebar_primary_bottom', 'tha_sidebar_bottom' );
-
-		/**
-		 * semantic <footer> hooks
-		 */
-		add_action( 'slimline_footer_before', 'tha_footer_before' );
-		add_action( 'slimline_footer_after',  'tha_footer_after' );
-		add_action( 'slimline_footer_top',    'tha_footer_top' );
-		add_action( 'slimline_footer_bottom', 'tha_footer_bottom' );
-
-	} // if ( defined( 'THA_HOOKS_VERSION' ) )
-
-	/**
-	 * Yoast SEO Support
-	 *
-	 * @link https://wordpress.org/plugins/wordpress-seo/
-	 */
-	if ( defined( 'WPSEO_VERSION' ) ) {
-
-		/**
-		 * Automatically insert Yoast breadcrumbs
-		 *
-		 * @see slimline_yoast_breadcrumb()
-		 */
-		add_action( 'slimline_content_before', 'slimline_yoast_breadcrumb' );
-
-	} // if ( defined( 'WPSEO_VERSION' ) )
 }
 
 /**
