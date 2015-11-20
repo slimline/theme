@@ -26,6 +26,88 @@ function slimline_has_logo() {
 }
 
 /**
+ * Whether the current page is considered a blog page
+ *
+ * By default, a page is considered blog page if it is a) the posts page, b) an
+ * archive normally used by posts (e.g., category, date, etc.) or c) a single post.
+ *
+ * @return bool TRUE is yes, otherwise FALSE
+ * @link   https://github.com/slimline/theme/wiki/slimline_is_blog()
+ * @since  0.2.0
+ */
+function slimline_is_blog() {
+
+	/**
+	 * Filter the results
+	 *
+	 * @link https://github.com/slimline/theme/wiki/slimline_is_blog
+	 * @link https://developer.wordpress.org/reference/functions/is_home/
+	 *       Description of the `is_home` function
+	 * @link https://developer.wordpress.org/reference/functions/is_author/
+	 *       Description of the `is_author` function
+	 * @link https://developer.wordpress.org/reference/functions/is_category/
+	 *       Description of the `is_category` function
+	 * @link https://developer.wordpress.org/reference/functions/is_date/
+	 *       Description of the `is_date` function
+	 * @link https://developer.wordpress.org/reference/functions/is_tag/
+	 *       Description of the `is_tag` function
+	 * @link https://developer.wordpress.org/reference/functions/is_single/
+	 *       Description of the `is_single` function
+	 */
+	return apply_filters( 'slimline_is_blog', ( is_home() || is_author() || is_category() || is_date() || is_tag() || is_single() ) );
+}
+
+/**
+ * Whether the current post is considered a blog post
+ *
+ * By default, a post is considered a blog post if it has the post type "post".
+ *
+ * @return bool TRUE is yes, otherwise FALSE
+ * @link   https://github.com/slimline/theme/wiki/slimline_is_blog_post()
+ * @since  0.2.0
+ */
+function slimline_is_blog_post( $post = null ) {
+
+	/**
+	 * Get current post (or given post)
+	 *
+	 * @link https://developer.wordpress.org/reference/functions/get_post/
+	 *       Description of the `get_post` function
+	 */
+	$post = get_post( $post );
+
+	/**
+	 * Filter the results
+	 *
+	 * @link https://github.com/slimline/theme/wiki/slimline_is_blog_post
+	 * @link https://developer.wordpress.org/reference/functions/get_post_type/
+	 *       Description of the `get_post_type` function
+	 */
+	return apply_filters( 'slimline_is_blog_post', ( 'post' === get_post_type( $post ) ) );
+}
+
+/**
+ * Whether the blog has posts in more than one category
+ *
+ * @return bool TRUE is yes, otherwise FALSE
+ * @link   https://github.com/slimline/theme/wiki/slimline_is_multicategory()
+ * @since  0.2.0
+ */
+function slimline_is_multicategory() {
+
+	$category_count = slimline_get_category_count() - 1;
+
+	/**
+	 * Filter the results
+	 *
+	 * @link https://github.com/slimline/theme/wiki/slimline_is_multicategory
+	 * @link https://developer.wordpress.org/reference/functions/get_post_type/
+	 *       Description of the `get_post_type` function
+	 */
+	return apply_filters( 'slimline_is_multicategory', (bool) $category_count );
+}
+
+/**
  * Decide whether to show comments
  *
  * By default comments are shown on singular posts that support comments, either
@@ -177,6 +259,27 @@ function slimline_use_as_logo( $feature = '' ) {
 	 * @link  https://github.com/slimline/theme/wiki/slimline_use_$feature_as_logo
 	 */
 	return apply_filters( "slimline_use_{$feature}_as_logo", $use );
+}
+
+/**
+ * Use default rows, column sizes, etc.?
+ *
+ * By default will return FALSE if using a child theme, TRUE if not.
+ *
+ * @return bool TRUE for yes, otherwise FALSE
+ * @link   https://github.com/slimline/theme/wiki/slimline_use_default_layout()
+ * @since  0.2.0
+ */
+function slimline_use_default_layout() {
+
+	/**
+	 * Filter the result
+	 *
+	 * @link https://developer.wordpress.org/reference/functions/is_child_theme/
+	 *       Description of the `is_child_theme` function
+	 * @link https://github.com/slimline/theme/wiki/slimline_use_default_layout
+	 */
+	return apply_filters( 'slimline_use_default_layout', ( ! is_child_theme() ) );
 }
 
 /**
