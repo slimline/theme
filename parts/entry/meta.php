@@ -6,7 +6,7 @@
  *
  * @package    Slimline / Theme
  * @subpackage Template Parts
- * @since      0.3.0
+ * @since      0.2.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
  * Conditionally show entry meta. By default we will show it only on blog posts.
  *
  * @see   https://github.com/slimline/theme/wiki/slimline_show_entry_meta
- * @since 0.3.0
+ * @since 0.2.0
  */
 if ( slimline_show_entry_meta() ) :
 ?>
@@ -45,7 +45,7 @@ if ( slimline_show_entry_meta() ) :
 		  * @see https://developer.wordpress.org/reference/functions/has_category/
 		  *      Documentation of has_category function
 		  */
-		 if ( has_category() ) :
+		 if ( slimline_is_multicategory() && has_category() ) :
 		?>
 			<p class="entry-categories">
 
@@ -62,7 +62,7 @@ if ( slimline_show_entry_meta() ) :
 				?>
 
 			</p><!-- .entry-categories -->
-		<?php endif; // if ( has_category() ) ?>
+		<?php endif; // if ( slimline_is_multicategory() && has_category() ) ?>
 
 	</footer><!-- .entry-meta -->
 

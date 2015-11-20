@@ -16,6 +16,8 @@ class Slimline {
 	 */
 	protected static $_instance = null;
 
+	protected $category_count = null;
+
 	protected $context = null;
 
 	protected $logo_id = null;
@@ -25,6 +27,36 @@ class Slimline {
 	function __construct() {
 
 	} // function __construct()
+
+	function get_category_count( $hide_empty = true ) {
+
+		if ( is_null( $this->category_count ) ) {
+
+			/**
+			 * Retrieve current category ids
+			 *
+			 * @link https://developer.wordpress.org/reference/functions/get_terms/
+			 *       Description of the `get_terms` function
+			 */
+			$categories = get_terms(
+				'category',
+				array(
+					'fields'     => 'ids',
+					'hide_empty' => $hide_empty,
+				)
+			);
+
+			/**
+			 * If array of ids returned, set $category_count to number of elements in
+			 * array. Otherwise (e.g., if WP_Error is returned) set count to 0.
+			 */
+			$this->category_count = ( is_array( $categories ) ? count( $categories ) : 0 );
+
+		} // if ( is_null( $this->category_count ) )
+
+		return absint( $this->category_count );
+
+	} // function get_category_count()
 
 	/**
 	 * Return the context class instance

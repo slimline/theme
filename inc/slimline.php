@@ -57,9 +57,23 @@ function Slimline_Template() {
 }
 
 /**
+ * Retrieve the total number of categories
+ *
+ * @return int $slimline::get_category_count()
+ * @link   https://github.com/slimline/theme/wiki/slimline_get_category_count()
+ * @see    Slimline()
+ * @since  0.2.0
+ */
+function slimline_get_category_count() {
+
+	return Slimline()->get_category_count();
+}
+
+/**
  * Retrieve the context array
  *
  * @return array Slimline_Context::context
+ * @link   https://github.com/slimline/theme/wiki/slimline_get_context()
  * @see    Slimline_Context()
  * @since  0.2.0
  */
@@ -72,6 +86,7 @@ function slimline_get_context() {
  * Retrieve the text description for the current page
  *
  * @return string Slimline_Context::description
+ * @link   https://github.com/slimline/theme/wiki/slimline_get_context_description()
  * @see    Slimline_Context()
  * @since  0.2.0
  */
@@ -84,6 +99,7 @@ function slimline_get_context_description() {
  * Retrieve the thumbnail ID for the current page
  *
  * @return string Slimline_Context::thumbnail_id
+ * @link   https://github.com/slimline/theme/wiki/slimline_get_context_thumbnail_id()
  * @see    Slimline_Context()
  * @since  0.2.0
  */
@@ -96,6 +112,7 @@ function slimline_get_context_thumbnail_id() {
  * Retrieve the title for the current page
  *
  * @return string Slimline_Context::title
+ * @link   https://github.com/slimline/theme/wiki/slimline_get_context_title()
  * @see    Slimline_Context()
  * @since  0.2.0
  */
@@ -109,6 +126,7 @@ function slimline_get_context_title() {
  *
  * @return int Slimline::logo_id ID of image attachment if a site logo is found,
  *                               otherwise 0
+ * @link   https://github.com/slimline/theme/wiki/slimline_get_logo_id()
  * @see    Slimline()
  * @since  0.2.0
  */
@@ -121,6 +139,7 @@ function slimline_get_logo_id() {
  * Retrieve name of template parts directory
  *
  * @return string Slimline_Template::parts_directory Template parts directory name
+ * @link   https://github.com/slimline/theme/wiki/slimline_get_template_parts_directory()
  * @see    Slimline_Template()
  * @since  0.2.0
  */
@@ -134,6 +153,7 @@ function slimline_get_template_parts_directory() {
  *
  * @param  string $template_string Template string passed
  * @return string Slimline_Template::parts_directory Template parts directory name
+ * @link   https://github.com/slimline/theme/wiki/slimline_get_template_path()
  * @see    Slimline_Template()
  * @since  0.2.0
  */
@@ -146,6 +166,7 @@ function slimline_get_template_path( $template_string ) {
  * Retrieve name of template parts directory
  *
  * @return string Slimline_Template::parts_directory Template parts directory name
+ * @link   https://github.com/slimline/theme/wiki/slimline_set_template_path()
  * @see    Slimline_Template()
  * @since  0.2.0
  */
