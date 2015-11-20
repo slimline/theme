@@ -135,7 +135,7 @@ function slimline_404_search_attributes( $attributes = '' ) {
  */
 function slimline_404_search_title( $before = '', $after = '', $echo = true ) {
 
-	echo slimline_get_404_title( $before, $after, $echo );
+	echo slimline_get_404_search_title( $before, $after, $echo );
 }
 
 /**
@@ -586,6 +586,20 @@ function slimline_not_found_title( $before = '', $after = '', $echo = true ) {
 function slimline_not_found_title_attributes( $attributes = '' ) {
 
 	echo slimline_get_not_found_title_attributes( $attributes );
+}
+
+/**
+ * Outputs HTML attributes meant for the search <form> tag.
+ *
+ * @param array|string $attributes (Optional). An array or query string of
+ *                                 attribute / value pairs.
+ * @uses  slimline_get_404_search_attributes() to generate attributes
+ * @link  https://github.com/slimline/theme/wiki/slimline_search_form_attributes()
+ * @since 0.1.0
+ */
+function slimline_search_form_attributes( $attributes = '' ) {
+
+	echo slimline_get_search_form_attributes( $attributes );
 }
 
 /**

@@ -12,6 +12,67 @@
 if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 
 /**
+ * Generate a default set of recent posts for the 404 page
+ *
+ * @link https://github.com/slimline/theme/wiki/slimline_404_recent_posts()
+ */
+function slimline_404_recent_posts() {
+
+	global $wp;
+
+	/**
+	 * Default arguments
+	 *
+	 * @see https://developer.wordpress.org/reference/classes/WP_Query/parse_query/
+	 *      Explanation of available arguments
+	 */
+	$args = array(
+		'orderby'        => 'post_date', // order posts chronologically
+		'order'          => 'DESC',      // most recent first
+		'post_type'      => 'any',       // show all posts from any (public) type
+		'posts_per_page' => 5,           // only retrieve 5 posts
+	);
+
+	/**
+	 * Grab the request URI that brought us to the 404 page
+	 *
+	 * We will use the last part of the URL (the attempted post/taxonomy slug) as a
+	 * search phrase for the query to hopefully get more relevant results.
+	 *
+	 * @link http://php.net/manual/en/function.basename.php
+	 *       Description of the `basename` function
+	 */
+	$basename = basename( $wp->request );
+
+	/**
+	 * If we have a search phrase, add it to the query args
+	 */
+	if ( $basename ) {
+
+		/**
+		 * Strip hyphens and underscores before adding the phrase
+		 */
+		$args['s'] = str_replace( array( '-', '_' ), ' ', $basename );
+
+	} // if ( $basename )
+
+	/**
+	 * Filter the arguments before creating the query
+	 *
+	 * @link https://github.com/slimline/theme/wiki/slimline_404_recent_posts
+	 */
+	$args = apply_filters( 'slimline_404_recent_posts_args', $args );
+
+	/**
+	 * Create the query and return
+	 *
+	 * @link https://developer.wordpress.org/reference/classes/wp_query/
+	 *       Description of the `WP_Query` class
+	 */
+	return new WP_Query( $args );
+}
+
+/**
  * Unset "class" attribute
  *
  * Per WordPress Theme Development guidelines, class attributes for body, posts and
@@ -48,8 +109,8 @@ function slimline_attributes_unset_class( $attributes = array() ) {
  * @param  array $attributes Array of default attributes passed from
  *                           `slimline_get_attributes`
  * @return array $attributes Attributes array with "lang" removed
- * @link http://codex.wordpress.org/Theme_Development#Document_Head_.28header.php.29
- *       The opening <html> tag should include `language_attributes()`.
+ * @link   http://codex.wordpress.org/Theme_Development#Document_Head_.28header.php.29
+ *         The opening <html> tag should include `language_attributes()`.
  * @since  0.2.0
  */
 function slimline_attributes_unset_lang( $attributes = array() ) {
@@ -128,8 +189,8 @@ function slimline_get_404_attributes( $attributes = '' ) {
 	 * Default attributes
 	 */
 	$defaults = array(
-		'class' => slimline_get_class( '404', array( 'not-found' ) ), // class="not-found 404"
-		'id'    => '404',                                             // id="404"
+		'class' => array( 'not-found' ), // class="not-found 404"
+		'id'    => '404',                // id="404"
 	);
 
 	/**
@@ -155,7 +216,7 @@ function slimline_get_404_description() {
 	/**
 	 * Default descriptive text
 	 */
-	$description = slimline_context_get_description();
+	$description = slimline_get_context_description();
 
 	/**
 	 * Filter the description
@@ -186,7 +247,7 @@ function slimline_get_404_description_attributes( $attributes = '' ) {
 	 * Default attributes
 	 */
 	$defaults = array(
-		'class' => slimline_get_class( '404-description', array( 'description main-description' ) ), // class="description main-description 404-description"
+		'class' => array( 'description', 'main-description' ), // class="description main-description 404-description"
 	);
 
 	/**
@@ -220,8 +281,8 @@ function slimline_get_404_entries_attributes( $attributes = '' ) {
 	 * Default attributes
 	 */
 	$defaults = array(
-		'class' => slimline_get_class( '404-entries', array( 'entries' ) ), // class="entries 404-entries"
-		'id'    => 'entries',                                               // id="entries"
+		'class' => array( 'entries' ), // class="entries 404-entries"
+		'id'    => 'entries',          // id="entries"
 	);
 
 	/**
@@ -278,7 +339,7 @@ function slimline_get_404_entries_title_attributes( $attributes = '' ) {
 	 * Default attributes
 	 */
 	$defaults = array(
-		'class' => slimline_get_class( '404-entries-title', array( 'title', 'subtitle', 'entries-title' ) ), // class="title subtitle entries-title 404-entries-title"
+		'class' => array( 'title', 'subtitle', 'entries-title' ), // class="title subtitle entries-title 404-entries-title"
 	);
 
 	/**
@@ -313,8 +374,8 @@ function slimline_get_404_search_attributes( $attributes = '' ) {
 	 * Default attributes
 	 */
 	$defaults = array(
-		'class' => slimline_get_class( '404-search', array( 'search' ) ), // class="search 404-search"
-		'id'    => 'search',                                              // id="search"
+		'class' => array( 'search' ), // class="search 404-search"
+		'id'    => 'search',          // id="search"
 	);
 
 	/**
@@ -371,7 +432,7 @@ function slimline_get_404_search_title_attributes( $attributes = '' ) {
 	 * Default attributes
 	 */
 	$defaults = array(
-		'class' => slimline_get_class( '404-search-title', array( 'title', 'subtitle', 'search-title' ) ), // class="title subtitle search-title 404-search-title"
+		'class' => array( 'title', 'subtitle', 'search-title' ), // class="title subtitle search-title 404-search-title"
 	);
 
 	/**
@@ -397,7 +458,7 @@ function slimline_get_404_title() {
 	/**
 	 * Default descriptive title
 	 */
-	$title = slimline_context_get_title();
+	$title = slimline_get_context_title();
 
 	/**
 	 * Filter and return the title
@@ -428,7 +489,7 @@ function slimline_get_404_title_attributes( $attributes = '' ) {
 	 * Default attributes
 	 */
 	$defaults = array(
-		'class' => slimline_get_class( '404-title', array( 'title main-title' ) ), // class="title main-title 404-title"
+		'class' => array( 'title', 'main-title' ), // class="title main-title 404-title"
 	);
 
 	/**
@@ -464,7 +525,27 @@ function slimline_get_404_title_attributes( $attributes = '' ) {
  */
 function slimline_get_attributes( $attributes = '', $element = '', $defaults = array() ) {
 
+	/**
+	 * Create separate array for attributes to be returned
+	 *
+	 * This second array lets us continue to pass the first array in filters after we
+	 * generate the return string.
+	 */
 	$return_attributes = array();
+
+	/**
+	 * Make sure defaults include a class attribute
+	 */
+	if ( ! isset( $defaults['class'] ) ) {
+		$defaults['class'] = '';
+	} // if ( ! isset( $defaults['class'] ) )
+
+	/**
+	 * Generate default classes
+	 *
+	 * @see slimline_get_class()
+	 */
+	$defaults['class'] = slimline_get_class( $element, (array) $defaults['class'] );
 
 	/**
 	 * Convert query string style arguments to array
@@ -594,7 +675,7 @@ function slimline_get_breadcrumb_attributes( $attributes = '' ) {
 	 * Default attributes
 	 */
 	$defaults = array(
-		'class' => slimline_get_class( 'breadcrumb' ), // class="breadcrumb"
+		'class' => array( 'breadcrumb' ), // class="breadcrumb"
 	);
 
 	/**
@@ -882,8 +963,7 @@ function slimline_get_entries_attributes( $attributes = '' ) {
 	 * Default attributes
 	 */
 	$defaults = array(
-		'class' => slimline_get_class( 'entries' ), // class="entries"
-		'id'    => 'entries',                       // id="entries"
+		'id'    => 'entries',          // id="entries"
 	);
 
 	/**
@@ -940,7 +1020,7 @@ function slimline_get_entries_title_attributes( $attributes = '' ) {
 	 * Default attributes
 	 */
 	$defaults = array(
-		'class' => slimline_get_class( 'entries-title', array( 'title', 'subtitle', 'entries-title' ) ), // class="title subtitle entries-title"
+		'class' => array( 'title', 'subtitle', 'entries-title' ), // class="title subtitle entries-title"
 	);
 
 	/**
@@ -1014,7 +1094,7 @@ function slimline_get_entry_content_attributes( $attributes = '' ) {
 	 * Default attributes
 	 */
 	$defaults = array(
-		'class' => slimline_get_class( 'entry-content', array( 'content' ) ), // class="content entry-content"
+		'class' => array( 'content' ), // class="content entry-content"
 	);
 
 	/**
@@ -1048,7 +1128,7 @@ function slimline_get_entry_description_attributes( $attributes = '' ) {
 	 * Default attributes
 	 */
 	$defaults = array(
-		'class' => slimline_get_class( 'entry-description', array( 'description' ) ), // class="description entry-description"
+		'class' => array( 'description' ), // class="description entry-description"
 	);
 
 	/**
@@ -1096,7 +1176,7 @@ function slimline_get_entry_title_attributes( $attributes = '' ) {
 	 * Default attributes
 	 */
 	$defaults = array(
-		'class' => slimline_get_class( 'entry-title', $classes ), // class="title (main-title) entry-title"
+		'class' => $classes, // class="title (main-title) entry-title"
 	);
 
 	/**
@@ -1108,6 +1188,30 @@ function slimline_get_entry_title_attributes( $attributes = '' ) {
 	 * @see slimline_get_attributes()
 	 */
 	return slimline_get_attributes( $attributes, 'entry-title', $defaults );
+}
+
+/**
+ * Add theme classes to Gravity Forms submit buttons
+ *
+ * @param string $button_input The string containing the <input> tag to be filtered.
+ * @link  https://github.com/slimline/theme/wiki/slimline_get_gform_submit_button_class()
+ * @link  https://www.gravityhelp.com/documentation/article/gform_submit_button/
+ *        Description of `gform_submit_button` filter
+ * @since 0.2.0
+ */
+function slimline_get_gform_submit_button_class( $button_input ) {
+
+	/**
+	 * Filter the classes
+	 *
+	 * @link  https://github.com/slimline/theme/wiki/slimline_get_gform_submit_button_class
+	 */
+	$button_class = apply_filters( 'slimline_gform_submit_button_class', 'button' );
+
+	/**
+	 * Add the classes and return
+	 */
+	return str_replace( 'class="', "class=\"{$button_class} ", $button_input );
 }
 
 /**
@@ -1130,7 +1234,7 @@ function slimline_get_html_attributes( $attributes = '' ) {
 	 * Default attributes
 	 */
 	$defaults = array(
-		'class' => slimline_get_class( 'html', array( 'no-js' ) ), // class="no-js html"
+		'class' => array( 'no-js' ), // class="no-js html"
 	);
 
 	/**
@@ -1164,8 +1268,7 @@ function slimline_get_index_attributes( $attributes = '' ) {
 	 * Default attributes
 	 */
 	$defaults = array(
-		'class' => slimline_get_class( 'index' ), // class="index"
-		'id'    => 'index',                       // id="index"
+		'id'    => 'index', // id="index"
 	);
 
 	/**
@@ -1224,7 +1327,7 @@ function slimline_get_index_description_attributes( $attributes = '' ) {
 	 * Default attributes
 	 */
 	$defaults = array(
-		'class' => slimline_get_class( 'index-description', array( 'description main-description' ) ), // class="description main-description index-description"
+		'class' => array( 'description', 'main-description' ), // class="description main-description index-description"
 	);
 
 	/**
@@ -1283,7 +1386,7 @@ function slimline_get_index_title_attributes( $attributes = '' ) {
 	 * Default attributes
 	 */
 	$defaults = array(
-		'class' => slimline_get_class( 'index-title', array( 'title main-title' ) ), // class="title main-title index-title"
+		'class' => array( 'title', 'main-title' ), // class="title main-title index-title"
 	);
 
 	/**
@@ -1471,8 +1574,7 @@ function slimline_get_not_found_attributes( $attributes = '' ) {
 	 * Default attributes
 	 */
 	$defaults = array(
-		'class' => slimline_get_class( 'not-found', array( 'not-found' ) ), // class="not-found not-found"
-		'id'    => 'not-found',                                             // id="not-found"
+		'id'    => 'not-found', // id="not-found"
 	);
 
 	/**
@@ -1529,7 +1631,7 @@ function slimline_get_not_found_description_attributes( $attributes = '' ) {
 	 * Default attributes
 	 */
 	$defaults = array(
-		'class' => slimline_get_class( 'not-found-description', array( 'description main-description' ) ), // class="description main-description not-found-description"
+		'class' => array( 'description', 'main-description' ), // class="description main-description not-found-description"
 	);
 
 	/**
@@ -1586,7 +1688,7 @@ function slimline_get_not_found_title_attributes( $attributes = '' ) {
 	 * Default attributes
 	 */
 	$defaults = array(
-		'class' => slimline_get_class( 'not-found-title', array( 'title main-title' ) ), // class="title main-title not-found-title"
+		'class' => array( 'title', 'main-title' ), // class="title main-title not-found-title"
 	);
 
 	/**
@@ -1598,6 +1700,42 @@ function slimline_get_not_found_title_attributes( $attributes = '' ) {
 	 * @see slimline_get_attributes()
 	 */
 	return slimline_get_attributes( $attributes, 'not-found-title', $defaults );
+}
+
+/**
+ * Generate HTML attributes for the search <form> tag
+ *
+ * Essentially a wrapper function for `slimline_get_attributes()` that includes
+ * default attributes. Developers can modify the returned string using the
+ * `slimline_search-form_attributes` filter.
+ *
+ * @param  array|string $attributes (Optional). An array or query string of
+ *                                  attribute / value pairs.
+ * @return string       $attributes The generated string of attributes
+ * @uses   slimline_get_attributes() to generate the attributes
+ * @link   https://github.com/slimline/theme/wiki/slimline_get_search_form_attributes()
+ * @since  0.1.0
+ */
+function slimline_get_search_form_attributes( $attributes = '' ) {
+
+	/**
+	 * Required attributes
+	 */
+	$attributes = array(
+		'action' => home_url( '/' ),
+		'method' => 'get',
+		'role'   => 'search',
+	);
+
+	/**
+	 * Return attributes string
+	 *
+	 * Note that the `slimline_attributes` and `slimline_404-search_attributes`
+	 * filters will be applied by `slimline_get_attributes()`.
+	 *
+	 * @see slimline_get_attributes()
+	 */
+	return slimline_get_attributes( $attributes, 'search-form' );
 }
 
 /**
@@ -1620,8 +1758,8 @@ function slimline_get_sidebar_footer_attributes( $attributes = '' ) {
 	 * Default attributes
 	 */
 	$defaults = array(
-		'class' => slimline_get_class( 'sidebar-footer', array( 'sidebar' ) ), // class="sidebar sidebar-footer"
-		'id'    => 'sidebar-footer',                                           // id="sidebar-footer"
+		'class' => array( 'sidebar' ), // class="sidebar sidebar-footer"
+		'id'    => 'sidebar-footer',   // id="sidebar-footer"
 	);
 
 	/**
@@ -1655,7 +1793,7 @@ function slimline_get_sidebar_footer_list_attributes( $attributes = '' ) {
 	 * Default attributes
 	 */
 	$defaults = array(
-		'class' => slimline_get_class( 'sidebar-footer-list', array( 'small-block-grid-1 medium-block-grid-2 large-block-grid-3' ) ), // class="small-block-grid-1 medium-block-grid-2 large-block-grid-3 sidebar-footer-list"
+		'class' => array( 'small-block-grid-1 medium-block-grid-2 large-block-grid-3' ), // class="small-block-grid-1 medium-block-grid-2 large-block-grid-3 sidebar-footer-list"
 	);
 
 	/**
@@ -1690,8 +1828,8 @@ function slimline_get_sidebar_primary_attributes( $attributes = '' ) {
 	 * Default attributes
 	 */
 	$defaults = array(
-		'class' => slimline_get_class( 'sidebar-primary', array( 'sidebar' ) ), // class="sidebar sidebar-primary"
-		'id'    => 'sidebar-primary',                                           // id="sidebar-primary"
+		'class' => array( 'sidebar' ), // class="sidebar sidebar-primary"
+		'id'    => 'sidebar-primary',  // id="sidebar-primary"
 	);
 
 	/**
@@ -1725,8 +1863,8 @@ function slimline_get_site_footer_attributes( $attributes = '' ) {
 	 * Default attributes
 	 */
 	$defaults = array(
-		'class' => slimline_get_class( 'site-footer', array( 'footer' ) ), // class="footer site-footer"
-		'id'    => 'site-footer',                                          // id="site-footer"
+		'class' => array( 'footer' ), // class="footer site-footer"
+		'id'    => 'site-footer',     // id="site-footer"
 	);
 
 	/**
@@ -1760,8 +1898,8 @@ function slimline_get_site_header_attributes( $attributes = '' ) {
 	 * Default attributes
 	 */
 	$defaults = array(
-		'class' => slimline_get_class( 'site-header', array( 'header' ) ), // class="header site-header"
-		'id'    => 'site-header',                                          // id="site-header"
+		'class' => array( 'header' ), // class="header site-header"
+		'id'    => 'site-header',     // id="site-header"
 	);
 
 	/**
@@ -1794,7 +1932,6 @@ function slimline_get_site_title_link_attributes( $attributes = '' ) {
 	 * Default attributes
 	 */
 	$defaults = array(
-		'class' => slimline_get_class( 'site-title-link' ), // class="site-title-link"
 		'href'  => home_url( '/' ),
 	);
 
