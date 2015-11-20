@@ -32,7 +32,35 @@ function slimline_schema_add_itemprop_breadcrumb( $attributes = array() ) {
 	 *       Explanation of itemprop
 	 * @link https://schema.org/breadcrumb Documentation of "breadcrumb" property
 	 */
-	$attributes[ 'itemprop' ] = 'breadcrumb';
+	$attributes['itemprop'] = 'breadcrumb';
+
+	/**
+	 * Return edited array
+	 */
+	return $attributes;
+}
+
+/**
+ * Add "blogPost" itemprop attribute
+ *
+ * Sets the itemprop attribute to "blogPost". Meant to be used with
+ * `slimline_attributes` filters.
+ *
+ * @param  array $attributes The array of default attributes
+ * @return array $attributes Array of attributes with itemprop added
+ * @link   https://github.com/slimline/theme/wiki/slimline_schema_add_itemprop_blogpost()
+ * @since  0.2.0
+ */
+function slimline_schema_add_itemprop_blogpost( $attributes = array() ) {
+
+	/**
+	 * Add "blogPost" itemprop
+	 *
+	 * @link https://schema.org/docs/gs.html#microdata_itemprop
+	 *       Explanation of itemprop
+	 * @link https://schema.org/blogPost Documentation of "blogPost" property
+	 */
+	$attributes['itemprop'] = 'blogPost';
 
 	/**
 	 * Return edited array
@@ -60,7 +88,7 @@ function slimline_schema_add_itemprop_comment( $attributes = array() ) {
 	 *       Explanation of itemprop
 	 * @link https://schema.org/comment Documentation of "comment" property
 	 */
-	$attributes[ 'itemprop' ] = 'comment';
+	$attributes['itemprop'] = 'comment';
 
 	/**
 	 * Return edited array
@@ -88,7 +116,7 @@ function slimline_schema_add_itemprop_description( $attributes = array() ) {
 	 *       Explanation of itemprop
 	 * @link https://schema.org/description Documentation of "description" property
 	 */
-	$attributes[ 'itemprop' ] = 'description';
+	$attributes['itemprop'] = 'description';
 
 	/**
 	 * Return edited array
@@ -116,7 +144,7 @@ function slimline_schema_add_itemprop_headline( $attributes = array() ) {
 	 *       Explanation of itemprop
 	 * @link https://schema.org/headline Documentation of "headline" property
 	 */
-	$attributes[ 'itemprop' ] = 'headline';
+	$attributes['itemprop'] = 'headline';
 
 	/**
 	 * Return edited array
@@ -144,7 +172,7 @@ function slimline_schema_add_itemprop_mainentity( $attributes = array() ) {
 	 *       Explanation of itemprop
 	 * @link https://schema.org/mainEntity Documentation of "mainEntity" property
 	 */
-	$attributes[ 'itemprop' ] = 'mainEntity';
+	$attributes['itemprop'] = 'mainEntity';
 
 	/**
 	 * Return edited array
@@ -172,7 +200,7 @@ function slimline_schema_add_itemprop_text( $attributes = array() ) {
 	 *       Explanation of itemprop
 	 * @link https://schema.org/text Documentation of "text" property
 	 */
-	$attributes[ 'itemprop' ] = 'text';
+	$attributes['itemprop'] = 'text';
 
 	/**
 	 * Return edited array
@@ -205,7 +233,7 @@ function slimline_schema_add_itemscope( $attributes = array() ) {
 	 * @link https://make.wordpress.org/core/handbook/best-practices/coding-standards/html/#quotes
 	 *       Description of HTML attribute coding standards
 	 */
-	$attributes[ 'itemscope' ] = 'itemscope';
+	$attributes['itemscope'] = 'itemscope';
 
 	/**
 	 * Return edited array
@@ -233,7 +261,7 @@ function slimline_schema_add_itemtype_blog( $attributes = array() ) {
 	 *       Explanation of itemtype
 	 * @link https://schema.org/Blog Documentation of "Blog" type
 	 */
-	$attributes[ 'itemtype' ] = 'https://schema.org/Blog';
+	$attributes['itemtype'] = 'https://schema.org/Blog';
 
 	/**
 	 * Return edited array
@@ -261,7 +289,7 @@ function slimline_schema_add_itemtype_blogposting( $attributes = array() ) {
 	 *       Explanation of itemtype
 	 * @link https://schema.org/BlogPosting Documentation of "BlogPosting" type
 	 */
-	$attributes[ 'itemtype' ] = 'https://schema.org/BlogPosting';
+	$attributes['itemtype'] = 'https://schema.org/BlogPosting';
 
 	/**
 	 * Return edited array
@@ -289,7 +317,7 @@ function slimline_schema_add_itemtype_comment( $attributes = array() ) {
 	 *       Explanation of itemtype
 	 * @link https://schema.org/Comment Documentation of "Comment" type
 	 */
-	$attributes[ 'itemtype' ] = 'https://schema.org/Comment';
+	$attributes['itemtype'] = 'https://schema.org/Comment';
 
 	/**
 	 * Return edited array
@@ -317,7 +345,7 @@ function slimline_schema_add_itemtype_creativework( $attributes = array() ) {
 	 *       Explanation of itemtype
 	 * @link https://schema.org/CreativeWork Documentation of "CreativeWork" type
 	 */
-	$attributes[ 'itemtype' ] = 'https://schema.org/CreativeWork';
+	$attributes['itemtype'] = 'https://schema.org/CreativeWork';
 
 	/**
 	 * Return edited array
@@ -345,7 +373,7 @@ function slimline_schema_add_itemtype_webpage( $attributes = array() ) {
 	 *       Explanation of itemtype
 	 * @link https://schema.org/WebPage Documentation of "WebPage" type
 	 */
-	$attributes[ 'itemtype' ] = 'https://schema.org/WebPage';
+	$attributes['itemtype'] = 'https://schema.org/WebPage';
 
 	/**
 	 * Return edited array
@@ -373,7 +401,7 @@ function slimline_schema_add_itemtype_wpfooter( $attributes = array() ) {
 	 *       Explanation of itemtype
 	 * @link https://schema.org/WPFooter Documentation of "WPFooter" type
 	 */
-	$attributes[ 'itemtype' ] = 'https://schema.org/WPFooter';
+	$attributes['itemtype'] = 'https://schema.org/WPFooter';
 
 	/**
 	 * Return edited array
@@ -401,7 +429,7 @@ function slimline_schema_add_itemtype_wpheader( $attributes = array() ) {
 	 *       Explanation of itemtype
 	 * @link https://schema.org/WPHeader Documentation of "WPHeader" type
 	 */
-	$attributes[ 'itemtype' ] = 'https://schema.org/WPHeader';
+	$attributes['itemtype'] = 'https://schema.org/WPHeader';
 
 	/**
 	 * Return edited array
@@ -429,12 +457,117 @@ function slimline_schema_add_itemtype_wpsidebar( $attributes = array() ) {
 	 *       Explanation of itemtype
 	 * @link https://schema.org/WPSidebar Documentation of "WPSidebar" type
 	 */
-	$attributes[ 'itemtype' ] = 'https://schema.org/WPSidebar';
+	$attributes['itemtype'] = 'https://schema.org/WPSidebar';
 
 	/**
 	 * Return edited array
 	 */
 	return $attributes;
+}
+
+/**
+ * Conditionally add itemprop attribute based on post type
+ *
+ * @param  array $attributes The array of default attributes
+ * @return array $attributes Array of attributes with itemtype added
+ * @link   https://github.com/slimline/theme/wiki/slimline_schema_entry_itemprop()
+ * @since  0.2.0
+ */
+function slimline_schema_entry_itemprop( $attributes = array() ) {
+
+	/**
+	 * Only add itemprop if in the main loop
+	 *
+	 * @link https://developer.wordpress.org/reference/functions/is_main_query/
+	 *       Description of `is_main_query` function
+	 */
+	if ( is_main_query() ) {
+
+		/**
+		 * Label as "mainEntity" if a singular post
+		 */
+		if ( is_singular() ) {
+
+			return slimline_schema_add_itemprop_mainentity( $attributes );
+
+		/**
+		 * Label as "blogPost" if a blog post
+		 *
+		 * @see slimline_is_blog_post()
+		 */
+		} else if ( slimline_is_blog_post() ) { // if ( is_singular() )
+
+			return slimline_schema_add_itemprop_blogpost( $attributes );
+
+		} // if ( is_singular() )
+
+	} // if ( is_main_query() )
+
+	/**
+	 * Otherwise return unchanged attributes
+	 */
+	return $attributes;
+
+}
+
+/**
+ * Conditionally add itemtype attribute based on post type
+ *
+ * @param  array $attributes The array of default attributes
+ * @return array $attributes Array of attributes with itemtype added
+ * @link   https://github.com/slimline/theme/wiki/slimline_schema_entry_itemtype()
+ * @since  0.2.0
+ */
+function slimline_schema_entry_itemtype( $attributes = array() ) {
+
+	/**
+	 * Label as "BlogPosting" if a blog post
+	 *
+	 * @see slimline_is_blog_post()
+	 */
+	if ( slimline_is_blog_post() ) {
+
+		return slimline_schema_add_itemtype_blogposting( $attributes );
+
+	/**
+	 * Otherwise label as a "CreativeWork"
+	 */
+	} else { // slimline_is_blog_post()
+
+		return slimline_schema_add_itemtype_creativework( $attributes );
+
+	} // slimline_is_blog_post()
+
+}
+
+/**
+ * Conditionally add itemtype attribute based on the type of page we are on
+ *
+ * @param  array $attributes The array of default attributes
+ * @return array $attributes Array of attributes with itemtype added
+ * @link   https://github.com/slimline/theme/wiki/slimline_schema_index_itemtype()
+ * @since  0.2.0
+ */
+function slimline_schema_index_itemtype( $attributes = array() ) {
+
+	/**
+	 * Label as "Blog" if on a blog page
+	 *
+	 * @see slimline_is_blog()
+	 */
+	if ( slimline_is_blog() ) {
+
+		return slimline_schema_add_itemtype_blog( $attributes );
+
+	/**
+	 * Otherwise label as a "CreativeWork"
+	 */
+	} else { // slimline_is_blog()
+
+		return slimline_schema_add_itemtype_creativework( $attributes );
+
+	} // slimline_is_blog()
+
 }
 
 /**
