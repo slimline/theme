@@ -6,7 +6,7 @@
  *
  * @package    Slimline / Theme
  * @subpackage Template Parts
- * @since      0.1.0
+ * @since      0.2.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
@@ -30,10 +30,9 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 				 *       Documentation for `the_tags` function
 				 */
 				the_tags(
-					sprintf( '<p class="entry-tags">%1$s', __( 'Tagged: ', 'slimline' ),
-						' ',
-						'</p><!-- .entry-tags -->'
-					)
+					sprintf( '<p class="entry-tags">%1$s', __( 'Tagged: ', 'slimline' ) ),
+					' ',
+					'</p><!-- .entry-tags -->'
 				);
 
 			} // if ( has_tag() )
