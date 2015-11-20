@@ -19,6 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
  *
  * @param  string $string The string to append ".php" to
  * @return string $string String with ".php" appended
+ * @link   https://github.com/slimline/theme/wiki/slimline_add_php_extension()
  * @since  0.2.0
  */
 function slimline_add_php_extension( $string = '' ) {
@@ -37,6 +38,7 @@ function slimline_add_php_extension( $string = '' ) {
  *
  * @param  array $array The array to be sorted
  * @return array $array Sorted array
+ * @link   https://github.com/slimline/theme/wiki/slimline_ksort()
  * @since  0.1.0
  */
 function slimline_ksort( $array = array() ) {
@@ -56,10 +58,62 @@ function slimline_ksort( $array = array() ) {
 }
 
 /**
+ * Filter and merge two or more arrays of HTML classes
+ *
+ * @param  array $classes
+ * @param  array $extra_classes
+ * @return array $classes
+ * @link   https://github.com/slimline/theme/wiki/slimline_merge_classes()
+ * @since  0.2.0
+ */
+function slimline_merge_classes( $filter, $classes = array(), $args = array() ) {
+
+	/**
+	 * Grab all function arguments
+	 *
+	 * This allows us to use more than one array of extra classes if needed.
+	 *
+	 * @link http://php.net/manual/en/function.func-get-args.php
+	 *       Description of `func_get_args` function
+	 */
+	$args = func_get_args();
+
+	/**
+	 * Remove $filter and $classes from arguments array
+	 *
+	 * @link http://php.net/manual/en/function.array_slice.php
+	 *       Description of `array_slice` function
+	 */
+	$args = array_slice( $args, 2 );
+
+	/**
+	 * Create array for consolidating all class arrays and merge
+	 */
+	$extra_classes = array();
+
+	foreach ( $args as $arg ) {
+		$extra_classes = array_merge( $extra_classes, (array) $arg );
+	} // foreach ( $args as $arg )
+
+	/**
+	 * Filter the extra classes
+	 */
+	$extra_classes = apply_filters( $filter, $extra_classes );
+
+	/**
+	 * Merge extra classes into the default classes
+	 */
+	$classes = array_merge( $classes, $extra_classes );
+
+	return $classes;
+}
+
+/**
  * Sanitize keys and values from an array
  *
  * @param  array $attributes Associative array of key/value pairs
  * @return array $attributes Sanitized array
+ * @link   https://github.com/slimline/theme/wiki/slimline_sanitize_attributes_array()
  * @since  0.2.0
  */
 function slimline_sanitize_attributes_array( $attributes ) {
