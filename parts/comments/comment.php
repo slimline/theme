@@ -30,6 +30,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 				/**
 				 * slimline_comment_top hook
 				 *
+				 * @hook slimline_comment_avatar - 20 (get comment/avatar.php template part)
+				 * @hook slimline_comment_author - 50 (get comment/author.php template part)
 				 * @link https://github.com/slimline/theme/wiki/slimline_comment_top
 				 */
 				do_action( 'slimline_comment_top' );
@@ -51,7 +53,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 				/**
 				 * slimline_comment_bottom hook
 				 *
-				 * @hook slimline_comment_reply_link - 10 (output comment reply link)
+				 * @hook slimline_get_comment_date   - 10 (get comment/date.php template part)
+				 * @hook slimline_comment_reply_link - 20 (output comment reply link)
 				 * @link https://github.com/slimline/theme/wiki/slimline_comment_bottom
 				 */
 				do_action( 'slimline_comment_bottom' );
