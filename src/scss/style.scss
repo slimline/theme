@@ -13,7 +13,7 @@
 
 @import 'settings';
 @import 'foundation';
-@import 'motion-ui';
+// @import 'motion-ui';
 
 @include foundation-global-styles;
 @include foundation-grid;
@@ -51,8 +51,8 @@
 @include foundation-tooltip;
 @include foundation-top-bar;
 
-@include motion-ui-transitions;
-@include motion-ui-animations;
+// @include motion-ui-transitions;
+// @include motion-ui-animations;
 
 .full-width {
 	max-width: none;
@@ -60,12 +60,14 @@
 }
 
 .site-menu {
+	display: block;
 	list-style: none;
 	margin: 0;
 	text-align: center;
 }
 
 	.site-menu li {
+		display: inline-block;
 		list-style: none;
 	}
 
@@ -94,7 +96,7 @@
 	}
 }
 
-@include breakpoint(medium only) {
+@include breakpoint(medium-up) {
 
 	.site-menu {
 		text-align: right;
