@@ -58,6 +58,12 @@ function slimline_autoload_register() {
 
 }
 
+/**
+ * Setup default grid
+ *
+ * @link  https://github.com/slimline/theme/wiki/slimline_default_layout()
+ * @since 0.2.0
+ */
 function slimline_default_layout() {
 
 	/**
@@ -76,13 +82,17 @@ function slimline_default_layout() {
 	add_action( 'slimline_sidebar_footer_top',    'slimline_get_row_open',       10 );
 	add_action( 'slimline_sidebar_footer_bottom', 'slimline_get_row_close',      90 );
 
-	add_filter( 'post_class',                     'slimline_entry_columns',           10 );
-	add_filter( 'slimline_footer-nav_class',      'slimline_footer_nav_columns',      10 );
-	add_filter( 'slimline_header-nav_class',      'slimline_header_nav_columns',      10 );
-	add_filter( 'slimline_index_class',           'slimline_index_columns',           10 );
-	add_filter( 'slimline_main_class',            'slimline_main_row',                10 );
-	add_filter( 'slimline_sidebar-primary_class', 'slimline_sidebar_primary_columns', 10 );
-	add_filter( 'slimline_site-title-link_class', 'slimline_site_title_link_columns', 10 );
+	add_filter( 'post_class',                      'slimline_entry_columns',               10 );
+	add_filter( 'slimline_copyright_class',        'slimline_copyright_columns',           10 );
+	add_filter( 'slimline_footer-nav_class',       'slimline_footer_nav_columns',          10 );
+	add_filter( 'slimline_header-nav_class',       'slimline_header_nav_columns',          10 );
+	add_filter( 'slimline_index_class',            'slimline_index_columns',               10 );
+	add_filter( 'slimline_logo',                   'slimline_logo_columns',                10 );
+	add_filter( 'slimline_main_class',             'slimline_main_row',                    10 );
+	add_filter( 'slimline_sidebar-primary_class',  'slimline_sidebar_primary_columns',     10 );
+	add_filter( 'slimline_site-title-link_class',  'slimline_site_title_link_columns',     10 );
+	add_filter( 'slimline_the_entry_title_after',  'slimline_the_entry_title_link_after',  90 );
+	add_filter( 'slimline_the_entry_title_before', 'slimline_the_entry_title_link_before', 10 );
 
 }
 
@@ -317,71 +327,97 @@ function slimline_vendor() {
 		/**
 		 * Declare THA hooks support
 		 *
-		 * @see slimline_tha_hooks_support()
+		 * @see slimline_tha_hooks_support_args()
 		 */
 		add_theme_support( 'tha_hooks', slimline_tha_hooks_support_args() );
 
 		/**
+		 * semantic <html> hooks
+		 */
+		if ( array_intersect( array( 'all', 'html' ), get_theme_support( 'tha_hooks' ) ) ) {
+			add_action( 'slimline_html', 'tha_html', 10 );
+		} // if ( array_intersect( array( 'all', 'html' ), get_theme_support( 'tha_hooks' ) ) )
+
+		/**
 		 * semantic <body> hooks
 		 */
-		add_action( 'slimline_body_top',    'tha_body_top',    10 );
-		add_action( 'slimline_body_bottom', 'tha_body_bottom', 10 );
+		if ( array_intersect( array( 'all', 'body' ), get_theme_support( 'tha_hooks' ) ) ) {
+			add_action( 'slimline_body_top',    'tha_body_top',    10 );
+			add_action( 'slimline_body_bottom', 'tha_body_bottom', 10 );
+		} // if ( array_intersect( array( 'all', 'body' ), get_theme_support( 'tha_hooks' ) ) )
 
 		/**
 		 * semantic <head> hooks
 		 */
-		add_action( 'wp_head', 'tha_head_top',    0 );
-		add_action( 'wp_head', 'tha_head_bottom', 1000 );
+		if ( array_intersect( array( 'all', 'head' ), get_theme_support( 'tha_hooks' ) ) ) {
+			add_action( 'wp_head', 'tha_head_top',    0 );
+			add_action( 'wp_head', 'tha_head_bottom', 1000 );
+		} // if ( array_intersect( array( 'all', 'head' ), get_theme_support( 'tha_hooks' ) ) )
 
 		/**
 		 * semantic <header> hooks
 		 */
-		add_action( 'slimline_header_before', 'tha_header_before', 10 );
-		add_action( 'slimline_header_after',  'tha_header_after',  10 );
-		add_action( 'slimline_header_top',    'tha_header_top',    10 );
-		add_action( 'slimline_header_bottom', 'tha_header_bottom', 10 );
+		if ( array_intersect( array( 'all', 'header' ), get_theme_support( 'tha_hooks' ) ) ) {
+			add_action( 'slimline_header_before', 'tha_header_before', 10 );
+			add_action( 'slimline_header_after',  'tha_header_after',  10 );
+			add_action( 'slimline_header_top',    'tha_header_top',    10 );
+			add_action( 'slimline_header_bottom', 'tha_header_bottom', 10 );
+		} // if ( array_intersect( array( 'all', 'header' ), get_theme_support( 'tha_hooks' ) ) )
 
 		/**
 		 * semantic <content> hooks
 		 */
-		add_action( 'slimline_content_before',       'tha_content_before',       10 );
-		add_action( 'slimline_content_after',        'tha_content_after',        10 );
-		add_action( 'slimline_content_top',          'tha_content_top',          10 );
-		add_action( 'slimline_content_bottom',       'tha_content_bottom',       10 );
-		add_action( 'slimline_content_while_before', 'tha_content_while_before', 10 );
-		add_action( 'slimline_content_while_after',  'tha_content_while_after',  10 );
+		if ( array_intersect( array( 'all', 'content' ), get_theme_support( 'tha_hooks' ) ) ) {
+			add_action( 'slimline_content_before',       'tha_content_before',       10 );
+			add_action( 'slimline_content_after',        'tha_content_after',        10 );
+			add_action( 'slimline_content_top',          'tha_content_top',          10 );
+			add_action( 'slimline_content_bottom',       'tha_content_bottom',       10 );
+			add_action( 'slimline_content_while_before', 'tha_content_while_before', 10 );
+			add_action( 'slimline_content_while_after',  'tha_content_while_after',  10 );
+		} // if ( array_intersect( array( 'all', 'content' ), get_theme_support( 'tha_hooks' ) ) )
 
 		/**
 		 * semantic <entry> hooks
 		 */
-		add_action( 'slimline_entry_before',         'tha_entry_before',         10 );
-		add_action( 'slimline_entry_after',          'tha_entry_after',          10 );
-		add_action( 'slimline_entry_content_before', 'tha_entry_content_before', 10 );
-		add_action( 'slimline_entry_content_after',  'tha_entry_content_after',  10 );
-		add_action( 'slimline_entry_top',            'tha_entry_top',            10 );
-		add_action( 'slimline_entry_bottom',         'tha_entry_bottom',         10 );
+		if ( array_intersect( array( 'all', 'entry' ), get_theme_support( 'tha_hooks' ) ) ) {
+			add_action( 'slimline_entry_before',         'tha_entry_before',         10 );
+			add_action( 'slimline_entry_after',          'tha_entry_after',          10 );
+			add_action( 'slimline_entry_content_before', 'tha_entry_content_before', 10 );
+			add_action( 'slimline_entry_content_after',  'tha_entry_content_after',  10 );
+			add_action( 'slimline_entry_top',            'tha_entry_top',            10 );
+			add_action( 'slimline_entry_bottom',         'tha_entry_bottom',         10 );
+		} // if ( array_intersect( array( 'all', 'entry' ), get_theme_support( 'tha_hooks' ) ) )
 
 		/**
 		 * comments block hooks
 		 */
-		add_action( 'slimline_comments_before', 'tha_comments_before', 10 );
-		add_action( 'slimline_comments_after',  'tha_comments_after',  10 );
+		if ( array_intersect( array( 'all', 'comments' ), get_theme_support( 'tha_hooks' ) ) ) {
+			add_action( 'slimline_comments_before', 'tha_comments_before', 10 );
+			add_action( 'slimline_comments_after',  'tha_comments_after',  10 );
+		} // if ( array_intersect( array( 'all', 'comments' ), get_theme_support( 'tha_hooks' ) ) )
 
 		/**
 		 * semantic <sidebar> hooks
 		 */
-		add_action( 'slimline_sidebar_primary_before', 'tha_sidebars_before', 10 );
-		add_action( 'slimline_sidebar_primary_after',  'tha_sidebars_after',  10 );
-		add_action( 'slimline_sidebar_primary_top',    'tha_sidebar_top',     10 );
-		add_action( 'slimline_sidebar_primary_bottom', 'tha_sidebar_bottom',  10 );
+		if ( array_intersect( array( 'all', 'sidebars' ), get_theme_support( 'tha_hooks' ) ) ) {
+			add_action( 'slimline_sidebar_primary_before', 'tha_sidebars_before', 10 );
+			add_action( 'slimline_sidebar_primary_after',  'tha_sidebars_after',  10 );
+		} // if ( array_intersect( array( 'all', 'sidebars' ), get_theme_support( 'tha_hooks' ) ) )
+
+		if ( array_intersect( array( 'all', 'sidebar' ), get_theme_support( 'tha_hooks' ) ) ) {
+			add_action( 'slimline_sidebar_primary_top',    'tha_sidebar_top',     10 );
+			add_action( 'slimline_sidebar_primary_bottom', 'tha_sidebar_bottom',  10 );
+		} // if ( array_intersect( array( 'all', 'sidebar' ), get_theme_support( 'tha_hooks' ) ) )
 
 		/**
 		 * semantic <footer> hooks
 		 */
-		add_action( 'slimline_footer_before', 'tha_footer_before', 10 );
-		add_action( 'slimline_footer_after',  'tha_footer_after',  10 );
-		add_action( 'slimline_footer_top',    'tha_footer_top',    10 );
-		add_action( 'slimline_footer_bottom', 'tha_footer_bottom', 10 );
+		if ( array_intersect( array( 'all', 'footer' ), get_theme_support( 'tha_hooks' ) ) ) {
+			add_action( 'slimline_footer_before', 'tha_footer_before', 10 );
+			add_action( 'slimline_footer_after',  'tha_footer_after',  10 );
+			add_action( 'slimline_footer_top',    'tha_footer_top',    10 );
+			add_action( 'slimline_footer_bottom', 'tha_footer_bottom', 10 );
+		} // if ( array_intersect( array( 'all', 'footer' ), get_theme_support( 'tha_hooks' ) ) )
 
 	} // if ( defined( 'THA_HOOKS_VERSION' ) )
 
