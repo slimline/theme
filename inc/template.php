@@ -35,8 +35,9 @@ function slimline_get_404_entries_header() {
 	/**
 	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
 	 *       Description of `get_template_part` function
+	 * @see  slimline_get_template_parts_directory()
 	 */
-	get_template_part( 'parts/404/title-entries' );
+	get_template_part( trailingslashit( slimline_get_template_parts_directory() ) . '404/title-entries' );
 }
 
 /**
@@ -49,8 +50,9 @@ function slimline_get_404_posts() {
 	/**
 	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
 	 *       Description of `get_template_part` function
+	 * @see  slimline_get_template_parts_directory()
 	 */
-	get_template_part( 'parts/404/posts' );
+	get_template_part( trailingslashit( slimline_get_template_parts_directory() ) . '404/posts' );
 }
 
 /**
@@ -63,8 +65,9 @@ function slimline_get_404_search_form() {
 	/**
 	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
 	 *       Description of `get_template_part` function
+	 * @see  slimline_get_template_parts_directory()
 	 */
-	get_template_part( 'parts/404/searchform' );
+	get_template_part( trailingslashit( slimline_get_template_parts_directory() ) . '404/searchform' );
 }
 
 /**
@@ -77,8 +80,54 @@ function slimline_get_charset_tag() {
 	/**
 	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
 	 *       Description of `get_template_part` function
+	 * @see  slimline_get_template_parts_directory()
 	 */
-	get_template_part( 'parts/tag', 'charset' );
+	get_template_part( trailingslashit( slimline_get_template_parts_directory() ) . 'tag', 'charset' );
+}
+
+/**
+ * Get comment avatar template part
+ *
+ * @since 0.2.0
+ */
+function slimline_get_comment_avatar() {
+
+	/**
+	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
+	 *       Description of `get_template_part` function
+	 * @see  slimline_get_template_parts_directory()
+	 */
+	get_template_part( trailingslashit( slimline_get_template_parts_directory() ) . 'comment/avatar' );
+}
+
+/**
+ * Get comment author template part
+ *
+ * @since 0.2.0
+ */
+function slimline_get_comment_author() {
+
+	/**
+	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
+	 *       Description of `get_template_part` function
+	 * @see  slimline_get_template_parts_directory()
+	 */
+	get_template_part( trailingslashit( slimline_get_template_parts_directory() ) . 'comment/author' );
+}
+
+/**
+ * Get comment date template part
+ *
+ * @since 0.2.0
+ */
+function slimline_get_comment_date() {
+
+	/**
+	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
+	 *       Description of `get_template_part` function
+	 * @see  slimline_get_template_parts_directory()
+	 */
+	get_template_part( trailingslashit( slimline_get_template_parts_directory() ) . 'comment/date' );
 }
 
 /**
@@ -99,7 +148,7 @@ function slimline_get_comment_template( $comment ) {
 	 *       Description of `get_comment_type` function
 	 * @see  slimline_get_template_part()
 	 */
-	slimline_get_template_part( 'comments/comment', get_comment_type( $comment->comment_ID ) );
+	slimline_get_template_part( 'comment/comment', get_comment_type( $comment->comment_ID ) );
 }
 
 /**
@@ -120,7 +169,7 @@ function slimline_get_comment_end_template( $comment ) {
 	 *       Description of `get_comment_type` function
 	 * @see  slimline_get_template_part()
 	 */
-	slimline_get_template_part( 'comments/end', get_comment_type( $comment->comment_ID ) );
+	slimline_get_template_part( 'comment/end', get_comment_type( $comment->comment_ID ) );
 }
 
 /**
@@ -135,8 +184,9 @@ function slimline_get_comments_list() {
 	 *
 	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
 	 *       Documentation of the `get_template_part` function
+	 * @see  slimline_get_template_parts_directory()
 	 */
-	get_template_part( 'parts/comments/list' );
+	get_template_part( trailingslashit( slimline_get_template_parts_directory() ) . 'comments/list' );
 }
 
 /**
@@ -151,8 +201,9 @@ function slimline_get_comments_form() {
 	 *
 	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
 	 *       Documentation of the `get_template_part` function
+	 * @see  slimline_get_template_parts_directory()
 	 */
-	get_template_part( 'parts/comments/form' );
+	get_template_part( trailingslashit( slimline_get_template_parts_directory() ) . 'comments/form' );
 }
 
 /**
@@ -167,8 +218,9 @@ function slimline_get_comments_header() {
 	 *
 	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
 	 *       Documentation of the `get_template_part` function
+	 * @see  slimline_get_template_parts_directory()
 	 */
-	get_template_part( 'parts/comments/title' );
+	get_template_part( trailingslashit( slimline_get_template_parts_directory() ) . 'comments/title' );
 }
 
 /**
@@ -181,8 +233,9 @@ function slimline_get_comments_pagination() {
 	/**
 	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
 	 *       Description of `get_template_part` function
+	 * @see  slimline_get_template_parts_directory()
 	 */
-	get_template_part( 'parts/comments/pagination' );
+	get_template_part( trailingslashit( slimline_get_template_parts_directory() ) . 'comments/pagination' );
 }
 
 /**
@@ -219,8 +272,24 @@ function slimline_get_copyright_notice() {
 	/**
 	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
 	 *       Description of `get_template_part` function
+	 * @see  slimline_get_template_parts_directory()
 	 */
-	get_template_part( 'parts/footer/notice', 'copyright' );
+	get_template_part( trailingslashit( slimline_get_template_parts_directory() ) . 'footer/notice', 'copyright' );
+}
+
+/**
+ * Get doctype template part
+ *
+ * @since 0.2.0
+ */
+function slimline_get_doctype() {
+
+	/**
+	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
+	 *       Description of `get_template_part` function
+	 * @see  slimline_get_template_parts_directory()
+	 */
+	get_template_part( trailingslashit( slimline_get_template_parts_directory() ) . 'doctype' );
 }
 
 /**
@@ -233,8 +302,9 @@ function slimline_get_entries_header() {
 	/**
 	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
 	 *       Description of `get_template_part` function
+	 * @see  slimline_get_template_parts_directory()
 	 */
-	get_template_part( 'parts/index/title-entries' );
+	get_template_part( trailingslashit( slimline_get_template_parts_directory() ) . 'index/title-entries' );
 }
 
 /**
@@ -247,8 +317,9 @@ function slimline_get_entry_footer() {
 	/**
 	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
 	 *       Description of `get_template_part` function
+	 * @see  slimline_get_template_parts_directory()
 	 */
-	get_template_part( 'parts/entry/footer' );
+	get_template_part( trailingslashit( slimline_get_template_parts_directory() ) . 'entry/footer' );
 }
 
 /**
@@ -261,8 +332,9 @@ function slimline_get_entry_header() {
 	/**
 	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
 	 *       Description of `get_template_part` function
+	 * @see  slimline_get_template_parts_directory()
 	 */
-	get_template_part( 'parts/entry/header' );
+	get_template_part( trailingslashit( slimline_get_template_parts_directory() ) . 'entry/header' );
 }
 
 /**
@@ -275,8 +347,9 @@ function slimline_get_entry_meta() {
 	/**
 	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
 	 *       Description of `get_template_part` function
+	 * @see  slimline_get_template_parts_directory()
 	 */
-	get_template_part( 'parts/entry/meta' );
+	get_template_part( trailingslashit( slimline_get_template_parts_directory() ) . 'entry/meta' );
 }
 
 /**
@@ -289,8 +362,9 @@ function slimline_get_footer_navigation() {
 	/**
 	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
 	 *       Description of `get_template_part` function
+	 * @see  slimline_get_template_parts_directory()
 	 */
-	get_template_part( 'parts/footer/navigation' );
+	get_template_part( trailingslashit( slimline_get_template_parts_directory() ) . 'footer/navigation' );
 }
 
 /**
@@ -303,8 +377,9 @@ function slimline_get_header_logo() {
 	/**
 	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
 	 *       Description of `get_template_part` function
+	 * @see  slimline_get_template_parts_directory()
 	 */
-	get_template_part( 'parts/header/logo' );
+	get_template_part( trailingslashit( slimline_get_template_parts_directory() ) . 'header/logo' );
 }
 
 /**
@@ -327,8 +402,24 @@ function slimline_get_header_navigation() {
 	/**
 	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
 	 *       Description of `get_template_part` function
+	 * @see  slimline_get_template_parts_directory()
 	 */
-	get_template_part( 'parts/header/navigation' );
+	get_template_part( trailingslashit( slimline_get_template_parts_directory() ) . 'header/navigation' );
+}
+
+/**
+ * Get opening html template part
+ *
+ * @since 0.2.0
+ */
+function slimline_get_html_tag() {
+
+	/**
+	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
+	 *       Description of `get_template_part` function
+	 * @see  slimline_get_template_parts_directory()
+	 */
+	get_template_part( trailingslashit( slimline_get_template_parts_directory() ) . 'tag', 'html' );
 }
 
 /**
@@ -350,6 +441,7 @@ function slimline_get_index_header() {
 
 	/**
 	 * @link https://github.com/slimline/theme/wiki/slimline_get_index_header()
+	 * @see  slimline_get_template_parts_directory()
 	 */
 	slimline_get_template_part( 'index/header', slimline_get_context() );
 }
@@ -364,8 +456,9 @@ function slimline_get_index_pagination() {
 	/**
 	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
 	 *       Description of `get_template_part` function
+	 * @see  slimline_get_template_parts_directory()
 	 */
-	get_template_part( 'parts/index/pagination' );
+	get_template_part( trailingslashit( slimline_get_template_parts_directory() ) . 'index/pagination' );
 }
 
 /**
@@ -378,8 +471,9 @@ function slimline_get_not_found_content() {
 	/**
 	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
 	 *       Description of `get_template_part` function
+	 * @see  slimline_get_template_parts_directory()
 	 */
-	get_template_part( 'parts/not-found/content' );
+	get_template_part( trailingslashit( slimline_get_template_parts_directory() ) . 'not-found/content' );
 }
 
 /**
@@ -392,8 +486,9 @@ function slimline_get_not_found_header() {
 	/**
 	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
 	 *       Description of `get_template_part` function
+	 * @see  slimline_get_template_parts_directory()
 	 */
-	get_template_part( 'parts/not-found/header' );
+	get_template_part( trailingslashit( slimline_get_template_parts_directory() ) . 'not-found/header' );
 }
 
 /**
@@ -406,8 +501,9 @@ function slimline_get_pingback_tag() {
 	/**
 	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
 	 *       Description of `get_template_part` function
+	 * @see  slimline_get_template_parts_directory()
 	 */
-	get_template_part( 'parts/tag', 'pingback' );
+	get_template_part( trailingslashit( slimline_get_template_parts_directory() ) . 'tag', 'pingback' );
 }
 
 /**
@@ -420,8 +516,9 @@ function slimline_get_row_close() {
 	/**
 	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
 	 *       Description of `get_template_part` function
+	 * @see  slimline_get_template_parts_directory()
 	 */
-	get_template_part( 'parts/html/row-close' );
+	get_template_part( trailingslashit( slimline_get_template_parts_directory() ) . 'html/row-close' );
 }
 
 /**
@@ -434,8 +531,9 @@ function slimline_get_row_close_full() {
 	/**
 	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
 	 *       Description of `get_template_part` function
+	 * @see  slimline_get_template_parts_directory()
 	 */
-	get_template_part( 'parts/html/row-close', 'full' );
+	get_template_part( trailingslashit( slimline_get_template_parts_directory() ) . 'html/row-close', 'full' );
 }
 
 /**
@@ -448,8 +546,9 @@ function slimline_get_row_open() {
 	/**
 	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
 	 *       Description of `get_template_part` function
+	 * @see  slimline_get_template_parts_directory()
 	 */
-	get_template_part( 'parts/html/row-open' );
+	get_template_part( trailingslashit( slimline_get_template_parts_directory() ) . 'html/row-open' );
 }
 
 /**
@@ -462,8 +561,9 @@ function slimline_get_row_open_full() {
 	/**
 	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
 	 *       Description of `get_template_part` function
+	 * @see  slimline_get_template_parts_directory()
 	 */
-	get_template_part( 'parts/html/row-open', 'full' );
+	get_template_part( trailingslashit( slimline_get_template_parts_directory() ) . 'html/row-open', 'full' );
 }
 
 /**
@@ -526,8 +626,9 @@ function slimline_get_viewport_tag() {
 	/**
 	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
 	 *       Description of `get_template_part` function
+	 * @see  slimline_get_template_parts_directory()
 	 */
-	get_template_part( 'parts/tag', 'viewport' );
+	get_template_part( trailingslashit( slimline_get_template_parts_directory() ) . 'tag', 'viewport' );
 }
 
 /**
@@ -546,12 +647,11 @@ function slimline_get_viewport_tag() {
  * @since 0.1.0
  */
 function slimline_get_template_part( $slug, $name = '' ) {
-	global $slimline;
 
 	/**
 	 * grab all parameters passed to the function
 	 */
-	$args = func_get_args();
+	$stems = func_get_args();
 
 	/**
 	 * If an array is passed for the second argument, it will overwrite all
@@ -560,9 +660,9 @@ function slimline_get_template_part( $slug, $name = '' ) {
 	if ( is_array( $name ) ) {
 
 		/**
-		 * Rewrite $args to match
+		 * Rewrite $stems to match
 		 */
-		$args = array_merge( array( $slug ), $name );
+		$stems = array_merge( array( $slug ), $name );
 
 		/**
 		 * Convert to string
@@ -579,11 +679,11 @@ function slimline_get_template_part( $slug, $name = '' ) {
 	 * The dynamic portion of the hook name, `$slug`, refers to the slug name
 	 * for the generic template part.
 	 *
-	 * @param string $slug The slug name for the generic template
-	 * @param string $name The name of the specialized template
-	 * @param array  $args Array of all parameters passed to the function
+	 * @param string $slug  The slug name for the generic template
+	 * @param string $name  The name of the specialized template
+	 * @param array  $stems Array of all parameters passed to the function
 	 */
-	do_action( "get_template_part_{$slug}", $slug, $name, $args );
+	do_action( "get_template_part_{$slug}", $slug, $name, $stems );
 
 	/**
 	 * save template for reuse
@@ -593,16 +693,39 @@ function slimline_get_template_part( $slug, $name = '' ) {
 	 * several times (such as on archive pages and in comments)
 	 *
 	 * @link slimline_get_template_path()
-	 * @link slimline_set_template_path()
 	 */
-	$template_string = join( '-', $args );
+	$template_string = join( '-', $stems );
 
-	if ( ! slimline_get_template_path( $template_string ) ) {
-		$template = slimline_locate_template( $args );
+	$template = slimline_get_template_path( $template_string );
+
+	/**
+	 * If we haven't checked for this template before, do so now and save the results
+	 * for later.
+	 */
+	if ( false === $template ) {
+
+		/**
+		 * Find absolute path to the file (if one exists)
+		 *
+		 * @see slimline_locate_template()
+		 */
+		$template = slimline_locate_template( $stems );
+
+		/**
+		 * Set the template path for later lookup
+		 *
+		 * @link slimline_set_template_path()
+		 */
 		slimline_set_template_path( $template_string, $template );
-	} // if ( ! slimline_get_template_path( $template_string ) )
 
-	require( slimline_get_template_path( $template_string ) );
+	} // if ( false === $template )
+
+	/**
+	 * If we have a valid template path, require it now.
+	 */
+	if ( $template ) {
+		require( $template );
+	} // if ( $template )
 }
 
 /**
@@ -659,7 +782,7 @@ function slimline_get_template_slugs( $stems ) {
 }
 
 /**
- * slimline_locate_template function
+ * Find the absolute path to a given template file based on parameters
  *
  * Arguments passed to slimline_locate_template() should be listed in descending
  * order of importance, with the first argument considered the slug. For example,
@@ -689,7 +812,7 @@ function slimline_get_template_slugs( $stems ) {
  *                      an empty string if none found
  * @uses   slimline_get_template_slugs() to build an array of filenames to search
  *         using locate_template()
- * @uses   slimline_add_php_extension to append ".php" to each filename in the array
+ * @uses   slimline_add_php_extension() to append ".php" to each filename in the array
  * @uses   locate_template() to find the first matching template in the array of filenames
  * @since  0.1.0
  */
