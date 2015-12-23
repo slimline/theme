@@ -73,6 +73,7 @@ $recent = slimline_404_recent_posts();
 				/**
 				 * slimline_404_entries_after hook
 				 *
+				 * @hook wp_reset_query - 10 (reset $wp_query object)
 				 * @see  https://github.com/slimline/theme/wiki/slimline_404_entries_after
 				 */
 				do_action( 'slimline_404_entries_after' );

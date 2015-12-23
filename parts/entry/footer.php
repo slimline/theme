@@ -51,12 +51,12 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 				/**
 				 * date published (i.e., WP_Post::post_date)
 				 */
-				get_template_part( 'parts/entry/tag-datepublished' );
+				get_template_part( trailingslashit( slimline_get_template_parts_directory() ) . 'entry/tag-datepublished' );
 
 				/**
 				 * date modified (i.e., WP_Post::modified_date)
 				 */
-				get_template_part( 'parts/entry/tag-datemodified' );
+				get_template_part( trailingslashit( slimline_get_template_parts_directory() ) . 'entry/tag-datemodified' );
 
 			} // if ( slimline_use_schema_org() )
 		?>

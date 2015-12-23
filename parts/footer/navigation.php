@@ -22,12 +22,12 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
  */
 wp_nav_menu(
 	array(
-		'container'       => 'nav',                        // wrap menu in a <nav> tag
-		'container-class' => 'site-nav footer-nav',        // class="site-nav footer-nav"
-		'container_id'    => 'footer-nav',                 // id="footer-nav"
-		'menu_class'      => 'menu site-menu footer-menu', // class="menu site-menu footer-menu"
-		'menu_id'         => 'footer-menu',                // id="footer-menu"
-		'fallback_cb'     => false,                        // only show menu if one is assigned to this location
-		'theme_location'  => 'footer-menu',                // labeled as "Footer Menu" in the menus UI
+		'container'       => 'nav',                                                              // wrap menu in a <nav> tag
+		'container_class' => slimline_get_class( 'footer-nav', array ( 'site-nav' ) ),           // class="site-nav footer-nav"
+		'container_id'    => 'footer-nav',                                                       // id="footer-nav"
+		'menu_class'      => slimline_get_class( 'footer-menu', array ( 'menu', 'site-menu' ) ), // class="menu site-menu footer-menu"
+		'menu_id'         => 'footer-menu',                                                      // id="footer-menu"
+		'fallback_cb'     => false,                                                              // only show menu if one is assigned to this location
+		'theme_location'  => 'footer-menu',                                                      // labeled as "Footer Menu" in the menus UI
 	)
 );

@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 wp_nav_menu(
 	array(
 		'container'       => 'nav',                                                             // wrap menu in a <nav> tag
-		'container-class' => slimline_get_class( 'header-nav', 'site-nav' ),                    // class="site-nav header-nav"
+		'container_class' => slimline_get_class( 'header-nav', 'site-nav' ),                    // class="site-nav header-nav"
 		'container_id'    => 'header-nav',                                                      // id="header-nav"
 		'menu_class'      => slimline_get_class( 'header-menu', array( 'menu', 'site-menu' ) ), // class="menu site-menu header-menu"
 		'menu_id'         => 'header-menu',                                                     // id="header-menu"
