@@ -265,6 +265,18 @@ function slimline_comment_attributes( $attributes = '' ) {
 }
 
 /**
+ * Outputs comment time/date based on how long ago a comment was published.
+ *
+ * @uses  slimline_get_comment_time() to generate the time/date string
+ * @link  https://github.com/slimline/theme/wiki/slimline_comment_time()
+ * @since 0.2.0
+ */
+function slimline_comment_time() {
+
+	echo slimline_get_comment_time();
+}
+
+/**
  * Outputs HTML attributes meant for the comment content wrapper tag (<div>).
  *
  * @param array|string $attributes (Optional). An array or query string of
@@ -308,6 +320,20 @@ function slimline_comments_attributes( $attributes = '' ) {
 function slimline_comments_title( $before = '', $after = '', $echo = true ) {
 
 	echo slimline_get_comments_title( $before, $after, $echo );
+}
+
+/**
+ * Outputs attributes for the copyright <p> tag.
+ *
+ * @param array|string $attributes (Optional). An array or query string of
+ *                                 attribute / value pairs.
+ * @uses  slimline_get_404_description_attributes() to generate attributes
+ * @link  https://github.com/slimline/theme/wiki/slimline_copyright_attributes()
+ * @since 0.2.0
+ */
+function slimline_copyright_attributes( $attributes = '' ) {
+
+	echo slimline_get_copyright_attributes( $attributes );
 }
 
 /**
