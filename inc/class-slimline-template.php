@@ -46,10 +46,10 @@ class Slimline_Template {
 
 	} // public static function get_instance()
 
-	function get_template_path( $template_string, $default = '' ) {
+	function get_template_path( $template_string ) {
 
 		if ( ! isset( $this->template_path[ $template_string ] ) ) {
-			$this->set_template_path( $template_string, $default );
+			return false;
 		} // if ( ! isset( $this->template_path[ $template_string ] ) )
 
 		return $this->template_path[ $template_string ];
