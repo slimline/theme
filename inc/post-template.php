@@ -146,8 +146,9 @@ function slimline_content( $text ) {
 	 * We are applying the `slimline_content` filter before returning to auto-add
 	 * line breaks and paragraphs, texturize punctuation and evaluate shortcodes.
 	 *
-	 * @param string $text The filtered description
-	 * @link  https://github.com/slimline/theme/wiki/slimline_content
+	 * @param  string $text The text to filter
+	 * @return string $text The filtered text
+	 * @link   https://github.com/slimline/theme/wiki/slimline_content
 	 */
 	echo apply_filters( 'slimline_content', $text );
 }
@@ -916,6 +917,130 @@ function slimline_get_comments_title() {
 }
 
 /**
+ * Generate HTML attributes for the copyright <p> tag
+ *
+ * Essentially a wrapper function for `slimline_get_attributes()` that includes
+ * default attributes. Developers can modify the returned string using the
+ * `slimline_copyright_attributes` filter.
+ *
+ * @param  array|string $attributes (Optional). An array or query string of
+ *                                  attribute / value pairs.
+ * @return string       $attributes The generated string of attributes
+ * @uses   slimline_get_attributes() to generate the attributes
+ * @link   https://github.com/slimline/theme/wiki/slimline_get_entries_attributes()
+ * @since  0.2.0
+ */
+function slimline_get_copyright_attributes( $attributes = '' ) {
+
+	/**
+	 * Return attributes string
+	 *
+	 * Note that the `slimline_attributes` and `slimline_copyright_attributes`
+	 * filters will be applied by `slimline_get_attributes()`.
+	 *
+	 * @see slimline_get_attributes()
+	 */
+	return slimline_get_attributes( $attributes, 'copyright' );
+}
+
+/**
+ * Generate a time/date string for a comment based on when it was published.
+ *
+ * For comments less than 24 hours old, we will use a human-readable time difference
+ * (e.g., "14 minutes ago"), while comments over 24 hours old will simply use date
+ * and time (e.g., December 1, 2015 at 2:43 PM).
+ *
+ * @return string $comment_time_string The date/time string
+ * @link   https://github.com/slimline/theme/wiki/slimline_get_comment_time()
+ * @since  0.2.0
+ */
+function slimline_get_comment_time() {
+
+	/**
+	 * Check to see if comment is less than 24 hours old
+	 *
+	 * If yes, then use human-readable time difference string.
+	 *
+	 * @link https://developer.wordpress.org/reference/functions/get_comment_time/
+	 *       Description of `get_comment_time` function
+	 * @link https://codex.wordpress.org/Easier_Expression_of_Time_Constants
+	 *       Description of `DAY_IN_SECONDS` constant
+	 */
+	if ( ( time() - get_comment_time( 'U' ) ) < DAY_IN_SECONDS ) {
+
+		/**
+		 * Translators: %1$s will be the human-readable time difference (e.g., "3 hours")
+		 */
+		$comment_time_format = __( '%1$s ago', 'slimline' );
+
+		/**
+		 * Get human-readable time difference
+		 *
+		 * @link https://developer.wordpress.org/reference/functions/human_time_diff/
+		 *       Description of `human_time_diff` function
+		 */
+		$comment_date = human_time_diff( get_comment_time( 'U' ) );
+
+		/**
+		 * Leave blank (we won't be using it for anything)
+		 */
+		$comment_time = '';
+
+	/**
+	 * Otherwise use the comment date and time.
+	 */
+	} else { // if ( ( time() - get_comment_time( 'U' ) ) < DAY_IN_SECONDS )
+
+		/**
+		 * Translators: %1$s will be the comment date, %2$s will be the comment time
+		 */
+		$comment_time_format = __( '%1$s at %2$s', 'slimline' );
+
+		/**
+		 * Get the comment date
+		 *
+		 * We are not passing any parameters so the date will respect the user's date
+		 * display settings.
+		 *
+		 * @link https://developer.wordpress.org/reference/functions/get_comment_date/
+		 *       Description of `get_comment_date` function
+		 */
+		$comment_date = get_comment_date();
+
+		/**
+		 * Get the comment time
+		 *
+		 * We are not passing any parameters so the time will respect the user's time
+		 * display settings.
+		 *
+		 * @link https://developer.wordpress.org/reference/functions/get_comment_time/
+		 *       Description of `get_comment_time` function
+		 */
+		$comment_time = get_comment_time();
+
+	} // if ( ( time() - get_comment_time( 'U' ) ) < DAY_IN_SECONDS )
+
+	/**
+	 * Create the date/time string
+	 */
+	$comment_time_string = sprintf( $comment_time_format, $comment_date, $comment_time );
+
+	/**
+	 * Filter the results
+	 *
+	 * @param string $comment_time_string The date/time string
+	 * @param string $comment_time_format The format to use for (s)printf statements
+	 * @param string $comment_date        Human-readable date difference for comments
+	 *                                    less than 24 hours old, otherwise comment
+	 *                                    date
+	 * @param string $comment_time        Empty string for comments less than 24 hours
+	 *                                    old, otherwise comment time
+	 * @link  https://github.com/slimline/theme/wiki/slimline_comment_time
+	 */
+	return apply_filters( 'slimline_comment_time', $comment_time_string, $comment_time_format, $comment_date, $comment_time );
+}
+
+/**
  * Retrieve a default ID for thumbnail attachments
  *
  * @return int $thumbnail_id ID of the attachment file
@@ -963,7 +1088,7 @@ function slimline_get_entries_attributes( $attributes = '' ) {
 	 * Default attributes
 	 */
 	$defaults = array(
-		'id'    => 'entries',          // id="entries"
+		'id'    => 'entries', // id="entries"
 	);
 
 	/**
@@ -1491,7 +1616,7 @@ function slimline_get_logo() {
  * @link  https://github.com/slimline/theme/wiki/slimline_get_logo_src()
  * @since 0.2.0
  */
-function slimline_get_logo_src( $size = 'slimline-logo' ) {
+function slimline_get_logo_src( $logo_size = 'slimline-logo' ) {
 
 	/**
 	 * Set up FALSE if no image info retrieved
@@ -1512,7 +1637,7 @@ function slimline_get_logo_src( $size = 'slimline-logo' ) {
 	 *       Description of `wp_get_attachment_image_src` function
 	 */
 	if ( $logo_id ) {
-		$logo_src = wp_get_attachment_image_src( $logo_id, $size );
+		$logo_src = wp_get_attachment_image_src( $logo_id, $logo_size );
 	} // if ( $logo_id )
 
 	/**
