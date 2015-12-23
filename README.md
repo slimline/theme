@@ -1,29 +1,63 @@
-# Foundation Compass Template
+# ZURB Template
 
-The easiest way to get started with Foundation + Compass.
+**Please open all issues with this template on the main [Foundation for Sites](https://github.com/zurb/foundation-sites/issues) repo.**
 
-## Requirements
+This is the official ZURB Template for use with [Foundation for Sites](http://foundation.zurb.com/sites). We use this template at ZURB to deliver static code to our clients. It has a Gulp-powered build system with these features:
 
-  * Ruby 1.9+
-  * [Node.js](http://nodejs.org)
-  * [compass](http://compass-style.org/): `gem install compass`
-  * [bower](http://bower.io): `npm install bower -g`
+- Handlebars HTML templates with Panini
+- Sass compilation and prefixing
+- JavaScript concatenation
+- Built-in BrowserSync server
+- For production builds:
+  - CSS compression
+  - JavaScript compression
+  - Image compression
 
-## Quickstart
+## Installation
 
-  * [Download this starter compass project and unzip it](https://github.com/zurb/foundation-compass-template/archive/master.zip)
-  * Run `bower install` to install the latest version of Foundation
-  
-Then when you're working on your project, just run the following command:
+To use this template, your computer needs:
+
+- [NodeJS](https://nodejs.org/en/) (0.10 or greater)
+- [Git](https://git-scm.com/)
+
+This template can be installed with the Foundation CLI, or downloaded and set up manually.
+
+### Using the CLI
+
+Install the Foundation CLI with this command:
 
 ```bash
-bundle exec compass watch
+npm install foundation-cli --global
 ```
 
-## Upgrading
-
-If you'd like to upgrade to a newer version of Foundation down the road just run:
+Use this command to set up a blank Foundation for Sites project with this template:
 
 ```bash
-bower update
+foundation new --framework sites --template zurb
 ```
+
+The CLI will prompt you to give your project a name. The template will be downloaded into a folder with this name.
+
+### Manual Setup
+
+To manually set up the template, first download it with Git:
+
+```bash
+git clone https://github.com/zurb/foundation-zurb-template projectname
+```
+
+Then open the folder in your command line, and install the needed dependencies:
+
+```bash
+cd projectname
+npm install
+bower install
+```
+
+Finally, run `npm start` to run Gulp. Your finished site will be created in a folder called `dist`, viewable at this URL:
+
+```
+http://localhost:8000
+```
+
+To create compressed, production-ready assets, run `npm run build`.

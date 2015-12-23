@@ -1,0 +1,14 @@
+/**
+ * Slimline Editor Styles
+ *
+ * @package    Slimline / Theme
+ * @subpackage Stylesheets
+ */
+
+@import 'settings';
+@import 'foundation';
+
+@include foundation-typography;
+@include foundation-button;
+@include foundation-table;
+@include foundation-thumbnail;
