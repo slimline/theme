@@ -44,32 +44,109 @@ if ( ! function_exists( 'slimline_comment_form_args' ) ) {
 
 } // if ( ! function_exists( 'slimline_comment_form_args' ) )
 
-if ( ! function_exists( 'slimline_footer_nav_columns' ) ) {
+/**
+ * Default grid columns for copyright notice
+ *
+ * @param  array $classes Array of css classes
+ * @return array $classes Class array with defaults added
+ * @link   https://github.com/slimline/theme/wiki/slimline_copyright_columns()
+ * @since  0.2.0
+ */
+if ( ! function_exists( 'slimline_copyright_columns' ) ) {
 
-	function slimline_footer_nav_columns( $classes ) {
+	function slimline_copyright_columns( $classes ) {
 
-		return slimline_merge_classes( 'slimline_footer_nav_columns', $classes, array( 'small-12', 'medium-9', 'columns' ) );
+		/**
+		 * Merge and filter the result
+		 *
+		 * @link https://github.com/slimline/theme/wiki/slimline_copyright_columns
+		 * @uses slimline_merge_classes()
+		 */
+		return slimline_merge_classes( 'slimline_copyright_columns', $classes, array( 'small-12', 'medium-3', 'medium-pull-9', 'columns' ) );
 	}
 
 } // if ( ! function_exists( 'slimline_footer_nav_columns' ) )
 
+/**
+ * Default grid columns for footer navigation
+ *
+ * @param  array $classes Array of css classes
+ * @return array $classes Class array with defaults added
+ * @link   https://github.com/slimline/theme/wiki/slimline_footer_nav_columns(()
+ * @since  0.2.0
+ */
+if ( ! function_exists( 'slimline_footer_nav_columns' ) ) {
+
+	function slimline_footer_nav_columns( $classes ) {
+
+		/**
+		 * Merge and filter the result
+		 *
+		 * @link https://github.com/slimline/theme/wiki/slimline_footer_nav_columns(
+		 * @uses slimline_merge_classes()
+		 */
+		return slimline_merge_classes( 'slimline_footer_nav_columns', $classes, array( 'small-12', 'medium-9', 'medium-push-3', 'columns' ) );
+	}
+
+} // if ( ! function_exists( 'slimline_footer_nav_columns' ) )
+
+/**
+ * Default grid columns for header navigation
+ *
+ * @param  array $classes Array of css classes
+ * @return array $classes Class array with defaults added
+ * @link   https://github.com/slimline/theme/wiki/slimline_header_nav_columns()
+ * @since  0.2.0
+ */
 if ( ! function_exists( 'slimline_header_nav_columns' ) ) {
 
 	function slimline_header_nav_columns( $classes ) {
 
+		/**
+		 * Merge and filter the result
+		 *
+		 * @link https://github.com/slimline/theme/wiki/slimline_header_nav_columns
+		 * @uses slimline_merge_classes()
+		 */
 		return slimline_merge_classes( 'slimline_header_nav_columns', $classes, array( 'small-12', 'medium-9', 'columns' ) );
 	}
 
 } // if ( ! function_exists( 'slimline_header_nav_columns' ) )
 
+/**
+ * Default grid columns for the main <article> on singular pages
+ *
+ * @param  array $classes Array of css classes
+ * @return array $classes Class array with defaults added
+ * @link   https://github.com/slimline/theme/wiki/slimline_entry_columns()
+ * @since  0.2.0
+ */
 if ( ! function_exists( 'slimline_entry_columns' ) ) {
 
 	function slimline_entry_columns( $classes ) {
 
+		/**
+		 * Only add columns to singular <article> tag
+		 *
+		 * @link https://developer.wordpress.org/reference/functions/is_singular/
+		 *       Description of the `is_singular` function
+		 */
 		if ( is_singular() ) {
 
+			/**
+			 * Use different widths based on whether or not we are including a sidebar
+			 *
+			 * @link https://developer.wordpress.org/reference/functions/is_active_sidebar/
+			 *       Description of the `is_active_sidebar` function
+			 */
 			$medium = ( is_active_sidebar( 'sidebar-1' ) ? 'medium-9' : '' );
 
+			/**
+			 * Filter the result
+			 *
+			 * @link https://github.com/slimline/theme/wiki/slimline_entry_columns
+			 * @uses slimline_merge_classes()
+			 */
 			return slimline_merge_classes( 'slimline_entry_columns', $classes, array( 'small-12', $medium, 'columns' ) );
 
 		} // if ( is_singular() )
@@ -118,13 +195,33 @@ if ( ! function_exists( 'slimline_html5_support_args' ) ) {
 
 } // if ( ! function_exists( 'slimline_html5_support_args' ) )
 
+/**
+ * Default grid columns for the main <article> on index pages
+ *
+ * @param  array $classes Array of css classes
+ * @return array $classes Class array with defaults added
+ * @link   https://github.com/slimline/theme/wiki/slimline_index_columns()
+ * @since  0.2.0
+ */
 if ( ! function_exists( 'slimline_index_columns' ) ) {
 
 	function slimline_index_columns( $classes ) {
 
+		/**
+		 * Use different widths based on whether or not we are including a sidebar
+		 *
+		 * @link https://developer.wordpress.org/reference/functions/is_active_sidebar/
+		 *       Description of the `is_active_sidebar` function
+		 */
 		$medium = ( is_active_sidebar( 'sidebar-1' ) ? 'medium-9' : '' );
 
-		return slimline_merge_classes( 'slimline_entry_columns', $classes, array( 'small-12', $medium, 'columns' ) );
+		/**
+		 * Merge and filter the result
+		 *
+		 * @link https://github.com/slimline/theme/wiki/slimline_index_columns
+		 * @uses slimline_merge_classes()
+		 */
+		return slimline_merge_classes( 'slimline_index_columns', $classes, array( 'small-12', $medium, 'columns' ) );
 	}
 
 } // if ( ! function_exists( 'slimline_entry_columns' ) )
@@ -246,6 +343,32 @@ if ( ! function_exists( 'slimline_login_logo_width' ) ) {
 } // if ( ! function_exists( 'slimline_login_logo_width' ) )
 
 /**
+ * Default grid columns for the logo area in the header
+ *
+ * @param  string $logo The logo HTML markup from slimline_logo()
+ * @return string $logo Logo markup with column classes added
+ * @link   https://github.com/slimline/theme/wiki/slimline_logo_columns()
+ * @since  0.2.0
+ */
+if ( ! function_exists( 'slimline_logo_columns' ) ) {
+
+	function slimline_logo_columns( $logo ) {
+
+		/**
+		 * Generate the string of CSS classes
+		 */
+		$classes = slimline_get_class( 'site-logo-link', array( 'small-12', 'medium-3', 'columns' ) );
+
+		/**
+		 * Replace the default class in the logo markup with the generated class string.
+		 */
+		return str_replace( 'class="site-logo-link"', "class=\"{$classes}\"", $logo );
+
+	}
+
+} // if ( ! function_exists( 'slimline_logo_columns' ) )
+
+/**
  * Default crop for `add_image( 'slimline-logo' )`
  *
  * @return bool Whether to crop the logo image. Default FALSE
@@ -309,7 +432,7 @@ if ( ! function_exists( 'slimline_logo_width' ) ) {
 		 * Filter and return value.
 		 *
 		 * NOTE: the default value of 500 (pixels) is twice the logo width as defined
-		 * in the stylesheet. This is for retina device support.
+		 * in the default stylesheet. This is for retina device support.
 		 *
 		 * @param  int $width Logo width (in pixels)
 		 * @return int $width Logo width (in pixels)
@@ -320,14 +443,27 @@ if ( ! function_exists( 'slimline_logo_width' ) ) {
 
 } // if ( ! function_exists( 'slimline_logo_width' ) )
 
+/**
+ * Add "row" to classes on <main> tag
+ *
+ * @param  array $classes Array of classes passed from slimline_get_class
+ * @return array $classes
+ * @since  0.2.0
+ */
 if ( ! function_exists( 'slimline_main_row' ) ) {
 
 	function slimline_main_row( $classes ) {
 
+		/**
+		 * Merge and filter the result
+		 *
+		 * @link https://github.com/slimline/theme/wiki/slimline_main_row
+		 * @uses slimline_merge_classes()
+		 */
 		return slimline_merge_classes( 'slimline_main_row', $classes, 'row' );
 	}
 
-}
+} // if ( ! function_exists( 'slimline_main_row' ) )
 
 /**
  * Arguments for `paginate_links()` on index pages
@@ -438,13 +574,19 @@ if ( ! function_exists( 'slimline_post_thumbnails_support_args' ) ) {
  *
  * @param  array $attributes Array of HTML attributes passed from slimline_get_attributes()
  * @return array $attributes Attribute array with columns widths added to classes
- * @link   https://github.com/slimline/theme/wiki/slimline_site_title_link_columns()
+ * @link   https://github.com/slimline/theme/wiki/slimline_sidebar_primary_columns()
  * @since  0.2.0
  */
 if ( ! function_exists( 'slimline_sidebar_primary_columns' ) ) {
 
 	function slimline_sidebar_primary_columns( $classes ) {
 
+		/**
+		 * Merge and filter the result
+		 *
+		 * @link https://github.com/slimline/theme/wiki/slimline_sidebar-primary_columns
+		 * @uses slimline_merge_classes()
+		 */
 		return slimline_merge_classes( 'slimline_sidebar-primary_columns', $classes, array( 'small-12', 'medium-3', 'columns' ) );
 	}
 
@@ -462,6 +604,12 @@ if ( ! function_exists( 'slimline_site_title_link_columns' ) ) {
 
 	function slimline_site_title_link_columns( $classes ) {
 
+		/**
+		 * Merge and filter the result
+		 *
+		 * @link https://github.com/slimline/theme/wiki/slimline_site_title_link_columns
+		 * @uses slimline_merge_classes()
+		 */
 		return slimline_merge_classes( 'slimline_site_title_link_columns', $classes, array( 'small-12', 'medium-3', 'columns' ) );
 	}
 
@@ -487,17 +635,17 @@ if ( ! function_exists( 'slimline_tha_hooks_support_args' ) ) {
 		 *       Explanation of possible arguments
 		 */
 		$args = array(
-			// 'all',   // All possible hooks. If this is enabled the other arguments are redundant
+			'all',   // All possible hooks. If this is enabled the other arguments are redundant
 			// 'html',  // <html> hook. Used for doctypes, etc.
-			'body',     // <body> hooks
-			'head',     // <head> hooks
-			'header',   // <header> hooks
-			'content',  // hooks (e.g., <main> and index <article>)
-			'entry',    // entry hooks (e.g., singular <article>)
-			'comments', // comment hooks (e.g., <section id="comments")
-			'sidebars', // sidebar hooks (e.g., <aside class="sidebar")
-			'sidebar',  // individual sidebar hooks (e.g., <aside class="sidebar")
-			'footer',   // <footer> hooks
+			// 'body',     // <body> hooks
+			// 'head',     // <head> hooks
+			// 'header',   // <header> hooks
+			// 'content',  // hooks (e.g., <main> and index <article>)
+			// 'entry',    // entry hooks (e.g., singular <article>)
+			// 'comments', // comment hooks (e.g., <section id="comments")
+			// 'sidebars', // sidebar hooks (e.g., <aside class="sidebar")
+			// 'sidebar',  // individual sidebar hooks (e.g., <aside class="sidebar")
+			// 'footer',   // <footer> hooks
 		);
 
 		/**
@@ -586,6 +734,78 @@ if ( ! function_exists( 'slimline_the_entry_title_before' ) ) {
 	}
 
 } // if ( ! function_exists( 'slimline_the_entry_title_before') )
+
+/**
+ * Closing anchor tag for entry title
+ *
+ * Adds </a> before the closing header tag when viewed on an index page.
+ *
+ * @param  string $tag HTML closing tag passed from slimline_the_entry_after()
+ * @return string $tag HTML closing tags
+ * @link   https://github.com/slimline/theme/wiki/slimline_the_entry_title_link_after()
+ * @since  0.2.0
+ */
+if ( ! function_exists( 'slimline_the_entry_title_link_after' ) ) {
+
+	function slimline_the_entry_title_link_after( $tag ) {
+
+		/**
+		 * Add closing anchor if not on a singular entry.
+		 *
+		 * @link https://developer.wordpress.org/reference/functions/is_singular/
+		 *       Description of the `is_singular` function
+		 */
+		if ( ! is_singular() ) {
+			$tag = "</a>{$tag}";
+		} // if ( ! is_singular() )
+
+		/**
+		 * Filter and return the markup
+		 *
+		 * @param string $tag HTML closing tag(s) with comment
+		 * @link  https://github.com/slimline/theme/wiki/slimline_the_entry_title_link_after
+		 */
+		return apply_filters( 'slimline_the_entry_title_link_after', $tag );
+
+	}
+
+} // if ( ! function_exists( 'slimline_the_entry_title_link_after') )
+
+/**
+ * Opening anchor tag for entry title
+ *
+ * Adds <a> after the opening header tag when viewed on an index page.
+ *
+ * @param  string $tag HTML opening tag passed from slimline_the_entry_after()
+ * @return string $tag HTML opening tags
+ * @link   https://github.com/slimline/theme/wiki/slimline_the_entry_title_link_before()
+ * @since  0.2.0
+ */
+if ( ! function_exists( 'slimline_the_entry_title_link_before' ) ) {
+
+	function slimline_the_entry_title_link_before( $tag ) {
+
+		/**
+		 * Add closing anchor if not on a singular entry.
+		 *
+		 * @link https://developer.wordpress.org/reference/functions/is_singular/
+		 *       Description of the `is_singular` function
+		 */
+		if ( ! is_singular() ) {
+			$tag .= '<a href="' . get_permalink() . '">';
+		} // if ( ! is_singular() )
+
+		/**
+		 * Filter and return the markup
+		 *
+		 * @param string $tag HTML opening tag(s)
+		 * @link  https://github.com/slimline/theme/wiki/slimline_the_entry_title_link_before
+		 */
+		return apply_filters( 'slimline_the_entry_title_link_before', $tag );
+
+	}
+
+} // if ( ! function_exists( 'slimline_the_entry_title_link_before') )
 
 /**
  * Title tag for entry title
