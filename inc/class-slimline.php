@@ -9,6 +9,9 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 
+/**
+ *
+ */
 class Slimline {
 
 	/**
@@ -24,8 +27,12 @@ class Slimline {
 
 	protected $template = null;
 
+	/**
+	 * Automatically runs when instantiating an object of this class
+	 *
+	 * Empty function since properties are set the first time they are called.
+	 */
 	function __construct() {
-
 	} // function __construct()
 
 	function get_category_count( $hide_empty = true ) {

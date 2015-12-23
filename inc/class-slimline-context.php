@@ -389,7 +389,7 @@ class Slimline_Context {
 		 */
 		if ( is_front_page() ) {
 			$this->context[] = 'front-page';
-		}
+		} // if ( is_front_page() )
 
 	} // function __construct()
 
