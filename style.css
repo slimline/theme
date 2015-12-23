@@ -9752,3 +9752,47 @@ th.hide-for-touch {
   max-width: none;
   width: 100%;
 }
+
+/* line 60, ../scss/style.scss */
+.site-menu {
+  list-style: none;
+  margin: 0;
+  text-align: center;
+}
+
+/* line 66, ../scss/style.scss */
+.site-menu li {
+  list-style: none;
+}
+
+/* line 70, ../scss/style.scss */
+#site-header {
+  background: #eee;
+  box-shadow: 0 -1px 3px -2px rgba(0, 0, 0, 0.85) inset;
+  margin-bottom: 1em;
+  padding-bottom: 1em;
+  padding-top: 1em;
+}
+
+/* line 78, ../scss/style.scss */
+.edit-link,
+.post-edit-link {
+  font-size: .9em;
+}
+
+/* line 83, ../scss/style.scss */
+#site-footer {
+  background: #222;
+  box-shadow: 0 1px 3px -2px black inset;
+  color: #fff;
+  margin-top: 1em;
+  padding-bottom: 3em;
+  padding-top: 1em;
+}
+
+@media only screen and (min-width: 40.0625em) {
+  /* line 94, ../scss/style.scss */
+  .site-menu {
+    text-align: right;
+  }
+}

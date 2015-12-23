@@ -56,3 +56,43 @@
 	max-width: none;
 	width: 100%;
 }
+
+.site-menu {
+	list-style: none;
+	margin: 0;
+	text-align: center;
+}
+
+	.site-menu li {
+		list-style: none;
+	}
+
+#site-header {
+	background: #eee;
+	box-shadow: 0 -1px 3px -2px rgba( 0, 0, 0, .85 ) inset;
+	margin-bottom: 1em;
+	padding-bottom: 1em;
+	padding-top: 1em;
+}
+
+.edit-link,
+.post-edit-link {
+	font-size: .9em;
+}
+
+#site-footer {
+	background: #222;
+	box-shadow: 0 1px 3px -2px rgba( 0, 0, 0, 1 ) inset;
+	color: #fff;
+	margin-top: 1em;
+	padding-bottom: 3em;
+	padding-top: 1em;
+}
+
+@media #{$medium-up} {
+
+	.site-menu {
+		text-align: right;
+	}
+
+}
