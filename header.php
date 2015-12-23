@@ -14,10 +14,16 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 
-?><!doctype html>
-<html <?php slimline_html_attributes(); ?> <?php language_attributes(); ?>>
+/**
+ * slimline_html hook
+ *
+ * @hook slimline_get_doctype  - 0 (gets doctype.php template part)
+ * @hook slimline_get_html_tag - 1 (gets tag-html.php template part)
+ * @see  https://github.com/slimline/theme/wiki/slimline_html
+ */
+do_action( 'slimline_html' );
+?>
 	<head>
-
 		<?php
 			/**
 			 * Fire the `wp_head` action

@@ -299,6 +299,12 @@ function slimline_theme_setup() {
 	add_action( 'wp_enqueue_scripts', 'slimline_wp_enqueue_scripts', 10 ); // Enqueue theme scripts and styles
 
 	/**
+	 * Add site <html> hooks
+	 */
+	add_action( 'slimline_html', 'slimline_get_doctype',  0  ); // get doctype.php template part
+	add_action( 'slimline_html', 'slimline_get_html_tag', 10 ); // get tag-html.php template part
+
+	/**
 	 * Add <meta> tags to <head>
 	 *
 	 * @link https://developer.wordpress.org/reference/hooks/wp_head/
@@ -320,7 +326,7 @@ function slimline_theme_setup() {
 	add_action( 'slimline_404_content',        'slimline_get_404_posts',         10 ); // get 404/posts.php template part
 	add_action( 'slimline_404_content',        'slimline_get_404_search_form',   20 ); // get 404/searchform.php template part
 	add_action( 'slimline_404_entries_before', 'slimline_404_get_entries_title', 10 ); // get 404/entries-title.php template part
-	add_action( 'slimline_404_entries_after',  'wp_reset_query',                 0  ); // reset $wp_query after showing recent posts
+	add_action( 'slimline_404_entries_after',  'wp_reset_query',                 10 ); // reset $wp_query after showing recent posts
 
 	/**
 	 * Index.php
@@ -350,7 +356,10 @@ function slimline_theme_setup() {
 	add_action( 'slimline_comments_bottom', 'slimline_get_comments_list',       10 ); // get comments/list.php template part
 	add_action( 'slimline_comments_bottom', 'slimline_get_comments_pagination', 20 ); // get comments/pagination.php template part
 	add_action( 'slimline_comments_bottom', 'slimline_get_comments_form',       30 ); // get comments/form.php template part
-	add_action( 'slimline_comment_bottom',  'slimline_comment_reply_link',      10 ); // Output comment reply link
+	add_action( 'slimline_comment_top',     'slimline_get_comment_avatar',      10 ); // get comment/avatar.php template part
+	add_action( 'slimline_comment_top',     'slimline_get_comment_author',      50 ); // get comment/author.php template part
+	add_action( 'slimline_comment_bottom',  'slimline_get_comment_date',        10 ); // get comment/date.php template part
+	add_action( 'slimline_comment_bottom',  'slimline_comment_reply_link',      20 ); // Output comment reply link
 
 	/**
 	 * Sidebars
@@ -472,6 +481,8 @@ function slimline_theme_setup() {
 	 * @see  slimline_post_thumbnails_support_args()
 	 */
 	add_theme_support( 'post-thumbnails', slimline_post_thumbnails_support_args() );
+
+	add_theme_support( 'site-logo', array( 'size' => 'slimline-logo' ) );
 
 	/**
 	 * Add automatic <title> tag output
