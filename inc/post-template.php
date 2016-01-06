@@ -896,7 +896,7 @@ function slimline_get_comments_title() {
 		 *       Description of `_nx` function
 		 * @see  https://codex.wordpress.org/Function_Reference/comments_number#Title_For_Comments_Section
 		 */
-		$title = sprintf( _nx( 'One comment so far:', '%1$s comments:', $comments_number, 'comments title', 'slimline' ) );
+		$title = sprintf( _nx( 'One comment so far:', '%1$s comments:', $comments_number, 'comments title', 'slimline' ), number_format_i18n( $comments_number ) );
 
 	/**
 	 * Special message when no comments have been left yet
