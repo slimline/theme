@@ -16,8 +16,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 /**
  * Load the header.php file
  *
- * @see https://developer.wordpress.org/reference/functions/get_header/ Documentation
- *      of the `get_header` function
+ * @link https://developer.wordpress.org/reference/functions/get_header/
+ *       Documentation of the `get_header` function
  */
 get_header();
 ?>
@@ -28,7 +28,7 @@ get_header();
 			/**
 			 * slimline_content_top hook
 			 *
-			 * @see https://github.com/slimline/theme/wiki/slimline_content_top
+			 * @link https://github.com/slimline/theme/wiki/slimline_content_top
 			 */
 			do_action( 'slimline_content_top' );
 		?>
@@ -41,7 +41,7 @@ get_header();
 			 * content of a WordPress 404 error page. Slimline theme gives this
 			 * ability to users via a custom widget area.
 			 *
-			 * @see   https://developer.wordpress.org/reference/functions/is_active_sidebar/
+			 * @link  https://developer.wordpress.org/reference/functions/is_active_sidebar/
 			 *        Documentation of `is_active_sidebar` function.
 			 * @since 0.1.0
 			 */
@@ -50,15 +50,15 @@ get_header();
 				/**
 				 * Display widget area content
 				 *
-				 * @see https://developer.wordpress.org/reference/functions/dynamic_sidebar/
-				 *      Documentation of `dynamic_sidebar` function
+				 * @link https://developer.wordpress.org/reference/functions/dynamic_sidebar/
+				 *       Documentation of `dynamic_sidebar` function
 				 */
 				dynamic_sidebar( 'slimline-404' );
 
 			/**
 			 * Show default content if no custom content set
 			 *
-			 * @see   http://codex.wordpress.org/Theme_Development#Widgets_.28sidebar.php.29
+			 * @link  http://codex.wordpress.org/Theme_Development#Widgets_.28sidebar.php.29
 			 * @since 0.1.0
 			 */
 			} else { // if ( is_active_sidebar( 'slimline-404' ) )
@@ -69,7 +69,7 @@ get_header();
 				 * The 404/header.php file contains the <header> tag for the
 				 * 404 page.
 				 *
-				 * @see   https://developer.wordpress.org/reference/functions/get_template_part/
+				 * @link  https://developer.wordpress.org/reference/functions/get_template_part/
 				 *        Documentation of the `get_template_part` function
 				 * @since 0.1.0
 				 */
@@ -80,7 +80,7 @@ get_header();
 				 *
 				 * @hook  slimline_get_404_posts       - 10 (gets recent posts loop template part)
 				 * @hook  slimline_get_404_search_form - 20 (gets search form template part)
-				 * @see   https://github.com/slimline/theme/wiki/slimline_404_content
+				 * @link  https://github.com/slimline/theme/wiki/slimline_404_content
 				 * @since 0.2.0
 				 */
 				do_action( 'slimline_404_content' );
@@ -92,7 +92,7 @@ get_header();
 			/**
 			 * slimline_content_bottom hook
 			 *
-			 * @see https://github.com/slimline/theme/wiki/slimline_content_bottom
+			 * @link https://github.com/slimline/theme/wiki/slimline_content_bottom
 			 */
 			do_action( 'slimline_content_bottom' );
 		?>
@@ -103,7 +103,7 @@ get_header();
 /**
  * Load the footer.php file
  *
- * @see https://developer.wordpress.org/reference/functions/get_footer/
- *      Documentation of the `get_footer` function
+ * @link https://developer.wordpress.org/reference/functions/get_footer/
+ *       Documentation of the `get_footer` function
  */
 get_footer();
