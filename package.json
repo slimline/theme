@@ -1,15 +1,20 @@
 {
-  "name": "foundation-zurb-template",
-  "version": "1.0.0",
-  "description": "Official ZURB Template for Foundation for Sites.",
+  "name": "slimline",
+  "version": "0.2.0",
+  "description": "Base template for building WordPress sites.",
   "main": "gulpfile.js",
   "scripts": {
     "start": "gulp",
     "build": "gulp build --production"
   },
-  "author": "ZURB <foundation@zurb.com>",
-  "license": "MIT",
+  "author": {
+    "name": "Michael Dozark",
+    "email": "michael@michaeldozark.com",
+    "url": "http://www.michaeldozark.com/"
+  },
+  "license": "GPL2",
   "devDependencies": {
+    "bower": "^1.6.8",
     "browser-sync": "^2.10.0",
     "gulp": "^3.9.0",
     "gulp-autoprefixer": "^2.2.0",
@@ -32,11 +37,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/zurb/foundation-zurb-template.git"
+    "url": "https://github.com/slimline/theme.git"
   },
   "bugs": {
-    "url": "https://github.com/zurb/foundation-sites/issues",
-    "email": "foundation@zurb.com"
+    "url": "https://github.com/slimline/theme/issues",
+    "email": "michael@michaeldozark.com"
   },
   "private": true
 }
