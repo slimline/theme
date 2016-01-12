@@ -593,6 +593,39 @@ if ( ! function_exists( 'slimline_sidebar_primary_columns' ) ) {
 } // if ( ! function_exists( 'slimline_sidebar_primary_columns' ) )
 
 /**
+ * Parameters for `add_theme_support( 'site-logo' )`
+ *
+ * Adds custom arguments for JetPack's site logo module.
+ *
+ * @return array $args Site Logo arguments set to work with Slimline theme
+ * @link   https://github.com/slimline/theme/wiki/slimline_site_logo_support_args()
+ * @since  0.1.0
+ */
+if ( ! function_exists( 'slimline_site_logo_support_args' ) ) {
+
+	function slimline_site_logo_support_args() {
+
+		/**
+		 * Default arguments
+		 *
+		 * @link https://jetpack.me/support/site-logo/
+		 *       Explanation of of Site Logo arguments
+		 */
+		$args = array(
+			'size' => 'slimline-logo', // use custom `slimline-logo` size for displaying the logo
+		);
+
+		/**
+		 * Filter the arguments
+		 *
+		 * @link https://github.com/slimline/theme/wiki/slimline_site_logo_support_args
+		 */
+		return apply_filters( 'slimline_site_logo_support_args', $args );
+	}
+
+} // if ( ! function_exists( 'slimline_site_logo_support_args' ) )
+
+/**
  * Column widths for site title link
  *
  * @param  array $attributes Array of HTML attributes passed from slimline_get_attributes()

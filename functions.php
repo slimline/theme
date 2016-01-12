@@ -235,6 +235,13 @@ function slimline_theme_setup() {
 	require_once( slimline_includes_directory() . 'post-template.php' );
 
 	/**
+	 * Script loading function
+	 *
+	 * Functions for deciding how to load scripts and styles
+	 */
+	require_once( slimline_includes_directory() . 'script-loader.php' );
+
+	/**
 	 * Slimline object functions
 	 *
 	 * Functions for working with Slimline objects
@@ -425,6 +432,17 @@ function slimline_theme_setup() {
 	add_filter( 'slimline_content', 'wptexturize' );
 
 	/**
+	 * Minify stylesheet filename if:
+	 * 1) script debugging is turned off AND
+	 * 2) style.min.css exists in the stylesheet directory
+	 *
+	 * @link https://developer.wordpress.org/reference/hooks/stylesheet_uri/
+	 *       Description of the `stylesheet_uri` filter
+	 * @see  slimline_stylesheet_uri()
+	 */
+	add_filter( 'stylesheet_uri', 'slimline_stylesheet_uri', 0, 1 );
+
+	/**
 	 * Make term descriptions shortcode-aware
 	 *
 	 * @link https://developer.wordpress.org/reference/hooks/term_description/
@@ -482,7 +500,13 @@ function slimline_theme_setup() {
 	 */
 	add_theme_support( 'post-thumbnails', slimline_post_thumbnails_support_args() );
 
-	add_theme_support( 'site-logo', array( 'size' => 'slimline-logo' ) );
+	/**
+	 * Add support for JetPack's site logo
+	 *
+	 * @link https://jetpack.me/support/site-logo/
+	 * @see  slimline_site_logo_support_args()
+	 */
+	add_theme_support( 'site-logo', slimline_site_logo_support_args() );
 
 	/**
 	 * Add automatic <title> tag output

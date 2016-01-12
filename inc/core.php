@@ -10,6 +10,39 @@
 if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 
 /**
+ * Set up admin area handling
+ *
+ * @link  https://github.com/slimline/theme/wiki/slimline_admin()
+ * @since 0.1.0
+ */
+function slimline_admin() {
+
+	/**
+	 * Exit if not in admin area
+	 *
+	 * @link https://developer.wordpress.org/reference/functions/is_admin/
+	 *       Description of the `is_admin` function
+	 */
+	if ( ! is_admin() ) {
+		return;
+	} // if ( ! is_admin() )
+
+	/**
+	 * Admin functions
+	 */
+	require_once( slimline_includes_directory() . 'admin.php' );
+
+	/**
+	 * Enqueue admin-side scripts and stylesheets
+	 *
+	 * @link https://developer.wordpress.org/reference/hooks/admin_enqueue_scripts/
+	 *       Description of `admin_enqueue_scripts` action
+	 * @see  slimline_admin_enqueue_scripts()
+	 */
+	add_action( 'admin_enqueue_scripts', 'slimline_admin_enqueue_scripts' );
+}
+
+/**
  * Auto-loader function for classes
  *
  * @see http://php.net/manual/en/function.spl-autoload-register.php
@@ -59,7 +92,7 @@ function slimline_autoload_register() {
 }
 
 /**
- * Setup default grid
+ * Set up default grid
  *
  * @link  https://github.com/slimline/theme/wiki/slimline_default_layout()
  * @since 0.2.0
@@ -97,7 +130,7 @@ function slimline_default_layout() {
 }
 
 /**
- * Setup login screen handling
+ * Set up login screen handling
  *
  * @link  https://github.com/slimline/theme/wiki/slimline_login()
  * @since 0.1.0

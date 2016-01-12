@@ -96,7 +96,7 @@ if ( ! function_exists( 'slimline_wp_enqueue_scripts' ) ) {
 
 	function slimline_wp_enqueue_scripts() {
 
-		wp_enqueue_script( 'slimline', slimline_javascript_directory_uri() . 'scripts.min.js', array( 'jquery' ), '0.1.0', true );
+		wp_enqueue_script( 'slimline', slimline_get_file_uri( 'js/scripts.js' ), array( 'jquery' ), '0.1.0', true );
 
 		wp_enqueue_style( 'slimline', get_stylesheet_uri(), false, wp_get_theme()->get( 'Version' ), 'all' );
 
