@@ -103,3 +103,52 @@
 	}
 
 }
+
+/**
+ * Color Schemes
+ */
+
+/**
+ * BLUE - "Social Network"
+ */
+body.social-network {
+	#site-header {
+		background: #3b5998;
+	}
+}
+
+/**
+ * GRAY - "Search Engine"
+ */
+body.search-engine {
+	#site-header {
+		background: #f1f1f1;
+	}
+}
+
+/**
+ * GREEN - "Tech News"
+ */
+body.search-engine {
+	#site-header {
+		background: #0a9e01;
+	}
+}
+
+/**
+ * PURPLE - "Old School"
+ */
+body.search-engine {
+	#site-header {
+		background: #2d1152;
+	}
+}
+
+/**
+ * RED - "News Station"
+ */
+body.news-station {
+	#site-header {
+		background: #cb0000;
+	}
+}
