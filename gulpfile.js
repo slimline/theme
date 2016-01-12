@@ -17,7 +17,7 @@ var PATHS = {
     'bower_components/motion-ui/src/'
   ],
   javascript: [
-    'bower_components/jquery/dist/jquery.js',
+    // 'bower_components/jquery/dist/jquery.js',
     'bower_components/what-input/what-input.js',
     'bower_components/foundation-sites/js/foundation.core.js',
     'bower_components/foundation-sites/js/foundation.util.*.js',
@@ -68,7 +68,7 @@ gulp.task('style', function() {
   // });
 
   return gulp.src('src/scss/style.scss')
-    .pipe($.sourcemaps.init())
+    // .pipe($.sourcemaps.init())
     .pipe($.sass({
       includePaths: PATHS.sass
     })
@@ -78,16 +78,16 @@ gulp.task('style', function() {
     }))
     // .pipe(uncss)
     .pipe(gulp.dest('./'))
-    // .pipe($.sourcemaps.write())
     .pipe($.minifyCss())
     .pipe($.extname('min.css'))
+    // .pipe($.sourcemaps.write())
     .pipe(gulp.dest('./'));
 });
 
 gulp.task('css', function() {
 
   return gulp.src(['src/scss/*.scss','!src/scss/style.scss'])
-    .pipe($.sourcemaps.init())
+    // .pipe($.sourcemaps.init())
     .pipe($.sass({
       includePaths: PATHS.sass
     })
@@ -96,9 +96,9 @@ gulp.task('css', function() {
       browsers: COMPATIBILITY
     }))
     .pipe(gulp.dest('./css'))
-    // .pipe($.sourcemaps.write())
     .pipe($.minifyCss())
     .pipe($.extname('min.css'))
+    // .pipe($.sourcemaps.write())
     .pipe(gulp.dest('./css'));
 });
 
@@ -111,12 +111,12 @@ gulp.task('js', function() {
     });
 
   return gulp.src(PATHS.javascript)
-    .pipe($.sourcemaps.init())
     .pipe($.concat('scripts.js'))
     .pipe(gulp.dest('./js'))
-    // .pipe($.sourcemaps.write())
+    // .pipe($.sourcemaps.init())
     .pipe(uglify)
     .pipe($.extname('min.js'))
+    // .pipe($.sourcemaps.write())
     .pipe(gulp.dest('./js'));
 });
 
