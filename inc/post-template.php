@@ -1637,7 +1637,25 @@ function slimline_get_logo_src( $logo_size = 'slimline-logo' ) {
 	 *       Description of `wp_get_attachment_image_src` function
 	 */
 	if ( $logo_id ) {
+
 		$logo_src = wp_get_attachment_image_src( $logo_id, $logo_size );
+
+		/**
+		 * Convert the default simple array into an associative array
+		 */
+		if ( $logo_src ) {
+
+			$logo_src_keys = array(
+				'url',
+				'width',
+				'height',
+				'is_intermediate',
+			);
+
+			$logo_src = array_combine( $logo_src_keys, $logo_src );
+
+		} // if ( $logo_src )
+
 	} // if ( $logo_id )
 
 	/**
