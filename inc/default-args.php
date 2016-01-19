@@ -67,6 +67,47 @@ if ( ! function_exists( 'slimline_copyright_columns' ) ) {
 
 } // if ( ! function_exists( 'slimline_footer_nav_columns' ) )
 
+if ( ! function_exists( 'slimline_customizer' ) ) {
+
+	function slimline_customizer() {
+
+		$customizer = array(
+			'panel'   => array(),
+			'section' => array(),
+			'setting' => array(),
+			'control' => array(),
+		);
+
+		if ( slimline_user_color_schemes() ) {
+
+			$customizer['setting']['color_scheme'] = array(
+				'capability' => 'edit_theme_options',
+				'type'       => 'theme_mod',          // or 'option'
+				'transport'  => 'postMessage',        // or postMessage
+				// 'sanitize_callback' => '',
+				// 'sanitize_js_callback' => '', // Basically to_json.
+			);
+
+			$customizer['control']['color_scheme'] = array(
+				'choices'  => array(
+					'social-network' => __( 'Blue', 'slimline' ),
+					'search-engine'  => __( 'Gray', 'slimline' ),
+					'tech-news'      => __( 'Green', 'slimline' ),
+					'old-school'     => __( 'Purple', 'slimline' ),
+					'news-station'   => __( 'Red', 'slimline' ),
+				),
+				'priority' => 100,
+				'section'  => 'colors',
+				'type'     => 'select',
+			);
+
+		} // if ( slimline_user_color_schemes() )
+
+		return apply_filters( 'slimline_customizer', $customizer );
+	}
+
+} // if ( ! function_exists( 'slimline_customizer' ) )
+
 /**
  * Default grid columns for footer navigation
  *
