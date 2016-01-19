@@ -69,7 +69,7 @@ function slimline_locate_file_uri( $filenames ) {
 	foreach ( $filenames as $filename ) {
 
 		if ( file_exists( trailingslashit( STYLESHEETPATH ) . $filename ) ) {
-			$located = trailingslashit( get_stylesheet_directory() ) . $filename;
+			$located = trailingslashit( get_stylesheet_directory_uri() ) . $filename;
 			break;
 		} // if ( file_exists( trailingslashit( STYLESHEETPATH ) . $filename ) )
 
@@ -83,7 +83,7 @@ function slimline_locate_file_uri( $filenames ) {
 		foreach ( $filenames as $filename ) {
 
 			if ( trailingslashit( file_exists( TEMPLATEPATH ) . $filename ) ) {
-				$located = trailingslashit( get_template_directory() ) . $filename;
+				$located = trailingslashit( get_template_directory_uri() ) . $filename;
 				break;
 			} // if ( trailingslashit( file_exists( TEMPLATEPATH ) . $filename ) )
 
