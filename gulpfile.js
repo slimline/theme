@@ -16,8 +16,7 @@ var PATHS = {
     'bower_components/foundation-sites/scss',
     'bower_components/motion-ui/src/'
   ],
-  javascript: [
-    // 'bower_components/jquery/dist/jquery.js',
+  scripts: [
     'bower_components/what-input/what-input.js',
     'bower_components/foundation-sites/js/foundation.core.js',
     'bower_components/foundation-sites/js/foundation.util.*.js',
@@ -41,8 +40,11 @@ var PATHS = {
     'bower_components/foundation-sites/js/foundation.tabs.js',
     'bower_components/foundation-sites/js/foundation.toggler.js',
     'bower_components/foundation-sites/js/foundation.tooltip.js',
-    'src/js/!(scripts.js)**/*.js',
     'src/js/scripts.js'
+  ],
+  javascript: [
+    'src/js/*.js',
+    '!src/js/scripts.js'
   ]
 };
 
@@ -104,6 +106,22 @@ gulp.task('css', function() {
 
 // Combine JavaScript into one file
 // In production, the file is minified
+gulp.task('scripts', function() {
+  var uglify = $.uglify()
+    .on('error', function (e) {
+      console.log(e);
+    });
+
+  return gulp.src(PATHS.scripts)
+    .pipe($.concat('scripts.js'))
+    .pipe(gulp.dest('./js'))
+    // .pipe($.sourcemaps.init())
+    .pipe(uglify)
+    .pipe($.extname('min.js'))
+    // .pipe($.sourcemaps.write())
+    .pipe(gulp.dest('./js'));
+});
+
 gulp.task('js', function() {
   var uglify = $.uglify()
     .on('error', function (e) {
@@ -111,7 +129,6 @@ gulp.task('js', function() {
     });
 
   return gulp.src(PATHS.javascript)
-    .pipe($.concat('scripts.js'))
     .pipe(gulp.dest('./js'))
     // .pipe($.sourcemaps.init())
     .pipe(uglify)
@@ -146,8 +163,9 @@ gulp.task('img', function() {
 
 // Build the site, run the server, and watch for file changes
 gulp.task('default', function() {
-  gulp.watch(['src/scss/*.scss'], ['style']);
+  gulp.watch(['src/scss/style.scss'], ['style']);
   gulp.watch(['src/scss/*.scss'], ['css']);
+  gulp.watch(['src/js/scripts.js'], ['scripts']);
   gulp.watch(['src/js/*.js'], ['js']);
   gulp.watch(['src/img/*'], ['img']);
   // gulp.watch(['src/styleguide/**'], ['styleguide']);
