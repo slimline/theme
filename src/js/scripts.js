@@ -18,7 +18,8 @@ jQuery(function($){
 	 */
 	var $slimlightbox = $('#slimline-lightbox');
 
-	$(document).on('click','a[href$=".bmp"],a[href$=".gif"],a[href$=".jpeg"],a[href$=".jpg"],a[href$=".png"]',function(){
+	$(document).on('click','a[href$=".bmp"],a[href$=".gif"],a[href$=".jpeg"],a[href$=".jpg"],a[href$=".png"]',function(e){
+		e.preventDefault();
 		$.ajax( $(this).attr('href') ).done(function(response){
 			$slimlightbox.html(response.html).foundation('open');
 		});
