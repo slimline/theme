@@ -262,6 +262,27 @@ function slimline_use_as_logo( $feature = '' ) {
 }
 
 /**
+ * Allow color scheme choices in customizer?
+ *
+ * By default will return FALSE if using a child theme, TRUE if not.
+ *
+ * @return bool TRUE for yes, otherwise FALSE
+ * @link   https://github.com/slimline/theme/wiki/slimline_use_default_layout()
+ * @since  0.2.0
+ */
+function slimline_use_color_schemes() {
+
+	/**
+	 * Filter the result
+	 *
+	 * @link https://developer.wordpress.org/reference/functions/is_child_theme/
+	 *       Description of the `is_child_theme` function
+	 * @link https://github.com/slimline/theme/wiki/slimline_use_color_schemes
+	 */
+	return apply_filters( 'slimline_use_color_schemes', ( ! is_child_theme() ) );
+}
+
+/**
  * Use default rows, column sizes, etc.?
  *
  * By default will return FALSE if using a child theme, TRUE if not.

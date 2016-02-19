@@ -211,6 +211,13 @@ function slimline_theme_setup() {
 	require_once( slimline_includes_directory() . 'core.php' );
 
 	/**
+	 * Customizer options
+	 *
+	 * Setup functions for the WordPress Customizer
+	 */
+	require_once( slimline_includes_directory() . 'customizer.php' );
+
+	/**
 	 * Default arguments for functions
 	 *
 	 * Arguments for add_theme_support and other arguments. All functions in this
@@ -292,6 +299,7 @@ function slimline_theme_setup() {
 	/**
 	 * Setup core modules and functions (core.php)
 	 */
+	add_action( 'after_setup_theme', 'slimline_admin',             20 ); // Add admin area handling
 	add_action( 'after_setup_theme', 'slimline_autoload_register', 15 ); // Register autoload functions
 	add_action( 'after_setup_theme', 'slimline_default_layout',    20 ); // Use default rows, columns, etc.
 	add_action( 'after_setup_theme', 'slimline_login',             20 ); // Add login page handling

@@ -9,6 +9,10 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 
+	add_action( 'customize_preview_init', 'slimline_customizer_enqueue_scripts' );
+
+	add_action( 'customize_register', 'slimline_customize_register' );
+
 /**
  * Set up admin area handling
  *
@@ -40,10 +44,6 @@ function slimline_admin() {
 	 * @see  slimline_admin_enqueue_scripts()
 	 */
 	add_action( 'admin_enqueue_scripts', 'slimline_admin_enqueue_scripts' );
-
-	add_action( 'customize_preview_init', 'slimline_customizer_enqueue_scripts' );
-
-	add_action( 'customize_register', 'slimline_customize_register' );
 }
 
 /**

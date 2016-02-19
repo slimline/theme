@@ -78,7 +78,7 @@ if ( ! function_exists( 'slimline_customizer' ) ) {
 			'control' => array(),
 		);
 
-		if ( slimline_user_color_schemes() ) {
+		if ( slimline_use_color_schemes() ) {
 
 			$customizer['setting']['color_scheme'] = array(
 				'capability' => 'edit_theme_options',
@@ -90,18 +90,20 @@ if ( ! function_exists( 'slimline_customizer' ) ) {
 
 			$customizer['control']['color_scheme'] = array(
 				'choices'  => array(
-					'social-network' => __( 'Blue', 'slimline' ),
-					'search-engine'  => __( 'Gray', 'slimline' ),
-					'tech-news'      => __( 'Green', 'slimline' ),
-					'old-school'     => __( 'Purple', 'slimline' ),
-					'news-station'   => __( 'Red', 'slimline' ),
+					'slimline-default'        => __( '-- Select --', 'slimline' ),
+					'slimline-social-network' => __( 'Blue', 'slimline' ),
+					'slimline-search-engine'  => __( 'Gray', 'slimline' ),
+					'slimline-tech-news'      => __( 'Green', 'slimline' ),
+					'slimline-old-school'     => __( 'Purple', 'slimline' ),
+					'slimline-news-station'   => __( 'Red', 'slimline' ),
 				),
+				'label'    => __( 'Color Scheme', 'slimline' ),
 				'priority' => 100,
 				'section'  => 'colors',
 				'type'     => 'select',
 			);
 
-		} // if ( slimline_user_color_schemes() )
+		} // if ( slimline_use_color_schemes() )
 
 		return apply_filters( 'slimline_customizer', $customizer );
 	}
