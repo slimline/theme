@@ -12,6 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 /**
  * Output comment reply link
  *
+ * @link  https://github.com/slimline/theme/wiki/slimline_comment_reply_link()
  * @since 0.2.0
  */
 function slimline_comment_reply_link() {
@@ -28,6 +29,7 @@ function slimline_comment_reply_link() {
 /**
  * Get entries header template part
  *
+ * @link  https://github.com/slimline/theme/wiki/slimline_get_404_entries_header()
  * @since 0.2.0
  */
 function slimline_get_404_entries_header() {
@@ -43,6 +45,7 @@ function slimline_get_404_entries_header() {
 /**
  * Get recent posts loop template part
  *
+ * @link  https://github.com/slimline/theme/wiki/slimline_get_404_posts()
  * @since 0.2.0
  */
 function slimline_get_404_posts() {
@@ -58,6 +61,7 @@ function slimline_get_404_posts() {
 /**
  * Get search form template part
  *
+ * @link  https://github.com/slimline/theme/wiki/slimline_get_404_search_form()
  * @since 0.2.0
  */
 function slimline_get_404_search_form() {
@@ -73,6 +77,7 @@ function slimline_get_404_search_form() {
 /**
  * Get charset template part
  *
+ * @link  https://github.com/slimline/theme/wiki/slimline_get_charset_tag()
  * @since 0.2.0
  */
 function slimline_get_charset_tag() {
@@ -86,23 +91,9 @@ function slimline_get_charset_tag() {
 }
 
 /**
- * Get comment avatar template part
- *
- * @since 0.2.0
- */
-function slimline_get_comment_avatar() {
-
-	/**
-	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
-	 *       Description of `get_template_part` function
-	 * @see  slimline_get_template_parts_directory()
-	 */
-	get_template_part( trailingslashit( slimline_get_template_parts_directory() ) . 'comment/avatar' );
-}
-
-/**
  * Get comment author template part
  *
+ * @link  https://github.com/slimline/theme/wiki/slimline_get_comment_author()
  * @since 0.2.0
  */
 function slimline_get_comment_author() {
@@ -116,8 +107,25 @@ function slimline_get_comment_author() {
 }
 
 /**
+ * Get comment avatar template part
+ *
+ * @link  https://github.com/slimline/theme/wiki/slimline_get_comment_avatar()
+ * @since 0.2.0
+ */
+function slimline_get_comment_avatar() {
+
+	/**
+	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
+	 *       Description of `get_template_part` function
+	 * @see  slimline_get_template_parts_directory()
+	 */
+	get_template_part( trailingslashit( slimline_get_template_parts_directory() ) . 'comment/avatar' );
+}
+
+/**
  * Get comment date template part
  *
+ * @link  https://github.com/slimline/theme/wiki/slimline_get_comment_date()
  * @since 0.2.0
  */
 function slimline_get_comment_date() {
@@ -134,6 +142,7 @@ function slimline_get_comment_date() {
  * Get comment template part
  *
  * @param object $comment WP_Comment object
+ * @link  https://github.com/slimline/theme/wiki/slimline_get_comment_template()
  * @since 0.2.0
  */
 function slimline_get_comment_template( $comment ) {
@@ -155,6 +164,7 @@ function slimline_get_comment_template( $comment ) {
  * Get comment end template part
  *
  * @param object $comment WP_Comment object
+ * @link  https://github.com/slimline/theme/wiki/slimline_get_comment_end_template()
  * @since 0.2.0
  */
 function slimline_get_comment_end_template( $comment ) {
@@ -175,6 +185,7 @@ function slimline_get_comment_end_template( $comment ) {
 /**
  * Get comments list template part
  *
+ * @link  https://github.com/slimline/theme/wiki/slimline_get_comments_template()
  * @since 0.2.0
  */
 function slimline_get_comments_list() {
@@ -192,6 +203,7 @@ function slimline_get_comments_list() {
 /**
  * Get comments form template part
  *
+ * @link  https://github.com/slimline/theme/wiki/slimline_get_comments_form()
  * @since 0.2.0
  */
 function slimline_get_comments_form() {
@@ -209,6 +221,7 @@ function slimline_get_comments_form() {
 /**
  * Get comments title template part
  *
+ * @link  https://github.com/slimline/theme/wiki/slimline_get_comments_header()
  * @since 0.2.0
  */
 function slimline_get_comments_header() {
@@ -226,6 +239,7 @@ function slimline_get_comments_header() {
 /**
  * Get comments pagination template part
  *
+ * @link  https://github.com/slimline/theme/wiki/slimline_get_comments_pagination()
  * @since 0.2.0
  */
 function slimline_get_comments_pagination() {
@@ -241,6 +255,7 @@ function slimline_get_comments_pagination() {
 /**
  * Get comments template part
  *
+ * @link  https://github.com/slimline/theme/wiki/slimline_get_comments_template()
  * @since 0.2.0
  */
 function slimline_get_comments_template() {
@@ -265,6 +280,7 @@ function slimline_get_comments_template() {
 /**
  * Get copyright template part
  *
+ * @link  https://github.com/slimline/theme/wiki/slimline_get_copyright_notice()
  * @since 0.2.0
  */
 function slimline_get_copyright_notice() {
@@ -280,6 +296,7 @@ function slimline_get_copyright_notice() {
 /**
  * Get doctype template part
  *
+ * @link  https://github.com/slimline/theme/wiki/slimline_get_doctype()
  * @since 0.2.0
  */
 function slimline_get_doctype() {
@@ -295,6 +312,7 @@ function slimline_get_doctype() {
 /**
  * Get entries header template part
  *
+ * @link  https://github.com/slimline/theme/wiki/slimline_get_entries_header()
  * @since 0.2.0
  */
 function slimline_get_entries_header() {
@@ -310,6 +328,7 @@ function slimline_get_entries_header() {
 /**
  * Get entry footer template part
  *
+ * @link  https://github.com/slimline/theme/wiki/slimline_get_entry_footer()
  * @since 0.2.0
  */
 function slimline_get_entry_footer() {
@@ -325,6 +344,7 @@ function slimline_get_entry_footer() {
 /**
  * Get entry header template part
  *
+ * @link  https://github.com/slimline/theme/wiki/slimline_get_entry_header()
  * @since 0.2.0
  */
 function slimline_get_entry_header() {
@@ -340,6 +360,7 @@ function slimline_get_entry_header() {
 /**
  * Get entry meta template part
  *
+ * @link  https://github.com/slimline/theme/wiki/slimline_get_entry_meta()
  * @since 0.2.0
  */
 function slimline_get_entry_meta() {
@@ -355,6 +376,7 @@ function slimline_get_entry_meta() {
 /**
  * Get footer navigation template part
  *
+ * @link  https://github.com/slimline/theme/wiki/slimline_get_footer_navigation()
  * @since 0.2.0
  */
 function slimline_get_footer_navigation() {
@@ -370,6 +392,7 @@ function slimline_get_footer_navigation() {
 /**
  * Get header logo template part
  *
+ * @link  https://github.com/slimline/theme/wiki/slimline_get_header_logo()
  * @since 0.2.0
  */
 function slimline_get_header_logo() {
@@ -385,19 +408,10 @@ function slimline_get_header_logo() {
 /**
  * Get header navigation template part
  *
+ * @link  https://github.com/slimline/theme/wiki/slimline_get_header_navigation()
  * @since 0.2.0
  */
 function slimline_get_header_navigation() {
-
-	/**
-	 * Don't show if on a 404 page
-	 *
-	 * @link https://developer.wordpress.org/reference/functions/is_404/
-	 *       Description of the `is_404` function
-	 */
-	if ( is_404() ) {
-		return;
-	} // if ( is_404() )
 
 	/**
 	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
@@ -410,6 +424,7 @@ function slimline_get_header_navigation() {
 /**
  * Get opening html template part
  *
+ * @link  https://github.com/slimline/theme/wiki/slimline_get_html_tag()
  * @since 0.2.0
  */
 function slimline_get_html_tag() {
@@ -425,6 +440,7 @@ function slimline_get_html_tag() {
 /**
  * Get index.php header template part
  *
+ * @link  https://github.com/slimline/theme/wiki/slimline_get_index_header()
  * @since 0.2.0
  */
 function slimline_get_index_header() {
@@ -449,9 +465,20 @@ function slimline_get_index_header() {
 /**
  * Get index.php pagination template part
  *
+ * @link  https://github.com/slimline/theme/wiki/slimline_get_index_pagination()
  * @since 0.2.0
  */
 function slimline_get_index_pagination() {
+
+	/**
+	 * Don't show if on a 404 page
+	 *
+	 * @link https://developer.wordpress.org/reference/functions/is_404/
+	 *       Description of the `is_404` function
+	 */
+	if ( is_404() ) {
+		return;
+	} // if ( is_404() )
 
 	/**
 	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
@@ -464,6 +491,7 @@ function slimline_get_index_pagination() {
 /**
  * Get not found description template part
  *
+ * @link  https://github.com/slimline/theme/wiki/slimline_get_not_found_content()
  * @since 0.2.0
  */
 function slimline_get_not_found_content() {
@@ -479,6 +507,7 @@ function slimline_get_not_found_content() {
 /**
  * Get not found header template part
  *
+ * @link  https://github.com/slimline/theme/wiki/slimline_get_not_found_header()
  * @since 0.2.0
  */
 function slimline_get_not_found_header() {
@@ -494,6 +523,7 @@ function slimline_get_not_found_header() {
 /**
  * Get pingback template part
  *
+ * @link  https://github.com/slimline/theme/wiki/slimline_get_pingback_tag()
  * @since 0.2.0
  */
 function slimline_get_pingback_tag() {
@@ -509,6 +539,7 @@ function slimline_get_pingback_tag() {
 /**
  * Get row close template part
  *
+ * @link  https://github.com/slimline/theme/wiki/slimline_get_row_close()
  * @since 0.2.0
  */
 function slimline_get_row_close() {
@@ -524,6 +555,7 @@ function slimline_get_row_close() {
 /**
  * Get full-width row close template part
  *
+ * @link  https://github.com/slimline/theme/wiki/slimline_get_row_close_full()
  * @since 0.2.0
  */
 function slimline_get_row_close_full() {
@@ -539,6 +571,7 @@ function slimline_get_row_close_full() {
 /**
  * Get row open template part
  *
+ * @link  https://github.com/slimline/theme/wiki/slimline_get_row_open()
  * @since 0.2.0
  */
 function slimline_get_row_open() {
@@ -554,6 +587,7 @@ function slimline_get_row_open() {
 /**
  * Get full-width row open template part
  *
+ * @link  https://github.com/slimline/theme/wiki/slimline_get_row_open_full()
  * @since 0.2.0
  */
 function slimline_get_row_open_full() {
@@ -569,6 +603,7 @@ function slimline_get_row_open_full() {
 /**
  * Get footer widget area
  *
+ * @link  https://github.com/slimline/theme/wiki/slimline_get_sidebar_footer()
  * @since 0.2.0
  */
 function slimline_get_sidebar_footer() {
@@ -594,6 +629,7 @@ function slimline_get_sidebar_footer() {
 /**
  * Get primary widget area
  *
+ * @link  https://github.com/slimline/theme/wiki/slimline_get_sidebar_primary()
  * @since 0.2.0
  */
 function slimline_get_sidebar_primary() {
@@ -617,8 +653,35 @@ function slimline_get_sidebar_primary() {
 }
 
 /**
+ * Get WooCommerce shop widget area
+ *
+ * @link  https://github.com/slimline/theme/wiki/slimline_get_sidebar_shop()
+ * @since 0.2.0
+ */
+function slimline_get_sidebar_shop() {
+
+	/**
+	 * Only include sidebar if it is being used
+	 *
+	 * @link https://developer.wordpress.org/reference/functions/is_active_sidebar/
+	 *       Description of `is_active_sidebar` function
+	 */
+	if ( is_active_sidebar( 'sidebar-shop' ) ) {
+
+		/**
+		 * @link https://developer.wordpress.org/reference/functions/get_sidebar/
+		 *       Description of `get_sidebar` function
+		 */
+		get_sidebar( 'shop' );
+
+	} // if ( is_active_sidebar( 'sidebar-shop' ) )
+
+}
+
+/**
  * Get viewport template part
  *
+ * @link  https://github.com/slimline/theme/wiki/slimline_get_viewport_tag()
  * @since 0.2.0
  */
 function slimline_get_viewport_tag() {
@@ -644,6 +707,7 @@ function slimline_get_viewport_tag() {
  *                           of names to the function to achieve the same result.
  * @uses  slimline_locate_template() to retrieve the absolute path to the first
  *        matching template if found
+ * @link  https://github.com/slimline/theme/wiki/slimline_get_template_part()
  * @since 0.1.0
  */
 function slimline_get_template_part( $slug, $name = '' ) {
@@ -731,6 +795,7 @@ function slimline_get_template_part( $slug, $name = '' ) {
 /**
  * slimline_get_template_slugs function
  *
+ * @link  https://github.com/slimline/theme/wiki/slimline_get_template_slugs()
  * @since 0.1.0
  */
 function slimline_get_template_slugs( $stems ) {
@@ -814,6 +879,7 @@ function slimline_get_template_slugs( $stems ) {
  *         using locate_template()
  * @uses   slimline_add_php_extension() to append ".php" to each filename in the array
  * @uses   locate_template() to find the first matching template in the array of filenames
+ * @link   https://github.com/slimline/theme/wiki/slimline_locate_template()
  * @since  0.1.0
  */
 function slimline_locate_template() {
