@@ -317,6 +317,8 @@ function slimline_vendor() {
 
 	/**
 	 * Gravity Forms Support
+	 *
+	 * @link https://www.gravityforms.com/
 	 */
 	if ( class_exists( 'GFForms' ) ) {
 
@@ -457,6 +459,22 @@ function slimline_vendor() {
 		} // if ( array_intersect( array( 'all', 'footer' ), get_theme_support( 'tha_hooks' ) ) )
 
 	} // if ( defined( 'THA_HOOKS_VERSION' ) )
+
+	/**
+	 * WooCommerce Support
+	 *
+	 * @link https://www.woothemes.com/woocommerce/
+	 */
+	if ( function_exists( 'WC' ) ) {
+
+		remove_action( 'woocommerce_before_main_content', 'woocommerce_output_content_wrapper',     10 );
+		remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb',                 20 );
+		remove_action( 'woocommerce_after_main_content',  'woocommerce_output_content_wrapper_end', 10 );
+		remove_action( 'woocommerce_sidebar',             'woocommerce_get_sidebar',                10 );
+
+		add_action( 'slimline_content_before', 'slimline_woocommerce_breadcrumb', 10 );
+
+	} // if ( function_exists( 'WC' ) )
 
 	/**
 	 * Yoast SEO Support

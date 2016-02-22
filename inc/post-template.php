@@ -2092,6 +2092,35 @@ function slimline_get_site_title_link_attributes( $attributes = '' ) {
 /**
  * Generate breadcrumb links
  *
+ * @link  https://docs.woothemes.com/document/woocommerce_breadcrumb/
+ *        Description of how to use breadcrumbs
+ * @link  https://github.com/slimline/theme/wiki/slimline_get_woocommerce_breadcrumb()
+ * @since 0.2.0
+ */
+function slimline_get_woocommerce_breadcrumb() {
+
+	$breadcrumb = '';
+
+	if ( slimline_use_woocommerce_breadcrumb() ) {
+
+		ob_start();
+
+		woocommerce_breadcrumb();
+
+		$breadcrumb = ob_get_clean();
+
+	} // if ( slimline_use_woocommerce_breadcrumb() )
+
+	/**
+	 * Return breadcrumb string
+	 *
+	 * @link  https://github.com/slimline/theme/wiki/slimline_woocommerce_breadcrumb
+	 */
+	return apply_filters( 'slimline_woocommerce_breadcrumb', $breadcrumb );
+}
+/**
+ * Generate breadcrumb links
+ *
  * NOTE: only works if Yoast SEO is installed and active AND either 1) the theme
  * declares yoast breadcrumb support (i.e.,
  * `add_theme_support( 'yoast-seo-breadcrumbs' )` or 2) the breadcrumb links option

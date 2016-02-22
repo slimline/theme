@@ -320,3 +320,21 @@ function slimline_use_schema_org() {
 	 */
 	return apply_filters( 'slimline_use_schema_org', true );
 }
+
+/**
+ * Use Yoast breadcrumbs for WooCommerce if available?
+ *
+ * @return bool TRUE for yes, otherwise FALSE
+ * @link   https://github.com/slimline/theme/wiki/slimline_use_yoast_breadcrumb_for_woocommerce()
+ * @since  0.2.0
+ */
+function slimline_use_yoast_breadcrumb_for_woocommerce() {
+
+	/**
+	 * Filter the result
+	 *
+	 * @param bool Default TRUE to replace WooCommerce breadcrumbs with Yoast if available
+	 * @link  https://github.com/slimline/theme/wiki/slimline_use_yoast_breadcrumb_for_woocommerce
+	 */
+	return apply_filters( 'slimline_use_yoast_breadcrumb_for_woocommerce', true );
+}

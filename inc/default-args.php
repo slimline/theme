@@ -67,6 +67,13 @@ if ( ! function_exists( 'slimline_copyright_columns' ) ) {
 
 } // if ( ! function_exists( 'slimline_footer_nav_columns' ) )
 
+/**
+ * Extra controls for the WordPress Theme Customizer
+ *
+ * @link  https://developer.wordpress.org/themes/advanced-topics/customizer-api/
+ *        Description of the Customizer API
+ * @since 0.2.0
+ */
 if ( ! function_exists( 'slimline_customizer' ) ) {
 
 	function slimline_customizer() {
@@ -78,32 +85,27 @@ if ( ! function_exists( 'slimline_customizer' ) ) {
 			'control' => array(),
 		);
 
-		if ( slimline_use_color_schemes() ) {
+		$customizer['setting']['color_scheme'] = array(
+			'capability' => 'edit_theme_options',
+			'type'       => 'theme_mod',
+			'transport'  => 'postMessage',
+		);
 
-			$customizer['setting']['color_scheme'] = array(
-				'capability' => 'edit_theme_options',
-				'type'       => 'theme_mod',          // or 'option'
-				'transport'  => 'postMessage',        // or postMessage
-				// 'sanitize_callback' => '',
-				// 'sanitize_js_callback' => '', // Basically to_json.
-			);
-
-			$customizer['control']['color_scheme'] = array(
-				'choices'  => array(
-					'slimline-default'        => __( '-- Select --', 'slimline' ),
-					'slimline-social-network' => __( 'Blue', 'slimline' ),
-					'slimline-search-engine'  => __( 'Gray', 'slimline' ),
-					'slimline-tech-news'      => __( 'Green', 'slimline' ),
-					'slimline-old-school'     => __( 'Purple', 'slimline' ),
-					'slimline-news-station'   => __( 'Red', 'slimline' ),
-				),
-				'label'    => __( 'Color Scheme', 'slimline' ),
-				'priority' => 100,
-				'section'  => 'colors',
-				'type'     => 'select',
-			);
-
-		} // if ( slimline_use_color_schemes() )
+		$customizer['control']['color_scheme'] = array(
+			'active_callback' => 'slimline_use_color_schemes',
+			'choices'         => array(
+				'slimline-default'        => __( '-- Select --', 'slimline' ),
+				'slimline-social-network' => __( 'Blue', 'slimline' ),
+				'slimline-search-engine'  => __( 'Gray', 'slimline' ),
+				'slimline-tech-news'      => __( 'Green', 'slimline' ),
+				'slimline-old-school'     => __( 'Purple', 'slimline' ),
+				'slimline-news-station'   => __( 'Red', 'slimline' ),
+			),
+			'label'           => __( 'Color Scheme', 'slimline' ),
+			'priority'        => 100,
+			'section'         => 'colors',
+			'type'            => 'select',
+		);
 
 		return apply_filters( 'slimline_customizer', $customizer );
 	}
