@@ -484,7 +484,7 @@ function slimline_theme_setup() {
 	 */
 	add_theme_support( 'automatic-feed-links' );
 
-	add_theme_support( 'custom-background' );
+	// add_theme_support( 'custom-background' );
 
 	/**
 	 * Use HTML5 Markup for comments, galleries, etc.
