@@ -21,7 +21,7 @@ if ( ! function_exists( 'slimline_admin_enqueue_scripts' ) ) {
 
 	function slimline_admin_enqueue_scripts() {
 
-		add_editor_style( slimline_get_file_uri( 'css/editor.css' ) );
+		add_editor_style( slimline_get_css_file_uri( 'editor.css' ) );
 
 	}
 

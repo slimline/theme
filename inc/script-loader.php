@@ -12,6 +12,22 @@
 if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 
 /**
+ * Get a CSS file URI
+ *
+ * Gets the URI of a given CSS file by first checking for the minified version and
+ * then the non-minified version
+ *
+ * @param  string $filename The name of the file to look for
+ * @return string $located  The file URI if found
+ * @uses   slimline_get_file_uri()
+ * @since  0.2.0
+ */
+function slimline_get_css_file_uri( $filename ) {
+
+	return slimline_get_file_uri( slimline_stylesheet_directory_uri() . $filename );
+}
+
+/**
  * Get a file URI
  *
  * Gets the URI of a given file by first checking for the minified version and then
@@ -37,6 +53,22 @@ function slimline_get_file_uri( $filename ) {
 	$located = slimline_locate_file_uri( $filenames );
 
 	return $located;
+}
+
+/**
+ * Get a js file URI
+ *
+ * Gets the URI of a given JS file by first checking for the minified version and
+ * then the non-minified version
+ *
+ * @param  string $filename The name of the file to look for
+ * @return string $located  The file URI if found
+ * @uses   slimline_get_file_uri()
+ * @since  0.2.0
+ */
+function slimline_get_js_file_uri( $filename ) {
+
+	return slimline_get_file_uri( slimline_javascript_directory_uri() . $filename );
 }
 
 /**
