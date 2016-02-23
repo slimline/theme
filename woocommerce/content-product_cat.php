@@ -7,6 +7,7 @@
  * 1) product categories are wrapped with <article> tags nested inside the <li> tags
  * 2) `wc_product_cat_class` has been moved to the <article> tag
  * 3) additional attributes output through `slimline_woocommerce_product_cat_attributes`
+ * 4) added url <meta> tag
  *
  * @package    Slimline / Theme
  * @subpackage WooCommerce
@@ -18,17 +19,23 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 
 global $woocommerce_loop;
 
-// Store loop count we're currently on.
+/**
+ * Store loop count we're currently on.
+ */
 if ( empty( $woocommerce_loop['loop'] ) ) {
 	$woocommerce_loop['loop'] = 0;
-}
+} // if ( empty( $woocommerce_loop['loop'] ) )
 
-// Store column count for displaying the grid.
+/**
+ * Store column count for displaying the grid.
+ */
 if ( empty( $woocommerce_loop['columns'] ) ) {
 	$woocommerce_loop['columns'] = apply_filters( 'loop_shop_columns', 4 );
-}
+} // if ( empty( $woocommerce_loop['columns'] ) )
 
-// Increase loop count.
+/**
+ * Increase loop count.
+ */
 $woocommerce_loop['loop']++;
 ?>
 <li>
@@ -67,5 +74,6 @@ $woocommerce_loop['loop']++;
 			 */
 			do_action( 'woocommerce_after_subcategory', $category );
 		?>
+		<meta content="<?php echo get_term_link( $category->slug, 'product_cat' ); ?>" itemprop="url" />
 	</article><!-- .product-category -->
 </li>

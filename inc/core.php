@@ -9,10 +9,6 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 
-	add_action( 'customize_preview_init', 'slimline_customizer_enqueue_scripts' );
-
-	add_action( 'customize_register', 'slimline_customize_register' );
-
 /**
  * Set up admin area handling
  *
@@ -481,14 +477,25 @@ function slimline_vendor() {
 		remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb',  20 );
 		remove_action( 'woocommerce_sidebar',             'woocommerce_get_sidebar', 10 );
 
+		/**
+		 * Edit WooCommerce outputs to fit with Slimline markup
+		 *
+		 * @link https://docs.woothemes.com/document/third-party-custom-theme-compatibility/
+		 */
 		add_action( 'slimline_content_before',         'slimline_woocommerce_breadcrumb',                       10 );
 		add_action( 'woocommerce_before_main_content', 'slimline_maybe_remove_woocommerce_content_wrapper',      0 );
 		add_action( 'woocommerce_after_main_content',  'slimline_maybe_remove_woocommerce_content_wrapper_end',  0 );
 
+		/**
+		 * Add structured markup to default WooCommerce items
+		 */
 		add_filter( 'slimline_entry_attributes_pre',   'slimline_woocommerce_get_product_schema',        20, 1 );
 		add_filter( 'slimline_index_attributes_pre',   'slimline_woocommerce_add_itemtype_offercatalog', 20, 1 );
 		add_filter( 'woocommerce_breadcrumb_defaults', 'slimline_woocommerce_breadcrumb_args',           10, 1 );
 
+		/**
+		 * Add extra structured markup to product cats
+		 */
 		add_filter( 'slimline_woocommerce-product_cat_attributes_pre', 'slimline_schema_add_itemprop_itemlistelement', 10, 1 )
 		add_filter( 'slimline_woocommerce-product_cat_attributes_pre', 'slimline_schema_add_itemscope',                10, 1 )
 		add_filter( 'slimline_woocommerce-product_cat_attributes_pre', 'slimline_schema_add_itemtype_offercatalog',    10, 1 )

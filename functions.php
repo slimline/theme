@@ -314,6 +314,12 @@ function slimline_theme_setup() {
 	add_action( 'wp_enqueue_scripts', 'slimline_wp_enqueue_scripts', 10 ); // Enqueue theme scripts and styles
 
 	/**
+	 * Set up theme customizer (customizer.php)
+	 */
+	add_action( 'customize_preview_init', 'slimline_customizer_enqueue_scripts', 10 ); // Load custom scripts into customizer window
+	add_action( 'customize_register',     'slimline_customize_register',         10 ); // Add custom customizer controls
+
+	/**
 	 * Add site <html> hooks
 	 */
 	add_action( 'slimline_html', 'slimline_get_doctype',  0  ); // get doctype.php template part
@@ -524,6 +530,13 @@ function slimline_theme_setup() {
 	 * @link https://codex.wordpress.org/Title_Tag
 	 */
 	add_theme_support( 'title-tag' );
+
+	/**
+	 * Add WooCommerce plugin support
+	 *
+	 * @link https://docs.woothemes.com/document/declare-woocommerce-support-in-third-party-theme/
+	 */
+	add_theme_support( 'woocommerce' );
 
 	/**
 	 * Add image sizes

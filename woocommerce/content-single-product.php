@@ -28,7 +28,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 	 if ( post_password_required() ) {
 	 	echo get_the_password_form();
 	 	return;
-	 }
+	 } // if ( post_password_required() )
 ?>
 
 <article <?php post_class(); ?> <?php slimline_entry_attributes(); ?>>

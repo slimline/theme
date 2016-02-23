@@ -18,32 +18,44 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 
 global $product, $woocommerce_loop;
 
-// Store loop count we're currently on
+/**
+ * Store loop count we're currently on.
+ */
 if ( empty( $woocommerce_loop['loop'] ) ) {
 	$woocommerce_loop['loop'] = 0;
-}
+} // if ( empty( $woocommerce_loop['loop'] ) )
 
-// Store column count for displaying the grid
+/**
+ * Store column count for displaying the grid.
+ */
 if ( empty( $woocommerce_loop['columns'] ) ) {
 	$woocommerce_loop['columns'] = apply_filters( 'loop_shop_columns', 4 );
-}
+} // if ( empty( $woocommerce_loop['columns'] ) )
 
-// Ensure visibility
+/**
+ * Ensure visibility
+ */
 if ( ! $product || ! $product->is_visible() ) {
 	return;
-}
+} // if ( ! $product || ! $product->is_visible() )
 
-// Increase loop count
+/**
+ * Increase loop count.
+ */
 $woocommerce_loop['loop']++;
 
-// Extra post classes
+/**
+ * Extra post classes
+ */
 $classes = array();
+
 if ( 0 === ( $woocommerce_loop['loop'] - 1 ) % $woocommerce_loop['columns'] || 1 === $woocommerce_loop['columns'] ) {
 	$classes[] = 'first';
-}
+} // if ( 0 === ( $woocommerce_loop['loop'] - 1 ) % $woocommerce_loop['columns'] || 1 === $woocommerce_loop['columns'] )
+
 if ( 0 === $woocommerce_loop['loop'] % $woocommerce_loop['columns'] ) {
 	$classes[] = 'last';
-}
+} // if ( 0 === $woocommerce_loop['loop'] % $woocommerce_loop['columns'] )
 ?>
 <li>
 	<article <?php post_class( $classes ); ?> <?php slimline_entry_attributes(); ?>>
