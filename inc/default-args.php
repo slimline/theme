@@ -982,3 +982,36 @@ if ( ! function_exists( 'slimline_wp_list_comments_args' ) ) {
 	}
 
 } // if ( ! function_exists( 'slimline_wp_list_comments_args' ) )
+
+/**
+ * Arguments for `woocommerce_breadcrumb`
+ *
+ * @return array $args Associative array of function arguments
+ * @link   https://github.com/slimline/theme/wiki/slimline_woocommerce_breadcrumb_args()
+ * @since  0.2.0
+ */
+if ( ! function_exists( 'slimline_woocommerce_breadcrumb_args' ) ) {
+
+	function slimline_woocommerce_breadcrumb_args() {
+
+		/**
+		 * Default arguments
+		 *
+		 * @link https://docs.woothemes.com/document/woocommerce_breadcrumb/
+		 *       Explanation of `woocommerce_breadcrumb` arguments
+		 */
+		$args = array(
+			'delimiter'   => '&raquo;',                                            // use right-angle quotes between breadcrumb links
+			'wrap_before' => '<nav ' . slimline_get_breadcrumb_attributes() . '>', // wrap breadcrumbs in <nav> tags
+			'wrap_after'  => '</nav><!-- .breadcrumb -->',                         // wrap breadcrumbs in <nav> tags
+		);
+
+		/**
+		 * Filter the arguments
+		 *
+		 * @link https://github.com/slimline/theme/wiki/slimline_woocommerce_breadcrumb_args
+		 */
+		return apply_filters( 'slimline_woocommerce_breadcrumb_args', $args );
+	}
+
+} // if ( ! function_exists( 'slimline_woocommerce_breadcrumb_args' ) )

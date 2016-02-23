@@ -467,12 +467,49 @@ function slimline_vendor() {
 	 */
 	if ( function_exists( 'WC' ) ) {
 
-		remove_action( 'woocommerce_before_main_content', 'woocommerce_output_content_wrapper',     10 );
-		remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb',                 20 );
-		remove_action( 'woocommerce_after_main_content',  'woocommerce_output_content_wrapper_end', 10 );
-		remove_action( 'woocommerce_sidebar',             'woocommerce_get_sidebar',                10 );
+		/**
+		 * WooCommerce has Schema.org markup baked in, so make sure we have it
+		 * available even if we aren't using it anywhere else
+		 */
+		require_once( slimline_includes_directory() . 'schema.org.php' );
 
-		add_action( 'slimline_content_before', 'slimline_woocommerce_breadcrumb', 10 );
+		/**
+		 * Remove WooCommerce outputs that will interfere with Slimline markup
+		 *
+		 * @link https://docs.woothemes.com/document/third-party-custom-theme-compatibility/
+		 */
+		remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb',  20 );
+		remove_action( 'woocommerce_sidebar',             'woocommerce_get_sidebar', 10 );
+
+		add_action( 'slimline_content_before',         'slimline_woocommerce_breadcrumb',                       10 );
+		add_action( 'woocommerce_before_main_content', 'slimline_maybe_remove_woocommerce_content_wrapper',      0 );
+		add_action( 'woocommerce_after_main_content',  'slimline_maybe_remove_woocommerce_content_wrapper_end',  0 );
+
+		add_filter( 'slimline_entry_attributes_pre',   'slimline_woocommerce_get_product_schema',        20, 1 );
+		add_filter( 'slimline_index_attributes_pre',   'slimline_woocommerce_add_itemtype_offercatalog', 20, 1 );
+		add_filter( 'woocommerce_breadcrumb_defaults', 'slimline_woocommerce_breadcrumb_args',           10, 1 );
+
+		add_filter( 'slimline_woocommerce-product_cat_attributes_pre', 'slimline_schema_add_itemprop_itemlistelement', 10, 1 )
+		add_filter( 'slimline_woocommerce-product_cat_attributes_pre', 'slimline_schema_add_itemscope',                10, 1 )
+		add_filter( 'slimline_woocommerce-product_cat_attributes_pre', 'slimline_schema_add_itemtype_offercatalog',    10, 1 )
+
+		/**
+		 * Add default Schema.org attributes if not already being used
+		 */
+		if ( ! slimline_use_schema_org() ) {
+
+			/**
+			 * Product archive filters
+			 */
+			add_filter( 'slimline_index_attributes_pre', 'slimline_woocommerce_archive_add_itemscope',   10 );
+
+			/**
+			 * Product filters
+			 */
+			add_filter( 'slimline_entry_attributes_pre', 'slimline_woocommerce_product_itemprop_itemlistelement', 10 );
+			add_filter( 'slimline_entry_attributes_pre', 'slimline_woocommerce_product_add_itemscope',            10 );
+
+		} // if ( ! slimline_use_schema_org() )
 
 	} // if ( function_exists( 'WC' ) )
 

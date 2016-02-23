@@ -703,13 +703,45 @@ function slimline_site_header_attributes( $attributes = '' ) {
  *
  * @param array|string $attributes (Optional). An array or query string of
  *                                 attribute / value pairs.
- * @uses  limline_get_site_title_link_attributes() to generate attributes
+ * @uses  slimline_get_site_title_link_attributes() to generate attributes
  * @link  https://github.com/slimline/theme/wiki/slimline_site_title_link_attributes()
  * @since 0.2.0
  */
 function slimline_site_title_link_attributes( $attributes = '' ) {
 
 	echo slimline_get_site_title_link_attributes( $attributes );
+}
+
+/**
+ * Outputs breadcrumb links
+ *
+ * NOTE: only works if WooCommerce is installed and active
+ *
+ * @link  https://docs.woothemes.com/document/woocommerce_breadcrumb/
+ *        Description of how to use breadcrumbs
+ * @uses  slimline_get_woocommerce_breadcrumb() to create the breadcrumb links
+ * @link  https://github.com/slimline/theme/wiki/slimline_woocommerce_breadcrumb()
+ * @since 0.2.0
+ */
+function slimline_woocommerce_breadcrumb() {
+
+	echo slimline_get_woocommerce_breadcrumb();
+}
+
+/**
+ * Outputs HTML attibutes meant for the WooCommerce product category container
+ * <article> tag.
+ *
+ * @param array|string $attributes (Optional). An array or query string of
+ *                                 attribute / value pairs.
+ * @param object       $category   (Optional). Product category
+ * @uses  slimline_get_woocommerce_product_cat_attributes() to generate attributes
+ * @link  https://github.com/slimline/theme/wiki/slimline_woocommerce_product_cat_attributes()
+ * @since 0.2.0
+ */
+function slimline_woocommerce_product_cat_attributes( $attributes = '', $category = null ) {
+
+	return slimline_get_woocommerce_product_cat_attributes( $attributes, $category );
 }
 
 /**
@@ -723,7 +755,8 @@ function slimline_site_title_link_attributes( $attributes = '' ) {
  * @link  http://kb.yoast.com/article/245-implement-wordpress-seo-breadcrumbs
  *        Description of how to activate breadcrumbs
  * @uses  slimline_get_yoast_breadcrumb() to create the breadcrumb links
- * @since 0.1.0
+ * @link  https://github.com/slimline/theme/wiki/slimline_yoast_breadcrumb()
+ * @since 0.2.0
  */
 function slimline_yoast_breadcrumb() {
 

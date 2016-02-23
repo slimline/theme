@@ -909,3 +909,49 @@ function slimline_locate_template() {
 
 	return locate_template( $templates );
 }
+
+/**
+ * Remove WooCommerce wrapper loading if we are not on an archive page
+ *
+ * WooCommerce singular pages already follow Slimline markup well enough, we just
+ * the wrapper templates for the index pages.
+ *
+ * @link  https://github.com/slimline/theme/wiki/slimline_maybe_remove_woocommerce_content_wrapper()
+ * @since 0.2.0
+ */
+function slimline_maybe_remove_woocommerce_content_wrapper() {
+
+	/**
+	 * Only remove the action if we are not on a singular page
+	 *
+	 * @link https://developer.wordpress.org/reference/functions/is_singular/
+	 *       Description of `is_singular` function
+	 */
+	if ( ! is_singular() ) {
+		remove_action( 'woocommerce_before_main_content', 'woocommerce_output_content_wrapper', 10 );
+	} // if ( ! is_singular() )
+
+}
+
+/**
+ * Remove WooCommerce wrapper loading if we are not on an archive page
+ *
+ * WooCommerce singular pages already follow Slimline markup well enough, we just
+ * the wrapper templates for the index pages.
+ *
+ * @link  https://github.com/slimline/theme/wiki/slimline_maybe_remove_woocommerce_content_wrapper_end()
+ * @since 0.2.0
+ */
+function slimline_maybe_remove_woocommerce_content_wrapper_end() {
+
+	/**
+	 * Only remove the action if we are not on a singular page
+	 *
+	 * @link https://developer.wordpress.org/reference/functions/is_singular/
+	 *       Description of `is_singular` function
+	 */
+	if ( ! is_singular() ) {
+		remove_action( 'woocommerce_after_main_content',  'woocommerce_output_content_wrapper_end', 10 );
+	} // if ( ! is_singular() )
+
+}

@@ -927,7 +927,7 @@ function slimline_get_comments_title() {
  *                                  attribute / value pairs.
  * @return string       $attributes The generated string of attributes
  * @uses   slimline_get_attributes() to generate the attributes
- * @link   https://github.com/slimline/theme/wiki/slimline_get_entries_attributes()
+ * @link   https://github.com/slimline/theme/wiki/slimline_get_copyright_attributes()
  * @since  0.2.0
  */
 function slimline_get_copyright_attributes( $attributes = '' ) {
@@ -2101,15 +2101,49 @@ function slimline_get_woocommerce_breadcrumb() {
 
 	$breadcrumb = '';
 
-	if ( slimline_use_woocommerce_breadcrumb() ) {
+	/**
+	 * Use Yoast breadcrumbs instead if we are supposed to
+	 */
+	if ( slimline_use_yoast_breadcrumb_for_woocommerce() ) {
+		$breadcrumb = slimline_get_yoast_breadcrumb();
+	} // if ( slimline_use_yoast_breadcrumb_for_woocommerce() )
 
-		ob_start();
+	/**
+	 * Only generate breadcrumb if it is not already set above
+	 */
+	if ( ! $breadcrumb ) {
 
-		woocommerce_breadcrumb();
+		/**
+		 * Make sure breadcrumb function is available.
+		 *
+		 * This makes sure that theme and plugin developers won't break anything if they
+		 * decide to drop the `slimline_woocommerce_breadcrumb` function directly into a
+		 * template without proper conditional checking.
+		 */
+		if ( function_exists( 'woocommerce_breadcrumb' ) ) {
 
-		$breadcrumb = ob_get_clean();
+			/**
+			 * Output buffering so we can filter later
+			 */
+			ob_start();
 
-	} // if ( slimline_use_woocommerce_breadcrumb() )
+			/**
+			 * Create the breadcrumbs
+			 *
+			 * Note that we are filtering the default arguments for the function through
+			 * `slimline_woocommerce_breadcrumb_args`.
+			 *
+			 * @param array $args Associative array of breadcrumb parameters
+			 * @link  https://docs.woothemes.com/wc-apidocs/function-woocommerce_breadcrumb.html
+			 *        Description of `woocommerce_breadcrumb` function
+			 */
+			woocommerce_breadcrumb();
+
+			$breadcrumb = ob_get_clean();
+
+		} // if ( function_exists( 'woocommerce_breadcrumb' ) )
+
+	} // if ( ! $breadcrumb )
 
 	/**
 	 * Return breadcrumb string
@@ -2118,6 +2152,43 @@ function slimline_get_woocommerce_breadcrumb() {
 	 */
 	return apply_filters( 'slimline_woocommerce_breadcrumb', $breadcrumb );
 }
+
+/**
+ * Generate HTML attibutes meant for the WooCommerce product category container
+ * <article> tag.
+ *
+ * Essentially a wrapper function for `slimline_get_attributes()` that includes
+ * default attributes. Developers can modify the returned string using the
+ * `slimline_woocommerce-product_cat_attributes` filter.
+ *
+ * @param  array|string $attributes (Optional). An array or query string of
+ *                                  attribute / value pairs.
+ * @param  object       $category   (Optional). Product category
+ * @return string       $attributes The generated string of attributes
+ * @uses   slimline_get_attributes() to generate the attributes
+ * @link   https://github.com/slimline/theme/wiki/slimline_get_woocommerce_product_cat_attributes()
+ * @since  0.2.0
+ */
+function slimline_get_woocommerce_product_cat_attributes( $attributes = '', $category = null ) {
+
+	/**
+	 * Default attributes
+	 */
+	$defaults = array(
+		'id'        => 'product_cat-' . ( is_object( $category ) ? $category->term_id : 0 ),
+	);
+
+	/**
+	 * Return attributes string
+	 *
+	 * Note that the `slimline_attributes` and `slimline_woocommerce-product_cat_attributes`
+	 * filters will be applied by `slimline_get_attributes()`.
+	 *
+	 * @see slimline_get_attributes()
+	 */
+	return slimline_get_attributes( $attributes, 'woocommerce-product_cat', $defaults );
+}
+
 /**
  * Generate breadcrumb links
  *

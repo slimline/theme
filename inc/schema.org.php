@@ -153,6 +153,34 @@ function slimline_schema_add_itemprop_headline( $attributes = array() ) {
 }
 
 /**
+ * Add "itemListElement" itemprop attribute
+ *
+ * Sets the itemprop attribute to "itemListElement". Meant to be used with
+ * `slimline_attributes` filters.
+ *
+ * @param  array $attributes The array of default attributes
+ * @return array $attributes Array of attributes with itemprop added
+ * @link   https://github.com/slimline/theme/wiki/slimline_schema_add_itemprop_itemlistelement()
+ * @since  0.2.0
+ */
+function slimline_schema_add_itemprop_itemlistelement( $attributes = array() ) {
+
+	/**
+	 * Add "itemListElement" itemprop
+	 *
+	 * @link https://schema.org/docs/gs.html#microdata_itemprop
+	 *       Explanation of itemprop
+	 * @link https://schema.org/itemListElement Documentation of "itemListElement" property
+	 */
+	$attributes['itemprop'] = 'itemListElement';
+
+	/**
+	 * Return edited array
+	 */
+	return $attributes;
+}
+
+/**
  * Add "mainEntity" itemprop attribute
  *
  * Sets the itemprop attribute to "mainEntity". Meant to be used with
@@ -346,6 +374,34 @@ function slimline_schema_add_itemtype_creativework( $attributes = array() ) {
 	 * @link https://schema.org/CreativeWork Documentation of "CreativeWork" type
 	 */
 	$attributes['itemtype'] = 'https://schema.org/CreativeWork';
+
+	/**
+	 * Return edited array
+	 */
+	return $attributes;
+}
+
+/**
+ * Set itemtype to "OfferCatalog"
+ *
+ * Sets the itemtype attribute to "OfferCatalog". Meant to be used with
+ * `slimline_attributes` filters.
+ *
+ * @param  array $attributes The array of default attributes
+ * @return array $attributes Array of attributes with itemtype added
+ * @link   https://github.com/slimline/theme/wiki/slimline_schema_add_itemtype_offercatalog()
+ * @since  0.2.0
+ */
+function slimline_schema_add_itemtype_offercatalog( $attributes = array() ) {
+
+	/**
+	 * Add itemtype
+	 *
+	 * @link https://schema.org/docs/gs.html#microdata_itemscope_itemtype
+	 *       Explanation of itemtype
+	 * @link https://schema.org/OfferCatalog Documentation of "OfferCatalog" type
+	 */
+	$attributes['itemtype'] = 'https://schema.org/OfferCatalog';
 
 	/**
 	 * Return edited array
@@ -591,4 +647,168 @@ function slimline_schema_remove_hentry_class( $classes ) {
 	 *       Documentation of `array_diff` function
 	 */
 	return array_diff( $classes, array( 'hentry' ) );
+}
+
+/**
+ * Conditionally add "itemListElement" itemprop
+ *
+ * @param  array $attributes The array of default attributes
+ * @return array $attributes Array of attributes with itemprop added
+ * @uses   slimline_schema_add_itemprop_itemlistelement() to add the itemprop
+ * @link   https://github.com/slimline/theme/wiki/slimline_woocommerce_product_itemprop_itemlistelement()
+ * @since  0.2.0
+ */
+function slimline_woocommerce_product_itemprop_itemlistelement( $attributes ) {
+
+	/**
+	 * Only continue if WooCommerce is installed and active. This is because we will
+	 * use WooCommerce conditionals to decide whether to add the itemtype.
+	 */
+	if ( function_exists( 'WC' ) ) {
+
+		/**
+		 * Add itemprop IF
+		 * 1) we are in a WooCommerce product archive AND
+		 * 2) we are currently in the main loop AND
+		 * 3) the current post is a product
+		 *
+		 * @link https://developer.wordpress.org/reference/functions/is_archive/
+		 *       Description of the `is_archive` function
+		 * @link https://docs.woothemes.com/wc-apidocs/function-is_woocommerce.html
+		 *       Description of the `is_woocommerce` function
+		 * @link https://developer.wordpress.org/reference/functions/in_the_loop/
+		 *       Description of the `in_the_loop` function
+		 * @link https://developer.wordpress.org/reference/functions/get_post_type/
+		 *       Description of the `get_post_type` function
+		 * @link https://developer.wordpress.org/reference/functions/get_the_ID/
+		 *       Description of the `get_the_ID` function
+		 */
+		if ( ( is_archive() && is_woocommerce() ) && in_the_loop() && 'product' === get_post_type( get_the_ID() ) ) {
+
+			$attributes = slimline_schema_add_itemprop_itemlistelement( $attributes );
+
+		} // if ( ( is_archive() && is_woocommerce() ) && in_the_loop() && 'product' === get_post_type( get_the_ID() ) )
+
+	} // if ( function_exists( 'WC' ) )
+
+	return $attributes;
+}
+
+/**
+ * Conditionally add "OfferCatalog" itemtype
+ *
+ * @param  array $attributes The array of default attributes
+ * @return array $attributes Array of attributes with itemtype added
+ * @uses   slimline_schema_add_itemtype_offercatalog() to add the itemtype
+ * @link   https://github.com/slimline/theme/wiki/slimline_woocommerce_add_itemtype_offercatalog()
+ * @since  0.2.0
+ */
+function slimline_woocommerce_add_itemtype_offercatalog( $attributes ) {
+
+	/**
+	 * Only continue if WooCommerce is installed and active. This is because we will
+	 * use WooCommerce conditionals to decide whether to add the itemtype.
+	 */
+	if ( function_exists( 'WC' ) ) {
+
+		/**
+		 * Add the itemtype IF:
+		 * 1) we are on an archive page AND
+		 * 2) the current page is a WooCommerce page
+		 *
+		 * (e.g., the main shop page, a product category or tag page, a product
+		 * attributes page, etc.).
+		 *
+		 * @link https://developer.wordpress.org/reference/functions/is_archive/
+		 *       Description of the `is_archive` function
+		 * @link https://docs.woothemes.com/wc-apidocs/function-is_woocommerce.html
+		 *       Description of the `is_woocommerce` function
+		 */
+		if ( is_archive() && is_woocommerce() ) {
+
+			$attributes = slimline_schema_add_itemtype_offercatalog( $attributes );
+
+		} // is_archive() && is_woocommerce() )
+
+	} // if ( function_exists( 'WC' ) )
+
+	return $attributes;
+
+}
+
+/**
+ * Add WooCommerce itemtype considerations to entry attributes
+ *
+ * @param  array $attributes The array of default attributes
+ * @return array $attributes Array of attributes with itemtype replaced
+ * @link   https://github.com/slimline/theme/wiki/slimline_woocommerce_get_product_schema()
+ * @since  0.2.0
+ */
+function slimline_woocommerce_get_product_schema( $attributes ) {
+
+	/**
+	 * Make sure we are dealing with a product and the
+	 * `woocommerce_get_product_schema` function is available.
+	 *
+	 * @link https://developer.wordpress.org/reference/functions/get_post_type/
+	 *       Description of the `get_post_type` function
+	 * @link https://developer.wordpress.org/reference/functions/get_the_ID/
+	 *       Description of the `get_the_ID` function
+	 */
+	if ( 'product' === get_post_type( get_the_ID() ) && function_exists( 'woocommerce_get_product_schema' ) ) {
+
+		/**
+		 * Replace the itemtype with the appropriate product type
+		 *
+		 * @link https://docs.woothemes.com/wc-apidocs/function-woocommerce_get_product_schema.html
+		 *       Description of the `woocommerce_get_product_schema` function
+		 */
+		$attributes['itemtype'] = woocommerce_get_product_schema();
+
+	} // if ( 'product' === get_post_type( get_the_ID() ) && function_exists( 'woocommerce_get_product_schema' ) )
+
+	return $attributes;
+}
+
+function slimline_woocommerce_archive_add_itemscope( $attributes ) {
+
+	/**
+	 * Only continue if WooCommerce is installed and active. This is because we will
+	 * use WooCommerce conditionals to decide whether to add the itemtype.
+	 */
+	if ( function_exists( 'WC' ) ) {
+
+		/**
+		 * Add the itemtype IF:
+		 * 1) we are on an archive page AND
+		 * 2) the current page is a WooCommerce page
+		 *
+		 * (e.g., the main shop page, a product category or tag page, a product
+		 * attributes page, etc.).
+		 *
+		 * @link https://developer.wordpress.org/reference/functions/is_archive/
+		 *       Description of the `is_archive` function
+		 * @link https://docs.woothemes.com/wc-apidocs/function-is_woocommerce.html
+		 *       Description of the `is_woocommerce` function
+		 */
+		if ( is_archive() && is_woocommerce() ) {
+
+			$attributes = slimline_schema_add_itemscope( $attributes );
+
+		} // is_archive() && is_woocommerce() )
+
+	} // if ( function_exists( 'WC' ) )
+
+	return $attributes;
+}
+
+function slimline_woocommerce_product_add_itemscope( $attributes ) {
+
+	if ( in_the_loop() && 'product' === get_post_type( get_the_ID() ) ) {
+
+		$attributes = slimline_schema_add_itemscope( $attributes );
+
+	} // if ( in_the_loop() && 'product' === get_post_type( get_the_ID() ) )
+
+	return $attributes;
 }
