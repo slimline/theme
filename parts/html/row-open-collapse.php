@@ -1,6 +1,6 @@
 <?php
 /**
- * Opening <div> tag for full-width rows
+ * Opening <div> tag for collapsed rows
  *
  * @package    Slimline / Theme
  * @subpackage Template Parts
@@ -10,4 +10,4 @@
 if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 ?>
 
-	<div class="row full-width">
+	<div class="row small-collapse">
