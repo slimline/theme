@@ -34,7 +34,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 			do_action( 'slimline_sidebar_footer_top' );
 		?>
 
-		<ul <?php slimline_sidebar_footer_list_attributes(); ?>>
+		<div <?php slimline_sidebar_footer_list_attributes(); ?>>
 
 			<?php
 				/**
@@ -46,7 +46,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 				dynamic_sidebar( 'sidebar-3' );
 			?>
 
-		</ul><!-- .block-list -->
+		</div><!-- .block-list -->
 
 		<?php
 			/**

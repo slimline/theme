@@ -77,8 +77,8 @@ if ( ! function_exists( 'slimline_register_sidebars' ) ) {
 				'description'   => __( 'Appears in the footer section of the site.', 'slimline' ), // Description shows when widget area is open in Appearance > Widgets
 				'before_title'  => '<h2 class="widget-title widgettitle">',                        // Use both widget-title and widgettitle for compatability with default styles
 				'after_title'   => '</h2><!-- .widget-title -->',                                  // Add closing comment
-				'before_widget' => '<li class="widget %2$s" id="%1$s">',                           // Alphabetize attributes
-				'after_widget'  => '</li><!-- .widget -->',                                        // Add closing comment
+				'before_widget' => '<div class="widget %2$s column" id="%1$s">',                   // Alphabetize attributes
+				'after_widget'  => '</div><!-- .widget -->',                                       // Add closing comment
 			)
 		);
 
