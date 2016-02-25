@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
  */
 function slimline_get_css_file_uri( $filename ) {
 
-	return slimline_get_file_uri( slimline_stylesheet_directory_uri() . $filename );
+	return slimline_get_file_uri( "css/{$filename}" );
 }
 
 /**
@@ -68,7 +68,7 @@ function slimline_get_file_uri( $filename ) {
  */
 function slimline_get_js_file_uri( $filename ) {
 
-	return slimline_get_file_uri( slimline_javascript_directory_uri() . $filename );
+	return slimline_get_file_uri( "js/{$filename}" );
 }
 
 /**
@@ -141,9 +141,11 @@ function slimline_maybe_minify_filename( $filename ) {
 
 	if ( ! defined( 'SCRIPT_DEBUG' ) || ! SCRIPT_DEBUG ) {
 
-		$extension = pathinfo( $filename, PATHINFO_EXTENSION );
+		$pathinfo = pathinfo( $filename );
 
-		$filename = str_replace( $extension, ".min.{$extension}", $filename );
+		$dirname = ( '.' === $pathinfo['dirname'] ? '' : trailingslashit( $pathinfo['dirname'] ) );
+
+		$filename = "{$dirname}{$pathinfo['filename']}.min.{$pathinfo['extension']}";
 
 	} // if ( ! defined( 'SCRIPT_DEBUG' ) || ! SCRIPT_DEBUG )
 
