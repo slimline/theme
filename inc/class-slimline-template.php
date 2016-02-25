@@ -17,18 +17,23 @@ class Slimline_Template {
 	 */
 	protected static $_instance = null;
 
+	/**
+	 * @var string $parts_directory Name of template parts directory
+	 */
 	protected $parts_directory = 'parts';
 
+	/**
+	 * @var array $template_path Associative array of template paths found by
+	 *                           `slimline_get_template_part`
+	 */
 	protected $template_path = array();
 
-	function __construct() {
-
-	}
+	function __construct() {}
 
 	/**
 	 * Return parts directory name
 	 */
-	function get_parts_directory() {
+	public function get_parts_directory() {
 
 		return apply_filters( 'slimline_parts_directory', $this->parts_directory );
 	}
@@ -46,7 +51,7 @@ class Slimline_Template {
 
 	} // public static function get_instance()
 
-	function get_template_path( $template_string ) {
+	public function get_template_path( $template_string ) {
 
 		if ( ! isset( $this->template_path[ $template_string ] ) ) {
 			return false;
@@ -55,7 +60,7 @@ class Slimline_Template {
 		return $this->template_path[ $template_string ];
 	}
 
-	function set_template_path( $template_string, $path ) {
+	public function set_template_path( $template_string, $path ) {
 
 		$this->template_path[ $template_string ] = $path;
 	}

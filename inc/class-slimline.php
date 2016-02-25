@@ -15,16 +15,28 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 class Slimline {
 
 	/**
-	 * @var Slimline $_instance The class instance
+	 * @var Slimline $_instance The Slimline class instance
 	 */
 	protected static $_instance = null;
 
+	/**
+	 * @var int $category_count Total number of categories in use on the blog
+	 */
 	protected $category_count = null;
 
+	/**
+	 * @var Slimline_Context $context Slimline Context class instance
+	 */
 	protected $context = null;
 
+	/**
+	 * @var int $logo_id ID of logo image
+	 */
 	protected $logo_id = null;
 
+	/**
+	 * @var Slimline_Template $template Slimline Template class instance
+	 */
 	protected $template = null;
 
 	/**
@@ -35,7 +47,7 @@ class Slimline {
 	function __construct() {
 	} // function __construct()
 
-	function get_category_count( $hide_empty = true ) {
+	public function get_category_count( $hide_empty = true ) {
 
 		if ( is_null( $this->category_count ) ) {
 
@@ -68,7 +80,7 @@ class Slimline {
 	/**
 	 * Return the context class instance
 	 */
-	function get_context_object() {
+	public function get_context_object() {
 
 		if ( is_null( $this->context ) ) {
 			$this->context = Slimline_Context::get_instance();
@@ -94,7 +106,7 @@ class Slimline {
 	/**
 	 * Return the site logo ID
 	 */
-	function get_logo_id() {
+	public function get_logo_id() {
 
 		if ( is_null( $this->logo_id ) ) {
 
@@ -165,7 +177,7 @@ class Slimline {
 	/**
 	 * Return the template class instance
 	 */
-	function get_template_object() {
+	public function get_template_object() {
 
 		if ( is_null( $this->template ) ) {
 			$this->template = Slimline_Template::get_instance();
