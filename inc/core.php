@@ -108,12 +108,12 @@ function slimline_default_layout() {
 		return;
 	} // if ( ! slimline_use_default_layout() )
 
-	add_action( 'slimline_header_top',            'slimline_get_row_open_full',  5 );
-	add_action( 'slimline_header_bottom',         'slimline_get_row_close_full', 90 );
-	add_action( 'slimline_footer_top',            'slimline_get_row_open_full',  10 );
-	add_action( 'slimline_footer_bottom',         'slimline_get_row_close_full', 90 );
-	add_action( 'slimline_sidebar_footer_top',    'slimline_get_row_open',       10 );
-	add_action( 'slimline_sidebar_footer_bottom', 'slimline_get_row_close',      90 );
+	add_action( 'slimline_header_top',            'slimline_get_row_open_expanded',   5 );
+	add_action( 'slimline_header_bottom',         'slimline_get_row_close_expanded', 90 );
+	add_action( 'slimline_footer_top',            'slimline_get_row_open_expanded',  10 );
+	add_action( 'slimline_footer_bottom',         'slimline_get_row_close_expanded', 90 );
+	add_action( 'slimline_sidebar_footer_top',    'slimline_get_row_open',           10 );
+	add_action( 'slimline_sidebar_footer_bottom', 'slimline_get_row_close',          90 );
 
 	add_filter( 'post_class',                      'slimline_entry_columns',               10 );
 	add_filter( 'slimline_copyright_class',        'slimline_copyright_columns',           10 );
@@ -300,7 +300,7 @@ function slimline_vendor() {
 	if ( defined( 'GAWP_VERSION' ) && ! is_admin() ) {
 
 		/**
-		 * @global object $yoast_ga_frontend The Front End object
+		 * @global Yoast_GA_Frontend $yoast_ga_frontend The Front End object
 		 */
 		global $yoast_ga_frontend;
 
@@ -482,9 +482,9 @@ function slimline_vendor() {
 		 *
 		 * @link https://docs.woothemes.com/document/third-party-custom-theme-compatibility/
 		 */
-		add_action( 'slimline_content_before',         'slimline_woocommerce_breadcrumb',                       10 );
-		add_action( 'woocommerce_before_main_content', 'slimline_maybe_remove_woocommerce_content_wrapper',      0 );
-		add_action( 'woocommerce_after_main_content',  'slimline_maybe_remove_woocommerce_content_wrapper_end',  0 );
+		add_action( 'slimline_content_before',         'slimline_maybe_add_woocommerce_breadcrumb',             5 );
+		add_action( 'woocommerce_before_main_content', 'slimline_maybe_remove_woocommerce_content_wrapper',     0 );
+		add_action( 'woocommerce_after_main_content',  'slimline_maybe_remove_woocommerce_content_wrapper_end', 0 );
 
 		/**
 		 * Add structured markup to default WooCommerce items
@@ -496,9 +496,9 @@ function slimline_vendor() {
 		/**
 		 * Add extra structured markup to product cats
 		 */
-		add_filter( 'slimline_woocommerce-product_cat_attributes_pre', 'slimline_schema_add_itemprop_itemlistelement', 10, 1 )
-		add_filter( 'slimline_woocommerce-product_cat_attributes_pre', 'slimline_schema_add_itemscope',                10, 1 )
-		add_filter( 'slimline_woocommerce-product_cat_attributes_pre', 'slimline_schema_add_itemtype_offercatalog',    10, 1 )
+		add_filter( 'slimline_woocommerce-product_cat_attributes_pre', 'slimline_schema_add_itemprop_itemlistelement', 10, 1 );
+		add_filter( 'slimline_woocommerce-product_cat_attributes_pre', 'slimline_schema_add_itemscope',                10, 1 );
+		add_filter( 'slimline_woocommerce-product_cat_attributes_pre', 'slimline_schema_add_itemtype_offercatalog',    10, 1 );
 
 		/**
 		 * Add default Schema.org attributes if not already being used
@@ -532,7 +532,7 @@ function slimline_vendor() {
 		 *
 		 * @see slimline_yoast_breadcrumb()
 		 */
-		add_action( 'slimline_content_before', 'slimline_yoast_breadcrumb', 10 );
+		add_action( 'slimline_content_before', 'slimline_maybe_add_yoast_breadcrumb', 0 );
 
 	} // if ( defined( 'WPSEO_VERSION' ) )
 }

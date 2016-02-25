@@ -336,5 +336,5 @@ function slimline_use_yoast_breadcrumb_for_woocommerce() {
 	 * @param bool Default TRUE to replace WooCommerce breadcrumbs with Yoast if available
 	 * @link  https://github.com/slimline/theme/wiki/slimline_use_yoast_breadcrumb_for_woocommerce
 	 */
-	return apply_filters( 'slimline_use_yoast_breadcrumb_for_woocommerce', true );
+	return apply_filters( 'slimline_use_yoast_breadcrumb_for_woocommerce', defined( 'WPSEO_VERSION' ) );
 }

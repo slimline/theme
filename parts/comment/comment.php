@@ -30,8 +30,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 				/**
 				 * slimline_comment_top hook
 				 *
-				 * @hook slimline_comment_avatar - 20
-				 * @hook slimline_comment_author - 50
+				 * @hook slimline_get_comment_avatar - 20
+				 * @hook slimline_get_comment_author - 50
 				 * @link https://github.com/slimline/theme/wiki/slimline_comment_top
 				 */
 				do_action( 'slimline_comment_top' );

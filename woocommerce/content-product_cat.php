@@ -17,6 +17,9 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 
+/**
+ * @global array $woocommerce_loop Associative array with loop information
+ */
 global $woocommerce_loop;
 
 /**

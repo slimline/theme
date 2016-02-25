@@ -513,8 +513,8 @@ if ( ! function_exists( 'slimline_main_row' ) ) {
 /**
  * Arguments for `paginate_links()` on index pages
  *
- * @global object $wp_query the WP_Query object
- * @return array  $args Associative array of function arguments
+ * @global WP_Query $wp_query The default query object
+ * @return array    $args     Associative array of function arguments
  * @link   https://github.com/slimline/theme/wiki/slimline_paginate_links_args()
  * @since  0.2.0
  */

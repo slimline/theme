@@ -377,7 +377,7 @@ function slimline_theme_setup() {
 	add_action( 'slimline_comments_bottom', 'slimline_get_comments_list',       10 ); // get comments/list.php template part
 	add_action( 'slimline_comments_bottom', 'slimline_get_comments_pagination', 20 ); // get comments/pagination.php template part
 	add_action( 'slimline_comments_bottom', 'slimline_get_comments_form',       30 ); // get comments/form.php template part
-	add_action( 'slimline_comment_top',     'slimline_get_comment_avatar',      10 ); // get comment/avatar.php template part
+	add_action( 'slimline_comment_top',     'slimline_get_comment_avatar',      20 ); // get comment/avatar.php template part
 	add_action( 'slimline_comment_top',     'slimline_get_comment_author',      50 ); // get comment/author.php template part
 	add_action( 'slimline_comment_bottom',  'slimline_get_comment_date',        10 ); // get comment/date.php template part
 	add_action( 'slimline_comment_bottom',  'slimline_comment_reply_link',      20 ); // Output comment reply link
@@ -393,6 +393,8 @@ function slimline_theme_setup() {
 	add_action( 'slimline_footer_before', 'slimline_get_sidebar_footer',    10 ); // get sidebar-footer.php
 	add_action( 'slimline_footer_bottom', 'slimline_get_footer_navigation', 10 ); // get footer/navigation.php template part
 	add_action( 'slimline_footer_bottom', 'slimline_get_copyright_notice',  20 ); // get footer/notice-copyright.php template part
+
+	add_filter( 'body_class', 'slimline_sidebar_body_class' );
 
 	/**
 	 * Add content filtering to 404 descriptions

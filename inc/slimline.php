@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 /**
  * Retrieve the Slimline singleton object
  *
- * @return object Slimline class instance
+ * @return Slimline The Slimline class instance
  * @link   https://github.com/slimline/theme/wiki/Slimline()
  * @since  0.2.0
  */
@@ -30,7 +30,7 @@ function Slimline() {
  * We retrieve the object through the Slimline object so we can use that object as a
  * container.
  *
- * @return object Slimline_Context class instance
+ * @return Slimline_Context The Slimline Context class instance
  * @link   https://github.com/slimline/theme/wiki/Slimline_Context()
  * @see    Slimline()
  * @since  0.2.0
@@ -46,7 +46,7 @@ function Slimline_Context() {
  * We retrieve the object through the Slimline object so we can use that object as a
  * container.
  *
- * @return object Slimline_Template class instance
+ * @return Slimline_Template The Slimline Template class instance
  * @link   https://github.com/slimline/theme/wiki/Slimline_Template()
  * @see    Slimline()
  * @since  0.2.0

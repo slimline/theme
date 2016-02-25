@@ -128,6 +128,23 @@ function slimline_attributes_unset_lang( $attributes = array() ) {
 	return $attributes;
 }
 
+function slimline_sidebar_body_class( $classes ) {
+
+	global $wp_registered_sidebars;
+
+	foreach ( $wp_registered_sidebars as $sidebar => $args ) {
+
+		if ( is_active_sidebar( $sidebar ) ) {
+
+			$classes[] = $sidebar;
+
+		} // if ( is_active_sidebar( $sidebar ) )
+
+	} // foreach ( $wp_registered_sidebars as $sidebar => $args )
+
+	return $classes;
+}
+
 /**
  * Filter and output text content
  *
@@ -673,13 +690,6 @@ function slimline_get_body_attributes( $attributes = '' ) {
 function slimline_get_breadcrumb_attributes( $attributes = '' ) {
 
 	/**
-	 * Default attributes
-	 */
-	$defaults = array(
-		'class' => array( 'breadcrumb' ), // class="breadcrumb"
-	);
-
-	/**
 	 * Return attributes string
 	 *
 	 * Note that the `slimline_attributes` and `slimline_breadcrumb_attributes`
@@ -687,7 +697,7 @@ function slimline_get_breadcrumb_attributes( $attributes = '' ) {
 	 *
 	 * @see slimline_get_attributes()
 	 */
-	return slimline_get_attributes( $attributes, 'breadcrumb', $defaults );
+	return slimline_get_attributes( $attributes, 'breadcrumb' );
 }
 
 /**
@@ -1917,7 +1927,7 @@ function slimline_get_sidebar_footer_attributes( $attributes = '' ) {
 }
 
 /**
- * Generate HTML attributes for footer sidebar internal wrapper <ul> tag.
+ * Generate HTML attributes for footer sidebar internal wrapper <div> tag.
  *
  * Essentially a wrapper function for `slimline_get_attributes()` that includes
  * default attributes. Developers can modify the returned string using the
@@ -1936,7 +1946,7 @@ function slimline_get_sidebar_footer_list_attributes( $attributes = '' ) {
 	 * Default attributes
 	 */
 	$defaults = array(
-		'class' => array( 'small-block-grid-1 medium-block-grid-2 large-block-grid-3' ), // class="small-block-grid-1 medium-block-grid-2 large-block-grid-3 sidebar-footer-list"
+		'class' => array( 'row small-up-1 medium-up-2 large-up-3' ), // class="row small-up-1 medium-up-2 large-up-3 sidebar-footer-list"
 	);
 
 	/**

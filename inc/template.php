@@ -141,7 +141,7 @@ function slimline_get_comment_date() {
 /**
  * Get comment template part
  *
- * @param object $comment WP_Comment object
+ * @param WP_Comment $comment The comment object
  * @link  https://github.com/slimline/theme/wiki/slimline_get_comment_template()
  * @since 0.2.0
  */
@@ -163,7 +163,7 @@ function slimline_get_comment_template( $comment ) {
 /**
  * Get comment end template part
  *
- * @param object $comment WP_Comment object
+ * @param WP_Comment $comment The comment object
  * @link  https://github.com/slimline/theme/wiki/slimline_get_comment_end_template()
  * @since 0.2.0
  */
@@ -553,19 +553,35 @@ function slimline_get_row_close() {
 }
 
 /**
- * Get full-width row close template part
+ * Get collapsed row close template part
  *
- * @link  https://github.com/slimline/theme/wiki/slimline_get_row_close_full()
+ * @link  https://github.com/slimline/theme/wiki/slimline_get_row_close_collapse()
  * @since 0.2.0
  */
-function slimline_get_row_close_full() {
+function slimline_get_row_close_collapse() {
 
 	/**
 	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
 	 *       Description of `get_template_part` function
 	 * @see  slimline_get_template_parts_directory()
 	 */
-	get_template_part( trailingslashit( slimline_get_template_parts_directory() ) . 'html/row-close', 'full' );
+	get_template_part( trailingslashit( slimline_get_template_parts_directory() ) . 'html/row-close', 'collapse' );
+}
+
+/**
+ * Get full-width row close template part
+ *
+ * @link  https://github.com/slimline/theme/wiki/slimline_get_row_close_expanded()
+ * @since 0.2.0
+ */
+function slimline_get_row_close_expanded() {
+
+	/**
+	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
+	 *       Description of `get_template_part` function
+	 * @see  slimline_get_template_parts_directory()
+	 */
+	get_template_part( trailingslashit( slimline_get_template_parts_directory() ) . 'html/row-close', 'expanded' );
 }
 
 /**
@@ -585,19 +601,35 @@ function slimline_get_row_open() {
 }
 
 /**
- * Get full-width row open template part
+ * Get collapsed row open template part
  *
- * @link  https://github.com/slimline/theme/wiki/slimline_get_row_open_full()
+ * @link  https://github.com/slimline/theme/wiki/slimline_get_row_open_collapse()
  * @since 0.2.0
  */
-function slimline_get_row_open_full() {
+function slimline_get_row_open_collapse() {
 
 	/**
 	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
 	 *       Description of `get_template_part` function
 	 * @see  slimline_get_template_parts_directory()
 	 */
-	get_template_part( trailingslashit( slimline_get_template_parts_directory() ) . 'html/row-open', 'full' );
+	get_template_part( trailingslashit( slimline_get_template_parts_directory() ) . 'html/row-open', 'collapse' );
+}
+
+/**
+ * Get full-width row open template part
+ *
+ * @link  https://github.com/slimline/theme/wiki/slimline_get_row_open_expanded()
+ * @since 0.2.0
+ */
+function slimline_get_row_open_expanded() {
+
+	/**
+	 * @link https://developer.wordpress.org/reference/functions/get_template_part/
+	 *       Description of `get_template_part` function
+	 * @see  slimline_get_template_parts_directory()
+	 */
+	get_template_part( trailingslashit( slimline_get_template_parts_directory() ) . 'html/row-open', 'expanded' );
 }
 
 /**
@@ -910,6 +942,42 @@ function slimline_locate_template() {
 	return locate_template( $templates );
 }
 
+function slimline_maybe_add_yoast_breadcrumb() {
+
+	if ( defined( 'WPSEO_VERSION' ) ) {
+
+		if ( ! is_front_page() ) {
+
+			add_action( 'slimline_content_before', 'slimline_yoast_breadcrumb', 10 );
+
+		} // if ( ! is_front_page() )
+
+	} // if ( defined( 'WPSEO_VERSION' ) )
+}
+
+function slimline_maybe_add_woocommerce_breadcrumb() {
+
+	/**
+	 * Only continue if WooCommerce is installed and active. This is because we will
+	 * use WooCommerce conditionals to decide whether to add the breadcrumb.
+	 */
+	if ( function_exists( 'WC' ) ) {
+
+		if ( is_product() || ( is_woocommerce() && is_archive() ) ) {
+
+			add_action( 'slimline_content_before', 'slimline_woocommerce_breadcrumb', 10 );
+
+			/**
+			 * No breadcrumb doubling
+			 */
+			remove_action( 'slimline_content_before', 'slimline_yoast_breadcrumb', 10 );
+
+		} // if ( is_product() || ( is_woocommerce() && is_archive() ) )
+
+	} // if ( function_exists( 'WC' ) )
+
+}
+
 /**
  * Remove WooCommerce wrapper loading if we are not on an archive page
  *
@@ -922,14 +990,14 @@ function slimline_locate_template() {
 function slimline_maybe_remove_woocommerce_content_wrapper() {
 
 	/**
-	 * Only remove the action if we are not on a singular page
+	 * Only remove the action if we are on a singular page
 	 *
 	 * @link https://developer.wordpress.org/reference/functions/is_singular/
 	 *       Description of `is_singular` function
 	 */
-	if ( ! is_singular() ) {
+	if ( is_singular() ) {
 		remove_action( 'woocommerce_before_main_content', 'woocommerce_output_content_wrapper', 10 );
-	} // if ( ! is_singular() )
+	} // if ( is_singular() )
 
 }
 
@@ -945,13 +1013,13 @@ function slimline_maybe_remove_woocommerce_content_wrapper() {
 function slimline_maybe_remove_woocommerce_content_wrapper_end() {
 
 	/**
-	 * Only remove the action if we are not on a singular page
+	 * Only remove the action if we are on a singular page
 	 *
 	 * @link https://developer.wordpress.org/reference/functions/is_singular/
 	 *       Description of `is_singular` function
 	 */
-	if ( ! is_singular() ) {
+	if ( is_singular() ) {
 		remove_action( 'woocommerce_after_main_content',  'woocommerce_output_content_wrapper_end', 10 );
-	} // if ( ! is_singular() )
+	} // if ( is_singular() )
 
 }

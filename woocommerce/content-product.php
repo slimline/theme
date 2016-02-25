@@ -16,7 +16,15 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 
-global $product, $woocommerce_loop;
+/**
+ * @global WC_Product $product The current product
+ */
+global $product;
+
+/**
+ * @global array $woocommerce_loop Associative array with loop information
+ */
+global $woocommerce_loop;
 
 /**
  * Store loop count we're currently on.
