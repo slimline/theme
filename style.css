@@ -3191,9 +3191,39 @@ table.hover tr:nth-of-type(even):hover {
   padding-bottom: 1em;
   padding-top: 1em; }
 
+.breadcrumb {
+  font-size: .85em;
+  margin-bottom: 1em;
+  margin-top: -.85em; }
+
+main ol,
+main ul {
+  margin-left: 1.5em; }
+
 .edit-link,
 .post-edit-link {
   font-size: .9em; }
+
+#comments-list {
+  list-style: none;
+  margin-left: 0; }
+  #comments-list .comment {
+    overflow: hidden; }
+    #comments-list .comment .avatar {
+      border-radius: 100%;
+      float: left; }
+    #comments-list .comment .comment-content {
+      clear: both;
+      overflow: hidden; }
+    #comments-list .comment > time {
+      float: right;
+      font-size: .75em; }
+
+#sidebar-footer {
+  background: #cacaca;
+  margin-top: 3em;
+  padding-bottom: 2em;
+  padding-top: 2em; }
 
 #site-footer {
   background: #232323;
@@ -3205,8 +3235,44 @@ table.hover tr:nth-of-type(even):hover {
   #site-footer a {
     color: #fefefe; }
 
+.sidebar-3 #site-footer {
+  margin-top: 0; }
+
 .site-menu {
   text-align: right; }
+
+.woocommerce #respond input#submit,
+.woocommerce a.button,
+.woocommerce button.button,
+.woocommerce input.button {
+  display: inline-block;
+  text-align: center;
+  line-height: 1;
+  cursor: pointer;
+  -webkit-appearance: none;
+  transition: all 0.25s ease-out;
+  vertical-align: middle;
+  border: 1px solid transparent;
+  border-radius: 0;
+  padding: 0.85em 1em;
+  margin: 0 0 1rem 0;
+  font-size: 0.9rem;
+  background: #2199e8;
+  color: #fff; }
+  [data-whatinput='mouse'] .woocommerce #respond input#submit, [data-whatinput='mouse']
+  .woocommerce a.button, [data-whatinput='mouse']
+  .woocommerce button.button, [data-whatinput='mouse']
+  .woocommerce input.button {
+    outline: 0; }
+  .woocommerce #respond input#submit:hover, .woocommerce #respond input#submit:focus,
+  .woocommerce a.button:hover,
+  .woocommerce a.button:focus,
+  .woocommerce button.button:hover,
+  .woocommerce button.button:focus,
+  .woocommerce input.button:hover,
+  .woocommerce input.button:focus {
+    background: #1583cc;
+    color: #fff; }
 
 /**
  * Color Schemes
