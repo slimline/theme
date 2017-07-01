@@ -9,47 +9,25 @@
  * @since      0.1.0
  */
 
-if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
+/**
+ * exit if accessed directly
+ */
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} // if ( ! defined( 'ABSPATH' ) )
+
 ?>
 
-	<?php
-		/**
-		 * slimline_header_before hook
-		 *
-		 * @see https://github.com/slimline/theme/wiki/slimline_header_before
-		 */
-		do_action( 'slimline_header_before' );
-	?>
-
-	<header <?php slimline_site_header_attributes(); ?>>
+	<header <?php slimline_header_attributes(); ?>>
 
 		<?php
 			/**
-			 * slimline_header_top hook
+			 * Get site logo and/or title
 			 *
-			 * @hook slimline_get_header_logo - 10 (gets header/logo.php template part)
-			 * @see  https://github.com/slimline/theme/wiki/slimline_header_top
+			 * @link https://developer.wordpress.org/reference/functions/get_template_part/
+			 *       Documentation of the `get_template_part` function
 			 */
-			do_action( 'slimline_header_top' );
+			get_template_part( 'parts/header/branding' );
 		?>
 
-		<?php
-			/**
-			 * slimline_header_bottom hook
-			 *
-			 * @hook slimline_get_header_navigation - 10 (gets header/navigation.php template part)
-			 * @see  https://github.com/slimline/theme/wiki/slimline_header_bottom
-			 */
-			do_action( 'slimline_header_bottom' );
-		?>
-
-	</header><!-- #site-header -->
-
-	<?php
-		/**
-		 * slimline_header_after hook
-		 *
-		 * @see https://github.com/slimline/theme/wiki/slimline_header_after
-		 */
-		do_action( 'slimline_header_after' );
-	?>
+	</header>
