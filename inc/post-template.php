@@ -12,6 +12,128 @@
 if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
 
 /**
+ * Generates an array of HTML attributes with values from an array.
+ *
+ * Developers can modify the returned string using the `slimline_attributes` and
+ * `slimline_{$element}_attributes` filters.
+ *
+ * @param  string       $element    The element to generate attributes for
+ *                                  (e.g., "header", "footer", etc.)
+ * @param  array|string $attributes (Optional). An associative array or query string
+ *                                  of attribute/value pairs.
+ * @param  array        $defaults   (Optional). Associative array of attribute/value
+ *                                  pairs.
+ * @return array        $attributes The generated string of attributes
+ * @link   https://github.com/slimline/theme/wiki/slimline_get_attributes()
+ * @since  0.1.0
+ */
+function slimline_get_attributes( $element, $attributes = array(), $defaults = array() ) {
+
+	/**
+	 * Sanitize element name for use in filters and function names
+	 *
+	 * @link https://developer.wordpress.org/reference/functions/esc_html/
+	 *       Documentation of the `esc_html` function
+	 */
+	$element = esc_html( $element );
+
+	/**
+	 * Merge defaults and convert query string style arguments to array
+	 *
+	 * @link https://developer.wordpress.org/reference/functions/wp_parse_args/
+	 *       Documentation of the `wp_parse_args` function
+	 */
+	$attributes = wp_parse_args( $attributes, $defaults );
+
+	/**
+	 * Handling for element classes (if any set)
+	 *
+	 * @link http://php.net/manual/en/function.isset.php
+	 *       Documentation of the PHP `isset` function
+	 */
+	if ( isset( $attributes['class'] ) ) {
+
+		/**
+		 * Get space-separated classes
+		 *
+		 * @link http://php.net/manual/en/function.implode.php
+		 *       Documentation of the PHP `implode` function
+		 */
+		$attributes['class'] = implode( ' ', slimline_get_class( $element, (array) $attributes['class'] ) );
+
+	} // if ( isset( $attributes['class'] ) )
+
+	/**
+	 * Generic filtering
+	 *
+	 * @param array  $attributes The generated attributes
+	 * @param string $element    The element or context for filtering
+	 * @param array  $defaults   Default attributes for the element
+	 * @link  https://github.com/slimline/theme/wiki/slimline_attributes
+	 */
+	$attributes = apply_filters( 'slimline_attributes', $attributes, $element, $defaults );
+
+	/**
+	 * Element-/context-specific filtering
+	 *
+	 * @param array $attributes The generated attributes
+	 * @param array $defaults   Default attributes for the element
+	 * @link  https://github.com/slimline/theme/wiki/slimline_element_attributes
+	 */
+	return apply_filters( "slimline_{$element}_attributes", $attributes, $defaults );
+}
+
+function slimline_get_class( $element, $classes = array() ) {
+
+	/**
+	 * Sanitize element name for use in filters and function names
+	 *
+	 * @link https://developer.wordpress.org/reference/functions/esc_html/
+	 *       Documentation of the `esc_html` function
+	 */
+	$element = esc_html( $element );
+
+	/**
+	 * Split space-separated class strings into an array
+	 *
+	 * @link http://php.net/manual/en/function.is-array.php
+	 *       Documentation of the PHP `is_array` function
+	 * @link http://php.net/manual/en/function.preg-split.php
+	 *       Documentation of the PHP `preg_split` function
+	 */
+	if ( ! is_array( $classes ) ) {
+		$classes = preg_split( '#\s+#', $classes );
+	} // if ( ! is_array( $classes ) )
+
+	/**
+	 * Escape classes for use in HTML attribute
+	 *
+	 * @link http://php.net/manual/en/function.array-map.php
+	 *       Documentation of the PHP `array_map` function
+	 * @link https://developer.wordpress.org/reference/functions/esc_attr/
+	 *       Documentation of the `esc_attr` function
+	 */
+	$classes = array_map( 'esc_attr', $classes );
+
+	/**
+	 * Generic filtering
+	 *
+	 * @param array  $classes An array of classes to apply to the element
+	 * @param string $element The element or context for filtering
+	 * @link  https://github.com/slimline/theme/wiki/slimline_class
+	 */
+	$classes = apply_filters( 'slimline_class', $classes, $element );
+
+	/**
+	 * Element-/context-specific filtering
+	 *
+	 * @param array $classes An array of classes to apply to the element
+	 * @link  https://github.com/slimline/theme/wiki/slimline_element_class
+	 */
+	return apply_filters( "slimline_{$element}_class", $classes );
+}
+
+/**
  * Filter and return text content
  *
  * Functions similar to `get_the_content`, but takes arbirtrary text. Also avoids the
@@ -76,9 +198,9 @@ function slimline_get_site_title( $blog_id = 0 ) {
 	 * - the given blog ID is not the current blog's ID
 	 *
 	 * @link https://developer.wordpress.org/reference/functions/is_multisite/
-	 *       Description of the `is_multisite` function
+	 *       Documentation of the `is_multisite` function
 	 * @link https://developer.wordpress.org/reference/functions/get_current_blog_id/
-	 *       Description of the `get_current_blog_id` function
+	 *       Documentation of the `get_current_blog_id` function
 	 */
 	if ( is_multisite() && ! empty( $blog_id ) && (int) $blog_id !== get_current_blog_id() ) {
 
@@ -86,7 +208,7 @@ function slimline_get_site_title( $blog_id = 0 ) {
 		 * Switch to given blog
 		 *
 		 * @link https://developer.wordpress.org/reference/functions/switch_to_blog/
-		 *       Description of the `switch_to_blog` function
+		 *       Documentation of the `switch_to_blog` function
 		 */
 		switch_to_blog( $blog_id );
 
@@ -101,13 +223,13 @@ function slimline_get_site_title( $blog_id = 0 ) {
 	 * Generate title markup
 	 *
 	 * @link http://php.net/manual/en/function.sprintf.php
-	 *       Description of the `sprintf` function
+	 *       Documentation of the `sprintf` function
 	 * @link https://developer.wordpress.org/reference/functions/home_url/
-	 *       Description of the `home_url` function
+	 *       Documentation of the `home_url` function
 	 * @link https://developer.wordpress.org/reference/functions/esc_url/
-	 *       Description of the `esc_url` function
+	 *       Documentation of the `esc_url` function
 	 * @link https://developer.wordpress.org/reference/functions/get_bloginfo/
-	 *       Description of the `get_bloginfo` function
+	 *       Documentation of the `get_bloginfo` function
 	 */
 	$html = sprintf(
 		'<a class="custom-logo-link" href="%1$s" itemprop="url" rel="home">%2$s</a>',
@@ -119,7 +241,7 @@ function slimline_get_site_title( $blog_id = 0 ) {
 	 * If we had to switch blogs, switch back now
 	 *
 	 * @link https://developer.wordpress.org/reference/functions/restore_current_blog/
-	 *       Description of the `restore_current_blog` function
+	 *       Documentation of the `restore_current_blog` function
 	 */
 	if ( $switched_blog ) {
 		restore_current_blog();
