@@ -83,6 +83,20 @@ function slimline_get_attributes( $element, $attributes = array(), $defaults = a
 	return apply_filters( "slimline_{$element}_attributes", $attributes, $defaults );
 }
 
+/**
+ * Generate a filterable class for miscellaneous elements
+ *
+ * Meant to work like `body_class()`, `post_class()` and/or `comment_class()` but for
+ * miscellaneous or arbitrary elements. Developers can modify the returned classes
+ * using the `slimline_class` and `slimline_{element}_class` filters.
+ *
+ * @param  string       $element The element to generate attributes for (e.g.,
+ *                               "header", "footer", etc.)
+ * @param  array|string $classes (Optional). An array or space-separated string of
+ *                               additional classes to apply to the element.
+ * @return string       $classes HTML class attribute
+ * @since  0.1.0
+ */
 function slimline_get_class( $element, $classes = array() ) {
 
 	/**
@@ -160,6 +174,40 @@ function slimline_get_content( $text = '' ) {
 }
 
 /**
+ * Generate array of HTML attributes for the site <footer>
+ *
+ * @param  array|string $attributes (Optional). Array or query string of attributes
+ * @return array        $attributes Array of generated attributes
+ * @uses   slimline_get_attributes()
+ * @since  0.3.0
+ */
+function slimline_get_footer_attributes( $attributes = array() ) {
+
+	$defaults = array(
+		'id' => 'site-footer',
+	);
+
+	return slimline_get_attributes( 'footer', $attributes, $defaults );
+}
+
+/**
+ * Generate array of HTML attributes for the site <header>
+ *
+ * @param  array|string $attributes (Optional). Array or query string of attributes
+ * @return array        $attributes Array of generated attributes
+ * @uses   slimline_get_attributes()
+ * @since  0.3.0
+ */
+function slimline_get_header_attributes( $attributes = array() ) {
+
+	$defaults = array(
+		'id' => 'site-header',
+	);
+
+	return slimline_get_attributes( 'header', $attributes, $defaults );
+}
+
+/**
  * Returns the site name, linked to home
  *
  * This function is essentially a copy of get_custom_logo(), substituting the blog
@@ -168,7 +216,7 @@ function slimline_get_content( $text = '' ) {
  * @param  int    $blog_id ID of the blog in question. Default is the ID of the
  *                         current blog.
  * @return string $html    Custom site title markup
- * @since  0.4.0
+ * @since  0.3.0
  */
 function slimline_get_site_title( $blog_id = 0 ) {
 

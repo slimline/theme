@@ -93,6 +93,39 @@ function slimline_attributes( $element, $attributes = array(), $defaults = array
 }
 
 /**
+ * Output attributes for the site <body>
+ *
+ * @param array|string $attributes (Optional). An associative array or query string
+ *                                 of attribute/value pairs.
+ * @link  https://github.com/slimline/theme/wiki/slimline_body_attributes()
+ * @uses  slimline_attributes()
+ * @since 0.3.0
+ */
+function slimline_body_attributes( $attributes = array() ) {
+
+	slimline_attributes( 'body', $attributes );
+}
+
+/**
+ * Gives miscellaneous objects a filterable class.
+ *
+ * This is meant to work similarly to the `body_class` and/or `post_class` functions,
+ * but for miscellaneous or arbitrary elements.
+ *
+ * @param  string      $element The element to generate attributes for (e.g.,
+ *                              "header", "footer", etc.)
+ * @param array|string $classes (Optional). An array or space-separated string of
+ *                              additional classes to apply to the element.
+ * @uses  slimline_get_class() to generate the class string
+ * @link  https://github.com/slimline/theme/wiki/slimline_class()
+ * @since 0.1.0
+ */
+function slimline_class( $element, $classes = array() ) {
+
+	echo 'class="' . implode( ' ', slimline_get_class( $element, $classes ) ) . '"';
+}
+
+/**
  * Output filtered text content
  *
  * Functions similar to `the_content`, but takes arbirtrary text. Also avoids the
@@ -107,6 +140,20 @@ function slimline_attributes( $element, $attributes = array(), $defaults = array
 function slimline_content( $text = '' ) {
 
 	echo slimline_get_content( $text );
+}
+
+/**
+ * Output attributes for the site content <div>
+ *
+ * @param array|string $attributes (Optional). An associative array or query string
+ *                                 of attribute/value pairs.
+ * @link  https://github.com/slimline/theme/wiki/slimline_document_attributes()
+ * @uses  slimline_attributes()
+ * @since 0.3.0
+ */
+function slimline_document_attributes( $attributes = array() ) {
+
+	slimline_attributes( 'document', $attributes );
 }
 
 /**
@@ -135,6 +182,20 @@ function slimline_footer_attributes( $attributes = array() ) {
 function slimline_header_attributes( $attributes = array() ) {
 
 	slimline_attributes( 'header', $attributes );
+}
+
+/**
+ * Output attributes for the site <main>
+ *
+ * @param array|string $attributes (Optional). An associative array or query string
+ *                                 of attribute/value pairs.
+ * @link  https://github.com/slimline/theme/wiki/slimline_main_attributes()
+ * @uses  slimline_attributes()
+ * @since 0.3.0
+ */
+function slimline_main_attributes( $attributes = array() ) {
+
+	slimline_attributes( 'main', $attributes );
 }
 
 /**
