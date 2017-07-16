@@ -4,7 +4,7 @@
  *
  * Contains the site logo and/or site title
  *
- * @package    Slimline / Theme
+ * @package    Slimline\Theme
  * @subpackage Template Parts
  * @since      0.3.0
  */

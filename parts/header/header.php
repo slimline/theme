@@ -4,7 +4,7 @@
  *
  * Contains the site <header> tag
  *
- * @package    Slimline / Theme
+ * @package    Slimline\Theme
  * @subpackage Template Parts
  * @since      0.1.0
  */
@@ -30,4 +30,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 			get_template_part( 'parts/header/branding' );
 		?>
 
-	</header>
+		<?php
+			/**
+			 * Get primary site navigation
+			 *
+			 * @link https://developer.wordpress.org/reference/functions/get_template_part/
+			 *       Documentation of the `get_template_part` function
+			 */
+			get_template_part( 'parts/header/navigation' );
+		?>
+
+	</header><!-- #site-header -->
