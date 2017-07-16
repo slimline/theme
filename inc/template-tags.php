@@ -6,7 +6,7 @@
  * listed in this file SHOULD echo the result of an associated "get" function which
  * MUST be noted in the PHPDoc description for the tag.
  *
- * @package    Slimline / Theme
+ * @package    Slimline\Theme
  * @subpackage Includes
  * @see        https://codex.wordpress.org/Template_Tags
  *             Description of Template Tags

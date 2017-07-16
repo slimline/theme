@@ -83,6 +83,70 @@ function slimline_get_attributes( $element, $attributes = array(), $defaults = a
 	return apply_filters( "slimline_{$element}_attributes", $attributes, $defaults );
 }
 
+function slimline_get_blog_description() {
+
+	if ( is_home() && ! is_front_page() ) {
+
+		$blog_page = get_post( get_option( 'page_for_posts' ) );
+
+		$description = $blog_page->post_content;
+
+	} elseif ( is_category() || is_tag() || is_tax() ) { // if ( is_home() && ! is_front_page() )
+
+		$term = get_queried_object();
+
+		$description = term_description( $term->term_id, $term->taxonomy );
+
+	} else { // if ( is_home() && ! is_front_page() )
+
+		$description = get_bloginfo( 'description' );
+
+	} // if ( is_home() && ! is_front_page() )
+
+	return apply_filters( 'slimline_blog_description', $description );
+}
+
+function slimline_get_blog_title() {
+
+	/**
+	 * If this is the page for posts, set title equal to the page title
+	 *
+	 * @link https://developer.wordpress.org/reference/functions/is_home/
+	 *       Documentation of the `is_home` function
+	 * @link https://developer.wordpress.org/reference/functions/is_front_page/
+	 *       Documentation of the `is_front_page` function
+	 */
+	if ( is_home() && ! is_front_page() ) {
+
+		/**
+		 * Get the WP_Post object for the blog page
+		 *
+		 * @link https://developer.wordpress.org/reference/functions/get_post/
+		 *       Documentation of the `get_post` function
+		 * @link https://developer.wordpress.org/reference/functions/get_option/
+		 *       Documentation of the `get_option` function
+		 */
+		$blog_page = get_post( get_option( 'page_for_posts' ) );
+
+		$title = $blog_page->post_title;
+
+	} elseif ( is_category() || is_tag() || is_tax() ) { // if ( is_home() && ! is_front_page() )
+
+		$title = single_term_title( '', false );
+
+	} elseif ( is_date() ) {
+
+
+
+	} else { // if ( is_home() && ! is_front_page() )
+
+		$title = get_bloginfo( 'name' );
+
+	} // if ( is_home() && ! is_front_page() )
+
+	return apply_filters( 'slimline_blog_title', $title );
+}
+
 /**
  * Generate a filterable class for miscellaneous elements
  *
@@ -282,7 +346,7 @@ function slimline_get_site_title( $blog_id = 0 ) {
 	$html = sprintf(
 		'<a class="custom-logo-link" href="%1$s" itemprop="url" rel="home">%2$s</a>',
 		esc_url( home_url( '/' ) ),
-		get_bloginfo( 'name', 'display' )
+		slimline_get_site_name()
 	);
 
 	/**
@@ -303,4 +367,265 @@ function slimline_get_site_title( $blog_id = 0 ) {
 	 * @link  https://github.com/slimline/theme/wiki/slimline_get_site_title
 	 */
 	return apply_filters( 'slimline_get_site_title', $html, $blog_id );
+}
+
+/**
+ * Return the site name
+ *
+ * Wrapper function for `get_bloginfo`
+ *
+ * @return string Site name set in admin area
+ * @since  0.3.0
+ */
+function slimline_get_site_name() {
+
+	return get_bloginfo( 'name', 'raw' );
+}
+
+/**
+ * Retrieve a term name to use as a title
+ *
+ * Essentially this does the same thing as the `single_term_title` function, but can
+ * be used for any term, not just the currently queried term.
+ *
+ * NOTE: you MUST pass a term id or object to this function if using it anywhere
+ * other than a term archive page.
+ *
+ * @param  int|WP_Term $term     Term ID or object. NULL to retrieve the current term
+ *                               on a term archive page.
+ * @param  string      $taxonomy Taxonomy name. Used for retrieving the term if a term
+ *                               ID is passed as the first parameter
+ * @return string                Term name
+ * @since  0.3.0
+ */
+function slimline_get_term_title( $term = null, $taxonomy = '' ) {
+
+	/**
+	 * Get term object
+	 *
+	 * @link http://php.net/manual/en/function.is-null.php
+	 *       Documentation of the PHP `is_null` function
+	 * @link https://developer.wordpress.org/reference/functions/get_queried_object/
+	 *       Documentation of the `get_queried_object` function
+	 * @link https://developer.wordpress.org/reference/functions/get_term/
+	 *       Documentation of the `get_term` function
+	 */
+	$term = ( is_null( $term ) ? get_queried_object() : get_term( $term, $taxonomy ) );
+
+	/**
+	 * Set filter based on taxonomy name
+	 */
+	switch ( $term->taxonomy ) {
+
+		case 'category' :
+			$filter = 'single_cat_title';
+			break;
+
+		case 'post_tag' :
+			$filter = 'single_tag_title';
+			break;
+
+		default :
+			$filter = 'single_term_title';
+			break;
+
+	} // switch ( $term->taxonomy )
+
+	/**
+	 * Filter and return term name
+	 */
+	return apply_filters( $filter, $term->name );
+}
+
+function slimline_get_author_title( $author = null ) {
+
+	if ( is_null( $author ) ) {
+		$author = get_query_var( 'author' );
+	} // if ( is_null( $author ) )
+
+	return get_the_author_meta( 'display_name', absint( $author ) );
+}
+
+function slimline_get_404_title() {
+
+	return apply_filters( 'slimline_404_title', esc_html__( '404 Not Found', 'slimline' ) );
+}
+
+function slimline_index_title() {
+
+	echo slimline_get_index_title();
+}
+
+function slimline_get_index_title() {
+
+	return slimline_get_title( slimline_get_index_data( 'title' ) );
+}
+
+function slimline_get_year_title() {
+
+	return slimline_get_date_title( 'year' );
+}
+
+function slimline_get_month_title() {
+
+	return slimline_get_date_title( 'month' );
+}
+
+function slimline_get_day_title() {
+
+	return slimline_get_date_title( 'day' );
+}
+
+function slimline_get_date_title( $period = '' ) {
+
+	switch ( $period ) {
+
+		case 'year' :
+			$format = 'Y';
+			break;
+
+		case 'month' :
+			$format = 'M Y';
+			break;
+
+		case 'day' :
+		default    :
+			$format = get_option( 'date_format', 'M j, Y' );
+			break;
+
+	} // switch ( $period )
+
+	$format = apply_filters( "slimline_{$period}_title_format", esc_html_x( $format, 'date format', 'slimline' ) );
+
+	return apply_filters( "slimline_{$period}_title", sprintf( esc_html__( 'Archives for %1$s', 'slimline' ), get_the_date( $format ) ), get_the_date( $format ) );
+}
+
+function slimline_title( $text = '' ) {
+
+	echo slimline_get_title( $text );
+}
+
+function slimline_get_title( $text = '' ) {
+
+	return apply_filters( 'slimline_title', $text );
+}
+
+function slimline_content( $text = '' ) {
+
+	echo slimline_get_content( $text );
+}
+
+function slimline_get_content( $text = '' ) {
+
+	return apply_filters( 'slimline_content', $text );
+}
+
+function slimline_get_index_data( $key = 'title' ) {
+
+	/**
+	 * If this is the blog home and a page for posts has been set
+	 *
+	 * @link https://developer.wordpress.org/reference/functions/is_home/
+	 *       Documentation of the `is_home` function
+	 * @link https://developer.wordpress.org/reference/functions/is_front_page/
+	 *       Documentation of the `is_front_page` function
+	 */
+	if ( is_home() && ! is_front_page() ) {
+		$context = 'home';
+
+	/**
+	 * If this is a search results page
+	 *
+	 * @link https://developer.wordpress.org/reference/functions/is_search/
+	 *       Documentation of the `is_search` function
+	 */
+	if ( is_search() ) {
+		$context = 'search';
+
+	/**
+	 * If this is a term archive
+	 *
+	 * @link https://developer.wordpress.org/reference/functions/is_category/
+	 *       Documentation of the `is_category` function
+	 * @link https://developer.wordpress.org/reference/functions/is_tag/
+	 *       Documentation of the `is_tag` function
+	 * @link https://developer.wordpress.org/reference/functions/is_tax/
+	 *       Documentation of the `is_tax` function
+	 */
+	} elseif ( is_category() || is_tag() || is_tax() ) {
+		$context = 'term';
+
+	/**
+	 * If this is an author archive
+	 *
+	 * @link https://developer.wordpress.org/reference/functions/is_author/
+	 *       Documentation of the `is_author` function
+	 */
+	} elseif ( is_author() ) {
+		$context = 'author';
+
+	/**
+	 * If this is a date archive
+	 *
+	 * @link https://developer.wordpress.org/reference/functions/is_date/
+	 *       Documentation of the `is_date` function
+	 */
+	} elseif( is_date() ) {
+
+		/**
+		 * If this is a date archive for a specific year
+		 *
+		 * @link https://developer.wordpress.org/reference/functions/is_year/
+		 *       Documentation of the `is_year` function
+		 */
+		if ( is_year() ) {
+			$context = 'year';
+
+		/**
+		 * If this is a date archive for a specific month
+		 *
+		 * @link https://developer.wordpress.org/reference/functions/is_month/
+		 *       Documentation of the `is_month` function
+		 */
+		} elseif( is_month() ) { // if ( is_year() )
+			$context = 'month';
+
+		/**
+		 * If this is a date archive for a specific day
+		 *
+		 * Note that this is also serves as the fallback in case additional date
+		 * archive types are added in the future.
+		 */
+		} else { // if ( is_year() )
+			$context = 'day';
+		} // if ( is_year() )
+
+	/**
+	 * If this is a post type archive
+	 *
+	 * @link https://developer.wordpress.org/reference/functions/is_post_type_archive/
+	 *       Documentation of the `is_post_type_archive` function
+	 */
+	} elseif ( is_post_type_archive() ) {
+		$context = 'post_type';
+
+	/**
+	 * Generic archive in case we missed any
+	 *
+	 * @link https://developer.wordpress.org/reference/functions/is_archive/
+	 *       Documentation of the `is_archive` function
+	 */
+	} elseif ( is_archive() ) {
+		$context = 'archive';
+
+	/**
+	 * If nothing else matches, use site data
+	 */
+	} else {
+		$context = 'site';
+	}
+
+	$function = "slimline_get_{$context}_{$key}";
+
+	return apply_filters( "slimline_{$context}_{$key}", $function() );
 }
