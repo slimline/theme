@@ -25,69 +25,47 @@ if ( ! defined( 'ABSPATH' ) ) {
  *       Documentation of the `get_header` function
  */
 get_header();
+
+/**
+ * Load the header/header.php template part
+ *
+ * The header.php template part contains the primary <header> tag for the site.
+ */
+get_template_part( 'parts/header' );
 ?>
 
-		<?php
-			/**
-			 * Load the header/header.php template part
-			 *
-			 * The header.php template part contains the main <header> tag for the site.
-			 *
-			 * @link https://github.com/slimline/theme/wiki/slimline_get_header()
-			 */
-			slimline_get_header();
-		?>
-
-		<div <?php slimline_document_attributes(); ?>>
-
-			<main <?php slimline_main_attributes(); ?>>
-				<?php
-					/**
-					 * Load the primary theme template (ex. single.php, index.php)
-					 *
-					 * @link https://github.com/slimline/theme/wiki/slimline_get_primary_template()
-					 */
-					slimline_get_primary_template();
-				?>
-			</main>
-
-			<?php
-				/**
-				 * Conditionally load the sidebar
-				 *
-				 * @link https://github.com/slimline/theme/wiki/slimline_show_sidebar()
-				 */
-				if ( slimline_show_sidebar() ) :
-			?>
-
-				<aside <?php slimline_sidebar_attributes(); ?>>
-					<?php
-						/**
-						 * Load the sidebar.php file
-						 *
-						 * @link https://developer.wordpress.org/reference/functions/get_sidebar/
-						 *       Documentation of the `get_sidebar` function
-						 */
-						get_sidebar();
-					?>
-				</aside><!-- #sidebar -->
-
-			<?php endif; // if ( slimline_show_sidebar() ) ?>
-
-		</div><!-- .document -->
+	<div <?php slimline_wrapper_attributes(); ?>>
 
 		<?php
 			/**
-			 * Load the footer/footer.php template part
+			 * Load the main.php template part
 			 *
-			 * The footer.php template part contains the main <footer> tag for the site.
-			 *
-			 * @link https://github.com/slimline/theme/wiki/slimline_get_footer()
+			 * The main.php template part contains the <main> tag for the site and
+			 * loads the primary template (ex. single.php, index.php)
 			 */
-			slimline_get_footer();
+			get_template_part( 'parts/main' );
 		?>
+
+		<?php
+			/**
+			 * Load the sidebar.php file
+			 *
+			 * @link https://developer.wordpress.org/reference/functions/get_sidebar/
+			 *       Documentation of the `get_sidebar` function
+			 */
+			get_sidebar();
+		?>
+
+	</div><!-- #wrapper -->
 
 <?php
+/**
+ * Load the footer/footer.php template part
+ *
+ * The footer.php template part contains the primary <footer> tag for the site.
+ */
+get_template_part( 'parts/footer' );
+
 /**
  * Load the footer.php file
  *

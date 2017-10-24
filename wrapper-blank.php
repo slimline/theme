@@ -27,20 +27,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 get_header();
 ?>
 
-		<div <?php slimline_document_attributes(); ?>>
+	<div <?php slimline_wrapper_attributes(); ?>>
 
-			<main <?php slimline_main_attributes(); ?>>
-				<?php
-					/**
-					 * Load the primary theme template (ex. single.php, index.php)
-					 *
-					 * @link https://github.com/slimline/theme/wiki/slimline_get_primary_template()
-					 */
-					slimline_get_primary_template();
-				?>
-			</main>
+		<?php
+			/**
+			 * Load the main.php template part
+			 *
+			 * The main.php template part contains the <main> tag for the site and
+			 * loads the primary template (ex. single.php, index.php)
+			 */
+			get_template_part( 'parts/main' );
+		?>
 
-		</div><!-- .document -->
+	</div><!-- #wrapper -->
 
 <?php
 /**
