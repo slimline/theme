@@ -1,0 +1,15 @@
+#the-list {
+	tr {
+		td {
+			/**
+			 * Kraken.io turns the row actions to inline-block on click, knocking
+			 * them down one line and (sometimes) making you click the wrong link
+			 * (very annoying when you accidentally delete an image instead of
+			 * replace it which Enable Media Replace)
+			 */
+			.row-actions.visible {
+				display: block;
+			}
+		}
+	}
+}
