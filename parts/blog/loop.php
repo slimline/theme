@@ -1,11 +1,9 @@
 <?php
 /**
- * Main content area
+ * Blog loop
  *
- * Contains the site <main> tag
- *
- * @package    Slimline\Theme
- * @subpackage Template Parts
+ * @package    Slimline/Theme
+ * @subpackage Template Parts/Blog
  * @since      0.3.0
  */
 
@@ -17,13 +15,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 } // if ( ! defined( 'ABSPATH' ) )
 ?>
 
-	<div class="index-loop">
+	<div class="archive-loop blog-loop">
 
 		<?php if ( have_posts() ) : ?>
 
 			<?php while ( have_posts() ) : the_post(); ?>
 
-				<?php get_template_part( 'parts/content', get_post_type() ); ?>
+				<?php get_template_part( 'parts/blog/content', get_post_format() ); ?>
 
 			<?php endwhile; // while ( have_posts() ) ?>
 
@@ -39,4 +37,4 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 		<?php endif; // if ( have_posts() ) ?>
 
-	</div><!-- .index-loop -->
+	</div><!-- .blog-loop -->

@@ -24,37 +24,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<section <?php slimline_archive_attributes(); ?>>
 
-		<header>
-
-			<h1 class="archive-title" itemprop="name">
-				<?php
-					/**
-					 * Output the archive title
-					 *
-					 * @link https://developer.wordpress.org/reference/functions/the_archive_title/
-					 *       Documentation of the `the_archive_title` function
-					 */
-					the_archive_title();
-				?>
-			</h1><!-- .archive-title -->
-
-			<div class="archive-description" itemprop="description">
-				<?php
-					/**
-					 * Output the archive description
-					 *
-					 * @link https://developer.wordpress.org/reference/functions/the_archive_description/
-					 *       Documentation of the `the_archive_description` function
-					 */
-					the_archive_description();
-				?>
-			</div><!-- .archive-description -->
-
-		</header>
+		<?php
+			/**
+			 * Load the archive header
+			 */
+			get_template_part( 'parts/index/header' );
+		?>
 
 		<?php
 			/**
-			 * Load the loop template part
+			 * Load the loop.php template part
+			 *
+			 * The loop.php template part contains our basic WordPress loop
 			 */
 			get_template_part( 'parts/loop', slimline_get_archive_type() );
 		?>
