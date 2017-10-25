@@ -19,24 +19,24 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<div class="index-loop">
 
-		<?php if ( have_posts() ) : ?>
+		<?php
+			if ( have_posts() ) {
 
-			<?php while ( have_posts() ) : the_post(); ?>
+				while ( have_posts() ) {
 
-				<?php get_template_part( 'parts/content', get_post_type() ); ?>
+					the_post();
 
-			<?php endwhile; // while ( have_posts() ) ?>
+					get_template_part( 'parts/content', get_post_type() );
 
-			<?php
+				} // while ( have_posts() )
+
 				get_template_part( 'parts/nav', 'index' );
-			?>
 
-		<?php else : // if ( have_posts() ) ?>
+			} else { // if ( have_posts() )
 
-			<?php
 				get_template_part( 'parts/content', 'none' );
-			?>
 
-		<?php endif; // if ( have_posts() ) ?>
+			} // if ( have_posts() )
+		?>
 
 	</div><!-- .index-loop -->
