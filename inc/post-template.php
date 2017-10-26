@@ -9,7 +9,12 @@
  * @since      0.1.0
  */
 
-if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
+/**
+ * exit if accessed directly
+ */
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} // if ( ! defined( 'ABSPATH' ) )
 
 /**
  * Generates an array of HTML attributes with values from an array.
@@ -81,70 +86,6 @@ function slimline_get_attributes( $element, $attributes = array(), $defaults = a
 	 * @link  https://github.com/slimline/theme/wiki/slimline_element_attributes
 	 */
 	return apply_filters( "slimline_{$element}_attributes", $attributes, $defaults );
-}
-
-function slimline_get_blog_description() {
-
-	if ( is_home() && ! is_front_page() ) {
-
-		$blog_page = get_post( get_option( 'page_for_posts' ) );
-
-		$description = $blog_page->post_content;
-
-	} elseif ( is_category() || is_tag() || is_tax() ) { // if ( is_home() && ! is_front_page() )
-
-		$term = get_queried_object();
-
-		$description = term_description( $term->term_id, $term->taxonomy );
-
-	} else { // if ( is_home() && ! is_front_page() )
-
-		$description = get_bloginfo( 'description' );
-
-	} // if ( is_home() && ! is_front_page() )
-
-	return apply_filters( 'slimline_blog_description', $description );
-}
-
-function slimline_get_blog_title() {
-
-	/**
-	 * If this is the page for posts, set title equal to the page title
-	 *
-	 * @link https://developer.wordpress.org/reference/functions/is_home/
-	 *       Documentation of the `is_home` function
-	 * @link https://developer.wordpress.org/reference/functions/is_front_page/
-	 *       Documentation of the `is_front_page` function
-	 */
-	if ( is_home() && ! is_front_page() ) {
-
-		/**
-		 * Get the WP_Post object for the blog page
-		 *
-		 * @link https://developer.wordpress.org/reference/functions/get_post/
-		 *       Documentation of the `get_post` function
-		 * @link https://developer.wordpress.org/reference/functions/get_option/
-		 *       Documentation of the `get_option` function
-		 */
-		$blog_page = get_post( get_option( 'page_for_posts' ) );
-
-		$title = $blog_page->post_title;
-
-	} elseif ( is_category() || is_tag() || is_tax() ) { // if ( is_home() && ! is_front_page() )
-
-		$title = single_term_title( '', false );
-
-	} elseif ( is_date() ) {
-
-
-
-	} else { // if ( is_home() && ! is_front_page() )
-
-		$title = get_bloginfo( 'name' );
-
-	} // if ( is_home() && ! is_front_page() )
-
-	return apply_filters( 'slimline_blog_title', $title );
 }
 
 /**
@@ -400,9 +341,4 @@ function slimline_get_title( $text = '' ) {
 function slimline_content( $text = '' ) {
 
 	echo slimline_get_content( $text );
-}
-
-function slimline_get_content( $text = '' ) {
-
-	return apply_filters( 'slimline_content', $text );
 }
