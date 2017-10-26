@@ -5,7 +5,7 @@
  * Contains the site logo and/or site title
  *
  * @package    Slimline\Theme
- * @subpackage Template Parts
+ * @subpackage TemplateParts
  * @since      0.3.0
  */
 
@@ -15,7 +15,6 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } // if ( ! defined( 'ABSPATH' ) )
-
 ?>
 
 		<div id="branding">

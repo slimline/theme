@@ -7,7 +7,7 @@
  * category.php, date.php, home.php, tag.php and taxonomy-post_format.php). It is
  * slightly less specific than those and comes after them in the template hierarchy.
  *
- * @package Slimline / Theme
+ * @package Slimline\Theme
  * @since   0.3.0
  */
 
@@ -19,13 +19,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 } // if ( ! defined( 'ABSPATH' ) )
 ?>
 
-	<section <?php slimline_archive_attributes(); ?>>
+	<section <?php slimline_blog_attributes(); ?>>
 
 		<?php
 			/**
 			 * Load the archive header
 			 */
-			get_template_part( 'parts/index/header' );
+			get_template_part( 'parts/archive/header' );
 		?>
 
 		<?php

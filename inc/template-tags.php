@@ -14,7 +14,12 @@
  * @since      0.1.0
  */
 
-if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
+/**
+ * exit if accessed directly
+ */
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} // if ( ! defined( 'ABSPATH' ) )
 
 /**
  * Generates a string of HTML attributes with values from an array.

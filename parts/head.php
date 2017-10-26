@@ -3,7 +3,7 @@
  * Meta tags for site <head>
  *
  * @package    Slimline\Theme
- * @subpackage Template Parts
+ * @subpackage TemplateParts
  * @since      0.3.0
  */
 

@@ -2,8 +2,8 @@
 /**
  * Header for index page
  *
- * @package    Slimline/Theme
- * @subpackage Template Parts/Index
+ * @package    Slimline\Theme
+ * @subpackage TemplateParts\Archive
  * @since      0.3.0
  */
 

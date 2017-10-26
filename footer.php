@@ -6,7 +6,7 @@
  * function.
  *
  * @package Slimline\Theme
- * @link    http://codex.wordpress.org/Theme_Development#Footer_.28footer.php.29
+ * @link    https://developer.wordpress.org/themes/template-files-section/partial-and-miscellaneous-template-files/#footer-php
  *          WordPress Theme Development guidelines for footer.php
  * @since   0.1.0
  */
@@ -17,7 +17,6 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } // if ( ! defined( 'ABSPATH' ) )
-
 ?>
 
 		<?php

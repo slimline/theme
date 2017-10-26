@@ -5,7 +5,7 @@
  * Contains the site <main> tag
  *
  * @package    Slimline\Theme
- * @subpackage Template Parts
+ * @subpackage TemplateParts
  * @since      0.3.0
  */
 

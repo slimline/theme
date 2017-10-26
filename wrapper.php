@@ -30,6 +30,9 @@ get_header();
  * Load the header/header.php template part
  *
  * The header.php template part contains the primary <header> tag for the site.
+ *
+ * @link https://developer.wordpress.org/reference/functions/get_template_part/
+ *       Documentation of the `get_template_part` function
  */
 get_template_part( 'parts/header' );
 ?>
@@ -42,6 +45,9 @@ get_template_part( 'parts/header' );
 			 *
 			 * The main.php template part contains the <main> tag for the site and
 			 * loads the primary template (ex. single.php, index.php)
+			 *
+			 * @link https://developer.wordpress.org/reference/functions/get_template_part/
+			 *       Documentation of the `get_template_part` function
 			 */
 			get_template_part( 'parts/main' );
 		?>
@@ -63,6 +69,9 @@ get_template_part( 'parts/header' );
  * Load the footer/footer.php template part
  *
  * The footer.php template part contains the primary <footer> tag for the site.
+ *
+ * @link https://developer.wordpress.org/reference/functions/get_template_part/
+ *       Documentation of the `get_template_part` function
  */
 get_template_part( 'parts/footer' );
 

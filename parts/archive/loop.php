@@ -1,11 +1,10 @@
 <?php
 /**
- * Main content area
- *
- * Contains the site <main> tag
+ * Default loop
  *
  * @package    Slimline\Theme
- * @subpackage Template Parts
+ * @subpackage TemplateParts\Archive
+ * @see        https://developer.wordpress.org/themes/basics/the-loop/
  * @since      0.3.0
  */
 
@@ -17,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 } // if ( ! defined( 'ABSPATH' ) )
 ?>
 
-	<div class="index-loop">
+	<div class="archive-loop index-loop">
 
 		<?php
 			if ( have_posts() ) {
@@ -26,11 +25,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 					the_post();
 
-					get_template_part( 'parts/content', get_post_type() );
+					get_template_part( 'parts/archive/content', get_post_type() );
 
 				} // while ( have_posts() )
 
-				get_template_part( 'parts/nav', 'index' );
+				get_template_part( 'parts/archive/pagination' );
 
 			} else { // if ( have_posts() )
 

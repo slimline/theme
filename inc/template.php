@@ -9,9 +9,12 @@
  * @since      0.3.0
  */
 
+/**
+ * exit if accessed directly
+ */
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // exit if accessed directly
-}
+	exit;
+} // if ( ! defined( 'ABSPATH' ) )
 
 add_filter( 'author_template_hierarchy',   'slimline_blog_archive_template', 1, 1 );
 add_filter( 'category_template_hierarchy', 'slimline_blog_archive_template', 1, 1 );

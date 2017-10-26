@@ -6,7 +6,7 @@
  * the <head> tag — of the web page. It also includes the opening <body> tag.
  *
  * @package Slimline\Theme
- * @see     http://codex.wordpress.org/Theme_Development#Document_Head_.28header.php.29
+ * @see     https://developer.wordpress.org/themes/template-files-section/partial-and-miscellaneous-template-files/#header-php
  *          WordPress Theme Development Guidelines for header.php
  * @since   0.1.0
  */

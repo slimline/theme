@@ -9,7 +9,7 @@
  *
  * Learn more: https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package Slimline / Theme
+ * @package Slimline\Theme
  * @see     http://codex.wordpress.org/Theme_Development#Index_.28index.php.29
  * @since   0.1.0
  */
@@ -28,7 +28,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			/**
 			 * Load the archive header
 			 */
-			get_template_part( 'parts/index/header' );
+			get_template_part( 'parts/archive/header' );
 		?>
 
 		<?php
@@ -37,7 +37,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			 *
 			 * The loop.php template part contains our basic WordPress loop
 			 */
-			get_template_part( 'parts/loop', slimline_get_archive_type() );
+			get_template_part( 'parts/archive/loop', slimline_get_archive_type() );
 		?>
 
 	</section><!-- #index -->

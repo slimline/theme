@@ -50,16 +50,23 @@
  * program; if not, write to the Free Software Foundation, Inc., 51 Franklin St,
  * Fifth Floor, Boston, MA 02110-1301 USA
  *
- * @package   Slimline / Theme
+ * @package   Slimline\Theme
  * @author    Michael Dozark <michael@michaeldozark.com>
  * @link      http://www.michaeldozark.com/themes/slimline/
- * @see       http://codex.wordpress.org/Functions_File_Explained
- * @version   0.2.0
- * @copyright Copyright (c) 2015, Michael Dozark
+ * @see       https://developer.wordpress.org/themes/basics/theme-functions/
+ * @version   0.3.0
+ * @copyright Copyright (c) 2017, Michael Dozark
  * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * @since     0.1.0
  */
-if ( ! defined( 'ABSPATH' ) ) exit; // exit if accessed directly
+
+/**
+ * exit if accessed directly
+ */
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} // if ( ! defined( 'ABSPATH' ) )
+
 /**
  * Add theme setup hook
  *

@@ -5,7 +5,7 @@
  * Contains the site <header> tag
  *
  * @package    Slimline\Theme
- * @subpackage Template Parts
+ * @subpackage TemplateParts
  * @since      0.1.0
  */
 
@@ -15,7 +15,6 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } // if ( ! defined( 'ABSPATH' ) )
-
 ?>
 
 	<header <?php slimline_header_attributes(); ?>>
