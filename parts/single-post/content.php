@@ -25,13 +25,26 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<?php the_title(); ?>
 			</h1><!-- .entry-title -->
 
-			<?php if ( has_excerpt() ) : ?>
-				<div class="entry-summary" itemprop="description">
-					<?php
-						the_excerpt(); ?>
-					?>
-				</div><!-- .entry-summary -->
-			<?php endif; // if ( has_excerpt() ) ?>
+			<?php
+				/**
+				 * If a custom excerpt is set, use it as an introductory summary
+				 *
+				 * @link https://developer.wordpress.org/reference/functions/has_excerpt/
+				 *       Documentation of the `has_excerpt` function
+				 */
+				if ( has_excerpt() ) {
+
+					/**
+					 * Include the summary content
+					 *
+					 * @link https://developer.wordpress.org/reference/functions/get_template_part/
+					 *       Documentation of the `get_template_part` function
+					 */
+					get_template_part( 'parts/entry/summary' );
+
+				} // if ( has_excerpt() )
+			?>
+
 
 			<p class="entry-meta">
 				<?php get_template_part( 'parts/entry/meta' ); ?>
@@ -40,6 +53,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 		<div class="entry-content" itemprop="text">
 			<?php
+				/**
+				 * Output post content
+				 *
+				 * @link https://developer.wordpress.org/reference/functions/the_content/
+				 *       Documentation of the `the_content` function
+				 */
 				the_content();
 			?>
 		</div><!-- .entry-content -->

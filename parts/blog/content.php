@@ -26,11 +26,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 			</h2>
 		</header><!-- .entry-header -->
 
-		<div class="entry-content" itemprop="description">
-			<?php
-				the_excerpt();
-			?>
-		</div><!-- .entry-content -->
+		<?php
+			/**
+			 * Include the summary content
+			 *
+			 * @link https://developer.wordpress.org/reference/functions/get_template_part/
+			 *       Documentation of the `get_template_part` function
+			 */
+			get_template_part( 'parts/entry/summary' );
+		?>
 
 		<footer class="entry-footer">
 			<?php get_template_part( 'parts/entry/meta' ); ?>
