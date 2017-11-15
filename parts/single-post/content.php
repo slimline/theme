@@ -67,8 +67,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<?php _e( 'Posted in', 'slimline' ); ?> <?php the_category( ', ' ); ?>
 			<?php
 				the_tags(
-					__( 'Tagged ', 'slimline' ),
-					', '
+					__( 'Tagged <span itemprop="keywords">', 'slimline' ),
+					', ',
+					'</span>'
 				);
 			?>
 
